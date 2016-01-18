@@ -118,7 +118,7 @@ int TwoKeyedAddress::readFromData(const Tbyte* data) {
     
     // Allocate memory for associated values, if they exist
     if (numSubKeys != 0) {
-      data_[i] = new Taddress[numSubKeys];
+      data_[i] = new Taddress[numSubKeys + subKeyBase];
     }
     else {
       data_[i] = NULL;

@@ -6,3 +6,4 @@ r2:
 r3:
 * Fixed multiple bugs with handling of palette 2 in metatile structure editor.
 * Fixed issue with modified graphics becoming corrupted after multiple exports.
+* Fixed bug that caused erratic behavior after loading a project.
