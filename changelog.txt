@@ -5,3 +5,4 @@ r2:
 * Fixed bug where exported ROMs were unplayable after loading a project file.
 r3:
 * Fixed multiple bugs with handling of palette 2 in metatile structure editor.
+* Fixed issue with modified graphics becoming corrupted after multiple exports.
