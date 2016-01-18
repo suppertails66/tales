@@ -1,0 +1,24 @@
+Tails Adventures Level Editor Suite (Tales), an editor for Tails Adventures
+    Copyright (C) 2016  Supper
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+    Contact e-mail: suppertails66@gmail.com
+    
+The lawyers say I'm supposed to put this in every file, but luckily I don't
+think any of them are planning to read my source code. Wish I had the option.
+All the code in the project is GNU GPL3. Not such a hard concept, right?
+
+See build_instructions.txt for instructions on building Tales, and "index.html"
+in the "manual" folder for an explanation of the program.

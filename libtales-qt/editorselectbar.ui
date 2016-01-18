@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditorSelectBar</class>
+ <widget class="QWidget" name="EditorSelectBar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>36</width>
+    <height>364</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QToolButton" name="levelEditorButton">
+     <property name="toolTip">
+      <string>Level editor</string>
+     </property>
+     <property name="text">
+      <string>M</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/mapicon.png</normaloff>:/resources/mapicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="vramButton">
+     <property name="toolTip">
+      <string>VRAM editor</string>
+     </property>
+     <property name="text">
+      <string>V</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/vramicon.png</normaloff>:/resources/vramicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="graphicsButton">
+     <property name="toolTip">
+      <string>Graphics editor</string>
+     </property>
+     <property name="text">
+      <string>G</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/paintbrushicon.png</normaloff>:/resources/paintbrushicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="paletteButton">
+     <property name="toolTip">
+      <string>Palette editor</string>
+     </property>
+     <property name="text">
+      <string>P</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/paletteicon.png</normaloff>:/resources/paletteicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="paletteCycleButton">
+     <property name="toolTip">
+      <string>Palette cycle editor</string>
+     </property>
+     <property name="text">
+      <string>C</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/palettecycleicon.png</normaloff>:/resources/palettecycleicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="metatileStructureButton">
+     <property name="toolTip">
+      <string>Metatile structure editor</string>
+     </property>
+     <property name="text">
+      <string>S</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/structureicon.png</normaloff>:/resources/structureicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="metatileBehaviorButton">
+     <property name="toolTip">
+      <string>Metatile behavior editor</string>
+     </property>
+     <property name="text">
+      <string>B</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/behavioricon.png</normaloff>:/resources/behavioricon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="lengthMapsButton">
+     <property name="toolTip">
+      <string>Width/height map editor</string>
+     </property>
+     <property name="text">
+      <string>L</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/lengthmapicon.png</normaloff>:/resources/lengthmapicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="musicButton">
+     <property name="toolTip">
+      <string>Music editor</string>
+     </property>
+     <property name="text">
+      <string>U</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/musicicon.png</normaloff>:/resources/musicicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="powerUpButton">
+     <property name="toolTip">
+      <string>Power-up editor</string>
+     </property>
+     <property name="text">
+      <string>E</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/powerupicon.png</normaloff>:/resources/powerupicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="enhancementsButton">
+     <property name="toolTip">
+      <string>Hacks and enhancements</string>
+     </property>
+     <property name="text">
+      <string>E</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/enhancementsicon.png</normaloff>:/resources/enhancementsicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

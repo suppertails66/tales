@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{373A38D4-C505-4850-9601-86FAFE60A75D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libtales</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\editors\AreaMetadataEntry.h" />
+    <ClInclude Include="include\editors\BaseEditor.h" />
+    <ClInclude Include="include\editors\ColorPickerGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\ColorPreviewGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\EditorMetadata.h" />
+    <ClInclude Include="include\editors\EnhancementsEditor.h" />
+    <ClInclude Include="include\editors\GraphicCategory.h" />
+    <ClInclude Include="include\editors\GraphicCompressionType.h" />
+    <ClInclude Include="include\editors\GraphicInfo.h" />
+    <ClInclude Include="include\editors\GraphicMappingEditorLayer.h" />
+    <ClInclude Include="include\editors\GraphicPaletteDefaultMap.h" />
+    <ClInclude Include="include\editors\GraphicsEditor.h" />
+    <ClInclude Include="include\editors\GraphicsEditorScene.h" />
+    <ClInclude Include="include\editors\GraphicsEditorTool.h" />
+    <ClInclude Include="include\editors\GraphicsEditorToolManager.h" />
+    <ClInclude Include="include\editors\GraphicTileEditorLayer.h" />
+    <ClInclude Include="include\editors\GraphicToInfo.h" />
+    <ClInclude Include="include\editors\GraphicToMappingEntry.h" />
+    <ClInclude Include="include\editors\GraphicToMappings.h" />
+    <ClInclude Include="include\editors\GridGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\HackSettings.h" />
+    <ClInclude Include="include\editors\IndexedPickerScene.h" />
+    <ClInclude Include="include\editors\LengthMapDrawer.h" />
+    <ClInclude Include="include\editors\LengthMapEditor.h" />
+    <ClInclude Include="include\editors\LengthMapLayeredGraphicScene.h" />
+    <ClInclude Include="include\editors\LevelBoundsGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelEditor.h" />
+    <ClInclude Include="include\editors\LevelEditorLayeredGraphicScene.h" />
+    <ClInclude Include="include\editors\LevelEditorTool.h" />
+    <ClInclude Include="include\editors\LevelEditorToolManager.h" />
+    <ClInclude Include="include\editors\LevelEffectGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelMetadataEntry.h" />
+    <ClInclude Include="include\editors\LevelObjectGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelSolidityGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelSpawnGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelVisualGraphicSceneLayer.h" />
+    <ClInclude Include="include\editors\LevelVRAMEditor.h" />
+    <ClInclude Include="include\editors\MappingAssembler.h" />
+    <ClInclude Include="include\editors\MetatileBehaviorEditor.h" />
+    <ClInclude Include="include\editors\MetatileBehaviorPickerScene.h" />
+    <ClInclude Include="include\editors\MetatileGraphicCollection.h" />
+    <ClInclude Include="include\editors\MetatilePickerLayeredGraphicScene.h" />
+    <ClInclude Include="include\editors\MetatilePickerSceneBase.h" />
+    <ClInclude Include="include\editors\MetatileStructureDefault.h" />
+    <ClInclude Include="include\editors\MetatileStructureDefaultMap.h" />
+    <ClInclude Include="include\editors\MetatileStructureEditor.h" />
+    <ClInclude Include="include\editors\MetatileSubtilePickerScene.h" />
+    <ClInclude Include="include\editors\MusicEditor.h" />
+    <ClInclude Include="include\editors\ObjectDisplayCache.h" />
+    <ClInclude Include="include\editors\ObjectDisplayCacheCollection.h" />
+    <ClInclude Include="include\editors\ObjectGraphicInfo.h" />
+    <ClInclude Include="include\editors\ObjectToGraphics.h" />
+    <ClInclude Include="include\editors\PaletteCycleEditor.h" />
+    <ClInclude Include="include\editors\PaletteEditor.h" />
+    <ClInclude Include="include\editors\PowerUpEditor.h" />
+    <ClInclude Include="include\editors\TailsAdvEditor.h" />
+    <ClInclude Include="include\editors\TilePickerScene.h" />
+    <ClInclude Include="include\editors\TileRenderer.h" />
+    <ClInclude Include="include\editors\VisualMetatilePickerScene.h" />
+    <ClInclude Include="include\editors\VRAMCache.h" />
+    <ClInclude Include="include\editors\VRAMEditorLayeredGraphicScene.h" />
+    <ClInclude Include="include\exception\ColorOutOfRangeException.h" />
+    <ClInclude Include="include\exception\FileException.h" />
+    <ClInclude Include="include\exception\FileNotFoundException.h" />
+    <ClInclude Include="include\exception\TGenericException.h" />
+    <ClInclude Include="include\exception\InvalidFileException.h" />
+    <ClInclude Include="include\exception\InvalidLoadDataException.h" />
+    <ClInclude Include="include\exception\NotEnoughSpaceException.h" />
+    <ClInclude Include="include\exception\OutOfRangeIndexException.h" />
+    <ClInclude Include="include\exception\PoppedEmptyStackException.h" />
+    <ClInclude Include="include\exception\TalesException.h" />
+    <ClInclude Include="include\exception\TmapKeyNotFoundException.h" />
+    <ClInclude Include="include\exception\UnrecognizedVersionException.h" />
+    <ClInclude Include="include\gamedata\AreaMapReference.h" />
+    <ClInclude Include="include\gamedata\BaseEditableFixedGraphicTable.h" />
+    <ClInclude Include="include\gamedata\BaseEditableMappedData.h" />
+    <ClInclude Include="include\gamedata\CharacterUncompressedGraphicHeader.h" />
+    <ClInclude Include="include\gamedata\EditableEmeraldHealthRefills.h" />
+    <ClInclude Include="include\gamedata\EditableLeafGraphicsTable.h" />
+    <ClInclude Include="include\gamedata\EditableLevelEffectsHeaders.h" />
+    <ClInclude Include="include\gamedata\EditableLevelGraphicsData.h" />
+    <ClInclude Include="include\gamedata\EditableLevelObjectEntryGroups.h" />
+    <ClInclude Include="include\gamedata\EditableLevelPaletteHeaders.h" />
+    <ClInclude Include="include\gamedata\EditableMapData.h" />
+    <ClInclude Include="include\gamedata\EditableMetatileBehaviors.h" />
+    <ClInclude Include="include\gamedata\EditableMetatileHeightMaps.h" />
+    <ClInclude Include="include\gamedata\EditableMetatileLengthMaps.h" />
+    <ClInclude Include="include\gamedata\EditableMetatileWidthMaps.h" />
+    <ClInclude Include="include\gamedata\EditableMusicAssignments.h" />
+    <ClInclude Include="include\gamedata\EditablePaletteCycles.h" />
+    <ClInclude Include="include\gamedata\EditablePowerUpData.h" />
+    <ClInclude Include="include\gamedata\EditableRadioMusic.h" />
+    <ClInclude Include="include\gamedata\EditableSlopeSpeedValues.h" />
+    <ClInclude Include="include\gamedata\EditableSmokePuffGraphicTable.h" />
+    <ClInclude Include="include\gamedata\EditableSpawnPoints.h" />
+    <ClInclude Include="include\gamedata\EditableSpriteMappings.h" />
+    <ClInclude Include="include\gamedata\EditableStandardPalettes.h" />
+    <ClInclude Include="include\gamedata\EditableWarpDestinations.h" />
+    <ClInclude Include="include\gamedata\EditableWaterSplashGraphicTable.h" />
+    <ClInclude Include="include\gamedata\FixedGraphicTableEntry.h" />
+    <ClInclude Include="include\gamedata\LengthMapValue.h" />
+    <ClInclude Include="include\gamedata\LevelEffectsHeader.h" />
+    <ClInclude Include="include\gamedata\LevelGraphicsHeader.h" />
+    <ClInclude Include="include\gamedata\LevelHeader.h" />
+    <ClInclude Include="include\gamedata\LevelHeaders.h" />
+    <ClInclude Include="include\gamedata\LevelObjectEntry.h" />
+    <ClInclude Include="include\gamedata\LevelObjectEntryGroup.h" />
+    <ClInclude Include="include\gamedata\LevelPaletteHeader.h" />
+    <ClInclude Include="include\gamedata\MapLayout.h" />
+    <ClInclude Include="include\gamedata\MapLayouts.h" />
+    <ClInclude Include="include\gamedata\MappingToGraphic.h" />
+    <ClInclude Include="include\gamedata\MappingToGraphicEntry.h" />
+    <ClInclude Include="include\gamedata\MetatileBehavior.h" />
+    <ClInclude Include="include\gamedata\MetatileHeightMap.h" />
+    <ClInclude Include="include\gamedata\MetatileLengthMap.h" />
+    <ClInclude Include="include\gamedata\MetatileSolidity.h" />
+    <ClInclude Include="include\gamedata\MetatileStructure.h" />
+    <ClInclude Include="include\gamedata\MetatileStructures.h" />
+    <ClInclude Include="include\gamedata\MetatileStructureSet.h" />
+    <ClInclude Include="include\gamedata\MetatileStructureTableCollection.h" />
+    <ClInclude Include="include\gamedata\MetatileType.h" />
+    <ClInclude Include="include\gamedata\MetatileWidthMap.h" />
+    <ClInclude Include="include\gamedata\ObjectGraphicMapping.h" />
+    <ClInclude Include="include\gamedata\ObjectGraphicsHeader.h" />
+    <ClInclude Include="include\gamedata\ObjectGraphicSubheader.h" />
+    <ClInclude Include="include\gamedata\ObjectStateInfo.h" />
+    <ClInclude Include="include\gamedata\ObjectStates.h" />
+    <ClInclude Include="include\gamedata\ObjectTypeID.h" />
+    <ClInclude Include="include\gamedata\PaletteCycle.h" />
+    <ClInclude Include="include\gamedata\PaletteCycleState.h" />
+    <ClInclude Include="include\gamedata\PrimaryMaps.h" />
+    <ClInclude Include="include\gamedata\RawLevelGraphicsHeader.h" />
+    <ClInclude Include="include\gamedata\RawLevelHeader.h" />
+    <ClInclude Include="include\gamedata\RawLevelHeaders.h" />
+    <ClInclude Include="include\gamedata\RawObjectGraphicsHeader.h" />
+    <ClInclude Include="include\gamedata\RawObjectGraphicSubheader.h" />
+    <ClInclude Include="include\gamedata\RawSpriteMapping.h" />
+    <ClInclude Include="include\gamedata\SoundID.h" />
+    <ClInclude Include="include\gamedata\SpawnPoint.h" />
+    <ClInclude Include="include\gamedata\SpecialEffect.h" />
+    <ClInclude Include="include\gamedata\SpriteMapping.h" />
+    <ClInclude Include="include\gamedata\SpriteMappingCoordinateTable.h" />
+    <ClInclude Include="include\gamedata\SpriteMappingCoordinateTableEntry.h" />
+    <ClInclude Include="include\gamedata\SpriteMappingTileIndexTable.h" />
+    <ClInclude Include="include\gamedata\StandardUncompressedGraphicHeader.h" />
+    <ClInclude Include="include\gamedata\SubMaps.h" />
+    <ClInclude Include="include\gamedata\TailsAdvAddresses.h" />
+    <ClInclude Include="include\gamedata\TailsAdvBank0Hacks.h" />
+    <ClInclude Include="include\gamedata\TailsAdvData.h" />
+    <ClInclude Include="include\gamedata\TailsAdvEditable.h" />
+    <ClInclude Include="include\gamedata\TailsAdvFreeSpace.h" />
+    <ClInclude Include="include\gamedata\TailsAdvGraphicCompressor.h" />
+    <ClInclude Include="include\gamedata\TailsAdvRLECompressor.h" />
+    <ClInclude Include="include\gamedata\TailsAdvROMLoader.h" />
+    <ClInclude Include="include\gamedata\TwoKeyEditableMappedData.h" />
+    <ClInclude Include="include\gamedata\TwoKeyIndexedEditableMappedData.h" />
+    <ClInclude Include="include\gamedata\WarpDestination.h" />
+    <ClInclude Include="include\gamedata\YTableAddresses.h" />
+    <ClInclude Include="include\gamegear\GGColor.h" />
+    <ClInclude Include="include\gamegear\GGFullTileSet.h" />
+    <ClInclude Include="include\gamegear\GGPalette.h" />
+    <ClInclude Include="include\gamegear\GGTile.h" />
+    <ClInclude Include="include\gamegear\GGTileSet.h" />
+    <ClInclude Include="include\gamegear\LoadedROM.h" />
+    <ClInclude Include="include\gamegear\TileReference.h" />
+    <ClInclude Include="include\gamegear\VirtualVDP.h" />
+    <ClInclude Include="include\gamegear\WritableROM.h" />
+    <ClInclude Include="include\structs\BitmapGraphicSceneObject.h" />
+    <ClInclude Include="include\structs\Box.h" />
+    <ClInclude Include="include\structs\BoxGraphicSceneObject.h" />
+    <ClInclude Include="include\structs\Color.h" />
+    <ClInclude Include="include\structs\ConstSizeVector.h" />
+    <ClInclude Include="include\structs\DataChunkID.h" />
+    <ClInclude Include="include\structs\FreeSpaceListing.h" />
+    <ClInclude Include="include\structs\FreeSpaceListPair.h" />
+    <ClInclude Include="include\structs\GenericGraphicSceneLayer.h" />
+    <ClInclude Include="include\structs\GenericGraphicSceneObject.h" />
+    <ClInclude Include="include\structs\Graphic.h" />
+    <ClInclude Include="include\structs\GraphicDependencyGroup.h" />
+    <ClInclude Include="include\structs\GraphicDependencyGroupEntry.h" />
+    <ClInclude Include="include\structs\GraphicIdentifier.h" />
+    <ClInclude Include="include\structs\GraphicSceneLayer.h" />
+    <ClInclude Include="include\structs\IndexToAddressMap.h" />
+    <ClInclude Include="include\structs\InputEventData.h" />
+    <ClInclude Include="include\structs\KeyedAddressTableBuilder.h" />
+    <ClInclude Include="include\structs\KeyedTableBuilder.h" />
+    <ClInclude Include="include\structs\LayeredGraphicScene.h" />
+    <ClInclude Include="include\structs\LevelWidth.h" />
+    <ClInclude Include="include\structs\LoadHelper.h" />
+    <ClInclude Include="include\structs\RawFreeSpacePair.h" />
+    <ClInclude Include="include\structs\SaveHelper.h" />
+    <ClInclude Include="include\structs\Taddress.h" />
+    <ClInclude Include="include\structs\Tbyte.h" />
+    <ClInclude Include="include\structs\Tmap.h" />
+    <ClInclude Include="include\structs\Tpair.h" />
+    <ClInclude Include="include\structs\TransModel.h" />
+    <ClInclude Include="include\structs\TwoKeyedAddress.h" />
+    <ClInclude Include="include\structs\TwoKeyedData.h" />
+    <ClInclude Include="include\structs\WrapScrollGraphic.h" />
+    <ClInclude Include="include\util\ArrayOps.h" />
+    <ClInclude Include="include\util\ByteConversion.h" />
+    <ClInclude Include="include\util\ByteSizes.h" />
+    <ClInclude Include="include\util\CoordinatePair.h" />
+    <ClInclude Include="include\util\DumbPointer.h" />
+    <ClInclude Include="include\util\EndiannessType.h" />
+    <ClInclude Include="include\util\FileManip.h" />
+    <ClInclude Include="include\util\GenericException.h" />
+    <ClInclude Include="include\util\IniFile.h" />
+    <ClInclude Include="include\util\MiscMath.h" />
+    <ClInclude Include="include\util\RLE8Command.h" />
+    <ClInclude Include="include\util\RLE8CommandCollection.h" />
+    <ClInclude Include="include\util\RLE8CommandType.h" />
+    <ClInclude Include="include\util\RLE8Compressor.h" />
+    <ClInclude Include="include\util\RLE8ValueCollection.h" />
+    <ClInclude Include="include\util\SignednessType.h" />
+    <ClInclude Include="include\util\StreamOps.h" />
+    <ClInclude Include="include\util\StringConversion.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\editors\AreaMetadataEntry.cpp" />
+    <ClCompile Include="src\editors\BaseEditor.cpp" />
+    <ClCompile Include="src\editors\ColorPickerGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\ColorPreviewGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\EditorMetadata.cpp" />
+    <ClCompile Include="src\editors\EnhancementsEditor.cpp" />
+    <ClCompile Include="src\editors\GraphicCategory.cpp" />
+    <ClCompile Include="src\editors\GraphicCompressionType.cpp" />
+    <ClCompile Include="src\editors\GraphicInfo.cpp" />
+    <ClCompile Include="src\editors\GraphicMappingEditorLayer.cpp" />
+    <ClCompile Include="src\editors\GraphicPaletteDefaultMap.cpp" />
+    <ClCompile Include="src\editors\GraphicsEditor.cpp" />
+    <ClCompile Include="src\editors\GraphicsEditorScene.cpp" />
+    <ClCompile Include="src\editors\GraphicsEditorTool.cpp" />
+    <ClCompile Include="src\editors\GraphicsEditorToolManager.cpp" />
+    <ClCompile Include="src\editors\GraphicTileEditorLayer.cpp" />
+    <ClCompile Include="src\editors\GraphicToInfo.cpp" />
+    <ClCompile Include="src\editors\GraphicToMappingEntry.cpp" />
+    <ClCompile Include="src\editors\GraphicToMappings.cpp" />
+    <ClCompile Include="src\editors\GridGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\HackSettings.cpp" />
+    <ClCompile Include="src\editors\IndexedPickerScene.cpp" />
+    <ClCompile Include="src\editors\LengthMapDrawer.cpp" />
+    <ClCompile Include="src\editors\LengthMapEditor.cpp" />
+    <ClCompile Include="src\editors\LengthMapLayeredGraphicScene.cpp" />
+    <ClCompile Include="src\editors\LevelBoundsGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelEditor.cpp" />
+    <ClCompile Include="src\editors\LevelEditorLayeredGraphicScene.cpp" />
+    <ClCompile Include="src\editors\LevelEditorTool.cpp" />
+    <ClCompile Include="src\editors\LevelEditorToolManager.cpp" />
+    <ClCompile Include="src\editors\LevelEffectGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelMetadataEntry.cpp" />
+    <ClCompile Include="src\editors\LevelObjectGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelSolidityGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelSpawnGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelVisualGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\editors\LevelVRAMEditor.cpp" />
+    <ClCompile Include="src\editors\MappingAssembler.cpp" />
+    <ClCompile Include="src\editors\MetatileBehaviorEditor.cpp" />
+    <ClCompile Include="src\editors\MetatileBehaviorPickerScene.cpp" />
+    <ClCompile Include="src\editors\MetatileGraphicCollection.cpp" />
+    <ClCompile Include="src\editors\MetatilePickerLayeredGraphicScene.cpp" />
+    <ClCompile Include="src\editors\MetatilePickerSceneBase.cpp" />
+    <ClCompile Include="src\editors\MetatileStructureDefault.cpp" />
+    <ClCompile Include="src\editors\MetatileStructureDefaultMap.cpp" />
+    <ClCompile Include="src\editors\MetatileStructureEditor.cpp" />
+    <ClCompile Include="src\editors\MetatileSubtilePickerScene.cpp" />
+    <ClCompile Include="src\editors\MusicEditor.cpp" />
+    <ClCompile Include="src\editors\ObjectDisplayCache.cpp" />
+    <ClCompile Include="src\editors\ObjectDisplayCacheCollection.cpp" />
+    <ClCompile Include="src\editors\ObjectGraphicInfo.cpp" />
+    <ClCompile Include="src\editors\ObjectToGraphics.cpp" />
+    <ClCompile Include="src\editors\PaletteCycleEditor.cpp" />
+    <ClCompile Include="src\editors\PaletteEditor.cpp" />
+    <ClCompile Include="src\editors\PowerUpEditor.cpp" />
+    <ClCompile Include="src\editors\TailsAdvEditor.cpp" />
+    <ClCompile Include="src\editors\TilePickerScene.cpp" />
+    <ClCompile Include="src\editors\TileRenderer.cpp" />
+    <ClCompile Include="src\editors\VisualMetatilePickerScene.cpp" />
+    <ClCompile Include="src\editors\VRAMCache.cpp" />
+    <ClCompile Include="src\editors\VRAMEditorLayeredGraphicScene.cpp" />
+    <ClCompile Include="src\exception\ColorOutOfRangeException.cpp" />
+    <ClCompile Include="src\exception\FileException.cpp" />
+    <ClCompile Include="src\exception\FileNotFoundException.cpp" />
+    <ClCompile Include="src\exception\TGenericException.cpp" />
+    <ClCompile Include="src\exception\InvalidFileException.cpp" />
+    <ClCompile Include="src\exception\InvalidLoadDataException.cpp" />
+    <ClCompile Include="src\exception\NotEnoughSpaceException.cpp" />
+    <ClCompile Include="src\exception\OutOfRangeIndexException.cpp" />
+    <ClCompile Include="src\exception\PoppedEmptyStackException.cpp" />
+    <ClCompile Include="src\exception\TalesException.cpp" />
+    <ClCompile Include="src\exception\TmapKeyNotFoundException.cpp" />
+    <ClCompile Include="src\exception\UnrecognizedVersionException.cpp" />
+    <ClCompile Include="src\gamedata\AreaMapReference.cpp" />
+    <ClCompile Include="src\gamedata\BaseEditableFixedGraphicTable.cpp" />
+    <ClCompile Include="src\gamedata\BaseEditableMappedData.cpp" />
+    <ClCompile Include="src\gamedata\CharacterUncompressedGraphicHeader.cpp" />
+    <ClCompile Include="src\gamedata\EditableEmeraldHealthRefills.cpp" />
+    <ClCompile Include="src\gamedata\EditableLeafGraphicsTable.cpp" />
+    <ClCompile Include="src\gamedata\EditableLevelEffectsHeaders.cpp" />
+    <ClCompile Include="src\gamedata\EditableLevelGraphicsData.cpp" />
+    <ClCompile Include="src\gamedata\EditableLevelObjectEntryGroups.cpp" />
+    <ClCompile Include="src\gamedata\EditableLevelPaletteHeaders.cpp" />
+    <ClCompile Include="src\gamedata\EditableMapData.cpp" />
+    <ClCompile Include="src\gamedata\EditableMetatileBehaviors.cpp" />
+    <ClCompile Include="src\gamedata\EditableMetatileHeightMaps.cpp" />
+    <ClCompile Include="src\gamedata\EditableMetatileLengthMaps.cpp" />
+    <ClCompile Include="src\gamedata\EditableMetatileWidthMaps.cpp" />
+    <ClCompile Include="src\gamedata\EditableMusicAssignments.cpp" />
+    <ClCompile Include="src\gamedata\EditablePaletteCycles.cpp" />
+    <ClCompile Include="src\gamedata\EditablePowerUpData.cpp" />
+    <ClCompile Include="src\gamedata\EditableRadioMusic.cpp" />
+    <ClCompile Include="src\gamedata\EditableSlopeSpeedValues.cpp" />
+    <ClCompile Include="src\gamedata\EditableSmokePuffGraphicTable.cpp" />
+    <ClCompile Include="src\gamedata\EditableSpawnPoints.cpp" />
+    <ClCompile Include="src\gamedata\EditableSpriteMappings.cpp" />
+    <ClCompile Include="src\gamedata\EditableStandardPalettes.cpp" />
+    <ClCompile Include="src\gamedata\EditableWarpDestinations.cpp" />
+    <ClCompile Include="src\gamedata\EditableWaterSplashGraphicTable.cpp" />
+    <ClCompile Include="src\gamedata\FixedGraphicTableEntry.cpp" />
+    <ClCompile Include="src\gamedata\LengthMapValue.cpp" />
+    <ClCompile Include="src\gamedata\LevelEffectsHeader.cpp" />
+    <ClCompile Include="src\gamedata\LevelGraphicsHeader.cpp" />
+    <ClCompile Include="src\gamedata\LevelHeader.cpp" />
+    <ClCompile Include="src\gamedata\LevelHeaders.cpp" />
+    <ClCompile Include="src\gamedata\LevelObjectEntry.cpp" />
+    <ClCompile Include="src\gamedata\LevelObjectEntryGroup.cpp" />
+    <ClCompile Include="src\gamedata\LevelPaletteHeader.cpp" />
+    <ClCompile Include="src\gamedata\MapLayout.cpp" />
+    <ClCompile Include="src\gamedata\MapLayouts.cpp" />
+    <ClCompile Include="src\gamedata\MappingToGraphic.cpp" />
+    <ClCompile Include="src\gamedata\MappingToGraphicEntry.cpp" />
+    <ClCompile Include="src\gamedata\MetatileBehavior.cpp" />
+    <ClCompile Include="src\gamedata\MetatileHeightMap.cpp" />
+    <ClCompile Include="src\gamedata\MetatileLengthMap.cpp" />
+    <ClCompile Include="src\gamedata\MetatileSolidity.cpp" />
+    <ClCompile Include="src\gamedata\MetatileStructure.cpp" />
+    <ClCompile Include="src\gamedata\MetatileStructures.cpp" />
+    <ClCompile Include="src\gamedata\MetatileStructureSet.cpp" />
+    <ClCompile Include="src\gamedata\MetatileStructureTableCollection.cpp" />
+    <ClCompile Include="src\gamedata\MetatileType.cpp" />
+    <ClCompile Include="src\gamedata\MetatileWidthMap.cpp" />
+    <ClCompile Include="src\gamedata\ObjectGraphicMapping.cpp" />
+    <ClCompile Include="src\gamedata\ObjectGraphicsHeader.cpp" />
+    <ClCompile Include="src\gamedata\ObjectGraphicSubheader.cpp" />
+    <ClCompile Include="src\gamedata\ObjectStateInfo.cpp" />
+    <ClCompile Include="src\gamedata\ObjectStates.cpp" />
+    <ClCompile Include="src\gamedata\ObjectTypeID.cpp" />
+    <ClCompile Include="src\gamedata\PaletteCycle.cpp" />
+    <ClCompile Include="src\gamedata\PaletteCycleState.cpp" />
+    <ClCompile Include="src\gamedata\PrimaryMaps.cpp" />
+    <ClCompile Include="src\gamedata\RawLevelGraphicsHeader.cpp" />
+    <ClCompile Include="src\gamedata\RawLevelHeader.cpp" />
+    <ClCompile Include="src\gamedata\RawLevelHeaders.cpp" />
+    <ClCompile Include="src\gamedata\RawObjectGraphicsHeader.cpp" />
+    <ClCompile Include="src\gamedata\RawObjectGraphicSubheader.cpp" />
+    <ClCompile Include="src\gamedata\RawSpriteMapping.cpp" />
+    <ClCompile Include="src\gamedata\SoundID.cpp" />
+    <ClCompile Include="src\gamedata\SpawnPoint.cpp" />
+    <ClCompile Include="src\gamedata\SpecialEffect.cpp" />
+    <ClCompile Include="src\gamedata\SpriteMapping.cpp" />
+    <ClCompile Include="src\gamedata\SpriteMappingCoordinateTable.cpp" />
+    <ClCompile Include="src\gamedata\SpriteMappingCoordinateTableEntry.cpp" />
+    <ClCompile Include="src\gamedata\SpriteMappingTileIndexTable.cpp" />
+    <ClCompile Include="src\gamedata\StandardUncompressedGraphicHeader.cpp" />
+    <ClCompile Include="src\gamedata\SubMaps.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvAddresses.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvBank0Hacks.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvData.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvEditable.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvFreeSpace.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvGraphicCompressor.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvRLECompressor.cpp" />
+    <ClCompile Include="src\gamedata\TailsAdvROMLoader.cpp" />
+    <ClCompile Include="src\gamedata\TwoKeyEditableMappedData.cpp" />
+    <ClCompile Include="src\gamedata\TwoKeyIndexedEditableMappedData.cpp" />
+    <ClCompile Include="src\gamedata\WarpDestination.cpp" />
+    <ClCompile Include="src\gamedata\YTableAddresses.cpp" />
+    <ClCompile Include="src\gamegear\GGColor.cpp" />
+    <ClCompile Include="src\gamegear\GGFullTileSet.cpp" />
+    <ClCompile Include="src\gamegear\GGPalette.cpp" />
+    <ClCompile Include="src\gamegear\GGTile.cpp" />
+    <ClCompile Include="src\gamegear\GGTileSet.cpp" />
+    <ClCompile Include="src\gamegear\LoadedROM.cpp" />
+    <ClCompile Include="src\gamegear\TileReference.cpp" />
+    <ClCompile Include="src\gamegear\VirtualVDP.cpp" />
+    <ClCompile Include="src\gamegear\WritableROM.cpp" />
+    <ClCompile Include="src\structs\BitmapGraphicSceneObject.cpp" />
+    <ClCompile Include="src\structs\Box.cpp" />
+    <ClCompile Include="src\structs\BoxGraphicSceneObject.cpp" />
+    <ClCompile Include="src\structs\Color.cpp" />
+    <ClCompile Include="src\structs\ConstSizeVector.cpp" />
+    <ClCompile Include="src\structs\DataChunkID.cpp" />
+    <ClCompile Include="src\structs\FreeSpaceListing.cpp" />
+    <ClCompile Include="src\structs\FreeSpaceListPair.cpp" />
+    <ClCompile Include="src\structs\GenericGraphicSceneLayer.cpp" />
+    <ClCompile Include="src\structs\GenericGraphicSceneObject.cpp" />
+    <ClCompile Include="src\structs\Graphic.cpp" />
+    <ClCompile Include="src\structs\GraphicDependencyGroup.cpp" />
+    <ClCompile Include="src\structs\GraphicDependencyGroupEntry.cpp" />
+    <ClCompile Include="src\structs\GraphicIdentifier.cpp" />
+    <ClCompile Include="src\structs\GraphicSceneLayer.cpp" />
+    <ClCompile Include="src\structs\IndexToAddressMap.cpp" />
+    <ClCompile Include="src\structs\InputEventData.cpp" />
+    <ClCompile Include="src\structs\KeyedAddressTableBuilder.cpp" />
+    <ClCompile Include="src\structs\KeyedTableBuilder.cpp" />
+    <ClCompile Include="src\structs\LayeredGraphicScene.cpp" />
+    <ClCompile Include="src\structs\LevelWidth.cpp" />
+    <ClCompile Include="src\structs\LoadHelper.cpp" />
+    <ClCompile Include="src\structs\RawFreeSpacePair.cpp" />
+    <ClCompile Include="src\structs\SaveHelper.cpp" />
+    <ClCompile Include="src\structs\Taddress.cpp" />
+    <ClCompile Include="src\structs\Tbyte.cpp" />
+    <ClCompile Include="src\structs\Tmap.cpp" />
+    <ClCompile Include="src\structs\Tpair.cpp" />
+    <ClCompile Include="src\structs\TransModel.cpp" />
+    <ClCompile Include="src\structs\TwoKeyedAddress.cpp" />
+    <ClCompile Include="src\structs\TwoKeyedData.cpp" />
+    <ClCompile Include="src\structs\WrapScrollGraphic.cpp" />
+    <ClCompile Include="src\util\ArrayOps.cpp" />
+    <ClCompile Include="src\util\ByteConversion.cpp" />
+    <ClCompile Include="src\util\ByteSizes.cpp" />
+    <ClCompile Include="src\util\CoordinatePair.cpp" />
+    <ClCompile Include="src\util\DumbPointer.cpp" />
+    <ClCompile Include="src\util\EndiannessType.cpp" />
+    <ClCompile Include="src\util\FileManip.cpp" />
+    <ClCompile Include="src\util\GenericException.cpp" />
+    <ClCompile Include="src\util\IniFile.cpp" />
+    <ClCompile Include="src\util\MiscMath.cpp" />
+    <ClCompile Include="src\util\RLE8Command.cpp" />
+    <ClCompile Include="src\util\RLE8CommandCollection.cpp" />
+    <ClCompile Include="src\util\RLE8CommandType.cpp" />
+    <ClCompile Include="src\util\RLE8Compressor.cpp" />
+    <ClCompile Include="src\util\RLE8ValueCollection.cpp" />
+    <ClCompile Include="src\util\SignednessType.cpp" />
+    <ClCompile Include="src\util\StreamOps.cpp" />
+    <ClCompile Include="src\util\StringConversion.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

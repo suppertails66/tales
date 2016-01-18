@@ -1,0 +1,22 @@
+There are two basic components to Tales: libtales, a static library which
+provides most of the editing logic, and libtales-qt, a Qt-based interface onto
+libtales.
+
+==Building libtales==
+- On Linux(-like) systems:
+  1. Navigate to the "libtales" folder and run the command "make".
+
+- On Windows systems:
+  1. Navigate to the "libtales" folder and open the "libtales.sln" Visual
+Studio solution.
+  2. Build libtales in debug or release mode, as appropriate.
+  Building on Windows has been tested with Visual Studio 2010. Other versions
+  and compilers may or may not work "out of the box".
+
+==Building libtales-qt==
+1. Navigate to the "libtales-qt" folder and open the "libtales-qt.pro" Qt
+project file in Qt Creator.
+2. Build libtales-qt.pro in debug or release mode, as appropriate.
+3. To start the program, run the "tales" executable generated in the build
+directory.
+libtales-qt is designed for Qt 4, but should build without issue in Qt 5.

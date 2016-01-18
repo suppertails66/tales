@@ -1,0 +1,876 @@
+<html>
+  <head>
+    <title>Tails Adventures Level Editor Suite</title>
+    <meta content="">
+    <link rel="icon" href="favicon.ico" />
+    <style></style>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <h1>Tails Adventures Level Editor Suite Documentation</h1>
+      by Supper (suppertails66@gmail.com)
+    </div>
+    <h2>Table of Contents</h2>
+    <div class="tableofcontents">
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#gettingstarted">Getting Started</a></li>
+        <li><a href="#basicuse">Basic Program Use</a>
+          <ol>
+            <li><a href="#menubar">Menu Bar</a></li>
+            <li><a href="#toolselect">Tool Selection Sidebar</a></li>
+            <li><a href="#currenttool">Current Editing Tool</a></li>
+          </ol>
+        </li>
+        <li><a href="#howlevelworks">How a Level Works</a></li>
+        <li><a href="#editingtools">Editing Tools</a>
+          <ol>
+            <li><a href="#leveleditor">Level Editor</a>
+              <ol>
+                <li><a href="#leveleditingtools">Level Editor Components</a></li>
+                <li><a href="#objectproperties">Object Properties Dialog</a></li>
+                <li><a href="#spawnproperties">Spawn Properties Dialog</a></li>
+                <li><a href="#levelproperties">Level Properties Dialog</a></li>
+                <li><a href="#warpeditor">Warp Editor Dialog</a></li>
+              </ol>
+            </li>
+            <li><a href="#vrameditor">VRAM Editor</a>
+              <ol>
+                <li><a href="#vramprimer">VRAM Primer</a></li>
+                <li><a href="#vramcomponents">VRAM Editor Components</a></li>
+                <li><a href="#objectheadersdialog">Object Headers Dialog</a></li>
+                <li><a href="#addgraphicdialog">Add Graphic Dialog</a></li>
+              </ol>
+            </li>
+            <li><a href="#graphicseditor">Graphics and Collision Editor</a>
+              <ol>
+                <li><a href="#graphicsprimer">Graphics Primer</a></li>
+                <li><a href="#graphicscomponents">Graphics Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#paletteeditor">Palette Editor</a>
+              <ol>
+                <li><a href="#palettecomponents">Palette Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#palettecycleeditor">Palette Cycle Editor</a>
+              <ol>
+                <li><a href="#palettecyclecomponents">Palette Cycle Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#structureeditor">Metatile Structure Editor</a>
+              <ol>
+                <li><a href="#structureprimer">Metatile Structure Primer</a></li>
+                <li><a href="#structurecomponents">Metatile Structure Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#behavioreditor">Metatile Behavior Editor</a>
+              <ol>
+                <li><a href="#behaviorprimer">Metatile Behavior Primer</a></li>
+                <li><a href="#behaviorcomponents">Metatile Behavior Editor Components</a></li>
+                <li><a href="#behaviorlist">Metatile Behavior List</a></li>
+              </ol>
+            </li>
+            <li><a href="#lengthmapeditor">Width/Height Map Editor</a>
+              <ol>
+                <li><a href="#lengthmapprimer">Width/Height Map Primer</a></li>
+                <li><a href="#lengthmapcomponents">Width/Height Map Editor Components</a></li>
+                <li><a href="#lengthmapeditdialog">Width/Height Edit Dialog</a></li>
+              </ol>
+            </li>
+            <li><a href="#musiceditor">Music Editor</a>
+              <ol>
+                <li><a href="#musiceditorcomponents">Music Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#powerupeditor">Power-Up Editor</a>
+              <ol>
+                <li><a href="#powerupeditorcomponents">Power-Up Editor Components</a></li>
+              </ol>
+            </li>
+            <li><a href="#enhancementseditor">Hacks and Enhancements Editor</a>
+              <ol>
+                <li><a href="#enhancementseditorcomponents">Hacks and Enhancements Editor Components</a></li>
+              </ol>
+            </li>
+          </ol>
+          </li>
+          <li><a href="#gamequirks">Game Quirks</a>
+            <ol>
+              <li><a href="#quirksvram">VRAM Caveats</a></li>
+              <li><a href="#quirksstructure">Metatile Structure Caveats</a></li>
+              <li><a href="#quirksmusic">Music Quirks</a></li>
+              <li><a href="#quirksseafox">Sea Fox</a></li>
+              <li><a href="#quirkswater">Water</a></li>
+              <li><a href="#quirkspseudolevels">Psuedo-Levels</a></li>
+              <li><a href="#quirksreplacelevels">Substitute Levels</a></li>
+              <li><a href="#quirkspollymt2">Polly Mt. 2 Palette</a></li>
+              <li><a href="#quirksgraphiccycles">Graphic Cycling Effects</a></li>
+              <li><a href="#quirksseafoxitems">Sea Fox Item Pickup Bug</a></li>
+              <li><a href="#quirkscamera">Camera Starting Positions</a></li>
+              <li><a href="#quirkseffects">Nonstandard Level Effects</a></li>
+              <li><a href="#quirksbosses">Bosses</a></li>
+              <li><a href="#quirksendgame">How to Complete the Game</a></li>
+            </ol>
+          </li>
+          <li><a href="#tipsandtricks">Tips and Tricks</a>
+            <ol>
+              <li><a href="#tipsoneway">One-Way Levels</a></li>
+              <li><a href="#tipsteleport">Teleporters</a></li>
+            </ol>
+          </li>
+      </ol>
+    </div>
+    
+    <h2 id="overview">Overview</h2>
+    <p>
+      Tails Adventures&mdash;a.k.a. Tails Adventure or Tails' Adventure&mdash;is, as you most likely already know if you're reading this, a 1995 game for Sega's Game Gear system. It was developed by Aspect, the company responsible for most of the <i>Sonic</i> platformers for the Master System and Game Gear, and runs on a variation of the engine used for games like <i>Sonic Chaos</i> and <i>Sonic Triple Trouble</i>. Despite this lineage, it's a radical departure from its predecessors in terms of gameplay; instead of standard Sonic go-fast platforming, it follows Tails on a slower-paced quest for the items he needs to defeat the army of ducks that have invaded his island for some reason.
+    </p>
+    <p>
+    Tails Adventures Level Editor Suite (Tales) is an editing program for Tails Adventures. It can modify almost every aspect of the game, such as level layout, graphics, and power-ups. This manual documents the program's features. While most of the editing tools should (hopefully) be fairly self-explanatory, the game has a number of limitations that aren't immediately apparent. These will be explained as they become relevant.
+    </p>
+    <h2 id="gettingstarted">Getting Started</h2>
+    <p>
+      If you haven't used Tales before, I suggest you first try booting the program up and playing around it. I've tried to make it reasonably intuitive to use; you shouldn't need this manual to load the game up and do some basic editing. If you get stuck or can't figure out how something works, then consult the documentation as appropriate. However, you should probably at least read the <a href="#leveleditor">Level Editor</a> section at some point&mdash;particularly <a href="#leveleditortoollist">the explanation of the editing tools</a>, as some of them have extremely convenient features that aren't immediately obvious. It's also a good idea to take a look at the <a href="#gamequirks">Game Quirks</a> and <a href="#tipsandtricks">Tips and Tricks</a> sections.
+    </p>
+    <h2 id="basicuse">Basic Program Use</h2>
+    <img src="sourcedialog.png" width="300"></img>
+    <p>
+    The first time you run tales.exe, you should be greeted by a dialog box similar to the above. In order to function, the program needs an <em>unmodified</em> ROM image of Tails Adventures from which to read data to create new projects. You must supply this file yourself. The path of the chosen file is saved to the program configuration file, <b>tales.cfg</b>, so you only need to do this once.
+    </p>
+    <p>
+    <div class="warning"><b><em style="color: red;">WARNING: Don't modify the selected ROM!</em></b> This file is used as a data source whenever a new project is created. If the file is not a clean Tails Adventures ROM, the program will most likely misbehave or crash.</div>
+    </p>
+    <div style="clear: both;"></span>
+    <img src="basicuse.png" width="500"></img><br>
+    <p>
+    After choosing your ROM, the editor proper will launch. There are three basic components of the program that are displayed at all times:
+    </p>
+    <ol>
+      <li>The <b><a href="#menubar">menu bar</a></b>. The menu bar provides access to essential program functions like saving, loading, and changing tools. It contains several submenus, each with their own set of options.</li>
+      <li>The <b><a href="#toolselect">tool selection sidebar</a></b>. This bar provides quick access to each of the editing tools, represented by a small icon.</li>
+      <li>The <b><a href="#currenttool">current editing tool</a></b>. This allows some aspect of the game to be edited.</li>
+    </ol>
+    
+    <h3 id="menubar">Menu Bar</h3>
+    <p>
+      The menu bar contains several submenus for manipulating the program.
+    </p>
+    <ol>
+      <li><b>File: </b>This is the most fundamentally important component of the program. The File menu allows projects to be saved and loaded to a project file, or exported to a playable ROM image. A <b>project file</b> (extension: .tls) contains the data Tales needs to make edits&mdash;it is not a playable game. Project files are used to store data between program sessions. To produce a playable game, the project data must be exported to a ROM image (extension: .gg). The File menu contains the following items:
+        <ol>
+          <li><b>Open project...</b> (<b>Ctrl+O</b>). Opens an existing project file.</li>
+          <li><b>Save project</b> (<b>Ctrl+S</b>). Saves the current project to the file it was last saved or loaded from. If the project has not yet been saved or loaded, this functions identically to the Save As option.</li>
+          <li><b>Save as...</b> (<b>Ctrl+Shift+S</b>). Opens a dialog box for selecting a location to save the current project.</li>
+          <li><b>Export ROM</b> (<b>Ctrl+E</b>). Exports the project as a playable ROM image to the location it was most recently exported to. If the project has not yet been exported, this functions identically to the Export ROM As option.</li>
+          <li><b>Export ROM as...</b> (<b>Ctrl+Shift+E</b>). Opens a dialog box for selecting a location to export the current project as a playable ROM.</li>
+        </ol>
+      </li>
+      <li><b>Tools:</b> contains a list of editing tools that can be selected for use. The currently selected tool is indicated by a check mark next to its name. Identical in function to the <a href="#toolselect">tool selection sidebar</a>&mdash;see that section for details.
+      </li>
+      <li><b>Help:</b> contains the <b>About</b> option, which displays program authorship and version information.
+      </li>
+    </ol>
+    <h3 id="toolselect">Tool Selection Sidebar</h3>
+    <p>
+    The tool selection sidebar is a series of graphical icons that provide quick access to the program's editing tools.
+    </p>
+    <ul>
+      <li><img src="mapicon.png"> <b><a href="#leveleditor">Level editor</a></b> (<b>Shift+L</b>)</li>
+      <li><img src="vramicon.png"> <b><a href="#vrameditor">VRAM editor</a></b> (<b>Shift+V</b>)</li>
+      <li><img src="paintbrushicon.png"> <b><a href="#graphicseditor">Graphics editor</a></b> (<b>Shift+G</b>)</li>
+      <li><img src="paletteicon.png"> <b><a href="#paletteeditor">Palette editor</a></b> (<b>Shift+P</b>)</li>
+      <li><img src="palettecycleicon.png"> <b><a href="#palettecycleeditor">Palette cycle editor</a></b> (<b>Shift+Y</b>)</li>
+      <li><img src="structureicon.png"> <b><a href="#structureeditor">Metatile structure editor</a></b> (<b>Shift+S</b>)</li>
+      <li><img src="behavioricon.png"> <b><a href="#behavioreditor">Metatile behavior editor</a></b> (<b>Shift+B</b>)</li>
+      <li><img src="lengthmapicon.png"> <b><a href="#lengthmapeditor">Width/height map editor</a></b> (<b>Shift+M</b>)</li>
+      <li><img src="musicicon.png"> <b><a href="#musiceditor">Music editor</a></b> (<b>Shift+U</b>)</li>
+      <li><img src="powerupicon.png"> <b><a href="#powerupeditor">Power-Up editor</a></b> (<b>Shift+R</b>)</li>
+      <li><img src="enhancementsicon.png"> <b><a href="#enhancementseditor">Hacks and enhancements editor</a></b> (<b>Shift+H</b>)</li>
+    </ul>
+    
+    <h3 id="currenttool">Current Editing Tool</h3>
+    <p>
+    Most of the program window is comprised of the current editing tool. Each tool has its own interface. These are described in detail in the following section.
+    </p>
+    
+    <h2 id="howlevelworks">How a Level Works</h2>
+    <p>
+      Conceptually, each level of Tails Adventures has three parts: the metatile layout, the object layout, and the spawn layout. The <b>metatile layout</b> determines how the "static", unchanging parts of the level look and behave. The <b>object layouts</b> determines where objects appear in the level. The <b>spawn layout</b> determines the starting positions of Tails and the camera within the level.
+    </p>
+    <p>
+      The basic building block of a level is the <b>metatile</b>. A metatile is a 16x16 pixel block built out of four 8x8 <b>tiles</b>. The game defines 256 metatiles that can be placed in any level. <em>Each of the 256 metatiles behaves the same no matter which level it is placed in</em>&mdash;only the appearance may change, depending on the level's VRAM and metatile structure definitions. Each metatile has several properties that determine its exact function&mdash;see <a href="#behaviorprimer">Metatile Behavior Primer</a> for more details.
+    </p>
+    <p>
+      Each level also contains up to 64 <b>objects</b>. Each object defined in a level has several properties:
+        <ul>
+          <li>a <b>type</b> that determines how it behaves</li>
+          <li>an X/Y <b>spawn position</b> where the object should initially appear</li>
+          <li>several <b>global flags</b> for various settings, such as which direction the object is facing and whether or not it is visible</li>
+          <li>two <a href="#vramprimer"><b>VRAM indices</b></a> that determine the object's appearance when facing left and right</li>
+          <li>an <b>initial state</b>, whose exact meaning depends on the object's type</li>
+        </ul>
+    </p>
+    <p>
+      It is important to note that due to space restrictions, <em style="color: red;">there is an absolute upper limit of 1645 objects total across all levels.</em>
+    </p>
+    <p>
+      The game needs to know where to place Tails in a level when it starts, so every standard level has one or more <b>Tails spawn points</b>. These spawn points consist of two X/Y positions: one for Tails, and one for the game's camera. The number of spawn points for a level is fixed; most have at least two. Spawn points are numbered sequentially. When an area is accessed from the world map, Tails appears at the first spawn point in the first map of the target area.
+    </p>
+    <p>
+      To create connections from one level to another, each level has a fixed number of <b>warp definitions</b>. Each level in the game is identified by two numbers: an <b>area</b> and a <b>map</b>. A warp definition specifies the area and map number of the target level, as well as a spawn index number indicating which of that level's spawn points Tails should start at when the warp is accessed. Each warp also contains 12 <b>unlock flags</b>, each corresponding to a location on the world map. When the warp is used, any area whose unlock flag is set will be unlocked for access on the world map. Warps are triggered using <b>warp objects</b>, described later.
+    </p>
+    <p>
+      Levels also contain a number of miscellaneous properties:
+        <ul>
+          <li>A <b>size</b>. There are a fixed number of valid level width/height pairs.</li>
+          <li>A <a href="#structureprimer"><b>metatile structure set</b></a>. This determines how the level's graphics, loaded in VRAM, are put together to form the look of each metatile.</li>
+          <li>Two <b>palette indices</b> identifying which of the game's palettes shoult be loaded. Palette 1 is used only for coloring the level, while Palette 2 can be used for coloring both level and object graphics (though the standard game uses it only for objects).</li>
+          <li>Up to four <b>effects</b>. Effects can do anything, but generally they cycle some of the colors in the palette or change some of the level's graphics.</li>
+        </ul>
+    </p>
+    
+    <h2 id="editingtools">Editing Tools</h2>
+    <h3 id="leveleditor">Level Editor</h3>
+    <p>
+      The level editor is the meat of the program, and the most complex component by far. It allows virtually all aspects of level layout to be customized, as well as spects of the game flow like connections between levels.
+    </p>
+    <h4 id="leveleditingtools">Level Editor Components</h4>
+    <img src="leveleditor.png" width="500"></img>
+    <p>
+      The level editor consists of a few different parts, as labelled on the image above:
+    </p>
+    <ol>
+      <li>The <b>level preview area</b>. This is an interactive display of the currently selected level. Its appearance varies based on the chosen display mode and active overlays, but generally it shows the layout of the current level, its objects and spawn points, and the boundaries of the camera. The scroll bars at the bottom and right of the preview allow it to be scrolled to view different parts of the level. The editing tools described below are used by interacting with this part of the screen.
+        <p>Shortcuts:
+            <ul>
+              <li><b>Mouse wheel up/down</b>: scroll display vertically</li>
+              <li><b>Shift+Mouse wheel up/down</b>: scroll display horizontally</li>
+              <li><b>Ctrl+either of the above</b>: scroll display faster</li>
+            </ul>
+        </p>
+      </li>
+      <li>The <b>level editing tool menu</b>. The buttons in this menu switch the active tool for the level preview area.</li>
+        <ul id="leveleditortoollist">
+          <li><img src="pencilicon.png"></img> <b>Metatile pencil tool</b> (shortcut: <b>P</b>). When this tool is active:
+            <ul>
+              <li><b>left-click</b> on the level preview area to replace the clicked metatile with the one currently selected in the metatile picker</li>
+              <li><b>right-click</b> on a metatile in the level preview area to "pick up" that metatile as the current type to draw.</li>
+              <li><b>Hold Ctrl and drag the mouse with the left button held</b> to switch to the area clone tool.</li>
+            </ul>
+          </li>
+          <li><img src="selecticon.png"></img> <b>Area clone tool</b> (shortcut: <b>L</b>). When this tool is active:
+            <ul>
+              <li>If a source area has not yet been selected, <b>hold the left button and drag the mouse</b> on the level preview area to select a rectangular area of metatiles to clone.</li>
+              <li>Once a source area has been selected (indicated by a preview area outlined in red), <b>left-click</b> on the level preview area to clone the source area to the target area.</li>
+              <li>If a source area is already selected, a new source area can be defined by <b>holding Ctrl and dragging the mouse with the left button held.</b></li>
+              <li>At any time, <b>right-click</b> to switch to the metatile pencil tool with the metatile under the mouse "picked up" as the active metatile.</li>
+            </ul>
+          </li>
+          <li><img src="objecticon.png"></img> <b>Object editing tool</b> (shortcut: <b>O</b>). When this tool is active:
+            <ul>
+              <li><b>Left-click</b> an object in the preview area to select it.</li>
+              <li><b>Left-click and drag an object in the preview area</b> to move it.</li>
+              <li><b>Hold Ctrl and drag an object in the preview area</b> to clone it.</li>
+              <li><b>Middle-click an object in the preview area</b> to delete it.</li>
+              <li><b>Double-click</b> an object in the preview area to open the <a href="#objectproperties">Object Properties Dialog</a>.</li>
+              <li><b>Left-click and drag an empty part of the preview area</b> to select multiple objects at once in a rectangular area.</li>
+              <li>With multiple objects selected, <b>left-click and drag any of the selected objects</b> to move all of them at once, maintaining their relative layout.</li>
+              <li><b>Perform any action from the spawn editing tool</b> to switch to the spawn editing tool.</li>
+            </ul>
+          </li>
+          <li><img src="spawnicon.png"></img> <b>Spawn editing tool</b> (shortcut: <b>K</b>). When this tool is active:
+            <ul>
+              <li><b>Left-click</b> a spawn point to select it.</li>
+              <li><b>Left-click and drag a spawn point in the preview area</b> to move it.</li>
+              <li><b>Double-click</b> a spawn point in the preview area to open the <a href="#spawnproperties">Spawn Properties Dialog</a>.</li>
+              <li><b>Perform any action from the object editing tool</b> to switch to the object editing tool.</li>
+            </ul>
+          </li>
+        </ul>
+      <p>
+        There are also two non-tool buttons in this area:
+        <ul>
+          <li>The <b>Warps...</b> button opens the <a href="#warpeditor">Warp Editor Dialog</a>.</li>
+          <li>The <b>Level properties...</b> button opens the <a href="#levelproperties">Level Properties Dialog</a>.</li>
+        </ul>
+      </p>
+      <li>The <b>metatile picker</b>. This displays the metatiles for the current level. Left-clicking on a metatile selects it as the current tile for the Pencil tool (switching to the Pencil tool if it is not already in use).</li>
+      <li>The <b>object list</b>. This lists the names and initial states of all of the objects in the current level. <b>Left-click</b> on an object's entry in the list to select it and scroll the preview area to its current location. <b>Double-click</b> on the entry to open its <a href="#objectproperties">Object Properties Dialog</a>. The <b>Add...</b> button opens the Add Object Dialog. The <b>Remove</b> button removes the currently selected object. The <b>Autofill all</b> button attempts to automatically correct the VRAM indices of all objects in the level, which is useful after rearranging a level's VRAM in the VRAM Editor. Finally, the text label below the list shows how many object slots out of the maximum are currently in use. If the maximum limit is reached, no more objects may be placed.</li>
+      <li>The <b>display settings</b>. The settings in this area control what information is displayed in the preview area and metatile picker.
+        <ul>
+          <li><b>Grid</b>: turns the metatile grid overlay on and off.</li>
+          <li><b>Zoom</b>: zooms the preview display in and out. Zoom levels range from 25% to 400%.</li>
+          <li><b>Metatile display options</b>: changes how metatiles are displayed.
+            <ul>
+              <li><b>Visual</b>: metatiles are displayed as they will appear in-game.</li>
+              <li><b>Behavior</b>: metatiles are displayed as icons representing their function in the level.</li>
+              <li><b>Vert. solidity</b>: each metatile's height map is displayed. Fully solid tiles appear black; tiles that are solid on top appear gray. If a tile has a nonzero height map but is marked as nonsolid, it will appear in very light gray.</li>
+              <li><b>Horiz. solidity</b>: same as the Vert. solidity option, but for width maps.</li>
+            </ul>
+          </li>
+          <li><b>Layer display options</b>: changes which "layers" of the preview are drawn.
+            <ul>
+              <li><b>BG</b>: toggles whether tiles with background priority are displayed.</li>
+              <li><b>FG</b>: toggles whether tiles with foreground priority are displayed.</li>
+              <li><b>Objects</b>: toggles whether objects are displayed.</li>
+              <li><b>Spawns</b>: toggles whether Tails spawn points are displayed.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>The <b>camera boundaries editor</b>. The four numbers listed indicate where scrolling will be halted in each direction. Note that coordinates are given as distances from the left side of the screen (for left/right bounds), or the top side of the screen (for top/bottom bounds). There is also a "dead area" at the top and left of each area that the game is not capable of displaying (this is a technical issue related to the size of the Game Gear's screen). The <b>Show</b> box toggles whether or not the camera boundaries are displayed in the preview.</li>
+      <li>The <b>map selector</b>. The game's maps are listed here, sorted by area. <b>Left-click</b> on a map's entry to open it for editing.
+      <p>
+        <b>Note:</b> <a href="#quirksreplacelevels">Some maps have hardcoded "alternate" layouts</a> that are loaded in place of the "regular" layout under certain circumstances. These maps share their object layout with the "parent" map, but are otherwise unique (i.e. they have their own properties and metatile layout). Such levels are marked as "Special" in this list, with their "parent" map listed in parentheses.
+      </p></li>
+    </ol>
+    <h4 id="objectproperties">Object Properties Dialog</h4>
+    <img src="objectproperties.png" width="350"></img>
+    <p>
+      The <b>Object Properties Dialog</b> is accessed by double-clicking on either an object's preview in the preview area, or its entry in the object list. It allows the object's properties to be modified.
+      <ul>
+        <li><b>Object type:</b> the object's base type, which determines its behavior.</li>
+        <li><b>X/Y-coordinate:</b> the object's starting position. Note that the point at which the object actually spawns (and despawns) is type-dependent.</li>
+        <li><b>Facing flag:</b> Theoretically, this sets which direction the object initially faces, left or right. In practice, all but perhaps two or three object types ignore this flag and instead set the direction manually in their initialization code depending on their initial state.</li>
+        <li><b>Invisible flag:</b> If set, the object will be invisible when spawned. This flag will not work if either it or the flashing flag is changed by the object's cpde.</li>
+        <li><b>Flashing flag:</b> If set, the object will flash (flicker on and off at 30 Hz) when spawned. This is implemented by repeatedly switching the invisible flag on and off, and hence will "override" it if both are set. Object may also manually override this setting in their code.</li>
+        <li><b>VRAM indices:</b> Each object has two <a href="#vramprimer">VRAM indices</a>, one for its left-facing graphics and one for its right-facing graphics. If the current level's VRAM does not contain the expected graphics at the listed indices, then the object's graphics will obviously not display correctly. To save you some headaches, <em>the program tries to fill in these values automatically whenever an object's type is changed</em> by scanning VRAM for the expected graphics. This rescanning process can also be triggered manually by clicking the <b>Autofill</b> button (see also the <b>Autofill all</b> button, found in the object list).</li>
+        <li><b>Spawn parameter:</b> a parameter that determines the object's initial configuration. For the vast majority of objects, this simply involves choosing an initial state from a list. There are exceptions, however:
+          <ul>
+            <li><b>Warp objects</b> (object type 8):
+              <ul>
+                <li><b>Warp destination:</b> chooses which of the level's warp definitions (see <a href="#warpeditor">Warp Editor Dialog</a>) is the target of the warp object.</li>
+                <li><b>Warp size:</b> determines the size of the warp. Warp size varies by orientation&mdash;vertical warps extend upward by the listed amount, while horizontal warps extend both left and right.</li>
+                <li><b>Orientation:</b> determines whether the warp is horizontal or vertical. Horizontal warps are always 16 pixels (one metatile) high, while vertical warps are always 16 pixels wide.</li>
+              </ul>
+            </li>
+            <li><b>Underwater mine hazards</b> (object type 65):
+              <ul>
+                <li><b>State:</b> selects whether the mine is an immobile hazard (1 damage), a dropped mine (5 damage), or a mine dropper.</li>
+                <li><b>Orientation:</b> If the mine is a mine dropper, then it may cover multiple metatiles in order to cram more stuff on the screen at once. Droppers may be lined up either horizontally or diagonally.</li>
+                <li><b>Metatile coverage:</b> determines how many metatiles the dropper extends from its origin. The maximum value is 15.</li>
+              </ul>
+            </li>
+            <li><b>Underwater missile launchers</b> (object type 66):
+              <ul>
+                <li><b>Orientation:</b> as with mine droppers, but missile launchers must be vertical instead of horizontal.</li>
+                <li><b>Metatile coverage:</b> same as mine dropper.</li>
+              </ul>
+            </li>
+            <li><b>Electric barriers</b> (object type 75) and <b>electric barrier switches</b> (object type 76):
+              <ul>
+                <li><b>Identifier:</b> When an electric barrier siwtch is pressed, it attempts to deactivate the electric barrier whose identifier matches its own. Thus, this value is used to pair switches and barriers together.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+    <h4 id="spawnproperties">Spawn Properties Dialog</h4>
+    <img src="spawnproperties.png" width="250"></img>
+    <p>
+      The <b>Spawn Properties Dialog</b> is accessed by double-clicking on a spawn point (Tails graphic) in the preview display. Like the Object Properties Dialog, it allows the spawn's position to be manually modified. It also allows the camera's starting position to be changed. For convenience, the camera position is expressed as an offset from Tails' position.
+    </p>
+    <h4 id="warpeditor">Warp Editor Dialog</h4>
+    <img src="warpeditor.png" width="340"></img>
+    <p>
+      The <b>Warp Editor Dialog</b> is accessed by clicking the <b>Warps...</b> button. The <b>Warp</b> combo box allows each of the defined warps for the current level to be selected for editing. The <b>Area</b>, <b>Map</b>, and <b>Spawn</b> boxes set the warp's destination. The <b>Area Unlock Flags</b> determine which areas on the world map are unlocked when the warp is used.
+    </p>
+    <p>
+      There are a couple of special cases hardcoded into the game. First, if a warp's area is set to "World map", then the "Spawn" parameter determines which area the Tails icon is set to when the warp is used. Second, warps to the world map can have a spawn parameter of "Coco Island escape". In this case, the Coco Island escape cutscene sequence will trigger when the warp is taken.
+    </p>
+    <h4 id="levelproperties">Level Properties Dialog</h4>
+    <img src="levelproperties.png" width="340"></img>
+    <p>
+      The <b>Level Properties Dialog</b> is accessed by clicking the <b>Level Properties...</b> button. It sets a number of miscellaneous level properties:
+      <ul>
+        <li><b>Size:</b> determines the width and height of the level, in metatiles. Only certain specific sizes are allowed by the game engine.</li>
+        <li><b>Effects:</b> Each level may have up to four effects. An "effect" is generally a cycling palette or graphic.</li>
+        <li><b>Metatile structure set:</b> Changes the level's metatile structure set, and thus the appearance of its metatiles.</li>
+        <li><b>Palette 1 and 2:</b> Changes the level's tile palette (palette 1) and object palette (palette 2).</li>
+      </ul>
+    </p>
+    <h3 id="vrameditor">VRAM Editor</h3>
+    <p>
+      The VRAM editor is probably the second most important part of the program after the level editor. It can rearrange and alter the contents of VRAM, allowing objects to be placed in levels they weren't originally meant to be in. It also handles some miscellaneous editing tasks related to the locations of certain graphics in VRAM, such the as leaf graphic used for wind gust effects.
+    </p>
+    <h4 id="vramprimer">VRAM Primer</h4>
+    <p>
+      On the Master System and Game Gear, VRAM consists of up to 512 pattern (tile) definitions, which constitute the graphics the system can display. Of those, 64 patterns' worth of space must be used to store graphics metadata; Tails Adventures always uses the last 64 patterns for this purpose. This leaves 448 free patterns at the start of VRAM.
+    </p>
+    <p>
+      Tails Adventures devotes the first 256 patterns to object graphics, and the remaining 192 to level graphics. All of the graphics for a level are stored as one big graphic. To save space, however, object graphics are broken up into small pieces, and each level loads whatever it needs to display its objects. This offers us some freedom to shuffle object VRAM around so we can put different objects in levels, which is the main purpose of the VRAM editor.
+    </p>
+    <p>
+      An important limitation of the SMS/GG video hardware is that it cannot flip sprites. Since objects are rendered using sprites, objects that can face left or right&mdash;as most objects in the game can&mdash;must have horizontally flipped versions of their graphics loaded to VRAM. Tails Adventures therefore has some special handling for flipped versions of graphics, as we will see.
+    </p>
+    <p>
+      Tails Adventures does not actually define a unique object VRAM layout for each level; instead, it has a number of object graphic "packs" or "groups" that it recycles where it can. Fortunately, this limitation is not terribly relevant because Tales can insert new packs alongside the originals.
+    </p>
+    <h4 id="vramcomponents">VRAM Editor Components</h4>
+    <img src="vrameditor.png" width="500"></img>
+    <p>
+      <ol>
+        <li><b>VRAM Preview: </b> The main component of the VRAM editor, this interactive display previews the contents of VRAM in the currently selected level. Each of the graphics to be loaded is displayed in its target position. <b>Left-clicking on an object graphic</b> highlights it in both the preview and the object graphic list. To move a graphic to a new location in VRAM, <b>click and drag it</b> to a different place. Additionally, the selected graphics for the leaf, smoke puff, and water splash graphics will be shown here if their corresponding displays are enabled (see below).</li>
+        <li><b>Selected Graphic Info: </b>displays information about the currently highlighted graphic in the VRAM preview. The <b>Index</b> box shows the raw VRAM index of the graphic and allows it to be manually changed to a new value. The <b>Select</b> button provides an alternate method of moving the graphic: click the button, then click the location in the VRAM preview where the graphic should go. The <b>Flipped</b> check box indicates whether the selected graphic is horizontally flipped or not.</li>
+        <li><b>Object Graphic List: </b>lists the current level's object graphic pack and all of its contained graphics, by name. <b>Left-clicking an object graphic's name</b> highlights it in both the list and the VRAM preview. The <b>Up Arrow</b> and <b>Down Arrow</b> buttons move the currently selected graphic up or down the list, changing its priority (graphics lower on the list will be overwritten by those higher on the list). The <b>graphic pack box</b> allows the graphic pack used for the level to be changed. The <b>Edit...</b> button opens the <b><a href="#objectheadersdialog">Object Headers Dialog</a></b>, where new graphic packs can be created and removed. Finally, the <b>Add...</b> button brings up the <b><a href="#addgraphicdialog">Add Graphic Dialog</a></b>, while the <b>Remove</b> button removes the currently selected graphic from the pack.</li>
+        <li><b>Other Settings: </b>allows non-object aspects of VRAM to be modified.
+          <ul>
+            <li><b>Map graphic box: </b>allows the map graphic for the current level to be changed. There is only one map graphic allowed per level, so generally this needs to be one of the game's provided level graphics.</li>
+            <li><b>Leaf index box: </b>Tails Adventures defines a "leaf index" for each area of the game. When the game wants to generate a wind gust effect, it looks up the leaf index for the current area and uses the patterns at that location to draw the effect. This allows space for other graphics to be optimally assigned, and is also used to composite two different graphics for the "fire wind" effect in Polly Mt. 2. This box allows the leaf index to be changed. To make this easier, the <b>Select</b> button, when clicked, allows the new location to be chosen by clicking on the VRAM preview.
+              <p>
+                <em>Note: The leaf index is shared among all maps in an area.</em> It can't be separately set for each map. Also note that <em style="color: red;">the leaf index for Polly Mt. 1's boss arena (area 4-3) is hardcoded to index 250 and cannot be changed.</em>
+              </p>
+            </li>
+            <li><b>Smoke puff index box: </b>Nearly identical in function to the leaf index box, this one specifies the location of the graphics for the smoke puff emitted from the Sea Fox when it fires a weapon. However, this index is <em>not</em> shared among maps in an area; each map has its own index.</li>
+            <li><b>Water splash index box: </b>Same as the smoke puff index, including unique definitions per map, for the splash effect that appears when Tails or the Sea Fox jumps in/out of the water.</li>
+          </ul>
+        </li>
+        <li><b>Map selector: </b>allows the current level to be changed. Click any map entry to select it.</li>
+      </ol>
+    </p>
+    <h4 id="objectheadersdialog">Object Headers Dialog</h4>
+    <img src="objectheadersdialog.png" width="200"></img>
+    <p>
+      The <b>Object Headers Dialog</b> allows new object graphic packs to be added and removed from the game. The <b>Add</b> button adds a new, empty pack to the end of the list, while the <b>Remove</b> button removes the currently highlighted pack. After confirming the changes with <b>OK</b>, any newly added packs can be populated by assigning the pack to a new level and changing it as needed.
+    </p>
+    <h4 id="addgraphicdialog">Add Graphic Dialog</h4>
+    <img src="addgraphicdialog.png" width="400"></img>
+    <p>
+      The <b>Add Graphic Dialog</b> allows a new graphic to be added to an object graphic pack. The <b>graphic list</b> on the right lists all the graphics that can be added to VRAM by name, sorted by category and then alphabetically. The <b>graphic preview</b> on the left shows the selected graphic and the number of tiles in VRAM it will occupy. The <b>flip options</b> at the bottom select whether to add the graphic as-is, flipped, or both (as two graphics, one for each direction).
+    </p>
+    <h3 id="graphicseditor">Graphics and Collision Editor</h3>
+    <p>
+      The graphics editor provides rudimentary but functional editing of all the graphics in Tails Adventures, both compressed and uncompressed, as well as the ability to diplay and modify object collision boxes.
+    </p>
+    <h4 id="graphicsprimer">Graphics Primer</h4>
+    <p>
+      On the Master System and Game Gear, raw graphics consist of a series of patterns of pixel data. Each pattern can be combined with one of two 16-color palettes to form a color image. Patterns can be stored in the ROM either compressed or uncompressed; graphics stored uncompressed can be loaded quickly, which makes them suitable for player character graphics (which are too numerous to all fit in VRAM at once, and so are loaded one at a time as needed).
+    </p>
+    <p>
+      Tails Adventures combines raw graphic patterns together to produce the "object graphics" that are displayed to the player using sprites. The way the patterns are assembled is referred to as a <b>sprite mapping</b>. Sprites have a <b>transparent color</b>, which is always the first (zeroth) color in the palette. The game also assigns every sprite mapping a <b>collision box</b>, so that an object that uses a mapping can tell when it has touched another object.
+    </p>
+    <p>
+      Tales does not support editing of sprite mappings for technical reasons (i.e. it's more trouble than it's worth). However, it can edit graphics and collision boxes.
+    </p>
+    <h4 id="graphicscomponents">Graphics Editor Components</h4>
+    <img src="graphicseditor.png" width="500"></img>
+    <p>
+      <ol>
+        <li><b>Graphic preview: </b>Displays the raw patterns that compose the selected graphic. The <b>graphic combo box</b> at the top allows the selected graphic to be changed. This area can be interacted with to edit the graphics using the tools described below.</li>
+        <li><b>Sprite mapping preview: </b>Displays the currently selected sprite mapping, if any, for the active graphic. The <b>mapping combo box</b> at the top allows the selected mapping to be changed. Not all graphics have mappings. For those that do, this area can be interacted with to edit the graphic, just like the graphic preview area.</li>
+        <li><b>Graphic editing tools: </b>The basic tools for editing.
+          <ul>
+            <li><b>Preview palette: </b>shows the palette being used to edit the graphic. Graphics can be colored using more than one palette, so the colors displayed are just for editing purposes. Clicking on a color selects it as the current color for the Pencil tool.</li>
+            <li><b>Preview palette box: </b>allows the preview palette for the current graphic to be changed. If changed, the new value will be saved as the default used whenever the graphic is loaded for editing.</li>
+            <li><b>Toolbar: </b>currently consists of just a single tool, the Pencil.
+              <ul>
+                <li><img src="pencilicon.png"></img> <b>Pencil:</b> a simple tool for drawing one pixel at a time.
+                  <ul>
+                    <li><b>Left-click:</b> draw the selected color to the clicked pixel. Either the graphic preview or the sprite mapping preview can be clicked.</li>
+                    <li><b>Right-click:</b> set the clicked pixel to color 0 (sprite transparency). Essentially an "eraser".</li>
+                    <li><b>Ctrl+left-click:</b> "pick up" the clicked pixel as the current color. Equivalent to the "dropper" tool in many image editing programs.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><b>Zoom box: </b>changes the current zoom level. Ranges from 100% to 1600%.</li>
+            <li><b>Transparency check box: </b>sets whether sprite transparency is enabled or disabled. If enabled, transparency pixels are displayed as white.</li>
+            <li><b>Grid check box: </b>sets whether an 8x8 tile grid is overlaid onto the editing preview(s).</li>
+          </ul>
+        </li>
+        <li><b>Collision editor: </b>allows the current sprite mapping's collision box to be edited. The <b>Width</b> and <b>Height</b> boxes allow the box's width and height to be changed. The <b>X-offset</b> and <b>Y-offset</b> boxes change the offset <em>of the graphic itself from its associated object's centerpoint</em>; thus, changing their values may not yield the results you'd intuitively expect. The <b>Collision check box</b> sets whether or not the collision box is overlayed onto the sprite mapping.</li>
+      </ol>
+    </p>
+    <h3 id="paletteeditor">Palette Editor</h3>
+    The palette editor can change the colors in the game's various color palettes.
+    <h4 id="palettecomponents">Palette Editor Components</h4>
+    <img src="paletteeditor.png" width="500"></img>
+    <p>
+      The palette editor is very simple. The <b>palette combo box</b> at the top selects the palette to be edited. The <b>palette preview</b> displays the chosen palette. Clicking on a color in the preview selects it as the active editing color. The active color can be edited using the <b>color sliders</b> representing the red, green, and blue components of the color.
+    </p>
+    <p>
+      <em>Note: The colors shown in the editor are not 100% accurate (slightly too dark) compared to the colors actually displayed by the Game Gear.</em> It shouldn't impair editing significantly.
+    </p>
+    
+    <h3 id="palettecycleeditor">Palette Cycle Editor</h3>
+    The palette cycle editor can change the colors in the game's various cycling palettes, which repeatedly change colors to create the illusion of motion.
+    <h4 id="palettecyclecomponents">Palette Cycle Editor Components</h4>
+    <img src="palettecycleeditor.png" width="500"></img>
+    <p>
+      The palette cycle editor is virtually identical in format to the palette editor except for the new <b>State</b> combo box, which can be used to select each of the palette states in the cycle for editing. Any colors not used in the cycle are marked as disabled in the palette preview and cannot be edited.
+    </p>
+    
+    <h3 id="structureeditor">Metatile Structure Editor</h3>
+    <p>
+      The metatile structure editor can modify the appearance of the game's metatiles by redefining which tiles are used to draw them.
+    </p>
+    <h4 id="structureprimer">Metatile Structure Primer</h4>
+    <p>
+      Each 16x16 metatile consists of four adjacent 8x8 tiles. A <b>tile</b> is a pattern in VRAM that is used as part of the SMS/GG's nametable&mdash;essentially, a "background" graphic. The SMS/GG hardware is capable of performing certain manipulation to tiles "on the fly":
+      <ul>
+        <li>A tile may be flipped horizontally, vertically, or both at once.</li>
+        <li>A tile may be colored using either one of the two color palettes.</li>
+        <li>A tile has an associated <b>priority</b>. If a tile has <b>background</b> (<b>BG</b>) priority, sprites will be drawn in front of it. If a tile has <b>foreground</b> (<b>FG</b>) priority, sprites that overlap the tile will be drawn behind it, <em>except if some of the overlapping pixels in the tile are set to color index 0</em>. In that case, the overlapping color 0 pixels will still appear behind the sprite.</li>
+      </ul>
+    </p>
+    <p>
+      Tails Adventures defines a number of <b>metatile structure sets</b>, each defining the tile layouts for a set of 256 metatiles. Each <b>metatile structure</b> consists of four <b>tile definitions</b>, each giving the appearance (pattern index, priority, etc.) of a tile in the metatile. Every level is associated with a metatile structure set used to draw its metatiles. Typically, levels with the same appearance share the same set.
+    </p>
+    <h4 id="structurecomponents">Metatile Structure Editor Components</h4>
+    <img src="structureeditor.png" width="340"></img>
+    <p>
+      <ol>
+        <li><b>Metatile picker:</b> displays the metatile structures in the current set. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
+        <li><b>Tile picker:</b> displays the patterns in the current preview graphic, with the pattern used for the selected tile in the active metatile highlighted. <b>Left-clicking</b> a pattern in this area changes the selected tile to use the new pattern.</li>
+        <li><b>Structure editor:</b> shows an editable preview of the currently selected metatile. The four tile editors allow each of the metatile's component tiles to be modified. <b>Left-clicking</b> on a tile in the preview selects it as the active tile, allowing its VRAM index to be changed using the tile picker. <b>Right-clicking</b> on a tile toggles its horizontal flip flag, while <b>middle-clicking</b> on it toggles its vertical flip flag.</li>
+        <li><b>Settings:</b>
+          <ul>
+            <li><b>Grid check box:</b> toggles the metatile and tile grids on and off.</li>
+            <li><b>Set box:</b> allows the target set to be changed. Changing sets automatically loads the default preview graphic and palettes associated with that set.</li>
+            <li><b>Preview graphic box:</b> changes the graphic used to display the current structure set. As a set can be associated with more than one set of graphics, determined by each level's VRAM configuration, <em>this setting is for editing purposes only</em>&mdash;it has no effect on the game if changed. If the preview graphic is changed, the new selection is saved as the default.</li>
+            <li><b>Preview palette boxes:</b> change the palettes used to display the current structure set. The same caveats as above apply.</li>
+          </ul>
+        </li>
+      </ol>
+    </p>
+    
+    <h3 id="behavioreditor">Metatile Behavior Editor</h3>
+    <p>
+      The metatile behavior editor allows several aspects of metatiles' behavior to be altered.
+    </p>
+    <h4 id="behaviorprimer">Metatile Behavior Primer</h4>
+    <p>
+      As previously discussed, the game defines 256 metatiles which have the same behavior throughout all the game's levels. Specifically, every metatile has a <b>solidity setting</b>, <b>behavior property</b>, <b>width map</b>, <b>height map</b>, and <b>slope speed value</b>.
+      <ul>
+        <li><b>Solidity: </b>defines whether the metatile is <b>fully solid</b>, <b>solid on top</b>, or <b>nonsolid</b>. If a metatile is fully solid, its width and height map determine when objects are colliding with it. If a metatile is solid on top, objects can pass through it from below but not from above. If a metatile is nonsolid, it can't be touched, but <em style="color: red;">its width and height map must have only zero magnitudes or the metatile will not behave correctly</em>.</li>
+        <li><b>Behavior: </b>defines the metatile's "effect", such as whether it can be destroyed with a bomb or damages Tails on contact. See <a href="#behaviorlist">the full list of behaviors below</a>.</li>
+        <li><b>Width/height map: </b>defines which parts of the metatile are "solid" and which are "nonsolid". See the <a href="#lengthmapeditor">Width/Height Map Editor section</a> for more details. Normally, a metatile's width and height map need to correspond to the same slope, or the metatile will behave erratically.</li>
+        <li><b>Slope speed value: </b>a signed value that is added to Tails' velocity when he tries to move while in contact with the metatile. This is used to make Tails walk slower when moving uphill. Note that Tails' velocity is modified before the speed cap is applied, so <em>this cannot be used to make Tails move faster than normal&mdash;only slower.</em> The game has a limited number of values for slope speed; each metatile must choose one of them.</li>
+      </ul>
+    </p>
+    <h4 id="behaviorcomponents">Metatile Behavior Editor Components</h4>
+    <img src="behavioreditor.png" width="340"></img>
+    <p>
+      <ol>
+        <li><b>Metatile picker:</b> displays the metatiles by behavior, vertical solidity, or horizontal solidity, according to the current settings. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
+        <li><b>Display settings:</b> changes how the metatiles in the metatile picker are previewed (by behavior, vertical solidity/height map, or horizontal solidity/width map). The <b>Grid</b> check box toggles the metatile grid on and off.</li>
+        <li><b>Metatile editor:</b> allows the current metatile's behavior to be changed. The radio buttons at the top set the solidity, while the combo boxes allow the slope speed, behavior, height map, and width map to be changed.</li>
+      </ol>
+    </p>
+    <h4 id="behaviorlist">Metatile Behavior List</h4>
+    <p>
+      Behaviors listed in <span style="color: red;">red</span> have hardcoded behavior depending on what metatile index they are assigned to.
+    </p>
+    <ul>
+      <li>0. <img src="behavior0.png"></img> <b>Null tile: </b>The metatile is "nonsolid". However, <em style="color: red;">this does not cause the width and height map to be ignored!</em> If a metatile has the null tile behavior, its width and height maps <em>must</em> consist of all zeroes, or Tails will not be able to interact with it correctly.</li>
+      <li>1. <img src="behavior1.png"></img> <b>Climbable 1: </b>The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge.</li>
+      <li>2. <img src="behavior2.png"></img> <b>Climbable 2: </b>The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge. Appears to be functionally identical to Climbable 1, and is displayed as such in the editor.</li>
+      <li>3. <img src="behavior3.png"></img> <b>Nonclimable: </b>If solid, the metatile can be interacted with but not climbed on by Tails. This is ordinarily set on sloped tiles to prevent Tails from inappropriately attemping to climb on them.</li>
+      <li>4. <img src="behavior4a.png"></img><img src="behavior4b.png"></img><img src="behavior4c.png"></img><img src="behavior4d.png"></img><img src="behavior4e.png"></img><b style="color: red;"> Damaging: </b>Touching the metatile causes 4 rings of damage to Tails.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>104, 105:</b> upward spikes (damaging on top).</li>
+          <li><b>106, 107:</b> downward spikes (damaging on bottom).</li>
+          <li><b>108, 109:</b> rightward spikes (damaging on right).</li>
+          <li><b>110, 111:</b> leftward spikes (damaging on left).</li>
+          <li><b>112, 113:</b> lava (damaging on all sides).</li>
+          <li><b>All other indices:</b> no effect.</li>
+        </ul>
+      </li>
+      <li>5. <img src="behavior5.png"></img> <b>Instadeath: </b>If Tails touches the metatile, he immediately dies, resulting in a game over. Note that this behavior is not set on any metatile in the base game.</li>
+      <li>6. <img src="behavior6a.png"></img><img src="behavior6b.png"></img> <b style="color: red;">Water: </b>The metatile is considered <a href="#quirkswater">Tails water</a>.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>154:</b> upward water current.</li>
+          <li><b>155:</b> downward water current.</li>
+          <li><b>156:</b> leftward water current.</li>
+          <li><b>157:</b> rightward water current.</li>
+          <li><b>All other indices:</b> standard water (alters physics).</li>
+        </ul>
+      </li>
+      <li>7. <img src="behavior7.png"></img> <b style="color: red;">Wind gust: </b>If Tails is flying and he comes in contact with the metatile, he will be forced to move in a particular direction until he stops flying or is no longer in contact with the metatile.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>120:</b> upward wind gust.</li>
+          <li><b>121:</b> downward wind gust.</li>
+          <li><b>122:</b> leftward wind gust.</li>
+          <li><b>123:</b> rightward wind gust.</li>
+          <li><b>124:</b> up-left wind gust.</li>
+          <li><b>125:</b> down-left wind gust.</li>
+          <li><b>126:</b> down-right wind gust.</li>
+          <li><b>127:</b> up-right wind gust.</li>
+          <li><b>All other indices:</b> no effect.</li>
+        </ul>
+      </li>
+      <li>8. <img src="behavior8.png"></img> <b>Always-left conveyor: </b>A conveyor belt that always moves to the left.</li>
+      <li>9. <img src="behavior9.png"></img> <b style="color: red;">Conveyor reverser: </b>If the Wrench item is used in the proximity of the metatile, all conveyor metatiles (behavior 12) in the level will reverse direction.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>118:</b> "Standard" reverser.</li>
+          <li><b>119:</b> "Reversed" reverser.</li>
+          <li><b>All other indices:</b> no effect?</li>
+        </ul>
+      </li>
+      <li>10. <img src="behavior10.png"></img> <b>Crumbling: </b>If Tails walks on top of the tile, it will disintegrate after a few moments.</li>
+      <li>11. <img src="behavior11.png"></img><img src="behavior11b.png"></img> <b style="color: red;">Destructible: </b>The metatile can be destroyed by various means.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>96, 97, 98:</b> destroyable by standard weapons (Regular Bomb, Remote Bomb, Sonic...). If in the Sea Fox, the metatile can be destroyed by touching it with the front of the ship.</li>
+          <li><b>99, 100, 101:</b> destroyable only by the Large Bomb.</li>
+          <li><b>158:</b> destroyable by standard weapons, and spawns a ring when destroyed.</li>
+          <li><b>All other indices:</b> destroyable by standard weapons?</li>
+        </ul>
+      </li>
+      <li>12. <img src="behavior12a.png"></img><img src="behavior12b.png"></img> <b style="color: red;">Standard conveyor: </b>The metatile pushes Tails left or right.<br/>
+        <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
+        <ul>
+          <li><b>116:</b> pushes left if conveyor belts have not been reversed, and right if they have.</li>
+          <li><b>117:</b> pushes right if conveyor belts have not been reversed, and left if they have.</li>
+          <li><b>All other indices:</b> no effect?</li>
+        </ul>
+      </li>
+      <li>13. <img src="behavior_dummy.png"></img> <b>Dummy 1: </b>no effect.</li>
+      <li>14. <img src="behavior14.png"></img> <b>Destructible with napalm: </b>The metatile can be destroyed by a Napalm Bomb.</li>
+      <li>15. <img src="behavior15.png"></img> <b>One-way down tile: </b>The metatile can be passed through from above, but not below.</li>
+      <li>16. <img src="behavior_dummy.png"></img> <b>Dummy 2: </b>no effect.</li>
+      <li>17. <img src="behavior17.png"></img> <b>Big upward gust: </b>When touched by Tails, the metatile generates a "strong" wind gust that blows him upward by approximately 16 metatiles vertically (regardless of whether he is flying). Note that <em>the controls are locked until Tails has moved the full distance required</em>, so make sure the player can't get stuck by being blown into a ceiling.</li>
+      <li>18. <img src="behavior_dummy.png"></img> <b>Dummy 3: </b>no effect.</li>
+    </ul>
+    
+    <h3 id="lengthmapeditor">Width/Height Map Editor</h3>
+    <p>
+      The width/height map editor can modify the game's metatile width and height maps. It also allows slope speed values to be changed.
+    </p>
+    <h4 id="lengthmapprimer">Width/Height Map Primer</h4>
+    <p>
+      To detect when objects are touching the level, the game assigns every metatile a <b>width map</b> and a <b>height map</b>. Width and height maps&mdash;occasionally referred to generically as "length maps"&mdash;each consist of 16 <b>magnitude</b> values, one for each pixel in a metatile's width or height. The magnitude indicates how far the metatile extends horizontally or vertically at the given index. The width map is used to detect collision on the x-axis, while the height map is used to detect collision on the y-axis.
+    </p>
+    <p>
+      Width maps can extend either from the right side of the metatile toward the left ("forward"), or the left side toward the right ("backward"). Similarly, height maps can extend either from the top of the metatile toward the bottom ("forward"), or the bottom toward the top ("backward"). Normally, all values in a length map face the same direction, although this is not required.
+    </p>
+    <h4 id="lengthmapcomponents">Width/Height Map Editor Components</h4>
+    <img src="lengthmapeditor.png" width="400"></img>
+    <p>
+      <ol>
+        <li><b>Length map preview: </b>an interactive display of the current length map. <b>Left-clicking</b> a row or column in the display sets the corresponding row or column in the map. <b>Double-clicking</b> or <b>right-clicking</b> a row or column in the display opens the <a href="#lengthmapeditdialog">Length Map Edit Dialog</a>, allowing its value to be manually set. The <b>All forward</b> button makes all lengths face forward, while the <b>All backward</b> button makes them all face backward.</li>
+        <li><b>Width/height map selector: </b>lists all the width and height maps in the game. Clicking on a width or height map opens it for editing in the preview.</li>
+        <li><b>Slope speed editor: </b>lists all of the game's slope speed values and allows them to be modified. See the explanation of slope speed values in the <a href="#behaviorprimer">Metatile Behavior Primer</a>.</li>
+      </ol>
+    </p>
+    <h4 id="lengthmapeditdialog">Width/Height Map Edit Dialog</h4>
+    <img src="lengthmapeditdialog.png" width="200"></img>
+    <p>
+      The <b>Width/Height Map Edit Dialog</b> is accessed by <b>double-clicking</b> or <b>right-clicking</b> a row or columns in the length map preview. It allows the magnitude of the length map at the selected point to be modified, and also allows the direction of its growth to be set to forward or backward.
+    </p>
+    <p>
+      An interesting point of fact is that the magnitude can be set as high as 63, well outside the actual boundaries of a metatile. However, the game will only recognize that an object has contacted the map when it is actually touching the associated metatile, causing it to "jump" away once it gets too close. This can be <a href="#tipsteleport">useful for achieving certain effects</a>.
+    </p>
+    
+    <h3 id="musiceditor">Music Editor</h3>
+    <p>
+      The music editor allows the music that plays in each area of the game to be changed. It can also alter the tracks that play when the Radio item is used.
+    </p>
+    <h4 id="musiceditorcomponents">Music Editor Components</h4>
+    <img src="musiceditor.png" width="400"></img>
+    <p>
+      The music editor is very simple. On the left is the <b>area music editor</b>. Each area of the game has an associated music track that plays on all maps in that area (with <a href="#quirksmusic">one exception</a>). The combo boxes allow the track for each area to be changed. On the right is the <b>Radio music editor</b>, which functions identically except that it changes the tracks that play when the Radio item is used.
+    </p>
+    <p>
+      Note that there are entries for areas 13, 14, and 15 in the area music editor, despite the fact that no such areas exist. The values listed are placeholders taken directly from the game; changing them normally has no effect.
+    </p>
+    
+    <h3 id="powerupeditor">Power-Up Editor</h3>
+    <p>
+      The power-up editor adjusts how Tails' stats change when he picks up Chaos Emeralds.
+    </p>
+    <h4 id="powerupeditorcomponents">Power-Up Editor Components</h4>
+    <img src="powerupeditor.png" width="350"></img>
+    <p>
+      Each of the rows in the editor gives Tails' stats when he obtains the given number of emeralds. These stats are:
+      <ul>
+        <li><b>Flight time: </b>the amount of time Tails can continuously fly. Ranges from 0 (no flight) to 12 (maximum time).</li>
+        <li><b>HP: </b>Tails' max ring count. Note that <em>the amount of HP listed for having no emeralds does not have any effect</em>&mdash;that value is manually initialized in the game's startup code and only changes when Tails picks up a new emerald.</li>
+        <li><b>HP Refill: </b>When Tails picks up the given number of Chaos Emeralds, his ring count will be set to this number. This does not have to be the same as the maximum HP for that Emerald. The above warning about the zero-Emerald entry applies.</li>
+      </ul>
+    </p>
+    
+    <h3 id="enhancementseditor">Enhancements Editor</h3>
+    <p>
+      The hacks and enhancements editor adds miscellaneous, optional enhancements and bugfixes to the game.
+    </p>
+    <h4 id="enhancementseditorcomponents">Enhancements Editor Components</h4>
+    <img src="enhancementseditor.png" width="350"></img>
+    <p>
+      There are a few different enhancements that can be applied:
+      <ul>
+        <li><b>Inventory system: </b>change the way the game manages items.
+          <ul>
+            <li><b>None: </b>the standard inventory system the game normally uses. The player gets four item slots, and the items in them can be changed by going to Tails' House or picking up an item with a slot empty. Note that this system means no continuous sequence of levels can require Tails to use more than four different items.</li>
+            <li><b>All items w/ hotswap: </b>massively overhauls the inventory system. This setting allows all obtained items to be used instead of just four at a time. To make managing the expanded inventory easier, a "hotswap" system is added to the pause screen. Holding Button 2 and pressing a direction button places the currently equipped item in a hotswap slot. That item can then be switched to on the fly by holding Button 1 and pressing the same direction.</li>
+            <li><b>All items, no hotswap: </b>allows all collected items to be accessed from the inventory, but doesn't add the hotswap system.</li>
+            <li><b>Standard w/ hotswap: </b>only allows four items to be carried at once, but adds the hotswap system for switching them quickly.</li>
+          </ul>
+        </li>
+        <li><b>Flight system: </b>change how Tails flies.
+          <ul>
+            <li><b>None: </b>the standard flight system. Tails can only fly for a limited duration, but the player can reset the flight meter in mid-air by stopping and resuming flight, meaning there is no effective limit on flight.</li>
+            <li><b>Chaining disabled: </b>The player is no longer allowed to resume flight in mid-air&mdash;Tails must touch the ground first. This places an absolute limit on how high/far Tails can fly.</li>
+            <li><b>Flight disabled: </b>prevents Tails from flying. This is a cleaner solution than setting flight time to zero in the power-up editor.</li>
+          </ul>
+        </li>
+        <li><b>Bug fixes: </b>toggle fixes for various game bugs, mostly minor ones.
+          <ul>
+            <li><b>Jump height when Button 1 held: </b>fixes an issue where the game erroneously checks to see if either Button 1 (use item) or Button 2 (jump) is pressed when deciding how long the player has held down the jump button. This causes Tails to incorrectly always jump to the maximum possible height when the item button is held down and the jump button is tapped.</li>
+            <li><b>Bomb while jumping graphic fix: </b>fixes an issue where one of Tails' graphics descriptors has the wrong length. This causes one of the frames of Tails' animation for throwing a bomb while jumping to display incorrectly. Note that the graphic in question can still be edited correctly in the graphics editor.</li>
+            <li><b>Double jump fix: </b>fixes an obscure bug where jumping, then falling for 256 frames while continuing to hold the jump button will cause Tails to jump again in mid-air. It's possible to achieve this on certain parts of Area 4-3 (the Polly Mt. 1 boss level).</li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+    
+    <h2 id="gamequirks">Game Quirks</h2>
+    <p>
+      Some of Tails Adventures' internal workings are a bit arcane. This section tries to explain the less intuitive aspects of editing the game.
+    </p>
+    
+    <h3 id="quirksvram">VRAM Caveats</h3>
+    <p>
+      <ul>
+        <li>The game expects certain graphics to appear in the same place in VRAM whenever they are needed.
+          <ul>
+            <li>The <b>HUD graphic</b> must always appear at <b>index 18</b>.</li>
+            <li>The <b>dead duck graphic</b> must always appear at <b>index 110</b>. This is used for the "dead duck" object that appears when a duck-like enemy is killed. If a level doesn't contain any of those enemies, it's okay to use that space for other graphics.</li>
+          </ul>
+        </li>
+        <li>If an object graphic overflows into the map graphic (index 256 or above), <em>the object graphic will overwrite the map graphic</em>, which is probably not what you want.</li>
+        <li>The leaf graphic for the wind gust effect in Polly Mt. 1's boss arena (area 4-3) is <em>hardcoded to VRAM index 250</em>, regardless of the settings for that area.</li>
+      </ul>
+    </p>
+     
+    <h3 id="quirksstructure">Metatile Structure Caveats</h3>
+    <p>
+      Internally, Tails Adventures does not assign every metatile a unique structure definition. Instead, it defines the structures and assigns one to each metatile. Generally, "blank" metatiles all use a single structure, so <em>editing one will change all of the others as well</em>. Ideally, the editor would allow the structure assigned to each metatile to be changed, but currently it does not. Non-blank metatiles normally each have a unique definition.
+    </p>
+    <p>
+      Due to a quirk involving how the game handles the world map, <em>Tales creates a special metatile set, set 13, in which every metatile has a unique structure definition.</em> If you need to create a new metatile structure set with more metatiles than an existing one provides, this set can be safely used for that purpose.
+    </p>
+    
+    <h3 id="quirksmusic">Music Quirks</h3>
+    <p>
+     Normally, all maps in an area share the same music. Exceptionally, Area 10-3, the Coco Island boss, is hardcoded to immediately play the boss music when entered, regardless of the area setting.
+    </p>
+    
+    <h3 id="quirksseafox">Sea Fox</h3>
+    <p>
+      The game hardcodes which levels use the Sea Fox and which don't:
+      <ul>
+        <li>All maps in area 6, as well as level 11-2, are "swimming" Sea Fox levels.</li>
+        <li>All maps in area 7 are "river" Sea Fox levels.</li>
+        <li>Area 11-1 is the only "flying" Sea Fox level.</li>
+        <li>All other levels are standard Tails levels.</li>
+      </ul>
+    </p>
+    <h3 id="quirkswater">Water</h3>
+    <p>
+      Tails Adventures actually has two very different concepts of water: <b>Tails water</b> and <b>Sea Fox water</b>.
+      <ul>
+        <li>"Tails water" is triggered by <a href="#behaviorlist">setting the Water behavior on a metatile</a>. When Tails comes in contact with such a metatile, <em>and he is not in the Sea Fox</em>, his physics change and he may be pushed in a particular direction. Unfortunately, <em style="color: red;">this kind of water has special hardcoding such that the "water splash" effect seen when entering or exiting water will appear correctly only in Area 9 (Cavern Island)</em>, the only map with this kind of water in the base game. Thus, you will need to either accept the graphical error, or restrict this kind of water to Area 9 in your hack.</li>
+        <li>"Sea Fox water" is triggered by placing object 10, the "water ripple effect", in a level. <em>When this object is spawned, everything below its y-position is considered "Sea Fox water".</em> When the Sea Fox comes in contact with the waterline, it "jumps" out and then falls back in. This kind of water has no effect on Tails outside of the Sea Fox. Note that <em style="color: red;">the waterline object will only be spawned when Tails gets close enough to it, so make sure the player can't get to the surface of the water without first spawning the waterline</em>. With no water object active, the Sea Fox can freely fly anywhere in the level.</li>
+      </ul>
+    </p>
+    <h3 id="quirkspseudolevels">Pseudo-Levels</h3>
+    <p>
+      In some cases, the game assigns map data to an area/map slot, but does not provide other data (such as an object layout). In these cases, the editor will allow only the editable aspects of the level to be changed. These "pseudo-levels" are:
+        <ul>
+          <li><b>Area 16 (world map):</b> The game does, in fact, assign the world map some unique level data. The top part of it is a duplicate of part of Area 4-2, while the rest is blank. It's normally never displayed to the user because the visible part of the screen is overwritten by a fixed tilemap. You can still edit the world map palettes and effects through the <a href="#levelproperties">Level Properties dialog</a>. The object layout is hardcoded and can't be changed.</li>
+          <li><b>Area 19 (intro):</b> The intro uses a hardcoded object layout, but the map layout can still be modified.</li>
+        </ul>
+    </p>
+    <h3 id="quirksreplacelevels">Substitute Levels</h3>
+    <p>
+      The game has a few "substitute" level layouts that are hardcoded to load in place of others if certain conditions are met. This is used primarily to get rid of boss-related parts of levels after the boss has been defeated. The levels with substitutes are:
+      <ul>
+        <li><b>Area 4-3 (Polly Mt. 1 boss):</b> loaded when the area is revisited after defeating the boss. Replaces the vertical "maze" with empty space.</li>
+        <li><b>Area 6-3 (Lake Rocky boss):</b> loaded when the area is revisited after defeating the boss. Gets rid of the boss ship.</li>
+        <li><b>Area 6-5 (Lake Rocky, exit to Coco Island):</b> loaded when the area is revisited after accessing Coco Island. Gets rid of the tiles blocking the Coco Island exit in the lower-right part of the level.</li>
+        <li><b>Area 9-3 (Cavern Island boss):</b> loaded when the area is revisited after defeating the boss. Changes the boss tiles to they are "embedded" in the ground.</li>
+        <li><b>Area 16-1 (world map):</b> unknown purpose.</li>
+        <li><b>Area 19-2 (intro forest on fire):</b> unknown purpose.</li>
+        <li><b>Area 20-2 (Coco Island escape cutscene):</b> unknown purpose.</li>
+      </ul>
+    </p>
+    
+    <h3 id="quirkspollymt2">Polly Mt. 2 Palette</h3>
+    <p>
+      Polly Mt. 2's default palette is the "dark" palette shown before the Night Vision item has been used. To edit the level, switch it to the "bright" palette in the <a href="#levelproperties">Level Properties dialog</a>, then change it back when you're done. Note that <em>the Night Vision item is hardcoded to change to that particular palette in that particular area</em>.
+    </p>
+    
+    <h3 id="quirksgraphiccycles">Graphic Cycling Effects</h3>
+    <p>
+      Two of the game's effects, <b>Lake Crystal animated water</b> and <b>Battle Fortress animated conveyor</b>, are special: they continually load a cycle of uncompressed graphics to specific VRAM indices to simulate motion. The Lake Crystal effect always alters tiles <b>317-332</b>, and the Battle Fortress effect always alters tile <b>373</b>. If you want to use these effects in other levels, you'll need to make sure those graphics are the ones you want overwritten.
+    </p>
+    
+    <h3 id="quirksseafoxitems">Sea Fox Item Pickup Bug</h3>
+    <p>
+      Due to a bug, <em>picking up a Sea Fox item with an inventory slot empty will erroneously place that item in the regular inventory</em>. Thus, you need to ensure that the player can't pick up <em>any</em> Sea Fox items until at least three regular items have been collected (filling up the four slots). Currently, this applies even when the use-all-items hack is on; this may change in future releases.
+    </p>
+    
+    <h3 id="quirkscamera">Camera Starting Positions</h3>
+    <p>
+      There are some quirks with how the camera starting position works. First, <em>the camera can start outside of the level's camera boundaries</em>. In this case, the camera will start at the listed position and will be allowed to scroll towards the valid boundary area, but not away from it. Second, <em style="color: red;">if Tails starts too far away from the camera, he will be immediately kicked back to the world map when the level starts</em>, so don't set the camera offset to anything too large.
+    </p>
+    
+    <h3 id="quirkseffects">Nonstandard Level Effects</h3>
+    <p>
+     A few of the game's level effects are somewhat unusual in function:
+      <ul>
+        <li><b>Final boss trigger sequence:</b> normally set only on the final boss arena. When the player enters that level, this effect checks to see if the semifinal boss has already been defeated and overrides the default scrolling limits if so.</li>
+        <li><b>Dummy 1 and 2:</b> These effects do nothing, and are set on the two maps of Battle Fortress 1. They have a small bit of leftover code that suggests they used to do something, but it's not in the game anymore.</li>
+        <li><b>Lake Rocky boss scrolling:</b> continually scrolls the bottom rows of the screen while the top continues to scroll normally.</li>
+        <li><b>Cavern Island boss split-scroll:</b> special scrolling used to "move" metatiles for the Cavern Island boss.</li>
+      </ul>
+     </p>
+    
+    <h3 id="quirksbosses">Bosses</h3>
+    <p>
+     Bosses tend to be very "hardcoded". Typically, they assume they will always be placed at the same x/y position, often locking the screen to that specific area. Here are a few tips to help with modifying boss levels:
+      <ul>
+        <li><b>Coco Island boss</b>
+          <ol>
+            <li><b>As soon as the boss spawns</b>, Tails is forced into the "falling through trapdoor" cutscene. At the default spawn distance, the boss is mostly offscreen, so you will want Tails to spawn close enough for it to be visible.</li>
+            <li>The "falling through trapdoor" cutscene causes Tails to first walk <b>96 pixels (6 metatiles) right</b> (unless his path is blocked <em>by an object</em>, not the level). He is then forced to fall <b>130 pixels (8.125 metatiles) downward, ignoring anything solid</b>, at which point control returns to the player. Also, all horizontal trapdoors in the level are disabled, but this is merely cosmetic&mdash;they have no collision.</li>
+            <li>A short time after the player regains control, the boss <b>moves to x-coordinate 368, leaving its y-coordinate as-is</b>.</li>
+            <li>The boss dies once its x-coordinate has changed and <b>any boulder in the level has stopped falling</b>. This means that <b>if a boulder has already fallen, the boss dies immediately</b>.</li>
+            <li>Upon dying, the boss spawns a button <b>24 pixels (1.5 metatiles) to the right of it</b> and <b>16 pixels (1 metatile) above it</b>.</li>
+            <li>The button left by the boss can <b>only be pressed by the Remote Robot</b> and <b>deactivates all vertical trapdoors in the level</b> (object 74, state 2), making them passable.</li>
+          </ol>
+        </li>
+      </ul>
+     </p>
+    
+    <h3 id="quirksendgame">How to Complete the Game</h3>
+    <p>
+      Tails Adventures triggers the ending sequence completely and fully only when
+        <ol>
+          <li>the world map is loaded after defeating the final boss, and</li>
+          <li>Battle Fortress 1 or 2 has been unlocked.</li>
+        </ol>
+      If the final boss is defeated but Battle Fortress is not unlocked&mdash;that is, Coco Island still appears on the world map&mdash;then the ending sequence will never finish because the Battle Fortress object can't be destroyed.
+    </p>
+    
+    <h2 id="tipsandtricks">Tips and Tricks</h2>
+    <p>
+      This is a small collection of potentially interesting tricks you can do using Tales.
+    </p>
+    <h3 id="tipsoneway">One-Way Levels</h3>
+    <p>
+      As described under <a href="#quirkscamera">Game Quirks</a>, the camera's starting position is allowed to be outside of the camera boundaries for a level. By setting the camera starting position well outside of one or more of the camera boundaries, you can create a level that only scrolls in one direction up to a certain point.
+    </p>
+    <h3 id="tipsteleport">Teleporters</h3>
+    <p>
+      By using the <a href="#lengthmapeditdialog">Width/Height Map Edit Dialog</a>, you can set the magnitudes for a width or height map to values larger than the metatile itself. The net effect of this is that if, for example, you set all the magnitudes on a height map to 63, then stepping on a metatile with that height map will cause Tails to "teleport" up by approximately three metatiles&mdash;enough to push him through a low ceiling or other obstacle. Similar effects can be realized in other directions.
+    </p>
+  </body>
+</html>

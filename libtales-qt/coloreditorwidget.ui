@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ColorEditorWidget</class>
+ <widget class="QWidget" name="ColorEditorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>323</width>
+    <height>136</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="ColorEditorSlider" name="rSlider" native="true"/>
+   </item>
+   <item>
+    <widget class="ColorEditorSlider" name="gSlider" native="true"/>
+   </item>
+   <item>
+    <widget class="ColorEditorSlider" name="bSlider" native="true"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorEditorSlider</class>
+   <extends>QWidget</extends>
+   <header>coloreditorslider.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

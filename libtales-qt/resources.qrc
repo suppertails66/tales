@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>mapicon.png</file>
+        <file>vramicon.png</file>
+        <file>behavioricon.png</file>
+        <file>lengthmapicon.png</file>
+        <file>paletteicon.png</file>
+        <file>structureicon.png</file>
+        <file>paintbrushicon.png</file>
+        <file>powerupicon.png</file>
+        <file>musicicon.png</file>
+        <file>palettecycleicon.png</file>
+        <file>enhancementsicon.png</file>
+        <file>pencilicon.png</file>
+        <file>selecticon.png</file>
+        <file>objecticon.png</file>
+        <file>spawnicon.png</file>
+        <file>talesicon.png</file>
+        <file>uparrow.png</file>
+        <file>downarrow.png</file>
+    </qresource>
+</RCC>
