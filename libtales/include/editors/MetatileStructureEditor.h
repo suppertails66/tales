@@ -79,6 +79,13 @@ public:
   
   MetatileStructureSet& currentMetatileStructureSet();
   MetatileStructure& currentMetatileStructure();
+  
+  int currentNumMetatileStructures();
+  
+  int currentMetatileIndex();
+  int currentMetatileStructureIndex();
+  
+  void setStructureOfCurrentMetatile(int index);
 protected:
   const static int tileOffset_ = -256;
   const static int legalTileLowerBound_ = 256;

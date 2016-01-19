@@ -77,7 +77,7 @@ public:
   
 protected:
 
-  const static int versionNum_ = 3;
+  const static int versionNum_ = 4;
 
   LoadedROM rom_;
   

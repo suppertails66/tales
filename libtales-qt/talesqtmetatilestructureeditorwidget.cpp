@@ -180,6 +180,8 @@ void TalesQtMetatileStructureEditorWidget::selectStructureSet(int index) {
     ui->previewPalette2ComboBox->setCurrentIndex(defaultPreview.palette1Index_);
 
     metatileStructureEditor_.loadNewCurrentSet(index);
+
+    repopulateIDList();
 }
 
 TalesQtMetatileStructureEditorWidget::~TalesQtMetatileStructureEditorWidget()
@@ -232,6 +234,20 @@ void TalesQtMetatileStructureEditorWidget::saveCurrentAsDefaults() {
     metatileStructureEditor_.setCurrentDefaults(defaults);
 }
 
+void TalesQtMetatileStructureEditorWidget::repopulateIDList() {
+    ui->structureIDComboBox->clear();
+    for (int i = 0;
+         i < metatileStructureEditor_.currentNumMetatileStructures();
+         i++) {
+        ui->structureIDComboBox->addItem(
+                    (StringConversion::toString(i)).c_str(),
+                    i);
+    }
+
+    ui->structureIDComboBox->setCurrentIndex(
+                metatileStructureEditor_.currentMetatileStructureIndex());
+}
+
 void TalesQtMetatileStructureEditorWidget::on_metatileSetComboBox_activated(int index)
 {
     selectStructureSet(index);
@@ -261,6 +277,8 @@ void TalesQtMetatileStructureEditorWidget
     metatileStructureEditor_.metatilePickerPressMouse(data);
     // this should use a callback but I'm tired
     metatileStructureEditor_.loadPickedMetatile();
+    ui->structureIDComboBox->setCurrentIndex(
+                metatileStructureEditor_.currentMetatileStructureIndex());
     refreshDisplay();
 }
 
@@ -392,5 +410,13 @@ void TalesQtMetatileStructureEditorWidget::llValueModified() {
 }
 
 void TalesQtMetatileStructureEditorWidget::lrValueModified() {
+    refreshDisplay();
+}
+
+void TalesQtMetatileStructureEditorWidget::on_structureIDComboBox_activated(int index)
+{
+    metatileStructureEditor_.setStructureOfCurrentMetatile(index);
+    metatileStructureEditor_.loadPickedMetatile();
+    metatileStructureEditor_.loadPickedSubtile();
     refreshDisplay();
 }

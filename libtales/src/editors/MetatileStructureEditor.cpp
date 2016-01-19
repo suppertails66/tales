@@ -180,6 +180,25 @@ MetatileStructure& MetatileStructureEditor::currentMetatileStructure() {
            metatilePicker_.pickedIndex());
 }
   
+int MetatileStructureEditor::currentNumMetatileStructures() {
+  return currentMetatileStructureSet().numStructureDefinitions();
+}
+  
+int MetatileStructureEditor::currentMetatileIndex() {
+  return metatilePicker_.pickedIndex();
+}
+
+int MetatileStructureEditor::currentMetatileStructureIndex() {
+  return currentMetatileStructureSet().structureIndex(
+            currentMetatileIndex());
+}
+  
+void MetatileStructureEditor::setStructureOfCurrentMetatile(int index) {
+  currentMetatileStructureSet().setStructureIndex(
+            metatilePicker_.pickedIndex(),
+            index);
+}
+  
 void MetatileStructureEditor::setGridEnabled(bool gridEnabled__) {
   metatilePicker_.setGridLayerEnabled(gridEnabled__);
   tilePicker_.setGridLayerEnabled(gridEnabled__);

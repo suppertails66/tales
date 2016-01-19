@@ -65,10 +65,29 @@ public:
   void exportToROM(WritableROM& rom);
   
   /**
+   * Returns structure index of the given metatile number.
+   * @return Structure index of the given metatile number.
+   */
+  int structureIndex(int metatileIndex);
+  
+  /**
+   * Sets the structure index of the given metatile mapping.
+   * @param metatileIndex Index of the metatile.
+   * @param structureIndex New structure index.
+   */
+  void setStructureIndex(int metatileIndex, int structureIndex);
+  
+  /**
    * Returns number of index to structure definition mappings.
    * @return Number of index to structure definition mappings.
    */
   int numMetatileMappings() const;
+  
+  /**
+   * Returns number of actual structure definitions.
+   * @return Number of actual structure definitions.
+   */
+  int numStructureDefinitions() const;
   
   /**
    * Returns structure definition corresponding to the given tile.

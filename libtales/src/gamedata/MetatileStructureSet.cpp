@@ -333,8 +333,22 @@ void MetatileStructureSet::exportToROM(WritableROM& rom) {
 //  std::cout << std::endl;
 }
   
+int MetatileStructureSet
+    ::structureIndex(int metatileIndex) {
+  return index_[metatileIndex];
+}
+
+void MetatileStructureSet
+    ::setStructureIndex(int metatileIndex, int structureIndex) {
+  index_[metatileIndex] = structureIndex;
+}
+  
 int MetatileStructureSet::numMetatileMappings() const {
   return index_.size();
+}
+
+int MetatileStructureSet::numStructureDefinitions() const {
+  return primaryStorage_.size();
 }
 
 MetatileStructure& MetatileStructureSet
