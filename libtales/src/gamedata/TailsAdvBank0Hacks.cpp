@@ -47,6 +47,8 @@ void TailsAdvBank0Hacks::addLevelHeaderHack(
   rom.directWrite(levelHeaderHackTriggerAddress,
                   levelHeaderHackTriggerData,
                   levelHeaderHackTriggerLength); */
+                  
+//  std::cout << levelHeaderAddress << std::endl;
   
   // Get banked address of level headers
   Taddress levelHeaderBankNum

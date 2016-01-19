@@ -1062,8 +1062,8 @@ void EditableLevelGraphicsData::exportToROM(WritableROM& rom) {
                                totalSize);
     
     // Free existing space
-    rom.freeSpace().giveSpace(oldAddress,
-                              lastExportSize_);
+//    rom.freeSpace().giveSpace(oldAddress,
+//                              lastExportSize_);
     
     // Export object headers
     
@@ -1197,6 +1197,10 @@ void EditableLevelGraphicsData::exportToROM(WritableROM& rom) {
                                            tableHeaderAddress_
                                              + totalSize
                           - TailsAdvBank0Hacks::levelHeaderHackCodeDataSize);
+    
+//    std::cout << tableHeaderAddress_ << " " << totalSize
+//        << " " << TailsAdvBank0Hacks::levelHeaderHackCodeDataSize
+//        << std::endl;
     
     // Update last export size              
     lastExportSize_ = totalSize;
