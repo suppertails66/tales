@@ -1,9 +1,18 @@
-r0: Initial release
+r0: Initial release.
+
 r1:
 * Fixed crash when VRAM editor was clicked.
+
 r2:
 * Fixed bug where exported ROMs were unplayable after loading a project file.
+
 r3:
 * Fixed multiple bugs with handling of palette 2 in metatile structure editor.
 * Fixed issue with modified graphics becoming corrupted after multiple exports.
 * Fixed bug that caused erratic behavior after loading a project.
+
+r4:
+* Added full metatile structure assignment editing to the metatile structure
+editor, allowing new metatile structures to be added to and removed from sets.
+* Fixed bug that could cause the game to crash or reset whenever a level was
+loaded.

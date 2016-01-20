@@ -524,7 +524,19 @@
       <ol>
         <li><b>Metatile picker:</b> displays the metatile structures in the current set. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
         <li><b>Tile picker:</b> displays the patterns in the current preview graphic, with the pattern used for the selected tile in the active metatile highlighted. <b>Left-clicking</b> a pattern in this area changes the selected tile to use the new pattern.</li>
-        <li><b>Structure editor:</b> shows an editable preview of the currently selected metatile. The four tile editors allow each of the metatile's component tiles to be modified. <b>Left-clicking</b> on a tile in the preview selects it as the active tile, allowing its VRAM index to be changed using the tile picker. <b>Right-clicking</b> on a tile toggles its horizontal flip flag, while <b>middle-clicking</b> on it toggles its vertical flip flag.</li>
+        <li><b>Structure editor:</b>
+          <ul>
+            <li><b>Metatile preview:</b> shows an editable preview of the structure of the currently selected metatile. The four tile editors allow each of the structure's component tiles to be modified.
+              <ul>
+                <li><b>Left-clicking</b> on a tile in the preview selects it as the active tile, allowing its VRAM index to be changed using the tile picker.</li>
+                <li><b>Right-clicking</b> on a tile toggles its horizontal flip flag.</li>
+                <li><b>Middle-clicking</b> on a tile toggles its vertical flip flag.</li>
+              </ul>
+              <li><b>Tile structure box</b> allows a different structure to be picked for the current metatile.</li>
+              <li><b>Add</b> and <b>Remove</b> buttons: add a new structure layout and remove the current one, respectively. There must be between 1 and 256 (inclusive) structure definitions per set.</li>
+            </li>
+          </ul>
+        </li>
         <li><b>Settings:</b>
           <ul>
             <li><b>Grid check box:</b> toggles the metatile and tile grids on and off.</li>
@@ -751,7 +763,7 @@
      
     <h3 id="quirksstructure">Metatile Structure Caveats</h3>
     <p>
-      Internally, Tails Adventures does not assign every metatile a unique structure definition. Instead, it defines the structures and assigns one to each metatile. Generally, "blank" metatiles all use a single structure, so <em>editing one will change all of the others as well</em>. Ideally, the editor would allow the structure assigned to each metatile to be changed, but currently it does not. Non-blank metatiles normally each have a unique definition.
+      Internally, Tails Adventures does not assign every metatile a unique structure definition. Instead, it defines the structures and assigns one to each metatile. Generally, "blank" metatiles all use a single structure, so <em>editing one will change all of the others as well</em>. You'll need to add a new metatile structure and assign it to each one to make use of those metatiles.
     </p>
     <p>
       Due to a quirk involving how the game handles the world map, <em>Tales creates a special metatile set, set 13, in which every metatile has a unique structure definition.</em> If you need to create a new metatile structure set with more metatiles than an existing one provides, this set can be safely used for that purpose.
