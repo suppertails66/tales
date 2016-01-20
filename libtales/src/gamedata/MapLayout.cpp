@@ -177,13 +177,13 @@ void MapLayout::exportToFreeROM(WritableROM& rom) {
   }
   // If an exception is thrown, ensure we delete the output buffer
   catch (std::exception& e) {
-    delete outputBuffer;
+    delete[] outputBuffer;
     // Re-throw exception
     throw e;
   }
   
   // Delete allocated buffer
-  delete outputBuffer;
+  delete[] outputBuffer;
 }
 
 Tbyte MapLayout::getMetatile(int index) const {
