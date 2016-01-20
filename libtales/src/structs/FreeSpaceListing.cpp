@@ -64,7 +64,7 @@ void FreeSpaceListing::giveSpace(
   // Check to see if we can add this space to an existing entry
   for (FreeSpaceList::iterator it = freeSpaceList_.begin();
        it != freeSpaceList_.end();
-       it++) {
+       ++it) {
     // Ensure that we don't cross bank boundaries
     // (needs more thorough checking)
     if ((it->address() % LoadedROM::bankSize)) {
@@ -97,7 +97,7 @@ FreeSpaceList::iterator FreeSpaceListing::getFreeSpace(int length) {
   // or a sufficiently large space is found
   while ((it != freeSpaceList_.end())
          && (it->length() < length)) {
-    it++;
+    ++it;
   }
   
   // Return result, or freeSpaceList_.end() on failure
@@ -108,9 +108,9 @@ FreeSpaceList::iterator FreeSpaceListing::getFreeSpace(
                                      int length,
                                      int low,
                                      int high) {
-  FreeSpaceList::iterator it = freeSpaceList_.begin();
-  
-  while ((it != freeSpaceList_.end())) {
+  for (FreeSpaceList::iterator it = freeSpaceList_.begin();
+       it != freeSpaceList_.end();
+       ++it) {
     if (it->address() >= high) {
       break;
     }
@@ -120,8 +120,6 @@ FreeSpaceList::iterator FreeSpaceListing::getFreeSpace(
         && (it->length() >= length)) {
       return it;
     }
-  
-    it++;
   }
   
   return freeSpaceList_.end();

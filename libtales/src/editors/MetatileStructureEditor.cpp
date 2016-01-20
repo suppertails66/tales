@@ -221,7 +221,7 @@ void MetatileStructureEditor::removeCurrentMetatileStructureIndex() {
   for (MetatileIndexToStructureMap::iterator it
           = currentMetatileStructureSet().metatileStructureIndexBegin();
        it != currentMetatileStructureSet().metatileStructureIndexEnd();
-       it++) {
+       ++it) {
     // Anything mapped to current index is reset to 0
     if (it->second == currentIndex) {
       it->second = 0;

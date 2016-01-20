@@ -18,7 +18,7 @@ MapLayouts::MapLayouts(
   int mapNum = 0;
   for (AddressRawLevelHeaderMap::const_iterator it = headers.cbegin();
        it != headers.cend();
-       it++) {
+       ++it) {
     
     // Check if this map has been loaded
     AddressToMapIndexMap::iterator findIt
@@ -62,7 +62,7 @@ void MapLayouts::save(std::string& data) {
   for (MapLayoutCollection::iterator it
           = mapLayouts_.begin();
        it != mapLayouts_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
 }
@@ -101,7 +101,7 @@ void MapLayouts::exportToROM(WritableROM& rom) {
   for (MapLayoutCollection::iterator it
           = mapLayouts_.begin();
        it != mapLayouts_.end();
-       it++) {
+       ++it) {
 //    std::cout << "exporting " << count++ << std::endl;
     it->exportToFreeROM(rom);
   }

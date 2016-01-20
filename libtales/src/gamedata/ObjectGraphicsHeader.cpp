@@ -27,7 +27,7 @@ void ObjectGraphicsHeader::save(std::string& data) {
   for (ObjectGraphicSubheaderCollection::iterator it
           = objectGraphicSubheaders_.begin();
        it != objectGraphicSubheaders_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -69,7 +69,7 @@ int ObjectGraphicsHeader::exportToData(
   for (ObjectGraphicSubheaderCollection::iterator it
           = objectGraphicSubheaders_.begin();
        it != objectGraphicSubheaders_.end();
-       it++) {
+       ++it) {
     // Get address of subheader's graphic
     Taddress subheaderGraphicAddress
       = objectIndexToAddress.findValueOrThrow(

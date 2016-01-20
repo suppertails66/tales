@@ -247,7 +247,7 @@ void WarpEditDialog::reloadSpawnBox() {
         int num = 0;
         for (SpawnPointCollection::iterator it = spawns.begin();
              it != spawns.end();
-             it++) {
+             ++it) {
             std::string namestr;
             namestr += StringConversion::toString(
                         num);

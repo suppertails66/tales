@@ -65,7 +65,7 @@ SOURCES += main.cpp\
     genericerrordialog.cpp \
     aboutdialog.cpp
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=gnu++11
 
 HEADERS  += talesqtmainwindow.h \
     editorselectbar.h \

@@ -24,7 +24,7 @@ void IndexToAddressMap::save(std::string& data) {
   // Write each entry
   for (IndexToAddressMap::iterator it = this->begin();
        it != this->end();
-       it++) {
+       ++it) {
     // Write index
     ByteConversion::toBytes(it->first,
                             buffer,

@@ -114,7 +114,7 @@ GGPalette PaletteCycleEditor::generateCurrentPalette() {
   PaletteCycleState& state = currentCycleState();
   for (IndexToColorMap::const_iterator it = state.cbegin();
        it != state.cend();
-       it++) {
+       ++it) {
     result[it->first] = it->second;
   }
   

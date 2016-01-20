@@ -210,7 +210,7 @@ void LevelEditor
   
   for (SpawnPointCollection::iterator it = spawns.begin();
        it != spawns.end();
-       it++) {
+       ++it) {
     if (it->tailsX() < 0) {
       int target = (0) * MetatileStructure::metatileWidth;
       it->setCamX(it->camX() - (it->tailsX() - target));

@@ -36,7 +36,7 @@ LevelHeaders::LevelHeaders(
   int indexNum = 0;
   for (AddressRawLevelHeaderMap::const_iterator it = rawHeaders.cbegin();
        it != rawHeaders.cend();
-       it++) {
+       ++it) {
     // Create index->address mapping
     indexToAddress_.insert(
       IndexLevelHeaderAddressMap::PairType(
@@ -225,7 +225,7 @@ void LevelHeaders::save(std::string& data) {
   // Write out all loaded headers
   for (AddressLevelHeaderMap::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     // Write header address
        
     // Buffer to hold converted address of data
@@ -307,7 +307,7 @@ void LevelHeaders::exportToROM(
   // Write each header to its corresponding address
   for (AddressLevelHeaderMap::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
      // Buffer to hold raw header
      Tbyte buffer[LevelHeader::dataSize];
      
@@ -364,7 +364,7 @@ int LevelHeaders::levelHeaderIndex(int primaryMap, int subMap) {
   // Linear search for corresponding ID (poor planning ahoy!)
   for (IndexLevelHeaderAddressMap::iterator it = indexToAddress_.begin();
        it != indexToAddress_.end();
-       it++) {
+       ++it) {
     if (it->second == address) {
       return it->first;
     }

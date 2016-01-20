@@ -72,12 +72,12 @@ void RLE8Compressor::decompress(RLE8CommandCollection& source,
   int pos = 0;
   for (RLE8CommandCollection::iterator it = source.begin();
        it != source.end();
-       it++) {
+       ++it) {
     switch (it->commandType()) {
     case RLE8CommandTypes::absolute:
       for (RLE8ValueCollection::iterator sit = it->values().begin();
            sit != it->values().end();
-           sit++) {
+           ++sit) {
          destination[pos++] = *sit;
       }
       break;
@@ -99,7 +99,7 @@ void RLE8Compressor::compressToBytes(RLE8CommandCollection& source,
   int pos = 0;
   for (RLE8CommandCollection::iterator it = source.begin();
        it != source.end();
-       it++) {
+       ++it) {
        
 //    std::cerr << "type: " << it->commandType() << std::endl;
 //    std::cerr << "quantity: " << it->quantity() << std::endl;
@@ -125,7 +125,7 @@ void RLE8Compressor::compressToBytes(RLE8CommandCollection& source,
     case RLE8CommandTypes::absolute:
       for (RLE8ValueCollection::iterator sit = it->values().begin();
            sit != it->values().end();
-           sit++) {
+           ++sit) {
         destination[pos++] = *sit;
       }
       break;
@@ -171,7 +171,7 @@ int RLE8Compressor::calculateCompressedByteSize(RLE8CommandCollection& source) {
     
   for (RLE8CommandCollection::iterator it = source.begin();
        it != source.end();
-       it++) {
+       ++it) {
     // size of command byte
     total += 1;
     

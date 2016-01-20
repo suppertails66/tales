@@ -93,12 +93,12 @@ void IniFile::writeFile(const std::string& filename) {
   std::ofstream ofs(filename);
   for (SectionKeysMap::iterator it = values_.begin();
        it != values_.end();
-       it++) {
+       ++it) {
      ofs << '[' << it->first << ']' << std::endl;
      
      for (StringMap::iterator jt = it->second.begin();
           jt != it->second.end();
-          jt++) {
+          ++jt) {
        ofs << jt->first << '=' << jt->second << std::endl;
      }
      

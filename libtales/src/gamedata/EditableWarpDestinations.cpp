@@ -78,7 +78,7 @@ void EditableWarpDestinations::saveElement(std::string& data,
   
   for (WarpDestinationCollection::iterator it = src.begin();
        it != src.end();
-       it++) {
+       ++it) {
     // Buffer for data
     Tbyte dataBuffer[WarpDestination::dataSize];
     
@@ -123,7 +123,7 @@ void EditableWarpDestinations::exportElementToROM(WritableROM& rom,
   Taddress writeAddress = address;
   for (WarpDestinationCollection::iterator it = src.begin();
        it != src.end();
-       it++) {
+       ++it) {
 //       if (writeAddress <= 16894) {
 //        std::cout << writeAddress << std::endl;
 //       }
