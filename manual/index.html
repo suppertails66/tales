@@ -105,6 +105,7 @@
               <li><a href="#quirkspseudolevels">Psuedo-Levels</a></li>
               <li><a href="#quirksreplacelevels">Substitute Levels</a></li>
               <li><a href="#quirkspollymt2">Polly Mt. 2 Palette</a></li>
+              <li><a href="#quirksbattlefortress1">Battle Fortress 1</a></li>
               <li><a href="#quirksgraphiccycles">Graphic Cycling Effects</a></li>
               <li><a href="#quirksseafoxitems">Sea Fox Item Pickup Bug</a></li>
               <li><a href="#quirkscamera">Camera Starting Positions</a></li>
@@ -817,6 +818,14 @@
     <h3 id="quirkspollymt2">Polly Mt. 2 Palette</h3>
     <p>
       Polly Mt. 2's default palette is the "dark" palette shown before the Night Vision item has been used. To edit the level, switch it to the "bright" palette in the <a href="#levelproperties">Level Properties dialog</a>, then change it back when you're done. Note that <em>the Night Vision item is hardcoded to change to that particular palette in that particular area</em>.
+    </p>
+    
+    <h3 id="quirksbattlefortress1">Battle Fortress 1</h3>
+    <p>
+      Battle Fortress 1 (area 11-1, the flying Sea Fox level) is special: <em>Tails cannot collide with the level in that area</em>. This is to facilitate the battleship in the background, which uses more metatiles than the game normally assigns the "nonsolid" property to.
+    </p>
+    <p>
+      This level also has the rather peculiar property that in the unmodified game, it can be beaten maximally quickly and without taking damage simply by not pressing any buttons. Circumstantial evidence relating to the dummied-out effects set on 11-1 and 11-2 suggests they were originally intended to be autoscrolling levels, which probably would have made things more of a challenge.
     </p>
     
     <h3 id="quirksgraphiccycles">Graphic Cycling Effects</h3>
