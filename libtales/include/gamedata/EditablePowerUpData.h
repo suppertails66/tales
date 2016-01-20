@@ -25,12 +25,12 @@ public:
   /**
    * Returns maximum possible amount of health that can be specified.
    */
-  const static unsigned int maxHealthTotal();
+  static unsigned int maxHealthTotal();
   
   /**
    * Returns maximum possible flight time that can be specified.
    */
-  const static unsigned int maxFlightTimeTotal();
+  static unsigned int maxFlightTimeTotal();
 
   /**
    * Default constructor.

@@ -15,11 +15,11 @@ int EditablePowerUpData::numPowerUps() {
   return numPowerUps_;
 }
 
-const unsigned int EditablePowerUpData::maxHealthTotal() {
+unsigned int EditablePowerUpData::maxHealthTotal() {
   return maxHealthTotal_;
 }
 
-const unsigned int EditablePowerUpData::maxFlightTimeTotal() {
+unsigned int EditablePowerUpData::maxFlightTimeTotal() {
   return maxFlightTimeTotal_;
 }
 
