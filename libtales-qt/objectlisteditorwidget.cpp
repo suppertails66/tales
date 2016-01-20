@@ -29,7 +29,7 @@ void ObjectListEditorWidget::repopulate() {
     int num = 0;
     for (LevelObjectEntryCollection::iterator it = group_->begin();
          it != group_->end();
-         it++) {
+         ++it) {
         LevelObjectEntry entry = *it;
         std::string name;
         name += StringConversion::toString(
@@ -55,7 +55,7 @@ void ObjectListEditorWidget::updateObjectSelection() {
     int num = 0;
     for (LevelObjectEntryCollection::iterator it = group_->begin();
          it != group_->end();
-         it++) {
+         ++it) {
         if (it == toolManager_->objectEditorSingleGroupIt()) {
             setCurrentRow(num);
             return;

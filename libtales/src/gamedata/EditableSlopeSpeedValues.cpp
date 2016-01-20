@@ -81,7 +81,7 @@ void EditableSlopeSpeedValues::save(std::string& data) {
   // Write each entry
   for (SlopeSpeedValueCollection::iterator it = speedValues_.begin();
        it != speedValues_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(*it,
                             buffer,
                             ByteSizes::int16Size,
@@ -154,7 +154,7 @@ void EditableSlopeSpeedValues::exportToROM(WritableROM& rom) {
   int writeAddress = baseAddress_;
   for (SlopeSpeedValueCollection::iterator it = speedValues_.begin();
        it != speedValues_.end();
-       it++) {
+       ++it) {
     Tbyte buffer[ByteSizes::int16Size];
     ByteConversion::toBytes(*it,
                             buffer,

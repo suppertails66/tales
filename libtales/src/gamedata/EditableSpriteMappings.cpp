@@ -150,7 +150,7 @@ EditableSpriteMappings::EditableSpriteMappings(
   for (MappingTableAddressToSize::iterator it
          = addressToSubtableEntries.begin();
        it != addressToSubtableEntries.end();
-       it++) {
+       ++it) {
 //    std::cout << std::hex << it->first << " " << it->second << std::endl;
     
 //    std::cout << "address: " << it->first << std::endl;
@@ -215,7 +215,7 @@ EditableSpriteMappings::EditableSpriteMappings(
   TileIndexTableAddressToSize addressToTileIndexSize;
   for (AddressToRawMapping::iterator it = addressToRawMapping.begin();
        it != addressToRawMapping.end();
-       it++) {
+       ++it) {
 /*    std::cout << std::hex << it->first << " " << std::endl;
     std::cout << '\t' << "numSprites: "
       << it->second.numSprites() << std::endl;
@@ -281,7 +281,7 @@ EditableSpriteMappings::EditableSpriteMappings(
   for (CoordinateTableAddressToSize::iterator it
          = addressToCoordinateSize.begin();
        it != addressToCoordinateSize.end();
-       it++) {
+       ++it) {
     // Read table
     SpriteMappingCoordinateTable table;
     table.readFromData(rom.directRead(it->first),
@@ -313,7 +313,7 @@ EditableSpriteMappings::EditableSpriteMappings(
   for (TileIndexTableAddressToSize::iterator it
          = addressToTileIndexSize.begin();
        it != addressToTileIndexSize.end();
-       it++) {
+       ++it) {
     // Read table
     SpriteMappingTileIndexTable table;
     table.readFromData(rom.directRead(it->first),
@@ -338,7 +338,7 @@ EditableSpriteMappings::EditableSpriteMappings(
   MappingTableAddressToIndex mappingAddressToIndex;
   for (AddressToRawMapping::iterator it = addressToRawMapping.begin();
        it != addressToRawMapping.end();
-       it++) {
+       ++it) {
     // Map index to address
     mappingIndexToAddress_.insert(
       MappingIndexToAddress::PairType(
@@ -430,7 +430,7 @@ void EditableSpriteMappings::save(std::string& data) {
   for (MappingIndexToAddress::iterator it
          = mappingIndexToAddress_.begin();
        it != mappingIndexToAddress_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->first,
                             buffer,
                             ByteSizes::uint32Size,
@@ -467,7 +467,7 @@ void EditableSpriteMappings::save(std::string& data) {
   for (CoordinateTableIndexToAddress::iterator it
          = coordinateTableIndexToAddress_.begin();
        it != coordinateTableIndexToAddress_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->first,
                             buffer,
                             ByteSizes::uint32Size,
@@ -500,7 +500,7 @@ void EditableSpriteMappings::save(std::string& data) {
   for (TileIndexTableIndexToAddress::iterator it
          = tileIndexTableIndexToAddress_.begin();
        it != tileIndexTableIndexToAddress_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->first,
                             buffer,
                             ByteSizes::uint32Size,

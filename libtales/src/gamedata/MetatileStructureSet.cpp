@@ -155,7 +155,7 @@ void MetatileStructureSet::save(std::string& data) {
   // Write each index entry
   for (MetatileIndexToStructureMap::iterator it = index_.begin();
        it != index_.end();
-       it++) {
+       ++it) {
     // Write index number
     ByteConversion::toBytes(it->first,
                             buffer,
@@ -189,7 +189,7 @@ void MetatileStructureSet::save(std::string& data) {
 //  int num = 0;
   for (MetatileStructureCollection::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
  //   std::cerr << "\ttile " << num << std::endl;
 //    ++num;
     
@@ -304,7 +304,7 @@ void MetatileStructureSet::exportToROM(WritableROM& rom) {
   // Write the index
   for (MetatileIndexToStructureMap::iterator it = index_.begin();
        it != index_.end();
-       it++) {
+       ++it) {
     int contentIndex = it->second;
     
     // Compute the address of the content
@@ -331,7 +331,7 @@ void MetatileStructureSet::exportToROM(WritableROM& rom) {
   int metatileNum = 0;
   for (MetatileStructureCollection::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     // Write metatile to buffer
     Tbyte buffer[MetatileStructure::dataSize];
     it->writeToData(buffer);

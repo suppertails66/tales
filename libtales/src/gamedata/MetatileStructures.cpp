@@ -27,7 +27,7 @@ MetatileStructures::MetatileStructures(
   int tableNum = 0;
   for (AddressRawLevelHeaderMap::const_iterator it = rawLevelHeaders.cbegin();
        it != rawLevelHeaders.cend();
-       it++) {
+       ++it) {
     // Get address of next table to read
     Taddress addr = it->second.metatileStructureAddress();
        
@@ -191,7 +191,7 @@ void MetatileStructures::save(std::string& data) {
   for (MetatileStructureTableCollection::iterator it
           = metatileStructureSets_.begin();
        it != metatileStructureSets_.end();
-       it++) {
+       ++it) {
 //    std::cerr << "set " << num << std::endl;
 //    ++num;
     
@@ -233,7 +233,7 @@ void MetatileStructures::save(std::string& data) {
   // Write each entry
   for (AddressMetatileStructureIndexMap::iterator it = indexMap_.begin();
        it != indexMap_.end();
-       it++) {
+       ++it) {
     
     // Write address
     ByteConversion::toBytes(it->first,
@@ -345,7 +345,7 @@ void MetatileStructures::exportToROM(WritableROM& rom) {
   // Write each structure table
   for (AddressMetatileStructureIndexMap::iterator it = indexMap_.begin();
        it != indexMap_.end();
-       it++) {
+       ++it) {
     // Throw if index out of range
     if ((unsigned int)(it->second) >= metatileStructureSets_.size()) {
       throw TGenericException(TALES_SRCANDLINE,

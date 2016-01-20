@@ -129,7 +129,7 @@ void EditableLevelPaletteHeaders::save(std::string& data) {
   // Write headers
   for (LevelPaletteHeaderCollection::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -207,7 +207,7 @@ void EditableLevelPaletteHeaders::exportToROM(WritableROM& rom) {
   int contentWriteAddress = tableContentAddress_;
   for (LevelPaletteHeaderCollection::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     it->exportToROM(rom,
                     contentWriteAddress);
     contentWriteAddress += LevelPaletteHeader::dataSize;

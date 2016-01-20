@@ -65,14 +65,14 @@ void EditableMetatileLengthMaps::saveInternal(std::string& data) {
   // Save each map
   for (MetatileLengthMapCollection::iterator it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
   // Save address mappings
   for (LengthIndexToAddressMap::iterator it = indexToAddress_.begin();
        it != indexToAddress_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->second,
                             buffer,
                             ByteSizes::uint32Size,

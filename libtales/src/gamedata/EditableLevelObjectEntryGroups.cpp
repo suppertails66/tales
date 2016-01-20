@@ -686,7 +686,7 @@ void EditableLevelObjectEntryGroups::readAndConstructReadStep(
   // Iterate over primary storage addresses and read corresponding data
   for (AddressIndexMap::iterator it = addressToIndex_.begin();
        it != addressToIndex_.end();
-       it++) {
+       ++it) {
 //      std::cout << "start: " << it->first << std::endl;
     
     Taddress startAddress = it->first;

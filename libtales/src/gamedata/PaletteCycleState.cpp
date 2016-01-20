@@ -22,7 +22,7 @@ void PaletteCycleState::save(std::string& data) {
 
   for (IndexToColorMap::iterator it = colors_.begin();
        it != colors_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->first,
                             buffer,
                             ByteSizes::uint16Size,
@@ -85,7 +85,7 @@ int PaletteCycleState::standardWriteToData(Tbyte* data) {
 
   for (IndexToColorMap::iterator it = colors_.begin();
        it != colors_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->second.nativeColor(),
                             data + byteCount,
                             ByteSizes::uint16Size,

@@ -49,7 +49,7 @@ void EditorMetadata::save(std::string& data) {
   for (MetatileStructureDefaultMap::iterator it
           = metatileStructureDefaults_.begin();
        it != metatileStructureDefaults_.end();
-       it++) {
+       ++it) {
     // Key
     ByteConversion::toBytes(it->first,
                             buffer,
@@ -464,7 +464,7 @@ void EditorMetadata::saveGraphicPaletteDefaultMap(
   
   for (GraphicPaletteDefaultMap::iterator it = src.begin();
        it != src.end();
-       it++) {
+       ++it) {
     // Key
     ByteConversion::toBytes(it->first,
                             buffer,

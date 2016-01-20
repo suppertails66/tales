@@ -78,7 +78,7 @@ void EditableSpawnPoints::saveElement(std::string& data,
   
   for (SpawnPointCollection::iterator it = src.begin();
        it != src.end();
-       it++) {
+       ++it) {
     // Buffer for data
     Tbyte dataBuffer[SpawnPoint::dataSize];
     
@@ -124,7 +124,7 @@ void EditableSpawnPoints::exportElementToROM(WritableROM& rom,
   
   for (SpawnPointCollection::iterator it = src.begin();
        it != src.end();
-       it++) {
+       ++it) {
 //    std::cout << writeAddress << std::endl;
 //    std::cout << '\t' << it->camX() << std::endl;
     // Buffer for data

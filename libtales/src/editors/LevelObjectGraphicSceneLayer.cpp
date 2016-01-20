@@ -208,7 +208,7 @@ void LevelObjectGraphicSceneLayer::regenerateObjectDisplayCache() {
     for (LevelObjectEntryCollection::iterator it
            = levelObjectEntryGroups_->groupBegin(levelObjectEntryGroupIndex_);
          it != levelObjectEntryGroups_->groupEnd(levelObjectEntryGroupIndex_);
-         it++) {
+         ++it) {
       ObjectDisplayCache cache;
       generateObjectPreview(cache, *it);
       objectDisplayCaches_.push_back(cache);
@@ -715,7 +715,7 @@ void LevelObjectGraphicSceneLayer::refreshAllGraphicVRAMOffsets() {
             ->groupBegin(levelObjectEntryGroupIndex_);
        groupIt != levelObjectEntryGroups_
             ->groupEnd(levelObjectEntryGroupIndex_);
-       groupIt++) {
+       ++groupIt) {
     ObjectGraphicInfo graphicInfo = ObjectToGraphics::objectToGraphics(
       groupIt->objectTypeID());
     

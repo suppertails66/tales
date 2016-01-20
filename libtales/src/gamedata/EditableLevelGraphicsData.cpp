@@ -194,7 +194,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToRawLevelGraphicsHeaderMap::iterator it
           = sortedRawLevelGraphicsHeaders.begin();
        it != sortedRawLevelGraphicsHeaders.end();
-       it++) {
+       ++it) {
     levelHeaderIndexToAddress_.insert(
       IndexToAddressPair(levelHeaderIndexNum++,
                          it->first));
@@ -216,7 +216,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (RawLevelGraphicsHeaderCollection::iterator
           it = rawLevelGraphicsHeaders.begin();
        it != rawLevelGraphicsHeaders.end();
-       it++) {
+       ++it) {
     // Use placeholder until real indices can be added
     compressedGraphicSorter.insert(
       AddressToGraphicIndexPair(it->mapGraphicAddress(),
@@ -230,7 +230,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (RawLevelGraphicsHeaderCollection::iterator
           it = rawLevelGraphicsHeaders.begin();
        it != rawLevelGraphicsHeaders.end();
-       it++) {
+       ++it) {
     // Use placeholder until real indices can be added
     objectGraphicsHeaderSorter.insert(
       AddressToObjectGraphicsHeaderIndexPair(
@@ -243,7 +243,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToObjectGraphicsHeaderIndexMap::iterator
           it = objectGraphicsHeaderSorter.begin();
        it != objectGraphicsHeaderSorter.end();
-       it++) {
+       ++it) {
     it->second = objectGraphicsHeaderIndexNum++;
     
 //    std::cout << "object header " << it->second
@@ -256,7 +256,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToObjectGraphicsHeaderIndexMap::iterator
           it = objectGraphicsHeaderSorter.begin();
        it != objectGraphicsHeaderSorter.end();
-       it++) {
+       ++it) {
     // Read header
     RawObjectGraphicsHeader header(rom,
                                    it->first);
@@ -283,7 +283,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (RawObjectGraphicsHeaderCollection::iterator
           it = rawObjectGraphicsHeaders.begin();
        it != rawObjectGraphicsHeaders.end();
-       it++) {
+       ++it) {
     // Iterate over subheaders
     for (int i = 0; i < it->size(); i++) {
       // Get each object graphic address
@@ -395,7 +395,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToGraphicIndexMap::iterator
          it = compressedGraphicSorter.begin();
        it != compressedGraphicSorter.end();
-       it++) {
+       ++it) {
     // Add proper index
     it->second = graphicIndexNum++;
     
@@ -487,7 +487,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (Tmap<Taddress, StandardUncompressedGraphicHeader>::iterator
          it = uncompressedHeaders.begin();
        it != uncompressedHeaders.end();
-       it++) {
+       ++it) {
     Taddress readAddress = it->second.graphicAddress();
     
     // Disallow certain invalid addresses
@@ -524,7 +524,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToRawObjectGraphicsHeaderMap::iterator
           it = sortedRawObjectGraphicsHeaders.begin();
        it != sortedRawObjectGraphicsHeaders.end();
-       it++) {
+       ++it) {
     // Created indexed header
     ObjectGraphicsHeader header;
     
@@ -557,7 +557,7 @@ EditableLevelGraphicsData::EditableLevelGraphicsData(
   for (AddressToRawLevelGraphicsHeaderMap::iterator
           it = sortedRawLevelGraphicsHeaders.begin();
        it != sortedRawLevelGraphicsHeaders.end();
-       it++) {
+       ++it) {
     // Created indexed header
     LevelGraphicsHeader header(
         it->second.vdpWriteAddress(),
@@ -621,12 +621,12 @@ void EditableLevelGraphicsData::save(std::string& data) {
   // Save compressed graphics
   for (IndexToGraphicMap::iterator it = compressedGraphics_.begin();
        it != compressedGraphics_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   for (IndexToGraphicSizeMap::iterator it = compressedGraphicSizeMap_.begin();
        it != compressedGraphicSizeMap_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes((*it),
                             buffer,
                             ByteSizes::uint16Size,
@@ -646,7 +646,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   // Save uncompressed graphics
   for (IndexToGraphicMap::iterator it = uncompressedGraphics_.begin();
        it != uncompressedGraphics_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -664,7 +664,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   for (LevelGraphicsHeaderCollection::iterator it
           = levelGraphicsHeaders_.begin();
        it != levelGraphicsHeaders_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -680,7 +680,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   for (ObjectGraphicsHeaderCollection::iterator it
           = objectGraphicsHeaders_.begin();
        it != objectGraphicsHeaders_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -688,7 +688,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   for (IndexToHeaderSizeMap::iterator it
          = objectGraphicsHeaderIndexToSize_.begin();
        it != objectGraphicsHeaderIndexToSize_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(*it,
                             buffer,
                             ByteSizes::uint16Size,
@@ -709,7 +709,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   for (SpecialExportAddressCollection::iterator it
           = specialCompressedGraphicExportAddresses_.begin();
        it != specialCompressedGraphicExportAddresses_.end();
-       it++) {
+       ++it) {
     ByteConversion::toBytes(it->first,
                             buffer,
                             ByteSizes::uint32Size,
@@ -730,7 +730,7 @@ void EditableLevelGraphicsData::save(std::string& data) {
   for (GraphicDependencyGroupCollection::iterator it
           = compressedGraphicDependencies_.begin();
        it != compressedGraphicDependencies_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
   
@@ -1263,7 +1263,7 @@ int EditableLevelGraphicsData::totalObjectHeaderSize() {
   for (ObjectGraphicsHeaderCollection::iterator it
          = objectGraphicsHeaders_.begin();
        it != objectGraphicsHeaders_.end();
-       it++) {
+       ++it) {
     total += it->rawSize();
   }
   
@@ -1312,7 +1312,7 @@ int EditableLevelGraphicsData::importCharacterGraphicsAddresses(
   for (Tmap<Taddress, CharacterUncompressedGraphicHeader>::iterator
           it = uncompressedHeaders.begin();
        it != uncompressedHeaders.end();
-       it++) {
+       ++it) {
        
     Taddress readAddress = it->second.graphicAddress();
     
@@ -1456,7 +1456,7 @@ void EditableLevelGraphicsData::exportSpecialGraphics(
   for (GraphicDependencyGroupCollection::iterator it
          = compressedGraphicDependencies_.begin();
        it != compressedGraphicDependencies_.end();
-       it++) {
+       ++it) {
     // Compress all graphics in the group
     int totalSize = 0;
     std::vector<std::string> comprGrp;
@@ -1464,7 +1464,7 @@ void EditableLevelGraphicsData::exportSpecialGraphics(
     for (GraphicDependencyGroupEntryCollection::iterator jt
            = it->entries().begin();
          jt != it->entries().end();
-         jt++) {
+         ++jt) {
       std::string compressedData;
       TailsAdvGraphicCompressor::compress(
                       compressedData,

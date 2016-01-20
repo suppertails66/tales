@@ -60,7 +60,7 @@ int LevelObjectEntryGroup::writeToData(Tbyte* data) {
 //  int count = 0;
   for (LevelObjectEntryCollection::iterator it = entries_.begin();
        it != entries_.end();
-       it++) {
+       ++it) {
     byteCount += it->writeToData(data + byteCount);
 //    ++count;
   }

@@ -94,7 +94,7 @@ void LevelSpawnGraphicSceneLayer::regenerateDisplayCaches() {
   
   for (SpawnPointCollection::iterator it = spawns_->begin();
        it != spawns_->end();
-       it++) {
+       ++it) {
     ObjectDisplayCache cache;
     
     // Tails standing sprite
@@ -313,7 +313,7 @@ int LevelSpawnGraphicSceneLayer
   int num = 0;
   for (SpawnPointCollection::iterator it = spawns_->begin();
        it != spawns_->end();
-       it++) {
+       ++it) {
     if (it == toolManager_->spawnEditorSingleGroupIt()) {
       return num;
     }

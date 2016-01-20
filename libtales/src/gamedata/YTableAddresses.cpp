@@ -13,7 +13,7 @@ YTableAddresses::YTableAddresses(const RawLevelHeaders& headers) {
   int tableNum = 0;
   for (AddressRawLevelHeaderMap::const_iterator it = headers.cbegin();
        it != headers.cend();
-       it++) {
+       ++it) {
     
     // Check if this map has been loaded
     AddressToWidthMap::iterator findIt
@@ -55,7 +55,7 @@ void YTableAddresses::save(std::string& data) {
   // Write each address mapping
   for (WidthToYTableMap::iterator it = widthToYTableMap_.begin();
        it != widthToYTableMap_.end();
-       it++) {
+       ++it) {
     // Write width
     ByteConversion::toBytes(it->first,
                             buffer,

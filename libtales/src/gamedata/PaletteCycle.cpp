@@ -23,7 +23,7 @@ void PaletteCycle::save(std::string& data) {
   
   for (PaletteCycleStateCollection::iterator it = states_.begin();
        it != states_.end();
-       it++) {
+       ++it) {
     it->save(data);
   }
 }
@@ -53,7 +53,7 @@ int PaletteCycle::standardWriteToData(Tbyte* data) {
   
   for (PaletteCycleStateCollection::iterator it = states_.begin();
        it != states_.end();
-       it++) {
+       ++it) {
     byteCount += it->standardWriteToData(data + byteCount);
   }
   
