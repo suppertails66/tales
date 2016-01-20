@@ -102,6 +102,32 @@ public:
   const MetatileStructure& metatileMapping(int indexNum) const;
   
   /**
+   * Destroys the metatile structure with the given index.
+   * Metatiles mapped to the structure are not modified and need to
+   * be updated.
+   * @param index Index of the metatile structure.
+   */
+  void removeStructureDefinition(int index);
+  
+  /**
+   * Adds a blank metatile structure at the end of the list.
+   * @return Index of the new structure.
+   */
+  int appendStructureDefinition();
+  
+  /**
+   * Returns iterator to start of index_.
+   * @return Iterator to start of index_.
+   */
+  MetatileIndexToStructureMap::iterator metatileStructureIndexBegin();
+  
+  /**
+   * Returns iterator to end of index_.
+   * @return Iterator to end of index_.
+   */
+  MetatileIndexToStructureMap::iterator metatileStructureIndexEnd();
+  
+  /**
    * Returns iterator to start of primaryStorage_.
    * @return Iterator to start of primaryStorage_.
    */
@@ -163,6 +189,12 @@ protected:
    * Tile number used to repair invalid structure table.
    */
   const static int invalidRepairTile = 0x0100;
+  
+  /**
+   * Returns exported size.
+   * @return Exported size.
+   */
+  int exportSize();
   
   /**
    * Source/export address.

@@ -3,6 +3,7 @@
 #include "util/ByteSizes.h"
 #include "util/StringConversion.h"
 #include "exception/TGenericException.h"
+#include "exception/NotEnoughSpaceException.h"
 #include <iostream>
 
 using namespace Luncheon;
@@ -279,7 +280,20 @@ void MetatileStructureSet::exportToROM(WritableROM& rom) {
   // TODO: support for adding metatile definitions
   // search freespace &c
   
-  int writeAddress = address_;
+  FreeSpaceList::iterator spaceIt = rom.freeSpace().getFreeSpace(
+    exportSize());
+    
+  if (spaceIt == rom.freeSpace().freeSpaceList().end()) {
+    throw NotEnoughSpaceException(TALES_SRCANDLINE,
+                                  "MetatileStructureSet::exportToROM("
+                                  "WritableROM&)",
+                                  exportSize());
+  }
+  
+  int writeAddress = spaceIt->address();
+  address_ = spaceIt->address();
+  
+  rom.freeSpace().claimSpace(spaceIt, exportSize());
   
 //  std::cout << "addr: " << writeAddress << std::endl;
   
@@ -351,6 +365,25 @@ int MetatileStructureSet::numStructureDefinitions() const {
   return primaryStorage_.size();
 }
 
+void MetatileStructureSet::removeStructureDefinition(int index) {
+  primaryStorage_.erase(primaryStorage_.begin() + index);
+}
+
+MetatileIndexToStructureMap::iterator MetatileStructureSet
+    ::metatileStructureIndexBegin() {
+  return index_.begin();
+}
+
+MetatileIndexToStructureMap::iterator MetatileStructureSet
+    ::metatileStructureIndexEnd() {
+  return index_.end();
+}
+
+int MetatileStructureSet::appendStructureDefinition() {
+  primaryStorage_.push_back(MetatileStructure());
+  return (primaryStorage_.size() - 1);
+}
+
 MetatileStructure& MetatileStructureSet
       ::metatileMapping(int indexNum) {
   // Throw if out of range
@@ -415,6 +448,12 @@ MetatileStructure& MetatileStructureSet
   
 int MetatileStructureSet::size() const {
   return primaryStorage_.size();
+}
+
+int MetatileStructureSet::exportSize() {
+  // Size of metatile definitions + size of index
+  return ((primaryStorage_.size() * MetatileStructure::dataSize)
+          + (index_.size() * ByteSizes::uint16Size));
 }
 
 

@@ -86,6 +86,9 @@ public:
   int currentMetatileStructureIndex();
   
   void setStructureOfCurrentMetatile(int index);
+  
+  void appendMetatileStructureIndex();
+  void removeCurrentMetatileStructureIndex();
 protected:
   const static int tileOffset_ = -256;
   const static int legalTileLowerBound_ = 256;

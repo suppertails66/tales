@@ -192,6 +192,46 @@ int MetatileStructureEditor::currentMetatileStructureIndex() {
   return currentMetatileStructureSet().structureIndex(
             currentMetatileIndex());
 }
+
+void MetatileStructureEditor::appendMetatileStructureIndex() {
+  // Do not allow more metatile than physically accessible to be mapped
+  if (currentNumMetatileStructures() >=
+        MetatileStructures::numMetatilesPerTable) {
+    return;
+  }
+  
+  int index = currentMetatileStructureSet().appendStructureDefinition();
+  
+  // Map current metatile to new index
+  setStructureOfCurrentMetatile(index);
+}
+  
+void MetatileStructureEditor::removeCurrentMetatileStructureIndex() {
+  // Do not allow the last structure definition to be removed
+  if (currentNumMetatileStructures() <= 1) {
+    return;
+  }
+  
+  int currentIndex = currentMetatileStructureIndex();
+  
+  currentMetatileStructureSet().removeStructureDefinition(
+    currentIndex);
+  
+  // Correct mappings
+  for (MetatileIndexToStructureMap::iterator it
+          = currentMetatileStructureSet().metatileStructureIndexBegin();
+       it != currentMetatileStructureSet().metatileStructureIndexEnd();
+       it++) {
+    // Anything mapped to current index is reset to 0
+    if (it->second == currentIndex) {
+      it->second = 0;
+    }
+    // Anything greater than current index is decremented
+    else if (it->second > currentIndex) {
+      --(it->second);
+    }
+  }
+}
   
 void MetatileStructureEditor::setStructureOfCurrentMetatile(int index) {
   currentMetatileStructureSet().setStructureIndex(

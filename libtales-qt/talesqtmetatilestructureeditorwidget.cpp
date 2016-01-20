@@ -244,6 +244,10 @@ void TalesQtMetatileStructureEditorWidget::repopulateIDList() {
                     i);
     }
 
+    refreshIDBox();
+}
+
+void TalesQtMetatileStructureEditorWidget::refreshIDBox() {
     ui->structureIDComboBox->setCurrentIndex(
                 metatileStructureEditor_.currentMetatileStructureIndex());
 }
@@ -418,5 +422,25 @@ void TalesQtMetatileStructureEditorWidget::on_structureIDComboBox_activated(int 
     metatileStructureEditor_.setStructureOfCurrentMetatile(index);
     metatileStructureEditor_.loadPickedMetatile();
     metatileStructureEditor_.loadPickedSubtile();
+    refreshDisplay();
+}
+
+void TalesQtMetatileStructureEditorWidget::on_structureRemoveButton_clicked(bool checked)
+{
+    metatileStructureEditor_.removeCurrentMetatileStructureIndex();
+    metatileStructureEditor_.loadPickedMetatile();
+    metatileStructureEditor_.loadPickedSubtile();
+//    refreshIDBox();
+    repopulateIDList();
+    refreshDisplay();
+}
+
+void TalesQtMetatileStructureEditorWidget::on_structureAddButton_clicked(bool checked)
+{
+    metatileStructureEditor_.appendMetatileStructureIndex();
+    metatileStructureEditor_.loadPickedMetatile();
+    metatileStructureEditor_.loadPickedSubtile();
+//    refreshIDBox();
+    repopulateIDList();
     refreshDisplay();
 }

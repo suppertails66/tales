@@ -52,6 +52,8 @@ protected:
 
     void repopulateIDList();
 
+    void refreshIDBox();
+
     Tales::MetatileStructureEditor& metatileStructureEditor_;
     
 private slots:
@@ -66,6 +68,10 @@ private slots:
     void on_previewPaletteComboBox_activated(int index);
 
     void on_structureIDComboBox_activated(int index);
+
+    void on_structureRemoveButton_clicked(bool checked);
+
+    void on_structureAddButton_clicked(bool checked);
 
 private:
     Ui::TalesQtMetatileStructureEditorWidget *ui;
