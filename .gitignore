@@ -1,2 +1,14 @@
 *~
 *.[oa]
+*.obj
+*.lib
+
+libtales/obj/
+
+libtales-qt/Makefile
+libtales-qt/ui_*.h
+libtales-qt/moc_*.cpp
+libtales-qt/qrc_resources.cpp
+libtales-qt/tales
+libtales-qt/tales.exe
+libtales-qt/tales.cfg
