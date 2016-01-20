@@ -179,7 +179,7 @@ void MapLayout::exportToFreeROM(WritableROM& rom) {
   catch (std::exception& e) {
     delete[] outputBuffer;
     // Re-throw exception
-    throw e;
+    throw;
   }
   
   // Delete allocated buffer

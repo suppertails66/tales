@@ -33,7 +33,7 @@ void LevelObjectEntryGroup::save(std::string& data) {
     delete[] entryBuffer;
     
     // Re-throw exception
-    throw e;
+    throw;
   }
   
   // Clean up allocated memory

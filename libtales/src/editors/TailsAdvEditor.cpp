@@ -168,7 +168,7 @@ void TailsAdvEditor::loadFromFile(const std::string& filename) {
   }
   catch (std::exception& e) {
     delete[] data;
-    throw e;
+    throw;
   }
   
   delete[] data;
