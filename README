@@ -22,3 +22,9 @@ All the code in the project is GNU GPL3. Not such a hard concept, right?
 
 See build_instructions.txt for instructions on building Tales, and "index.html"
 in the "manual" folder for an explanation of the program.
+
+Thanks to the following people for their contributions, direct or indirect, to
+this project:
+* GerbilSoft, for code cleanup and helpful advice
+* mcallegari79, for the prebuilt minimal ICU DLLs used in the Windows builds
+* Everyone on Sonic Retro and SMS Power who helped test the program
