@@ -31,4 +31,5 @@ $(LIB): $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(LIB) $(OBJ) $(DEP)
+	rm -f $(LIB)
+	rm -rf $(ODIR)
