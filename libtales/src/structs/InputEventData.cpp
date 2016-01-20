@@ -7,8 +7,8 @@ InputEventData::InputEventData()
   : x_(0),
     y_(0),
     mouseLeftButton_(false),
-    mouseRightButton_(false),
     mouseMiddleButton_(false),
+    mouseRightButton_(false),
     control_(false),
     alt_(false),
     shift_(false) { };
