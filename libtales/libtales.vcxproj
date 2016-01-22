@@ -229,6 +229,7 @@
     <ClInclude Include="include\gamedata\TailsAdvGraphicCompressor.h" />
     <ClInclude Include="include\gamedata\TailsAdvRLECompressor.h" />
     <ClInclude Include="include\gamedata\TailsAdvROMLoader.h" />
+    <ClInclude Include="include\gamedata\TileMap.h" />
     <ClInclude Include="include\gamedata\TwoKeyEditableMappedData.h" />
     <ClInclude Include="include\gamedata\TwoKeyIndexedEditableMappedData.h" />
     <ClInclude Include="include\gamedata\WarpDestination.h" />
@@ -449,6 +450,7 @@
     <ClCompile Include="src\gamedata\TailsAdvGraphicCompressor.cpp" />
     <ClCompile Include="src\gamedata\TailsAdvRLECompressor.cpp" />
     <ClCompile Include="src\gamedata\TailsAdvROMLoader.cpp" />
+    <ClCompile Include="src\gamedata\TileMap.cpp" />
     <ClCompile Include="src\gamedata\TwoKeyEditableMappedData.cpp" />
     <ClCompile Include="src\gamedata\TwoKeyIndexedEditableMappedData.cpp" />
     <ClCompile Include="src\gamedata\WarpDestination.cpp" />
