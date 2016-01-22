@@ -56,11 +56,13 @@ public:
   
   /**
    * Constructor.
-   * @param tileNum Number of the referenced tile.
-   * @param horizontalMirroringOption Indicates whether the tile should be
+   * @param tileNum__ Number of the referenced tile.
+   * @param horizontalMirroringOption__ Indicates whether the tile should be
    * flipped horizontally.
-   * @param verticalMirroringOption Indicates whether the tile should be
+   * @param verticalMirroringOption__ Indicates whether the tile should be
    * flipped vertically.
+   * @param paletteOption__ Indicates whether the tile uses palette 0 or 1.
+   * @param priorityOption__ Indicates whether the tile has BG or FG priority.
    */
   TileReference(unsigned int tileNum__,
                 HorizontalMirroringOption horizontalMirroringOption__,

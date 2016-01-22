@@ -109,6 +109,22 @@ public:
   int load(const Tbyte* data);
   
   /**
+   * Accesses tile data.
+   * @param x X-position of the target tile.
+   * @param y Y-position of the target tile.
+   * @return Reference to the TileReference for the given tile.
+   */
+  TileReference& tileData(int x, int y);
+  
+  /**
+   * Accesses const tile data.
+   * @param x X-position of the target tile.
+   * @param y Y-position of the target tile.
+   * @return Const reference to the TileReference for the given tile.
+   */
+  const TileReference& tileData(int x, int y) const;
+  
+  /**
    * Getter.
    */
   TileMapFormat format() const;
