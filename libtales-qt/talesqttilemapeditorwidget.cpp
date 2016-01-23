@@ -81,7 +81,7 @@ TalesQtTileMapEditorWidget::TalesQtTileMapEditorWidget(QWidget *parent) :
                      this,
                      SLOT(subtileEditorValueModified()));
 
-    refreshDisplay();
+    changeTileMap(0);
 }
 
 TalesQtTileMapEditorWidget::~TalesQtTileMapEditorWidget()
@@ -104,8 +104,7 @@ void TalesQtTileMapEditorWidget::refreshDisplay() {
                 tileMapEditor_.currentTile());
 }
 
-void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
-{
+void TalesQtTileMapEditorWidget::changeTileMap(int index) {
     tileMapEditor_.changeTileMap(index);
 
     if (tileMapEditor_.currentEditingLimited()) {
@@ -114,6 +113,15 @@ void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
     else {
         ui->subtileEditorWidget->enableAll();
     }
+
+    ui->subtileEditorWidget->setTileRange(
+                tileMapEditor_.currentTileMap().lowerLimit(),
+                tileMapEditor_.currentTileMap().upperLimit() - 1);
+}
+
+void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
+{
+    changeTileMap(index);
 
     refreshDisplay();
 }

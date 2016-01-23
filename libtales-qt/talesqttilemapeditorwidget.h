@@ -20,6 +20,8 @@ public:
     void refreshDisplay();
 
 protected:
+    void changeTileMap(int index);
+
     Tales::TileMapEditor& tileMapEditor_;
     
 private slots:

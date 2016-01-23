@@ -27,6 +27,8 @@ public:
     void enableAll();
     void disableAllButTileNum();
 
+    void setTileRange(int lower, int upper);
+
 protected:
     Tales::TileReference* tile_;
 

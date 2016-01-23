@@ -69,6 +69,10 @@ void SubtileEditorWidget::disableAllButTileNum() {
     ui->flipWidget->setEnabled(false);
 }
 
+void SubtileEditorWidget::setTileRange(int lower, int upper) {
+    ui->ulTileBox->setRange(lower, upper);
+}
+
 void SubtileEditorWidget::setNameLabel(const std::string& nameLabel) {
     ui->nameLabel->setText(nameLabel.c_str());
 }
