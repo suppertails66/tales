@@ -24,7 +24,7 @@ protected:
   /**
    * Number of tilemaps.
    */
-  const static int numTileMaps_ = 184;
+  const static int numTileMaps_ = 183;
   
   /**
    * Array of tilemap infos.

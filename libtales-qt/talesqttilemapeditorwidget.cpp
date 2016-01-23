@@ -76,6 +76,11 @@ TalesQtTileMapEditorWidget::TalesQtTileMapEditorWidget(QWidget *parent) :
                      this,
                      SLOT(tilePickerMouseDoubleClick(Tales::InputEventData)));
 
+    QObject::connect(ui->subtileEditorWidget,
+                     SIGNAL(valueModified()),
+                     this,
+                     SLOT(subtileEditorValueModified()));
+
     refreshDisplay();
 }
 
@@ -94,11 +99,15 @@ void TalesQtTileMapEditorWidget::refreshDisplay() {
     tileMapEditor_.drawTilePicker(g2);
     ui->tilePickerPreviewLabel->setPixmap(
                 TalesQtFormatConversion::graphicToPixmap(g2));
+
+    ui->subtileEditorWidget->setTile(
+                tileMapEditor_.currentTile());
 }
 
 void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
 {
     tileMapEditor_.changeTileMap(index);
+
     refreshDisplay();
 }
 
@@ -159,6 +168,10 @@ void TalesQtTileMapEditorWidget::tilePickerMouseRelease(Tales::InputEventData da
 
 void TalesQtTileMapEditorWidget::tilePickerMouseDoubleClick(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMouseDoubleClick(data);
+    refreshDisplay();
+}
+
+void TalesQtTileMapEditorWidget::subtileEditorValueModified() {
     refreshDisplay();
 }
 

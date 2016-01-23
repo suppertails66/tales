@@ -4,6 +4,7 @@
 
 #include "editors/BaseEditor.h"
 #include "editors/TileMapPickerScene.h"
+#include "editors/GraphicTilePickerScene.h"
 #include "gamedata/EditableTileMaps.h"
 #include "gamedata/EditableLevelGraphicsData.h"
 #include "gamedata/EditableStandardPalettes.h"
@@ -53,7 +54,7 @@ public:
    * Selects the tilemap at the given index.
    * @param index New tilemap index.
    */
-  int changeTileMap(int index);
+  void changeTileMap(int index);
   
   /**
    * Returns name of the tilemap at the given index.
@@ -61,6 +62,18 @@ public:
    * @return Name of the tilemap at the given index.
    */
   std::string nameOfTileMap(int index);
+  
+  /**
+   * Returns the current tilemap.
+   * @return The current tilemap.
+   */
+  TileMap& currentTileMap();
+  
+  /**
+   * Returns the currently selected tile of the tilemap.
+   * @return The currently selected tile of the tilemap.
+   */
+  TileReference& currentTile();
   
   /**
    * Getter.
@@ -84,6 +97,11 @@ public:
   void tilePickerMouseRelease(InputEventData eventData);
   void tilePickerMouseDoubleClick(InputEventData eventData);
 protected:
+  TileMapInfo currentTileMapInfo();
+  
+  void updateFromTileMap();
+  void updateFromTilePicker();
+
   EditableTileMaps& tileMaps_;
   EditableLevelGraphicsData& levelGraphicsData_;
   EditableStandardPalettes& standardPalettes_;
@@ -94,6 +112,8 @@ protected:
   int currentIndex_;
   
   TileMapPickerScene tileMapPreview_;
+  
+  GraphicTilePickerScene tilePickerPreview_;
   
   bool gridEnabled_;
 };
