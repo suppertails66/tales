@@ -57,7 +57,10 @@ TailsAdvEditor::TailsAdvEditor(const std::string& romFileName)
     musicEditor_(data_.musicAssignments(),
                  data_.radioMusic()),
     paletteCycleEditor_(data_.paletteCycles()),
-    enhancementsEditor_(metadata_) {
+    enhancementsEditor_(metadata_),
+    tileMapEditor_(data_.tileMaps(),
+                   data_.levelGraphicsData(),
+                   data_.standardPalettes()) {
   
   /* Expand the ROM regardless of anything else.
      This is theoretically temporary until some inconsistencies
@@ -249,6 +252,10 @@ PaletteCycleEditor& TailsAdvEditor::paletteCycleEditor() {
   
 EnhancementsEditor& TailsAdvEditor::enhancementsEditor() {
   return enhancementsEditor_;
+}
+  
+TileMapEditor& TailsAdvEditor::tileMapEditor() {
+  return tileMapEditor_;
 }
 
 

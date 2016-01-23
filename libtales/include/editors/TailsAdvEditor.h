@@ -18,6 +18,7 @@
 #include "editors/MusicEditor.h"
 #include "editors/PaletteCycleEditor.h"
 #include "editors/EnhancementsEditor.h"
+#include "editors/TileMapEditor.h"
 #include "structs/SaveHelper.h"
 #include "structs/LoadHelper.h"
 #include "structs/DataChunkID.h"
@@ -75,6 +76,8 @@ public:
   
   EnhancementsEditor& enhancementsEditor();
   
+  TileMapEditor& tileMapEditor();
+  
 protected:
 
   const static int versionNum_ = 4;
@@ -106,6 +109,8 @@ protected:
   PaletteCycleEditor paletteCycleEditor_;
   
   EnhancementsEditor enhancementsEditor_;
+  
+  TileMapEditor tileMapEditor_;
   
 };
 
