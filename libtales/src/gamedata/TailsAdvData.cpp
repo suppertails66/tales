@@ -41,6 +41,7 @@ TailsAdvData::TailsAdvData(LoadedROM& rom)
                       TailsAdvAddresses::NumTailsGraphicHeaders,
                       TailsAdvAddresses::RemoteRobotGraphicHeaders,
                       TailsAdvAddresses::NumRemoteRobotGraphicHeaders),
+    tileMaps_(rom),
     leafGraphicsTable_(rom,
                        TailsAdvAddresses::LeafGraphicsTable),
     waterSplashGraphicTable_(rom,
@@ -102,6 +103,7 @@ void TailsAdvData::save(std::string& data) {
   levelEffectsHeaders_.save(data);
   levelPaletteHeaders_.save(data);
   levelGraphicsData_.save(data);
+  tileMaps_.save(data);
   leafGraphicsTable_.save(data);
   waterSplashGraphicTable_.save(data);
   smokePuffGraphicTable_.save(data);
@@ -162,6 +164,9 @@ int TailsAdvData::load(const Tbyte* data) {
       break;
     case DataChunkIDs::levelGraphicsData:
       dataAddr += levelGraphicsData_.load(data + dataAddr);
+      break;
+    case DataChunkIDs::tileMaps:
+      dataAddr += tileMaps_.load(data + dataAddr);
       break;
     case DataChunkIDs::leafGraphicsTable:
       dataAddr += leafGraphicsTable_.load(data + dataAddr);
@@ -263,6 +268,7 @@ void TailsAdvData::exportToROM(WritableROM& rom) {
   levelEffectsHeaders_.exportToROM(rom);
   levelPaletteHeaders_.exportToROM(rom);
   levelGraphicsData_.exportToROM(rom);
+  tileMaps_.exportToROM(rom);
   leafGraphicsTable_.exportToROM(rom);
   waterSplashGraphicTable_.exportToROM(rom);
   smokePuffGraphicTable_.exportToROM(rom);
@@ -280,18 +286,18 @@ void TailsAdvData::exportToROM(WritableROM& rom) {
   levelObjectEntryGroups_.exportToROM(rom);
   mapData_.exportToROM(rom);
   
-  // If the ROM has been expanded, there are now 0x40 rather than 0x20
-  // valid banks. However, there are a handful of pieces of code that
-  // mask a value by 0x1F to obtain a bank number. We need to adjust these
-  // to 0x3F or the program will be unable to access the new banks.
-  rom.directWrite(andMaskExpandAdjustAddress1,
-                  andMaskExpandAdjustValue,
-                  1);
-  rom.directWrite(andMaskExpandAdjustAddress2,
-                  andMaskExpandAdjustValue,
-                  1);
-
-  
+  if (romExpanded_) {
+    // If the ROM has been expanded, there are now 0x40 rather than 0x20
+    // valid banks. However, there are a handful of pieces of code that
+    // mask a value by 0x1F to obtain a bank number. We need to adjust these
+    // to 0x3F or the program will be unable to access the new banks.
+    rom.directWrite(andMaskExpandAdjustAddress1,
+                    andMaskExpandAdjustValue,
+                    1);
+    rom.directWrite(andMaskExpandAdjustAddress2,
+                    andMaskExpandAdjustValue,
+                    1);
+  }
 }
 
 void TailsAdvData::exportToFile(LoadedROM& rom,
@@ -340,6 +346,10 @@ EditableLevelPaletteHeaders& TailsAdvData::levelPaletteHeaders() {
 
 EditableLevelGraphicsData& TailsAdvData::levelGraphicsData() {
   return levelGraphicsData_;
+}
+
+EditableTileMaps& TailsAdvData::tileMaps() {
+  return tileMaps_;
 }
 
 EditableLeafGraphicsTable& TailsAdvData::leafGraphicsTable() {

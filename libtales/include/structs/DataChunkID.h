@@ -6,7 +6,7 @@ namespace Tales {
 
 
 /**
- * Container for enum of rsource chunk IDs.
+ * Container for enum of resource chunk IDs.
  */
 class DataChunkIDs {
 public:
@@ -45,13 +45,13 @@ public:
     standardPalettes,
     warpDestinations,
     waterSplashGraphicTable,
-    
     tailsAdvEditorStart,
     tailsAdvEditorEnd,
     editorMetadata,
     levelMetadataEntry,
     areaMetadataEntry,
-    hackSettings
+    hackSettings,
+    tileMaps
   };
 };
 

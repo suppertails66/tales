@@ -10,6 +10,7 @@
 #include "gamedata/EditableLevelEffectsHeaders.h"
 #include "gamedata/EditableLevelPaletteHeaders.h"
 #include "gamedata/EditableLevelGraphicsData.h"
+#include "gamedata/EditableTileMaps.h"
 #include "gamedata/EditableLeafGraphicsTable.h"
 #include "gamedata/EditableWaterSplashGraphicTable.h"
 #include "gamedata/EditableSmokePuffGraphicTable.h"
@@ -115,6 +116,12 @@ public:
    * @returns Reference to levelGraphicsData_.
    */
   EditableLevelGraphicsData& levelGraphicsData();
+  
+  /**
+   * Accessor for tileMaps_.
+   * @returns Reference to tileMaps_.
+   */
+  EditableTileMaps& tileMaps();
   
   /**
    * Accessor for leafGraphicsTable_.
@@ -229,6 +236,7 @@ protected:
   EditableLevelEffectsHeaders levelEffectsHeaders_;
   EditableLevelPaletteHeaders levelPaletteHeaders_;
   EditableLevelGraphicsData levelGraphicsData_;
+  EditableTileMaps tileMaps_;
   EditableLeafGraphicsTable leafGraphicsTable_;
   EditableWaterSplashGraphicTable waterSplashGraphicTable_;
   EditableSmokePuffGraphicTable smokePuffGraphicTable_;
