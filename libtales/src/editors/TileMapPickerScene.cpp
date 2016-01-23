@@ -198,6 +198,16 @@ void TileMapPickerScene::pressMouse(InputEventData eventData) {
         drawPencil(posIndex);
       }
     }
+    else if (eventData.mouseRightButton()) {
+      int posIndex = drawPosToSelectableIndex(
+                        eventData.x(), eventData.y());
+      grabPencil(posIndex);
+    }
+    break;
+  case TileMapEditorTools::regular:
+    if (eventData.mouseLeftButton()) {
+      IndexedPickerScene::pressMouse(eventData);
+    }
     else if (eventData.mouseMiddleButton()) {
       int posIndex = drawPosToSelectableIndex(
                         eventData.x(), eventData.y());
@@ -224,7 +234,6 @@ void TileMapPickerScene::pressMouse(InputEventData eventData) {
         ref.setHorizontalMirroringOption(TileReference::horizontalMirror);
       }
     }
-    break;
   default:
     IndexedPickerScene::pressMouse(eventData);
     break;

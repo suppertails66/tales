@@ -14,6 +14,8 @@ public:
   TileMapEditorTools::TileMapEditorTool currentTool() const;
   void changeTool(TileMapEditorTools::TileMapEditorTool tool);
   
+  void resetTools();
+  
   int pencilDrawIndex() const;
   void setPencilDrawIndex(int pencilDrawIndex__);
 protected:

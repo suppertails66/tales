@@ -14,7 +14,14 @@ TileMapEditorTools::TileMapEditorTool TileMapEditorToolManager
 
 void TileMapEditorToolManager
     ::changeTool(TileMapEditorTools::TileMapEditorTool tool) {
+  resetTools();
+  
   currentTool_ = tool;
+}
+  
+void TileMapEditorToolManager
+    ::resetTools() {
+  pencilDrawIndex_ = 0;
 }
   
 int TileMapEditorToolManager

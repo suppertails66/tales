@@ -82,6 +82,8 @@ void TileMapEditor::changeTileMap(int index) {
   currentIndex_ = index;
   
   updateFromTileMap();
+  
+  toolManager_.resetTools();
 }
 
 bool TileMapEditor::currentEditingLimited() const {
@@ -137,6 +139,8 @@ TileMapEditorTools::TileMapEditorTool TileMapEditor::currentTool() const {
 
 void TileMapEditor::changeTool(TileMapEditorTools::TileMapEditorTool tool) {
   toolManager_.changeTool(tool);
+  updateFromTileMap();
+  updateFromTilePicker();
 }
   
 void TileMapEditor::tileMapEnter() {
