@@ -47,6 +47,7 @@ void TalesQtMainWindow
     ui->actionMusic_editor->setChecked(false);
     ui->actionPalette_cycle_editor->setChecked(false);
     ui->actionHacks_and_enhancements->setChecked(false);
+    ui->actionTilemap_editor->setChecked(false);
 
     switch (mode) {
     case TalesQtEditorModes::levelEditor:
@@ -81,6 +82,9 @@ void TalesQtMainWindow
         break;
     case TalesQtEditorModes::enhancementsEditor:
         ui->actionHacks_and_enhancements->setChecked(true);
+        break;
+    case TalesQtEditorModes::tileMapEditor:
+        ui->actionTilemap_editor->setChecked(true);
         break;
     default:
         break;
@@ -250,4 +254,9 @@ void TalesQtMainWindow::on_actionAbout_triggered(bool checked)
 {
     AboutDialog(appState_.editor().versionNum(),
                 this).exec();
+}
+
+void TalesQtMainWindow::on_actionTilemap_editor_triggered(bool checked)
+{
+    appState_.changeEditor(TalesQtEditorModes::tileMapEditor);
 }

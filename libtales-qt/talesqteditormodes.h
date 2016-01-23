@@ -16,7 +16,8 @@ public:
         powerUpEditor,
         musicEditor,
         paletteCycleEditor,
-        enhancementsEditor
+        enhancementsEditor,
+        tileMapEditor
     };
 
 protected:

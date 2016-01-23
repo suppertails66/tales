@@ -34,6 +34,7 @@ void EditorSelectBar::raiseAllButtons() {
     ui->musicButton->setChecked(false);
     ui->paletteCycleButton->setChecked(false);
     ui->enhancementsButton->setChecked(false);
+    ui->tileMapButton->setChecked(false);
 }
 
 void EditorSelectBar
@@ -73,6 +74,9 @@ void EditorSelectBar
         break;
     case TalesQtEditorModes::enhancementsEditor:
         ui->enhancementsButton->setChecked(true);
+        break;
+    case TalesQtEditorModes::tileMapEditor:
+        ui->tileMapButton->setChecked(true);
         break;
     default:
         break;
@@ -136,4 +140,9 @@ void EditorSelectBar::on_paletteCycleButton_clicked(bool checked)
 void EditorSelectBar::on_enhancementsButton_clicked(bool checked)
 {
     appState_.changeEditor(TalesQtEditorModes::enhancementsEditor);
+}
+
+void EditorSelectBar::on_tileMapButton_clicked(bool checked)
+{
+    appState_.changeEditor(TalesQtEditorModes::tileMapEditor);
 }

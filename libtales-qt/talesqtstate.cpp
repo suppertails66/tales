@@ -11,6 +11,7 @@
 #include "talesqtmusiceditorwidget.h"
 #include "talesqtpalettecycleeditorwidget.h"
 #include "talesqtenhancementseditor.h"
+#include "talesqttilemapeditorwidget.h"
 #include <iostream>
 
 using namespace Tales;
@@ -137,6 +138,15 @@ void TalesQtState::changeEditor(TalesQtEditorModes::TalesQtEditorMode editorMode
     {
         TalesQtEnhancementsEditor* widget
                 = (TalesQtEnhancementsEditor*)
+                    (mainWindow_->mainEditorWidgets()
+                        .stackedWidget().currentWidget());
+        widget->refreshDisplay();
+        break;
+    }
+    case TalesQtEditorModes::tileMapEditor:
+    {
+        TalesQtTileMapEditorWidget* widget
+                = (TalesQtTileMapEditorWidget*)
                     (mainWindow_->mainEditorWidgets()
                         .stackedWidget().currentWidget());
         widget->refreshDisplay();

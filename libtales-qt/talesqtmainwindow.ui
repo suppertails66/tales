@@ -53,7 +53,7 @@
      <x>0</x>
      <y>0</y>
      <width>1059</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -81,6 +81,7 @@
     <addaction name="actionMusic_editor"/>
     <addaction name="actionPower_up_editor"/>
     <addaction name="actionHacks_and_enhancements"/>
+    <addaction name="actionTilemap_editor"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -265,6 +266,17 @@
   <action name="actionAbout">
    <property name="text">
     <string>About...</string>
+   </property>
+  </action>
+  <action name="actionTilemap_editor">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tilemap editor</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+T</string>
    </property>
   </action>
  </widget>

@@ -11,6 +11,7 @@
 #include "talesqtmusiceditorwidget.h"
 #include "talesqtpalettecycleeditorwidget.h"
 #include "talesqtenhancementseditor.h"
+#include "talesqttilemapeditorwidget.h"
 
 MainEditorWidgets::MainEditorWidgets(QWidget *parent) :
     QWidget(parent),
@@ -41,6 +42,8 @@ MainEditorWidgets::MainEditorWidgets(QWidget *parent) :
             = new TalesQtPaletteCycleEditorWidget();
     TalesQtEnhancementsEditor* enhancementsEditor
             = new TalesQtEnhancementsEditor();
+    TalesQtTileMapEditorWidget* tileMapEditor
+            = new TalesQtTileMapEditorWidget();
 
     // TODO: whyyyy won't qt let me remove the default pages
     // in the form editor
@@ -59,6 +62,7 @@ MainEditorWidgets::MainEditorWidgets(QWidget *parent) :
     ui->stackedWidget->addWidget(musicEditor);
     ui->stackedWidget->addWidget(paletteCycleEditor);
     ui->stackedWidget->addWidget(enhancementsEditor);
+    ui->stackedWidget->addWidget(tileMapEditor);
 
     // Load initial data
 //    levelEditor->reloadAndRefresh();

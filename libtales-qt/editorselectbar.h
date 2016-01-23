@@ -45,6 +45,8 @@ private slots:
 
     void on_enhancementsButton_clicked(bool checked);
 
+    void on_tileMapButton_clicked(bool checked);
+
 private:
     Ui::EditorSelectBar *ui;
 };
