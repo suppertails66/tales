@@ -1,4 +1,4 @@
-#include "editors/TileMapInfo.h"
+#include "gamedata/TileMapInfo.h"
 
 namespace Tales {
 
@@ -20,6 +20,7 @@ TileMapInfo::TileMapInfo(Taddress address__,
             int graphicNum__,
             int offset__,
             int paletteNum__,
+            std::string name__,
             Tbyte upperByte__)
   : address(address__),
     w(w__),
@@ -28,6 +29,7 @@ TileMapInfo::TileMapInfo(Taddress address__,
     graphicNum(graphicNum__),
     offset(offset__),
     paletteNum(paletteNum__),
+    name(name__),
     upperByte(upperByte__) { };
 
 
