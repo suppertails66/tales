@@ -3,6 +3,7 @@
 #include "util/ByteConversion.h"
 #include "util/ByteSizes.h"
 #include <cstdlib>
+#include <iostream>
 
 using namespace Luncheon;
 
@@ -11,11 +12,11 @@ namespace Tales {
 
 TileMap::TileMap()
   : tileData_(NULL),
-	format_(TileMap::twoBytesPerTile),
-	w_(0),
-	h_(0),
-	lowerLimit_(defaultLowerLimit_),
-	upperLimit_(defaultUpperLimit_) { };
+	  format_(TileMap::twoBytesPerTile),
+	  w_(0),
+	  h_(0),
+	  lowerLimit_(defaultLowerLimit_),
+	  upperLimit_(defaultUpperLimit_) { };
 
 TileMap::TileMap(const Tbyte* data,
 	  TileMapFormat format__,
@@ -45,7 +46,8 @@ TileMap::TileMap(const Tbyte* data,
 }
 
 TileMap::TileMap(const TileMap& t)
-  : format_(t.format_),
+  : tileData_(NULL),
+    format_(t.format_),
     w_(t.w_),
     h_(t.h_),
     lowerLimit_(t.lowerLimit_),
@@ -96,13 +98,13 @@ int TileMap::readFromData(const Tbyte* data,
   // Read tile identifiers
   for (int j = 0; j < h_; j++) {
     for (int i = 0; i < w_; i++) {
+	    // Place in array
 	    tileData_[i][j] = TileReference(ByteConversion::fromBytes(
 	                                data + byteCount,
 								    ByteSizes::uint16Size,
 								    EndiannessTypes::little,
 								    SignednessTypes::nosign));
         
-	    // Place in array
 	    byteCount += ByteSizes::uint16Size;
 	  }
   }
@@ -169,7 +171,7 @@ void TileMap::writeToData(Tbyte* data) const {
 	        = tileData_[i][j].toRawIdentifier();
 	        
 	      // Write low byte to data
-	      ByteConversion::toBytes(identifier & 0x00FF,
+	      ByteConversion::toBytes(identifier & 0xFF,
 	                              data + byteCount,
 	                              ByteSizes::uint8Size,
 	                              EndiannessTypes::little,
@@ -392,13 +394,17 @@ void TileMap::setUpperLimit(int upperLimit__) {
 }
 
 void TileMap::destroyTileData() {
+  if (tileData_ == NULL) {
+    return;
+  }
+  
   // Delete column arrays
   for (int i = 0; i < w_; i++) {
-    delete tileData_[i];
+    delete[] tileData_[i];
   }
   
   // Delete container array
-  delete tileData_;
+  delete[] tileData_;
 }
 
 void TileMap::reinitializeTileData(int w__, int h__) {
