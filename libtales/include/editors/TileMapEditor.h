@@ -6,6 +6,9 @@
 #include "gamedata/EditableTileMaps.h"
 #include "gamedata/EditableLevelGraphicsData.h"
 #include "gamedata/EditableStandardPalettes.h"
+#include "gamedata/TileMapInfos.h"
+#include "structs/Graphic.h"
+#include "structs/InputEventData.h"
 
 namespace Tales {
 
@@ -28,6 +31,18 @@ public:
   virtual void refresh();
   
   /**
+   * Draws the tilemap preview.
+   * @param dst Graphic to draw to.
+   */
+  void drawTileMapPreview(Graphic& dst);
+  
+  /**
+   * Draws the tile picker.
+   * @param dst Graphic to draw to.
+   */
+  void drawTilePicker(Graphic& dst);
+  
+  /**
    * Returns number of selectable tilemap indices.
    * @return Number of selectable tilemap indices.
    */
@@ -40,9 +55,30 @@ public:
   int changeTileMap(int index);
   
   /**
+   * Returns name of the tilemap at the given index.
+   * @param index Index of the tilemap.
+   * @return Name of the tilemap at the given index.
+   */
+  std::string nameOfTileMap(int index);
+  
+  /**
    * Getter.
    */
   int currentIndex();
+  
+  void tileMapEnter();
+  void tileMapExit();
+  void tileMapMouseMove(InputEventData eventData);
+  void tileMapMousePress(InputEventData eventData);
+  void tileMapMouseRelease(InputEventData eventData);
+  void tileMapMouseDoubleClick(InputEventData eventData);
+  
+  void tilePickerEnter();
+  void tilePickerExit();
+  void tilePickerMouseMove(InputEventData eventData);
+  void tilePickerMousePress(InputEventData eventData);
+  void tilePickerMouseRelease(InputEventData eventData);
+  void tilePickerMouseDoubleClick(InputEventData eventData);
 protected:
   EditableTileMaps& tileMaps_;
   EditableLevelGraphicsData& levelGraphicsData_;
