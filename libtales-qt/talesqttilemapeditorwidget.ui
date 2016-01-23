@@ -78,6 +78,15 @@
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="GenericEventLabel" name="tileMapPreviewLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="mouseTracking">
+              <bool>true</bool>
+             </property>
              <property name="text">
               <string>tilemap preview</string>
              </property>
@@ -88,6 +97,15 @@
            </item>
            <item>
             <widget class="GenericEventLabel" name="tilePickerPreviewLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="mouseTracking">
+              <bool>true</bool>
+             </property>
              <property name="text">
               <string>tile picker</string>
              </property>

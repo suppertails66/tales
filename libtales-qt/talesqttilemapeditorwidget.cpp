@@ -102,48 +102,60 @@ void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
 
 void TalesQtTileMapEditorWidget::tileMapEnter() {
     tileMapEditor_.tileMapEnter();
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tileMapLeave() {
     tileMapEditor_.tileMapExit();
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tileMapMouseMove(Tales::InputEventData data) {
     tileMapEditor_.tileMapMouseMove(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tileMapMousePress(Tales::InputEventData data) {
     tileMapEditor_.tileMapMousePress(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tileMapMouseRelease(Tales::InputEventData data) {
     tileMapEditor_.tileMapMouseRelease(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tileMapMouseDoubleClick(Tales::InputEventData data) {
     tileMapEditor_.tileMapMouseDoubleClick(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerEnter() {
     tileMapEditor_.tilePickerEnter();
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerLeave() {
     tileMapEditor_.tilePickerExit();
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerMouseMove(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMouseMove(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerMousePress(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMousePress(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerMouseRelease(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMouseRelease(data);
+    refreshDisplay();
 }
 
 void TalesQtTileMapEditorWidget::tilePickerMouseDoubleClick(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMouseDoubleClick(data);
+    refreshDisplay();
 }
