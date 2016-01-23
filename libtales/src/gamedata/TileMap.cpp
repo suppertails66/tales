@@ -22,11 +22,11 @@ TileMap::TileMap(const Tbyte* data,
 	  int w__,
 	  int h__)
   : tileData_(NULL),
-	format_(format__),
-	w_(w__),
-	h_(h__),
-	lowerLimit_(defaultLowerLimit_),
-	upperLimit_(defaultUpperLimit_) {
+	  format_(format__),
+	  w_(w__),
+	  h_(h__),
+	  lowerLimit_(defaultLowerLimit_),
+	  upperLimit_(defaultUpperLimit_) {
   readFromData(data, format_, w_, h_);
 }
 
@@ -35,12 +35,44 @@ TileMap::TileMap(const Tbyte* data,
 	  int w__,
 	  int h__,
 	  Tbyte upperByte__)
-  : format_(format__),
+  : tileData_(NULL),
+    format_(format__),
     w_(w__),
-	h_(h__),
+	  h_(h__),
     lowerLimit_(defaultLowerLimit_),
     upperLimit_(defaultUpperLimit_) {
   readFromData(data, format_, w_, h_, upperByte__);
+}
+
+TileMap::TileMap(const TileMap& t)
+  : format_(t.format_),
+    w_(t.w_),
+    h_(t.h_),
+    lowerLimit_(t.lowerLimit_),
+    upperLimit_(t.upperLimit_) {
+  // Copy tile data
+  reinitializeTileData(w_, h_);
+  for (int j = 0; j < h_; j++) {
+    for (int i = 0; i < w_; i++) {
+      tileData_[i][j] = t.tileData_[i][j];
+    }
+  }
+}
+
+TileMap& TileMap::operator=(const TileMap& t) {
+  format_ = t.format_;
+  w_ = t.w_;
+  h_ = t.h_;
+  lowerLimit_ = t.lowerLimit_;
+  upperLimit_ = t.upperLimit_;
+  
+  // Copy tile data
+  reinitializeTileData(w_, h_);
+  for (int j = 0; j < h_; j++) {
+    for (int i = 0; i < w_; i++) {
+      tileData_[i][j] = t.tileData_[i][j];
+    }
+  }
 }
 
 TileMap::~TileMap() {

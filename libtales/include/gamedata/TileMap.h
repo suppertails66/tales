@@ -25,8 +25,8 @@ public:
    * mirrored, having palette flags set, etc.
    */
   enum TileMapFormat {
-	oneBytePerTile,
-	twoBytesPerTile
+	  oneBytePerTile,
+	  twoBytesPerTile
   };
 
   /**
@@ -59,6 +59,16 @@ public:
           int w__,
 		  int h__,
 		  Tbyte upperByte__);
+  
+  /**
+   * Copy constructor.
+   */
+  TileMap(const TileMap& t);
+  
+  /**
+   * Copy assignment.
+   */
+  TileMap& operator=(const TileMap& t);
   
   /**
    * Destructor.
