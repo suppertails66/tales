@@ -3,6 +3,7 @@
 
 
 #include "editors/BaseEditor.h"
+#include "editors/TileMapPickerScene.h"
 #include "gamedata/EditableTileMaps.h"
 #include "gamedata/EditableLevelGraphicsData.h"
 #include "gamedata/EditableStandardPalettes.h"
@@ -88,6 +89,8 @@ protected:
    * Index of the currently selected tilemap.
    */
   int currentIndex_;
+  
+  TileMapPickerScene tileMapPreview_;
 };
 
 
