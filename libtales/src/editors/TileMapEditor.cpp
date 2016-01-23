@@ -11,7 +11,8 @@ TileMapEditor::TileMapEditor(EditableTileMaps& tileMaps__,
   : tileMaps_(tileMaps__),
     levelGraphicsData_(levelGraphicsData__),
     standardPalettes_(standardPalettes__),
-    currentIndex_(0) {
+    currentIndex_(0),
+    gridEnabled_(true) {
   changeTileMap(0);
 }
 
@@ -54,6 +55,7 @@ int TileMapEditor::changeTileMap(int index) {
                         standardPalettes_.palette(
                           info.paletteNum),
                         info.offset);
+  tileMapPreview_.setGridLayerEnabled(gridEnabled_);
   tileMapPreview_.setSceneScale(2.00);
   
   currentIndex_ = index;
@@ -65,6 +67,15 @@ std::string TileMapEditor::nameOfTileMap(int index) {
   
 int TileMapEditor::currentIndex() {
   return currentIndex_;
+}
+
+bool TileMapEditor::gridEnabled() const {
+  return gridEnabled_;
+}
+  
+void TileMapEditor::setGridEnabled(bool gridEnabled__) {
+  gridEnabled_ = gridEnabled__;
+  tileMapPreview_.setGridLayerEnabled(gridEnabled__);
 }
   
 void TileMapEditor::tileMapEnter() {

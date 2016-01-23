@@ -67,6 +67,9 @@ public:
    */
   int currentIndex();
   
+  bool gridEnabled() const;
+  void setGridEnabled(bool gridEnabled__);
+  
   void tileMapEnter();
   void tileMapExit();
   void tileMapMouseMove(InputEventData eventData);
@@ -91,6 +94,8 @@ protected:
   int currentIndex_;
   
   TileMapPickerScene tileMapPreview_;
+  
+  bool gridEnabled_;
 };
 
 

@@ -14,6 +14,8 @@ TalesQtTileMapEditorWidget::TalesQtTileMapEditorWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->gridCheckBox->setChecked(tileMapEditor_.gridEnabled());
+
     ui->subtileEditorWidget->setNameLabel("Selected tile");
 
     for (int i = 0; i < tileMapEditor_.numTileMaps(); i++) {
@@ -157,5 +159,11 @@ void TalesQtTileMapEditorWidget::tilePickerMouseRelease(Tales::InputEventData da
 
 void TalesQtTileMapEditorWidget::tilePickerMouseDoubleClick(Tales::InputEventData data) {
     tileMapEditor_.tilePickerMouseDoubleClick(data);
+    refreshDisplay();
+}
+
+void TalesQtTileMapEditorWidget::on_gridCheckBox_clicked(bool checked)
+{
+    tileMapEditor_.setGridEnabled(checked);
     refreshDisplay();
 }

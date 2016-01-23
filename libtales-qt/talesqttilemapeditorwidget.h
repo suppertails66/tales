@@ -39,6 +39,8 @@ private slots:
     void tilePickerMouseRelease(Tales::InputEventData data);
     void tilePickerMouseDoubleClick(Tales::InputEventData data);
 
+    void on_gridCheckBox_clicked(bool checked);
+
 private:
     Ui::TalesQtTileMapEditorWidget *ui;
 };

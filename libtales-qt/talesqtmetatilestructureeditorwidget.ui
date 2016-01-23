@@ -125,28 +125,22 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="SubtileEditorWidget" name="ulSubtileWidget">
+         <widget class="SubtileEditorWidget" name="ulSubtileWidget" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="SubtileEditorWidget" name="llSubtileWidget">
+         <widget class="SubtileEditorWidget" name="llSubtileWidget" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
           </property>
          </widget>
         </item>
@@ -316,28 +310,22 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="SubtileEditorWidget" name="urSubtileWidget">
+         <widget class="SubtileEditorWidget" name="urSubtileWidget" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="SubtileEditorWidget" name="lrSubtileWidget">
+         <widget class="SubtileEditorWidget" name="lrSubtileWidget" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
           </property>
          </widget>
         </item>
@@ -546,15 +534,15 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>SubtileEditorWidget</class>
+   <extends>QWidget</extends>
+   <header>subtileeditorwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>GenericEventLabel</class>
    <extends>QLabel</extends>
    <header>genericeventlabel.h</header>
-  </customwidget>
-  <customwidget>
-   <class>SubtileEditorWidget</class>
-   <extends>QFrame</extends>
-   <header>subtileeditorwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

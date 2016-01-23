@@ -131,6 +131,10 @@ void IndexedPickerScene::highlightIndex(int index) {
   highlightedSelectableBoxEnabled_ = true;
   highlightedSelectableIndex_ = index;
 }
+  
+bool IndexedPickerScene::gridLayerEnabled() const {
+  return gridLayerEnabled_;
+}
  
 void IndexedPickerScene::setGridLayerEnabled(bool gridLayerEnabled__) {
   gridLayerEnabled_ = gridLayerEnabled__;

@@ -41,6 +41,7 @@ public:
   void pickIndex(int index);
   void highlightIndex(int index);
   
+  bool gridLayerEnabled() const;
   void setGridLayerEnabled(bool gridLayerEnabled__);
   
   double sceneScale();
