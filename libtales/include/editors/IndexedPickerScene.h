@@ -38,6 +38,9 @@ public:
   void clearHighlightedBox();
   void clearPickedBox();
   
+  void enableHighlightedBox();
+  void enablePickedBox();
+  
   void pickIndex(int index);
   void highlightIndex(int index);
   

@@ -45,6 +45,10 @@ private slots:
 
     void on_gridCheckBox_clicked(bool checked);
 
+    void on_regularButton_clicked(bool checked);
+
+    void on_pencilButton_clicked(bool checked);
+
 private:
     Ui::TalesQtTileMapEditorWidget *ui;
 };

@@ -13,8 +13,13 @@ public:
   
   TileMapEditorTools::TileMapEditorTool currentTool() const;
   void changeTool(TileMapEditorTools::TileMapEditorTool tool);
+  
+  int pencilDrawIndex() const;
+  void setPencilDrawIndex(int pencilDrawIndex__);
 protected:
   TileMapEditorTools::TileMapEditorTool currentTool_;
+  
+  int pencilDrawIndex_;
 };
 
 

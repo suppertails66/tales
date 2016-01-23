@@ -149,6 +149,14 @@ void IndexedPickerScene::clearPickedBox() {
   pickedSelectableBoxEnabled_ = false;
 }
   
+void IndexedPickerScene::enableHighlightedBox() {
+  highlightedSelectableBoxEnabled_ = true;
+}
+
+void IndexedPickerScene::enablePickedBox() {
+  pickedSelectableBoxEnabled_ = true;
+}
+  
 void IndexedPickerScene::pickIndex(int index) {
   pickedSelectableBoxEnabled_ = true;
   pickedSelectableIndex_ = index;

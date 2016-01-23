@@ -16,10 +16,18 @@ public:
   
   GraphicTilePickerScene(TileMapEditorToolManager& toolManager__,
                          GGTileSet& graphic__,
-                         GGPalette& palette__);
+                         GGPalette& palette__,
+                         int offset__);
   
   virtual void renderNative(Graphic& dst,
                             Box srcbox);
+  
+  virtual void enterMouse();
+  virtual void exitMouse();
+  virtual void moveMouse(InputEventData eventData);
+  virtual void pressMouse(InputEventData eventData);
+  virtual void releaseMouse(InputEventData eventData);
+  virtual void doubleClickMouse(InputEventData eventData);
                             
   int nativeW();
   int nativeH();
@@ -29,6 +37,7 @@ protected:
   TileMapEditorToolManager* toolManager_;
   GGTileSet* graphic_;
   GGPalette* palette_;
+  int offset_;
   
 };
 

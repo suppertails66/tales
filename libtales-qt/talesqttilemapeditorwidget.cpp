@@ -195,3 +195,15 @@ void TalesQtTileMapEditorWidget::on_gridCheckBox_clicked(bool checked)
     tileMapEditor_.setGridEnabled(checked);
     refreshDisplay();
 }
+
+void TalesQtTileMapEditorWidget::on_regularButton_clicked(bool checked)
+{
+    tileMapEditor_.changeTool(TileMapEditorTools::regular);
+    refreshDisplay();
+}
+
+void TalesQtTileMapEditorWidget::on_pencilButton_clicked(bool checked)
+{
+    tileMapEditor_.changeTool(TileMapEditorTools::pencil);
+    refreshDisplay();
+}

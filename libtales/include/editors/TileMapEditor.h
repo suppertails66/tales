@@ -90,6 +90,9 @@ public:
   bool gridEnabled() const;
   void setGridEnabled(bool gridEnabled__);
   
+  TileMapEditorTools::TileMapEditorTool currentTool() const;
+  void changeTool(TileMapEditorTools::TileMapEditorTool tool);
+  
   void tileMapEnter();
   void tileMapExit();
   void tileMapMouseMove(InputEventData eventData);

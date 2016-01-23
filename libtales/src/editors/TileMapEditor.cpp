@@ -74,7 +74,8 @@ void TileMapEditor::changeTileMap(int index) {
                         levelGraphicsData_.compressedGraphic(
                           info.graphicNum),
                         standardPalettes_.palette(
-                          info.paletteNum));
+                          info.paletteNum),
+                        info.offset);
   tilePickerPreview_.setGridLayerEnabled(gridEnabled_);
   tilePickerPreview_.setSceneScale(2.00);
   
@@ -130,6 +131,14 @@ void TileMapEditor::setGridEnabled(bool gridEnabled__) {
   tilePickerPreview_.setGridLayerEnabled(gridEnabled__);
 }
   
+TileMapEditorTools::TileMapEditorTool TileMapEditor::currentTool() const {
+  return toolManager_.currentTool();
+}
+
+void TileMapEditor::changeTool(TileMapEditorTools::TileMapEditorTool tool) {
+  toolManager_.changeTool(tool);
+}
+  
 void TileMapEditor::tileMapEnter() {
   tileMapPreview_.enterMouse();
 //  updateFromTileMap();
@@ -177,6 +186,7 @@ void TileMapEditor::tilePickerMouseMove(InputEventData eventData) {
 
 void TileMapEditor::tilePickerMousePress(InputEventData eventData) {
   tilePickerPreview_.pressMouse(eventData);
+  
   updateFromTilePicker();
 }
 
@@ -191,13 +201,27 @@ void TileMapEditor::tilePickerMouseDoubleClick(InputEventData eventData) {
 }
 
 void TileMapEditor::updateFromTileMap() {
-  tilePickerPreview_.pickIndex(currentTile().tileNum()
-                                      + currentTileMapInfo().offset);
+  switch (toolManager_.currentTool()) {
+  case TileMapEditorTools::pencil:
+    tilePickerPreview_.pickIndex(
+      toolManager_.pencilDrawIndex() + currentTileMapInfo().offset);
+    break;
+  default:
+    tilePickerPreview_.pickIndex(currentTile().tileNum()
+                                        + currentTileMapInfo().offset);
+    break;
+  }
 }
   
 void TileMapEditor::updateFromTilePicker() {
-  currentTile().setTileNum(
-    tilePickerPreview_.pickedIndex() - currentTileMapInfo().offset);
+  switch (toolManager_.currentTool()) {
+  case TileMapEditorTools::pencil:
+    break;
+  default:
+    currentTile().setTileNum(
+      tilePickerPreview_.pickedIndex() - currentTileMapInfo().offset);
+    break;
+  }
 }
 
 

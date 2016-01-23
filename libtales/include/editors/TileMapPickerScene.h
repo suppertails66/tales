@@ -21,12 +21,25 @@ public:
                      GGPalette& palette0__,
                      int offset__);
   
+  virtual void enterMouse();
+  virtual void exitMouse();
+  virtual void moveMouse(InputEventData eventData);
+  virtual void pressMouse(InputEventData eventData);
+  virtual void releaseMouse(InputEventData eventData);
+  virtual void doubleClickMouse(InputEventData eventData);
+  
   virtual void renderNative(Graphic& dst,
                             Box srcbox);
                             
   int nativeW();
   int nativeH();
 protected:
+  int indexToTileX(int index) const;
+  int indexToTileY(int index) const;
+  
+  void drawPencil(int posIndex);
+  void grabPencil(int posIndex);
+
   TileMapEditorToolManager* toolManager_;
   TileMap* tileMap_;
   GGTileSet* graphic_;
