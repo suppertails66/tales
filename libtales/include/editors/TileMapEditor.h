@@ -57,11 +57,17 @@ public:
   void changeTileMap(int index);
   
   /**
+   * Returns true if editing is limited to tile number for the current tilemap.
+   * @return True if editing is limited to tile number for the current tilemap.
+   */
+  bool currentEditingLimited() const;
+  
+  /**
    * Returns name of the tilemap at the given index.
    * @param index Index of the tilemap.
    * @return Name of the tilemap at the given index.
    */
-  std::string nameOfTileMap(int index);
+  std::string nameOfTileMap(int index) const;
   
   /**
    * Returns the current tilemap.
@@ -78,7 +84,7 @@ public:
   /**
    * Getter.
    */
-  int currentIndex();
+  int currentIndex() const;
   
   bool gridEnabled() const;
   void setGridEnabled(bool gridEnabled__);
@@ -97,7 +103,7 @@ public:
   void tilePickerMouseRelease(InputEventData eventData);
   void tilePickerMouseDoubleClick(InputEventData eventData);
 protected:
-  TileMapInfo currentTileMapInfo();
+  TileMapInfo currentTileMapInfo() const;
   
   void updateFromTileMap();
   void updateFromTilePicker();

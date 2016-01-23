@@ -108,6 +108,13 @@ void TalesQtTileMapEditorWidget::on_tileMapComboBox_activated(int index)
 {
     tileMapEditor_.changeTileMap(index);
 
+    if (tileMapEditor_.currentEditingLimited()) {
+        ui->subtileEditorWidget->disableAllButTileNum();
+    }
+    else {
+        ui->subtileEditorWidget->enableAll();
+    }
+
     refreshDisplay();
 }
 

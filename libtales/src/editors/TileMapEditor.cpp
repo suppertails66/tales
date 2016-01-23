@@ -77,9 +77,25 @@ void TileMapEditor::changeTileMap(int index) {
   tilePickerPreview_.setSceneScale(2.00);
   
   currentIndex_ = index;
+  
+  updateFromTileMap();
 }
 
-std::string TileMapEditor::nameOfTileMap(int index) {
+bool TileMapEditor::currentEditingLimited() const {
+  switch (currentTileMapInfo().format) {
+  case TileMap::oneBytePerTile:
+    return true;
+    break;
+  case TileMap::twoBytesPerTile:
+    return false;
+    break;
+  default:
+    return false;
+    break;
+  }
+}
+
+std::string TileMapEditor::nameOfTileMap(int index) const {
   return (TileMapInfos::tileMapInfo(index).name);
 }
 
@@ -94,11 +110,11 @@ TileReference& TileMapEditor::currentTile() {
                               / currentTileMapInfo().w);
 }
 
-TileMapInfo TileMapEditor::currentTileMapInfo() {
+TileMapInfo TileMapEditor::currentTileMapInfo() const {
   return TileMapInfos::tileMapInfo(currentIndex_);
 }
   
-int TileMapEditor::currentIndex() {
+int TileMapEditor::currentIndex() const {
   return currentIndex_;
 }
 

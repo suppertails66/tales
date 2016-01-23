@@ -83,6 +83,21 @@ void IndexedPickerScene::exitMouse() {
 }
 
 void IndexedPickerScene::moveMouse(InputEventData eventData) {
+  int posIndex = drawPosToSelectableIndex(
+                                  eventData.x(), eventData.y());
+  
+  if (posIndex >= totalSelectables_) {
+    highlightedSelectableBoxEnabled_ = false;
+    return;
+//    pickedSelectableIndex_ = totalSelectables_ - 1;
+  }
+  
+  if (posIndex < 0) {
+    highlightedSelectableBoxEnabled_ = false;
+    return;
+//    pickedSelectableIndex_ = 0;
+  }
+  
   highlightedSelectableBoxEnabled_ = true;
   highlightedSelectableIndex_ = drawPosToSelectableIndex(
                                   eventData.x(), eventData.y());
@@ -93,9 +108,21 @@ void IndexedPickerScene::pressMouse(InputEventData eventData) {
     return;
   }
   
-  pickedSelectableBoxEnabled_ = true;
-  pickedSelectableIndex_ = drawPosToSelectableIndex(
+  int posIndex = drawPosToSelectableIndex(
                                   eventData.x(), eventData.y());
+  
+  if (posIndex >= totalSelectables_) {
+    return;
+//    pickedSelectableIndex_ = totalSelectables_ - 1;
+  }
+  
+  if (posIndex < 0) {
+    return;
+//    pickedSelectableIndex_ = 0;
+  }
+  
+  pickedSelectableBoxEnabled_ = true;
+  pickedSelectableIndex_ = posIndex;
 }
 
 void IndexedPickerScene::releaseMouse(InputEventData eventData) {

@@ -24,6 +24,9 @@ public:
 
     void setNameLabel(const std::string& nameLabel);
 
+    void enableAll();
+    void disableAllButTileNum();
+
 protected:
     Tales::TileReference* tile_;
 

@@ -57,6 +57,18 @@ void SubtileEditorWidget::refreshDisplay() {
                     : false);
 }
 
+void SubtileEditorWidget::enableAll() {
+    ui->paletteWidget->setEnabled(true);
+    ui->priorityWidget->setEnabled(true);
+    ui->flipWidget->setEnabled(true);
+}
+
+void SubtileEditorWidget::disableAllButTileNum() {
+    ui->paletteWidget->setEnabled(false);
+    ui->priorityWidget->setEnabled(false);
+    ui->flipWidget->setEnabled(false);
+}
+
 void SubtileEditorWidget::setNameLabel(const std::string& nameLabel) {
     ui->nameLabel->setText(nameLabel.c_str());
 }
