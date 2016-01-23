@@ -5,6 +5,7 @@
 #include "gamedata/TileMap.h"
 #include "structs/Tbyte.h"
 #include "structs/Taddress.h"
+#include <string>
 
 namespace Tales {
 
@@ -19,6 +20,7 @@ public:
               int graphicNum__,
               int offset__,
               int paletteNum__,
+              std::string name__,
               Tbyte upperByte__ = 0);
               
   Taddress address;
@@ -28,6 +30,7 @@ public:
   int graphicNum;
   int offset;
   int paletteNum;
+  std::string name;
   Tbyte upperByte;
   
 /*protected:
