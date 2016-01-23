@@ -148,7 +148,7 @@ int TileMap::readFromData(const Tbyte* data,
 								                  SignednessTypes::nosign);
         
       // Incorporate upper byte
-      identifier |= (((unsigned int)(upperByte__)) << ByteSizes::uint8Size);
+      identifier |= (((unsigned int)(upperByte__)) << 8);
 	    
 	    // Place in array
 	    tileData_[i][j] = TileReference(identifier);
