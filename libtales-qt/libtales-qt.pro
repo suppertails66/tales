@@ -63,7 +63,8 @@ SOURCES += main.cpp\
     talesqtenhancementseditor.cpp \
     confirmationdialog.cpp \
     genericerrordialog.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    talesqttilemapeditorwidget.cpp
 
 QMAKE_CXXFLAGS += -std=gnu++11
 
@@ -117,7 +118,8 @@ HEADERS  += talesqtmainwindow.h \
     talesqtenhancementseditor.h \
     confirmationdialog.h \
     genericerrordialog.h \
-    aboutdialog.h
+    aboutdialog.h \
+    talesqttilemapeditorwidget.h
 
 FORMS    += talesqtmainwindow.ui \
     editorselectbar.ui \
@@ -154,7 +156,8 @@ FORMS    += talesqtmainwindow.ui \
     talesqtenhancementseditor.ui \
     confirmationdialog.ui \
     genericerrordialog.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    talesqttilemapeditorwidget.ui
 
 RESOURCES += \
     resources.qrc
