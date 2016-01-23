@@ -2,7 +2,7 @@
 #define TILEPICKERSCENE_H
 
 
-#include "IndexedPickerScene.h"
+#include "editors/IndexedPickerScene.h"
 #include "gamegear/GGTileSet.h"
 #include "gamegear/GGPalette.h"
 

@@ -59,6 +59,7 @@ void TileMapEditor::changeTileMap(int index) {
   TileMapInfo info = TileMapInfos::tileMapInfo(index);
   
   tileMapPreview_ = TileMapPickerScene(
+                        toolManager_,
                         tileMaps_.tileMap(index),
                         levelGraphicsData_.compressedGraphic(
                           info.graphicNum),
@@ -69,6 +70,7 @@ void TileMapEditor::changeTileMap(int index) {
   tileMapPreview_.setSceneScale(2.00);
   
   tilePickerPreview_ = GraphicTilePickerScene(
+                        toolManager_,
                         levelGraphicsData_.compressedGraphic(
                           info.graphicNum),
                         standardPalettes_.palette(

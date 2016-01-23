@@ -12,11 +12,14 @@ TileMapPickerScene::TileMapPickerScene()
                        1,
                        1,
                        1),
+    toolManager_(NULL),
     tileMap_(NULL),
     graphic_(NULL),
     palette0_(NULL) { };
 
-TileMapPickerScene::TileMapPickerScene(TileMap& tileMap__,
+TileMapPickerScene::TileMapPickerScene(
+                   TileMapEditorToolManager& toolManager__,
+                   TileMap& tileMap__,
                    GGTileSet& graphic__,
                    GGPalette& palette0__,
                    int offset__)
@@ -24,6 +27,7 @@ TileMapPickerScene::TileMapPickerScene(TileMap& tileMap__,
                         tileMap__.w(),
                         GGTile::width,
                         GGTile::height),
+    toolManager_(&toolManager__),
     tileMap_(&tileMap__),
     graphic_(&graphic__),
     palette0_(&palette0__),

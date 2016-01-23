@@ -6,16 +6,19 @@ namespace Tales {
 
 GraphicTilePickerScene::GraphicTilePickerScene()
   : IndexedPickerScene(1, 1, 1, 1),
+    toolManager_(NULL),
     graphic_(NULL),
     palette_(NULL) { };
   
 GraphicTilePickerScene::GraphicTilePickerScene(
+                       TileMapEditorToolManager& toolManager__,
                        GGTileSet& graphic__,
                        GGPalette& palette__)
   : IndexedPickerScene(graphic__.numTiles(),
                        tilesPerRow_,
                        GGTile::width,
                        GGTile::height),
+    toolManager_(&toolManager__),
     graphic_(&graphic__),
     palette_(&palette__) { };
 

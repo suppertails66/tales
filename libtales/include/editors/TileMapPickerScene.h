@@ -3,6 +3,7 @@
 
 
 #include "editors/IndexedPickerScene.h"
+#include "editors/TileMapEditorToolManager.h"
 #include "gamedata/TileMap.h"
 #include "gamegear/GGTileSet.h"
 #include "gamegear/GGPalette.h"
@@ -14,7 +15,8 @@ class TileMapPickerScene : public IndexedPickerScene {
 public:
   TileMapPickerScene();
                      
-  TileMapPickerScene(TileMap& tileMap__,
+  TileMapPickerScene(TileMapEditorToolManager& toolManager__,
+                     TileMap& tileMap__,
                      GGTileSet& graphic__,
                      GGPalette& palette0__,
                      int offset__);
@@ -25,6 +27,7 @@ public:
   int nativeW();
   int nativeH();
 protected:
+  TileMapEditorToolManager* toolManager_;
   TileMap* tileMap_;
   GGTileSet* graphic_;
   GGPalette* palette0_;

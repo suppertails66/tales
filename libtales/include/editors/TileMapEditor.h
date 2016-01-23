@@ -3,6 +3,7 @@
 
 
 #include "editors/BaseEditor.h"
+#include "editors/TileMapEditorToolManager.h"
 #include "editors/TileMapPickerScene.h"
 #include "editors/GraphicTilePickerScene.h"
 #include "gamedata/EditableTileMaps.h"
@@ -107,6 +108,8 @@ protected:
   
   void updateFromTileMap();
   void updateFromTilePicker();
+  
+  TileMapEditorToolManager toolManager_;
 
   EditableTileMaps& tileMaps_;
   EditableLevelGraphicsData& levelGraphicsData_;
