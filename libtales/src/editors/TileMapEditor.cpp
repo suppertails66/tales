@@ -81,9 +81,12 @@ void TileMapEditor::changeTileMap(int index) {
   
   currentIndex_ = index;
   
-  updateFromTileMap();
-  
   toolManager_.resetTools();
+  // Set upper-left tile as pencil tool target
+  toolManager_.setPencilDrawIndex(
+    currentTileMap().tileData(0, 0).tileNum());
+  
+  updateFromTileMap();
 }
 
 bool TileMapEditor::currentEditingLimited() const {

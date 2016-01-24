@@ -35,6 +35,16 @@ void GraphicTilePickerScene::renderNative(
                       *palette_,
                       Color(255, 255, 255, Color::fullAlphaOpacity),
                       Graphic::noTileTrans);
+  
+  // hack to keep picked index from displaying in certain modes
+  switch (toolManager_->currentTool()) {
+  case TileMapEditorTools::areaClone:
+    clearPickedBox();
+    break;
+  default:
+    enablePickedBox();
+    break;
+  }
 }
   
 void GraphicTilePickerScene::enterMouse() {

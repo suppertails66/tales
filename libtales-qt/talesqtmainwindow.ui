@@ -73,6 +73,7 @@
     <addaction name="actionLevel_Editor"/>
     <addaction name="actionVRAM_Editor"/>
     <addaction name="actionGraphics_mappings_editor"/>
+    <addaction name="actionTilemap_editor"/>
     <addaction name="actionPalette_editor"/>
     <addaction name="actionPalette_cycle_editor"/>
     <addaction name="actionMetatile_structure_editor"/>
@@ -81,7 +82,6 @@
     <addaction name="actionMusic_editor"/>
     <addaction name="actionPower_up_editor"/>
     <addaction name="actionHacks_and_enhancements"/>
-    <addaction name="actionTilemap_editor"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">

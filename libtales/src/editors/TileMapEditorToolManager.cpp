@@ -34,7 +34,7 @@ void TileMapEditorToolManager
   
 void TileMapEditorToolManager
     ::resetTools() {
-  pencilDrawIndex_ = 0;
+//  pencilDrawIndex_ = 0;
   pencilHFlip_ = false;
   pencilVFlip_ = false;
   clearAreaCloneBuffer();
