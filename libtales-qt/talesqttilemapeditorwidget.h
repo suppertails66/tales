@@ -49,6 +49,8 @@ private slots:
 
     void on_pencilButton_clicked(bool checked);
 
+    void on_areaCloneButton_clicked(bool checked);
+
 private:
     Ui::TalesQtTileMapEditorWidget *ui;
 };

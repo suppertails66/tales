@@ -78,6 +78,10 @@ void GraphicTilePickerScene::pressMouse(InputEventData eventData) {
       drawPosToSelectableIndex(eventData.x(), eventData.y())
         - offset_);
     break;
+  case TileMapEditorTools::areaClone:
+    toolManager_->changeTool(TileMapEditorTools::pencil);
+    pressMouse(eventData);
+    break;
   default:
     IndexedPickerScene::pressMouse(eventData);
     break;

@@ -301,6 +301,19 @@
                <property name="text">
                 <string>P</string>
                </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="areaCloneButton">
+               <property name="text">
+                <string>A</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>

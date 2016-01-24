@@ -39,6 +39,12 @@ protected:
   
   void drawPencil(int posIndex);
   void grabPencil(int posIndex);
+  
+  void areaCloneClick(InputEventData eventData);
+  void areaCloneDrag(InputEventData eventData);
+  void areaCloneRelease(InputEventData eventData);
+  
+  void cloneArea(int index);
 
   TileMapEditorToolManager* toolManager_;
   TileMap* tileMap_;

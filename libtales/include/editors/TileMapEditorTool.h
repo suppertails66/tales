@@ -9,7 +9,14 @@ class TileMapEditorTools {
 public:
   enum TileMapEditorTool {
     regular,
-    pencil
+    pencil,
+    areaClone
+  };
+  
+  enum AreaCloneState {
+    areaCloneWaitingForSelect,
+    areaCloneSelecting,
+    areaCloneCloning
   };
 protected:
   

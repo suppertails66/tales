@@ -207,3 +207,9 @@ void TalesQtTileMapEditorWidget::on_pencilButton_clicked(bool checked)
     tileMapEditor_.changeTool(TileMapEditorTools::pencil);
     refreshDisplay();
 }
+
+void TalesQtTileMapEditorWidget::on_areaCloneButton_clicked(bool checked)
+{
+    tileMapEditor_.changeTool(TileMapEditorTools::areaClone);
+    refreshDisplay();
+}
