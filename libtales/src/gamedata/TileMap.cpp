@@ -319,9 +319,9 @@ int TileMap::load(const Tbyte* data) {
   // oops
   format_ = formatTemp_;
   
-  if (format_ == oneBytePerTile) {
-    std::cout << "here" << std::endl;
-  }
+//  if (format_ == oneBytePerTile) {
+//    std::cout << "here" << std::endl;
+//  }
   
   return byteCount;
 }
