@@ -267,7 +267,8 @@ int TileMap::load(const Tbyte* data) {
   int byteCount = 0;
   
   // Format
-  format_ = static_cast<TileMap::TileMapFormat>(
+  TileMap::TileMapFormat formatTemp_
+      = static_cast<TileMap::TileMapFormat>(
                   ByteConversion::fromBytes(
                           data + byteCount,
                           ByteSizes::uint8Size,
@@ -313,6 +314,12 @@ int TileMap::load(const Tbyte* data) {
                             twoBytesPerTile,
                             w_,
                             h_);
+  // oops
+  format_ = formatTemp_;
+  
+  if (format_ == oneBytePerTile) {
+    std::cout << "here" << std::endl;
+  }
   
   return byteCount;
 }
