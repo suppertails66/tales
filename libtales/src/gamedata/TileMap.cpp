@@ -75,6 +75,8 @@ TileMap& TileMap::operator=(const TileMap& t) {
       tileData_[i][j] = t.tileData_[i][j];
     }
   }
+  
+  return *this;
 }
 
 TileMap::~TileMap() {
