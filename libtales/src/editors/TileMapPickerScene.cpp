@@ -337,6 +337,7 @@ void TileMapPickerScene::pressMouse(InputEventData eventData) {
         ref.setHorizontalMirroringOption(TileReference::horizontalMirror);
       }
     }
+    break;
   case TileMapEditorTools::areaClone:
     areaCloneClick(eventData);
     break;
