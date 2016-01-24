@@ -21,7 +21,15 @@ public:
   void resetTools();
   
   int pencilDrawIndex() const;
+  bool pencilHFlip() const;
+  bool pencilVFlip() const;
+  
   void setPencilDrawIndex(int pencilDrawIndex__);
+  void setPencilHFlip(bool pencilHFlip__);
+  void setPencilVFlip(bool pencilVFlip__);
+  
+  void flipPencilH();
+  void flipPencilV();
   
   void finalizeCloneArea(TileMap& tileMap);
   
@@ -51,6 +59,8 @@ protected:
   TileMapEditorTools::TileMapEditorTool currentTool_;
   
   int pencilDrawIndex_;
+  bool pencilHFlip_;
+  bool pencilVFlip_;
   
   TileMapEditorTools::AreaCloneState areaCloneState_;
   int areaCloneBaseX_;

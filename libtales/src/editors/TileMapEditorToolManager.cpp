@@ -5,8 +5,10 @@ namespace Tales {
 
 
 TileMapEditorToolManager::TileMapEditorToolManager()
-  : currentTool_(TileMapEditorTools::regular),
+  : currentTool_(TileMapEditorTools::pencil),
     pencilDrawIndex_(0),
+    pencilHFlip_(false),
+    pencilVFlip_(false),
     areaCloneState_(TileMapEditorTools::areaCloneWaitingForSelect),
     areaCloneBaseX_(0),
     areaCloneBaseY_(0),
@@ -33,6 +35,8 @@ void TileMapEditorToolManager
 void TileMapEditorToolManager
     ::resetTools() {
   pencilDrawIndex_ = 0;
+  pencilHFlip_ = false;
+  pencilVFlip_ = false;
   clearAreaCloneBuffer();
   areaCloneState_ = TileMapEditorTools::areaCloneWaitingForSelect;
 }
@@ -41,10 +45,50 @@ int TileMapEditorToolManager
     ::pencilDrawIndex() const {
   return pencilDrawIndex_;
 }
+  
+bool TileMapEditorToolManager
+    ::pencilHFlip() const {
+  return pencilHFlip_;
+}
+  
+bool TileMapEditorToolManager
+    ::pencilVFlip() const {
+  return pencilVFlip_;
+}
 
 void TileMapEditorToolManager
     ::setPencilDrawIndex(int pencilDrawIndex__) {
   pencilDrawIndex_ = pencilDrawIndex__;
+}
+
+void TileMapEditorToolManager
+    ::setPencilHFlip(bool pencilHFlip__) {
+  pencilHFlip_ = pencilHFlip__;
+}
+
+void TileMapEditorToolManager
+    ::setPencilVFlip(bool pencilVFlip__) {
+  pencilVFlip_ = pencilVFlip__;
+}
+
+void TileMapEditorToolManager
+    ::flipPencilH() {
+  if (pencilHFlip_) {
+    pencilHFlip_ = false;
+  }
+  else {
+    pencilHFlip_ = true;
+  }
+}
+    
+void TileMapEditorToolManager
+    ::flipPencilV() {
+  if (pencilVFlip_) {
+    pencilVFlip_ = false;
+  }
+  else {
+    pencilVFlip_ = true;
+  }
 }
   
 void TileMapEditorToolManager

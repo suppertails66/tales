@@ -135,8 +135,8 @@ void TileMapPickerScene::renderNative(Graphic& dst,
                      GGTile::height),
                  (*graphic_)[target],
                  *palette0_,
-                 false,
-                 false);
+                 toolManager_->pencilHFlip(),
+                 toolManager_->pencilVFlip());
     }
     break;
   case TileMapEditorTools::areaClone:
@@ -164,7 +164,7 @@ void TileMapPickerScene::renderNative(Graphic& dst,
                              w * GGTile::width,
                              h * GGTile::height,
                              Color(0xFF, 0, 0, Color::fullAlphaOpacity),
-                             2,
+                             1,
                              Graphic::noTransUpdate);
         }
         break;
@@ -211,7 +211,7 @@ void TileMapPickerScene::renderNative(Graphic& dst,
                              toolManager_->areaCloneW() * GGTile::width,
                              toolManager_->areaCloneH() * GGTile::height,
                              Color(0xFF, 0, 0, Color::fullAlphaOpacity),
-                             2,
+                             1,
                              Graphic::noTransUpdate);
         }
         break;
@@ -284,17 +284,27 @@ void TileMapPickerScene::pressMouse(InputEventData eventData) {
     if (eventData.mouseLeftButton()) {
       int posIndex = drawPosToSelectableIndex(
                         eventData.x(), eventData.y());
-      if (eventData.control()) {
+                        
+      if (eventData.shift()) {
         grabPencil(posIndex);
+      }
+      else if (eventData.control()) {
+        highlightedSelectableBoxEnabled_ = false;
+        toolManager_->changeTool(TileMapEditorTools::areaClone);
+        pressMouse(eventData);
       }
       else {
         drawPencil(posIndex);
       }
     }
+    else if (eventData.mouseMiddleButton()) {
+      toolManager_->flipPencilV();
+    }
     else if (eventData.mouseRightButton()) {
-      int posIndex = drawPosToSelectableIndex(
-                        eventData.x(), eventData.y());
-      grabPencil(posIndex);
+      toolManager_->flipPencilH();
+//      int posIndex = drawPosToSelectableIndex(
+//                        eventData.x(), eventData.y());
+//      grabPencil(posIndex);
     }
     break;
   case TileMapEditorTools::regular:
@@ -349,8 +359,12 @@ void TileMapPickerScene::drawPencil(int posIndex) {
 
 //  ref.setTileNum(toolManager_->pencilDrawIndex());
   ref = TileReference(toolManager_->pencilDrawIndex(),
-                      TileReference::noHorizontalMirror,
-                      TileReference::noVerticalMirror,
+                      (toolManager_->pencilHFlip())
+                        ? TileReference::horizontalMirror
+                        : TileReference::noHorizontalMirror,
+                      (toolManager_->pencilVFlip())
+                        ? TileReference::verticalMirror
+                        : TileReference::noVerticalMirror,
                       TileReference::palette0,
                       TileReference::priorityBG);
 }
@@ -365,6 +379,16 @@ void TileMapPickerScene::grabPencil(int posIndex) {
       indexToTileX(posIndex), indexToTileY(posIndex));
       
   toolManager_->setPencilDrawIndex(ref.tileNum());
+  toolManager_->setPencilHFlip(
+                 (ref.horizontalMirroringOption()
+                    == TileReference::horizontalMirror)
+                    ? true
+                    : false);
+  toolManager_->setPencilVFlip(
+                 (ref.verticalMirroringOption()
+                    == TileReference::verticalMirror)
+                    ? true
+                    : false);
 }
 
 int TileMapPickerScene::indexToTileX(int index) const {
@@ -409,6 +433,16 @@ int TileMapPickerScene::nativeH() {
 }
   
 void TileMapPickerScene::areaCloneClick(InputEventData eventData) {
+  if ((eventData.mouseRightButton())
+      || (eventData.mouseLeftButton() && eventData.shift())) {
+    toolManager_->changeTool(TileMapEditorTools::pencil);
+    highlightedSelectableIndex_
+      = drawPosToSelectableIndex(eventData.x(), eventData.y());
+    highlightedSelectableBoxEnabled_ = true;
+    grabPencil(highlightedSelectableIndex_);
+    return;
+  }
+  
   switch (toolManager_->areaCloneState()) {
   case TileMapEditorTools::areaCloneWaitingForSelect:
     {
