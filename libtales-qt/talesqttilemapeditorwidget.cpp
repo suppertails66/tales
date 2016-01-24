@@ -102,6 +102,24 @@ void TalesQtTileMapEditorWidget::refreshDisplay() {
 
     ui->subtileEditorWidget->setTile(
                 tileMapEditor_.currentTile());
+
+    ui->regularButton->setChecked(false);
+    ui->pencilButton->setChecked(false);
+    ui->areaCloneButton->setChecked(false);
+
+    switch (tileMapEditor_.currentTool()) {
+    case TileMapEditorTools::regular:
+        ui->regularButton->setChecked(true);
+        break;
+    case TileMapEditorTools::pencil:
+        ui->pencilButton->setChecked(true);
+        break;
+    case TileMapEditorTools::areaClone:
+        ui->areaCloneButton->setChecked(true);
+        break;
+    default:
+        break;
+    }
 }
 
 void TalesQtTileMapEditorWidget::changeTileMap(int index) {

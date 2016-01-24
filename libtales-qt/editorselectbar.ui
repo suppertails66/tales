@@ -69,6 +69,23 @@
     </widget>
    </item>
    <item>
+    <widget class="QToolButton" name="tileMapButton">
+     <property name="toolTip">
+      <string>Tilemap editor</string>
+     </property>
+     <property name="text">
+      <string>T</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/tilemapicon.png</normaloff>:/resources/tilemapicon.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QToolButton" name="paletteButton">
      <property name="toolTip">
       <string>Palette editor</string>
@@ -96,19 +113,6 @@
      <property name="icon">
       <iconset resource="resources.qrc">
        <normaloff>:/resources/palettecycleicon.png</normaloff>:/resources/palettecycleicon.png</iconset>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QToolButton" name="tileMapButton">
-     <property name="toolTip">
-      <string>Hacks and enhancements</string>
-     </property>
-     <property name="text">
-      <string>T</string>
      </property>
      <property name="checkable">
       <bool>true</bool>

@@ -18,5 +18,7 @@
         <file>talesicon.png</file>
         <file>uparrow.png</file>
         <file>downarrow.png</file>
+        <file>tilemapicon.png</file>
+        <file>detailsicon.png</file>
     </qresource>
 </RCC>
