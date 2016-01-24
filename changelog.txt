@@ -16,3 +16,9 @@ r4:
 editor, allowing new metatile structures to be added to and removed from sets.
 * Fixed bug that could cause the game to crash or reset whenever a level was
 loaded.
+
+r5:
+* Added tilemap editor.
+* Fixed converion of Game Gear colors (previously, brighter colors appeared too
+dark).
+* Many internal improvements made to the code, courtesy of GerbilSoft.
