@@ -37,6 +37,8 @@ protected:
   int indexToTileX(int index) const;
   int indexToTileY(int index) const;
   
+  void clipInputEvent(InputEventData& eventData);
+  
   void drawPencil(int posIndex);
   void grabPencil(int posIndex);
   

@@ -254,6 +254,8 @@ void TileMapPickerScene::exitMouse() {
 }
 
 void TileMapPickerScene::moveMouse(InputEventData eventData) {
+  clipInputEvent(eventData);
+
   switch (toolManager_->currentTool()) {
   case TileMapEditorTools::pencil:
     IndexedPickerScene::moveMouse(eventData);
@@ -279,6 +281,8 @@ void TileMapPickerScene::moveMouse(InputEventData eventData) {
 }
 
 void TileMapPickerScene::pressMouse(InputEventData eventData) {
+  clipInputEvent(eventData);
+
   switch (toolManager_->currentTool()) {
   case TileMapEditorTools::pencil:
     if (eventData.mouseLeftButton()) {
@@ -346,6 +350,54 @@ void TileMapPickerScene::pressMouse(InputEventData eventData) {
     break;
   }
 }
+
+void TileMapPickerScene::releaseMouse(InputEventData eventData) {
+  clipInputEvent(eventData);
+
+  switch (toolManager_->currentTool()) {
+  case TileMapEditorTools::pencil:
+    
+    break;
+  case TileMapEditorTools::areaClone:
+    areaCloneRelease(eventData);
+    break;
+  default:
+    IndexedPickerScene::releaseMouse(eventData);
+    break;
+  }
+}
+
+void TileMapPickerScene::doubleClickMouse(InputEventData eventData) {
+  clipInputEvent(eventData);
+
+  switch (toolManager_->currentTool()) {
+  case TileMapEditorTools::pencil:
+    
+    break;
+  default:
+    IndexedPickerScene::doubleClickMouse(eventData);
+    break;
+  }
+}
+  
+void TileMapPickerScene::clipInputEvent(InputEventData& eventData) {
+  if (eventData.x() < 0) {
+    eventData.setX(0);
+  }
+  
+  if (eventData.x() >= nativeW() * sceneScale_) {
+    eventData.setX((nativeW() - 1) * sceneScale_);
+  }
+  
+  if (eventData.y() < 0) {
+    eventData.setY(0);
+  
+  }
+  
+  if (eventData.y() >= nativeH() * sceneScale_) {
+    eventData.setY((nativeH() * sceneScale_) - 1);
+  }
+}
   
 void TileMapPickerScene::drawPencil(int posIndex) {
   if ((posIndex >= totalSelectables_)
@@ -398,31 +450,6 @@ int TileMapPickerScene::indexToTileX(int index) const {
 
 int TileMapPickerScene::indexToTileY(int index) const {
   return (index / tileMap_->w());
-}
-
-void TileMapPickerScene::releaseMouse(InputEventData eventData) {
-  switch (toolManager_->currentTool()) {
-  case TileMapEditorTools::pencil:
-    
-    break;
-  case TileMapEditorTools::areaClone:
-    areaCloneRelease(eventData);
-    break;
-  default:
-    IndexedPickerScene::releaseMouse(eventData);
-    break;
-  }
-}
-
-void TileMapPickerScene::doubleClickMouse(InputEventData eventData) {
-  switch (toolManager_->currentTool()) {
-  case TileMapEditorTools::pencil:
-    
-    break;
-  default:
-    IndexedPickerScene::doubleClickMouse(eventData);
-    break;
-  }
 }
                             
 int TileMapPickerScene::nativeW() {
