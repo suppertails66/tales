@@ -265,12 +265,18 @@
                <layout class="QHBoxLayout" name="horizontalLayout_9">
                 <item>
                  <widget class="QToolButton" name="pencilButton">
+                  <property name="toolTip">
+                   <string>Pencil (P)</string>
+                  </property>
                   <property name="text">
                    <string>P</string>
                   </property>
                   <property name="icon">
                    <iconset resource="resources.qrc">
                     <normaloff>:/resources/pencilicon.png</normaloff>:/resources/pencilicon.png</iconset>
+                  </property>
+                  <property name="shortcut">
+                   <string>P</string>
                   </property>
                   <property name="checkable">
                    <bool>true</bool>
@@ -279,12 +285,18 @@
                 </item>
                 <item>
                  <widget class="QToolButton" name="areaCloneButton">
+                  <property name="toolTip">
+                   <string>Area clone (L)</string>
+                  </property>
                   <property name="text">
                    <string>A</string>
                   </property>
                   <property name="icon">
                    <iconset resource="resources.qrc">
                     <normaloff>:/resources/selecticon.png</normaloff>:/resources/selecticon.png</iconset>
+                  </property>
+                  <property name="shortcut">
+                   <string>L</string>
                   </property>
                   <property name="checkable">
                    <bool>true</bool>
@@ -293,12 +305,18 @@
                 </item>
                 <item>
                  <widget class="QToolButton" name="regularButton">
+                  <property name="toolTip">
+                   <string>Details editor (K)</string>
+                  </property>
                   <property name="text">
                    <string>R</string>
                   </property>
                   <property name="icon">
                    <iconset resource="resources.qrc">
                     <normaloff>:/resources/detailsicon.png</normaloff>:/resources/detailsicon.png</iconset>
+                  </property>
+                  <property name="shortcut">
+                   <string>K</string>
                   </property>
                   <property name="checkable">
                    <bool>true</bool>
