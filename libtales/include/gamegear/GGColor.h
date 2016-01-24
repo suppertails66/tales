@@ -64,6 +64,13 @@ public:
 protected:
 
   /**
+   * Returns the "corrected" RGB color value corresponding to the input.
+   * @param rgbColor An 8-bit color component.
+   * @return The "corrected" RGB color value corresponding to the input.
+   */
+  int correctColor(int rgbColor);
+
+  /**
    * The native Game Gear format value of the color.
    */
 	int nativeColor_;
