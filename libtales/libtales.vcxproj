@@ -90,6 +90,7 @@
     <ClInclude Include="include\editors\GraphicsEditorTool.h" />
     <ClInclude Include="include\editors\GraphicsEditorToolManager.h" />
     <ClInclude Include="include\editors\GraphicTileEditorLayer.h" />
+    <ClInclude Include="include\editors\GraphicTilePickerScene.h" />
     <ClInclude Include="include\editors\GraphicToInfo.h" />
     <ClInclude Include="include\editors\GraphicToMappingEntry.h" />
     <ClInclude Include="include\editors\GraphicToMappings.h" />
@@ -131,6 +132,10 @@
     <ClInclude Include="include\editors\PaletteEditor.h" />
     <ClInclude Include="include\editors\PowerUpEditor.h" />
     <ClInclude Include="include\editors\TailsAdvEditor.h" />
+    <ClInclude Include="include\editors\TileMapEditor.h" />
+    <ClInclude Include="include\editors\TileMapEditorTool.h" />
+    <ClInclude Include="include\editors\TileMapEditorToolManager.h" />
+    <ClInclude Include="include\editors\TileMapPickerScene.h" />
     <ClInclude Include="include\editors\TilePickerScene.h" />
     <ClInclude Include="include\editors\TileRenderer.h" />
     <ClInclude Include="include\editors\VisualMetatilePickerScene.h" />
@@ -172,6 +177,7 @@
     <ClInclude Include="include\gamedata\EditableSpawnPoints.h" />
     <ClInclude Include="include\gamedata\EditableSpriteMappings.h" />
     <ClInclude Include="include\gamedata\EditableStandardPalettes.h" />
+    <ClInclude Include="include\gamedata\EditableTileMaps.h" />
     <ClInclude Include="include\gamedata\EditableWarpDestinations.h" />
     <ClInclude Include="include\gamedata\EditableWaterSplashGraphicTable.h" />
     <ClInclude Include="include\gamedata\FixedGraphicTableEntry.h" />
@@ -230,6 +236,8 @@
     <ClInclude Include="include\gamedata\TailsAdvRLECompressor.h" />
     <ClInclude Include="include\gamedata\TailsAdvROMLoader.h" />
     <ClInclude Include="include\gamedata\TileMap.h" />
+    <ClInclude Include="include\gamedata\TileMapInfo.h" />
+    <ClInclude Include="include\gamedata\TileMapInfos.h" />
     <ClInclude Include="include\gamedata\TwoKeyEditableMappedData.h" />
     <ClInclude Include="include\gamedata\TwoKeyIndexedEditableMappedData.h" />
     <ClInclude Include="include\gamedata\WarpDestination.h" />
@@ -311,6 +319,7 @@
     <ClCompile Include="src\editors\GraphicsEditorTool.cpp" />
     <ClCompile Include="src\editors\GraphicsEditorToolManager.cpp" />
     <ClCompile Include="src\editors\GraphicTileEditorLayer.cpp" />
+    <ClCompile Include="src\editors\GraphicTilePickerScene.cpp" />
     <ClCompile Include="src\editors\GraphicToInfo.cpp" />
     <ClCompile Include="src\editors\GraphicToMappingEntry.cpp" />
     <ClCompile Include="src\editors\GraphicToMappings.cpp" />
@@ -352,6 +361,10 @@
     <ClCompile Include="src\editors\PaletteEditor.cpp" />
     <ClCompile Include="src\editors\PowerUpEditor.cpp" />
     <ClCompile Include="src\editors\TailsAdvEditor.cpp" />
+    <ClCompile Include="src\editors\TileMapEditor.cpp" />
+    <ClCompile Include="src\editors\TileMapEditorTool.cpp" />
+    <ClCompile Include="src\editors\TileMapEditorToolManager.cpp" />
+    <ClCompile Include="src\editors\TileMapPickerScene.cpp" />
     <ClCompile Include="src\editors\TilePickerScene.cpp" />
     <ClCompile Include="src\editors\TileRenderer.cpp" />
     <ClCompile Include="src\editors\VisualMetatilePickerScene.cpp" />
@@ -393,6 +406,7 @@
     <ClCompile Include="src\gamedata\EditableSpawnPoints.cpp" />
     <ClCompile Include="src\gamedata\EditableSpriteMappings.cpp" />
     <ClCompile Include="src\gamedata\EditableStandardPalettes.cpp" />
+    <ClCompile Include="src\gamedata\EditableTileMaps.cpp" />
     <ClCompile Include="src\gamedata\EditableWarpDestinations.cpp" />
     <ClCompile Include="src\gamedata\EditableWaterSplashGraphicTable.cpp" />
     <ClCompile Include="src\gamedata\FixedGraphicTableEntry.cpp" />
@@ -451,6 +465,8 @@
     <ClCompile Include="src\gamedata\TailsAdvRLECompressor.cpp" />
     <ClCompile Include="src\gamedata\TailsAdvROMLoader.cpp" />
     <ClCompile Include="src\gamedata\TileMap.cpp" />
+    <ClCompile Include="src\gamedata\TileMapInfo.cpp" />
+    <ClCompile Include="src\gamedata\TileMapInfos.cpp" />
     <ClCompile Include="src\gamedata\TwoKeyEditableMappedData.cpp" />
     <ClCompile Include="src\gamedata\TwoKeyIndexedEditableMappedData.cpp" />
     <ClCompile Include="src\gamedata\WarpDestination.cpp" />
