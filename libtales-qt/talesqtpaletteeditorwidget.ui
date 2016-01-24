@@ -171,6 +171,9 @@
                    <property name="maximum">
                     <number>255</number>
                    </property>
+                   <property name="singleStep">
+                    <number>16</number>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -218,6 +221,9 @@
                    <property name="maximum">
                     <number>255</number>
                    </property>
+                   <property name="singleStep">
+                    <number>16</number>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -264,6 +270,9 @@
                   <widget class="QSpinBox" name="blueSpinBox">
                    <property name="maximum">
                     <number>255</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>16</number>
                    </property>
                   </widget>
                  </item>

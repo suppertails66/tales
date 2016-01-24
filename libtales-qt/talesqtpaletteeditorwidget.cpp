@@ -105,8 +105,8 @@ void TalesQtPaletteEditorWidget::setCurrentR(int r) {
                 r,
                 paletteEditor_.currentColor().realG(),
                 paletteEditor_.currentColor().realB());
-    ui->redSlider->setValue(r);
-    ui->redSpinBox->setValue(r);
+    ui->redSlider->setValue(paletteEditor_.currentColor().realR());
+    ui->redSpinBox->setValue(paletteEditor_.currentColor().realR());
 }
 
 void TalesQtPaletteEditorWidget::setCurrentG(int g) {
@@ -115,8 +115,8 @@ void TalesQtPaletteEditorWidget::setCurrentG(int g) {
                 paletteEditor_.currentColor().realR(),
                 g,
                 paletteEditor_.currentColor().realB());
-    ui->greenSlider->setValue(g);
-    ui->greenSpinBox->setValue(g);
+    ui->greenSlider->setValue(paletteEditor_.currentColor().realG());
+    ui->greenSpinBox->setValue(paletteEditor_.currentColor().realG());
 }
 
 void TalesQtPaletteEditorWidget::setCurrentB(int b) {
@@ -125,8 +125,8 @@ void TalesQtPaletteEditorWidget::setCurrentB(int b) {
                 paletteEditor_.currentColor().realR(),
                 paletteEditor_.currentColor().realG(),
                 b);
-    ui->blueSlider->setValue(b);
-    ui->blueSpinBox->setValue(b);
+    ui->blueSlider->setValue(paletteEditor_.currentColor().realB());
+    ui->blueSpinBox->setValue(paletteEditor_.currentColor().realB());
 }
 
 void TalesQtPaletteEditorWidget::pickerEnter() {
@@ -165,21 +165,21 @@ void TalesQtPaletteEditorWidget::on_paletteComboBox_activated(int index)
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_redSpinBox_editingFinished()
+void TalesQtPaletteEditorWidget::on_redSpinBox_valueChanged()
 {
-    setCurrentR(ui->redSpinBox->value());
+    setCurrentR(ui->redSpinBox->value() / 16 * 16);
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_greenSpinBox_editingFinished()
+void TalesQtPaletteEditorWidget::on_greenSpinBox_valueChanged()
 {
-    setCurrentG(ui->greenSpinBox->value());
+    setCurrentG(ui->greenSpinBox->value() / 16 * 16);
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_blueSpinBox_editingFinished()
+void TalesQtPaletteEditorWidget::on_blueSpinBox_valueChanged()
 {
-    setCurrentB(ui->blueSpinBox->value());
+    setCurrentB(ui->blueSpinBox->value() / 16 * 16);
     refreshDisplay();
 }
 
