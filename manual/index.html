@@ -48,6 +48,12 @@
                 <li><a href="#graphicscomponents">Graphics Editor Components</a></li>
               </ol>
             </li>
+            <li><a href="#tilemapeditor">Tilemap Editor</a>
+              <ol>
+                <li><a href="#tilemapprimer">Tilemap Primer</a></li>
+                <li><a href="#tilemapcomponents">Tilemap Editor Components</a></li>
+              </ol>
+            </li>
             <li><a href="#paletteeditor">Palette Editor</a>
               <ol>
                 <li><a href="#palettecomponents">Palette Editor Components</a></li>
@@ -441,6 +447,7 @@
     <p>
       The <b>Add Graphic Dialog</b> allows a new graphic to be added to an object graphic pack. The <b>graphic list</b> on the right lists all the graphics that can be added to VRAM by name, sorted by category and then alphabetically. The <b>graphic preview</b> on the left shows the selected graphic and the number of tiles in VRAM it will occupy. The <b>flip options</b> at the bottom select whether to add the graphic as-is, flipped, or both (as two graphics, one for each direction).
     </p>
+    
     <h3 id="graphicseditor">Graphics and Collision Editor</h3>
     <p>
       The graphics editor provides rudimentary but functional editing of all the graphics in Tails Adventures, both compressed and uncompressed, as well as the ability to diplay and modify object collision boxes.
@@ -484,6 +491,59 @@
         <li><b>Collision editor: </b>allows the current sprite mapping's collision box to be edited. The <b>Width</b> and <b>Height</b> boxes allow the box's width and height to be changed. The <b>X-offset</b> and <b>Y-offset</b> boxes change the offset <em>of the graphic itself from its associated object's centerpoint</em>; thus, changing their values may not yield the results you'd intuitively expect. The <b>Collision check box</b> sets whether or not the collision box is overlayed onto the sprite mapping.</li>
       </ol>
     </p>
+    
+    <h3 id="tilemapeditor">Tilemap Editor</h3>
+    <p>
+      The tilemap editor can modify the layout of the game's fixed-position tilemaps, such as the title screen and world map.
+    </p>
+    <h4 id="tilemapprimer">Tilemap Primer</h4>
+    <p>
+      In Tails Adventures, a <b>tilemap</b> is a rectangular area composed of 8x8 <b>tiles</b>. For details about how tiles work, see the <a href="#structureprimer">Metatile Structure Primer</a>. Suffice it to say that a tilemap specifies the type and layout of patterns from a particular graphic. Due to the nature of the game, the graphic associated with a tilemap is more or less hardcoded, and Tales does not allow it to be changed.
+    </p>
+    <p>
+      There are two tilemap formats in Tails Adventures: 2-byte-per-tile (2bpt) and 1-byte-per-tile (1bpt). 2bpt tilemaps store full tile information for every pattern in the tilemap. 1bpt tilemaps store only the low byte of the data and use a hardcoded value for the upper, which in practical terms means that (a.) only half the patterns in VRAM can be used in the tilemap, usually hardcoded to the lower 256 patterns; and (b.) only the pattern number of the tile can be modified, not the priority or other settings. The vast majority of tilemaps are 2bpt, with notable exceptions including the title screen and the credits text.
+    </p>
+    <h4 id="tilemapcomponents">Tilemap Components</h4>
+    <img src="tilemapeditor.png" width="400"></img>
+    <p>
+      <ol>
+        <li><b>Tilemap selector: </b>allows different tilemaps to be selected for editing.</li>
+        <li><b>Tilemap preview: </b>an interactive display that allows the tilemap to be modified. Tools and controls are explained below under <b>Editing tools</b>.</li>
+        <li><b>Tile selector: </b>an interactive display showing the tiles in the graphic associated with the tilemap. Generally, this indicates the "active" metatile for each tool, and allows different ones to be selected as "active".</li>
+        <li><b>Editing tools: </b>allows different tools to be selected for editing the tilemap.
+          <ul>
+            <li><img src="pencilicon.png"></img> <b>Pencil: </b>"draws" on top of the tilemap.
+              <ul>
+                <li><b>Left-clicking on the tilemap preview</b> overwrites the clicked tile with the active tile.</li>
+                <li><b>Left-clicking on the tile selector</b> selects the clicked tile as the active tile.</li>
+                <li><b>Right-clicking on the tilemap preview</b> flips the active tile horizontally when it is placed in the tilemap preview.</li>
+                <li><b>Middle-clicking on the tilemap preview</b> flips the active tile vertically when it is placed in the tilemap preview.</li>
+                <li><b>Holding Shift and clicking on the tilemap preview</b> selects the clicked tile as the active tile.</li>
+                <li><b>Holding Control and clicking on the tilemap preview</b> switches to the Area Clone tool.</li>
+              </ul>
+            </li>
+            <li><img src="selecticon.png"></img> <b>Area clone: </b>allows a rectangular portion of the tilemap to be coped to another area.
+              <ul>
+                <li><b>Left-clicking and dragging on the tilemap preview with nothing selected</b> selects an area for copying.</li>
+                <li><b>Left-clicking after selecting something</b> copies the selected area to the clicked area.</li>
+                <li>With an area selected, <b>holding Control, left-clicking, and dragging</b> selects a new area for copying.</li>
+                <li><b>Holding Shift and clicking on a tile</b> switches to the Pencil tool and selects the clicked tile as the active tile.</li>
+                <li><b>Left-clicking on the tile selector</b> switches to the Pencil tool and selects the clicked tile as the active tile.</li>
+              </ul>
+            </li>
+            <li><img src="detailsicon.png"></img> <b>Details editor: </b>allows details of each tile to be changed.
+              <ul>
+                <li><b>Left-clicking on the tilemap preview</b> selects the clicked tile as the active tile.</li>
+                <li><b>Left-clicking on the tile selector</b> changes the pattern associated with the active tile.</li>
+                <li><b>Interacting with the detailed tile editor</b> below the toolbar changes the properties of the active tile. Note that all functions of this editor exception the Tile box are disabled for 1bpt tilemaps.</li>
+              </ul>
+            </li>
+            <li><b>Grid check box: </b>enables and disables the tilemap grid overlay.</li>
+          </ul>
+        </li>
+      </ol>
+    </p>
+    
     <h3 id="paletteeditor">Palette Editor</h3>
     The palette editor can change the colors in the game's various color palettes.
     <h4 id="palettecomponents">Palette Editor Components</h4>
