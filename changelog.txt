@@ -21,6 +21,7 @@ r5:
 * Added tilemap editor for modifying fixed tilemaps.
 * Added resource export dialog for exporting maps, metatiles, tilemaps, and
 graphics to PNGs.
+* Added no game over hack.
 * Fixed conversion of Game Gear colors (previously, brighter colors appeared too
 dark).
 * Changed display of mappings in the graphics editor so that non-mapped
