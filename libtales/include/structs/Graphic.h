@@ -75,6 +75,18 @@ public:
           TileTransferTransOption transOption = noTileTrans);
   
   /**
+  * Tile-and-palette constructor.
+  * Given a GGTile containing color data and a GGPalette to color it with,
+  * this produces a graphic corresponding to the GGTile.
+  * @param tile Tile containing indexed color values.
+  * @param palette Palette containing colors corresponding to the tile indices.
+  */
+  Graphic(const GGTile& tile,
+          const GGPalette& palette,
+          TileTransferTransOption transOption,
+          Color backgroundColor);
+  
+  /**
   * Empty graphic constructor.
   * Initializes width and height to specified values, and initializes
   * pixel array to all 0xFF (fully transparent white).
@@ -454,6 +466,18 @@ protected:
                     const Tbyte* getpos,
                     char* transputpos,
                     const char* transgetpos);
+  
+  /**
+  * Tile-and-palette constructor.
+  * Given a GGTile containing color data and a GGPalette to color it with,
+  * this produces a graphic corresponding to the GGTile.
+  * @param tile Tile containing indexed color values.
+  * @param palette Palette containing colors corresponding to the tile indices.
+  */
+  void fromTile(const GGTile& tile,
+                const GGPalette& palette,
+                TileTransferTransOption transOption,
+                bool skipTransparentPixels = false);
   
   /**
   * Graphic width.

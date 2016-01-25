@@ -49,6 +49,29 @@ Graphic::Graphic(const GGTile& tile,
   // Clear pixel data array
   clear();
   
+  // Read tile data
+  fromTile(tile, palette, transOption);
+}
+
+Graphic::Graphic(const GGTile& tile,
+                 const GGPalette& palette,
+                 TileTransferTransOption transOption,
+                 Color backgroundColor)
+  : w_(tile.w()),
+    h_(tile.h()),
+    imgdat_(new Tbyte[w_ * h_ * bytesPerPixel]),
+    transModel_(w_, h_) {
+  // Clear pixel data array
+  clear(backgroundColor);
+  
+  // Read tile data
+  fromTile(tile, palette, transOption, true);
+}
+
+void Graphic::fromTile(const GGTile& tile,
+              const GGPalette& palette,
+              TileTransferTransOption transOption,
+              bool skipTransparentPixels) {
   // Copy pixel data, turning color indices into their full equivalents
   for (int j = 0; j < tile.h(); j++) {
     for (int i = 0; i < tile.w(); i++) {
@@ -65,7 +88,12 @@ Graphic::Graphic(const GGTile& tile,
       // update the alpha channel
       if (transOption == tileTrans) {
         if (index == palette.getTransColorIndex()) {
-          alpha = Color::fullAlphaTransparency;
+          if (skipTransparentPixels) {
+            continue;
+          }
+          else {
+            alpha = Color::fullAlphaTransparency;
+          }
         }
       }
       

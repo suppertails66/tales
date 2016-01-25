@@ -21,4 +21,6 @@ r5:
 * Added tilemap editor.
 * Fixed converion of Game Gear colors (previously, brighter colors appeared too
 dark).
+* Changed display of mappings in the graphics editor so that non-mapped
+(non-editable) areas appear transparent.
 * Many internal improvements made to the code, courtesy of GerbilSoft.

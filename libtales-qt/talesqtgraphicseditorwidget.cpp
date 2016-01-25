@@ -227,7 +227,7 @@ void TalesQtGraphicsEditorWidget::refreshMappingDisplay() {
                                     graphicsEditor_.mappingEditorHeight());
         mappingEditorQImageBuffer_ = QImage(mappingEditorBuffer_.w(),
                                          mappingEditorBuffer_.h(),
-                                         QImage::Format_RGB32);
+                                         QImage::Format_ARGB32);
 /*        mappingEditorQImageBuffer_ = QImage(mappingEditorBuffer_.const_imgdat(),
                                          mappingEditorBuffer_.w(),
                                          mappingEditorBuffer_.h(),

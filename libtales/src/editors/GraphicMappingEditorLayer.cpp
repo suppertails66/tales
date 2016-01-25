@@ -31,7 +31,7 @@ void GraphicMappingEditorLayer::render(Graphic& dst,
     buffer_ = Graphic(nativeWidth(), nativeHeight());
   }
   
-  buffer_.clear(Color(0xFF, 0xFF, 0xFF, Color::fullAlphaOpacity));
+  buffer_.clear(Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency));
     
   // Draw raster elements
   MappingAssembler::assembleMappings(cache_,
@@ -42,7 +42,11 @@ void GraphicMappingEditorLayer::render(Graphic& dst,
                                      toolManager_->palette(),
                                      ObjectStateInfo::left,
                                      toolManager_->mappingEntry()
-                                       .tileOffset);
+                                       .tileOffset,
+                                     Color(0xFF, 0xFF, 0xFF,
+                                           Color::fullAlphaTransparency),
+                                     Color(0xFF, 0xFF, 0xFF,
+                                           Color::fullAlphaOpacity));
 //  cache_.graphic().regenerateTransparencyModel();
   
   buffer_.blit(cache_.graphic());

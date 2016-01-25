@@ -39,8 +39,7 @@ void TalesQtFormatConversion::drawGraphicToImage(QImage& image,
             (*rgb) = qRgba(color.r(),
                            color.g(),
                            color.b(),
-                           // Convert from our alpha to Qt's
-                           0xFF - color.a());
+                           color.a());
             ++rgb;
         }
     }

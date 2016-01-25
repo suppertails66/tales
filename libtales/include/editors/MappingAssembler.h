@@ -24,6 +24,18 @@ public:
                                  facingDirection,
                                int tileOffset);
                                
+  static void assembleMappings(ObjectDisplayCache& dst,
+                               GGTileSet& src,
+                               SpriteMapping& spriteMapping,
+                               SpriteMappingCoordinateTable& coordinateTable,
+                               SpriteMappingTileIndexTable& tileIndexTable,
+                               GGPalette& palette,
+                               ObjectStateInfo::FacingDirection
+                                 facingDirection,
+                               int tileOffset,
+                               Color backgroundColor,
+                               Color tileBackgroundColor);
+                               
   static Box computeDimensionsOfMapping(
     SpriteMappingCoordinateTable coordinateTable);
                                
@@ -31,6 +43,21 @@ public:
     SpriteMappingCoordinateTable coordinateTable,
     int offsetX,
     int offsetY);
+protected:
+  static void assembleMappingsInternal(ObjectDisplayCache& dst,
+                               GGTileSet& src,
+                               Graphic& graphic,
+                               SpriteMapping& spriteMapping,
+                               SpriteMappingCoordinateTable& coordinateTable,
+                               SpriteMappingTileIndexTable& tileIndexTable,
+                               GGPalette& palette,
+                               ObjectStateInfo::FacingDirection
+                                 facingDirection,
+                               int tileOffset,
+                               Box offsetInfo,
+                               bool useTileBGColor = false,
+                               Color tileBGColor = Color());
+                               
 };
 
 

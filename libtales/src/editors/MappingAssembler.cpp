@@ -6,21 +6,76 @@
 namespace Tales {
 
 
-void MappingAssembler::assembleMappings(
+void MappingAssembler::assembleMappings(ObjectDisplayCache& dst,
+                             GGTileSet& src,
+                             SpriteMapping& spriteMapping,
+                             SpriteMappingCoordinateTable& coordinateTable,
+                             SpriteMappingTileIndexTable& tileIndexTable,
+                             GGPalette& palette,
+                             ObjectStateInfo::FacingDirection
+                               facingDirection,
+                             int tileOffset) {
+  Box offsetInfo = computeDimensionsOfMapping(coordinateTable);
+  
+  Graphic graphic(offsetInfo.w(), offsetInfo.h());
+  graphic.clear();
+  
+  assembleMappingsInternal(dst,
+                           src,
+                           graphic,
+                           spriteMapping,
+                           coordinateTable,
+                           tileIndexTable,
+                           palette,
+                           facingDirection,
+                           tileOffset,
+                           offsetInfo);
+}
+                             
+void MappingAssembler::assembleMappings(ObjectDisplayCache& dst,
+                             GGTileSet& src,
+                             SpriteMapping& spriteMapping,
+                             SpriteMappingCoordinateTable& coordinateTable,
+                             SpriteMappingTileIndexTable& tileIndexTable,
+                             GGPalette& palette,
+                             ObjectStateInfo::FacingDirection
+                               facingDirection,
+                             int tileOffset,
+                             Color backgroundColor,
+                             Color tileBackgroundColor) {
+  Box offsetInfo = computeDimensionsOfMapping(coordinateTable);
+  
+  Graphic graphic(offsetInfo.w(), offsetInfo.h());
+  graphic.clear(backgroundColor);
+  
+  assembleMappingsInternal(dst,
+                           src,
+                           graphic,
+                           spriteMapping,
+                           coordinateTable,
+                           tileIndexTable,
+                           palette,
+                           facingDirection,
+                           tileOffset,
+                           offsetInfo,
+                           true,
+                           tileBackgroundColor);
+}
+                               
+void MappingAssembler::assembleMappingsInternal(
                                ObjectDisplayCache& dst,
                                GGTileSet& src,
+                               Graphic& graphic,
                                SpriteMapping& spriteMapping,
                                SpriteMappingCoordinateTable& coordinateTable,
                                SpriteMappingTileIndexTable& tileIndexTable,
                                GGPalette& palette,
                                ObjectStateInfo::FacingDirection
                                  facingDirection,
-                               int tileOffset) {
-  Box offsetInfo = computeDimensionsOfMapping(coordinateTable);
-  
-  Graphic graphic(offsetInfo.w(), offsetInfo.h());
-  graphic.clear();
-  
+                               int tileOffset,
+                               Box offsetInfo,
+                               bool useTileBGColor,
+                               Color tileBGColor) {
   int baseX = offsetInfo.x();
   int baseY = offsetInfo.y();
   
@@ -31,12 +86,26 @@ void MappingAssembler::assembleMappings(
   
     int tileIndex = tileIndexTable.tileIndex(i) + tileOffset;
     
-    Graphic g(src[tileIndex],
-              palette,
-              Graphic::tileTrans);
-    Graphic g2(src[tileIndex + 1],
-              palette,
-              Graphic::tileTrans);
+    Graphic g;
+    Graphic g2;
+    if (useTileBGColor) {
+      g = Graphic(src[tileIndex],
+                palette,
+                Graphic::tileTrans,
+                tileBGColor);
+      g2 = Graphic(src[tileIndex + 1],
+                palette,
+                Graphic::tileTrans,
+                tileBGColor);
+    }
+    else {
+      g = Graphic(src[tileIndex],
+                palette,
+                Graphic::tileTrans);
+      g2 = Graphic(src[tileIndex + 1],
+                palette,
+                Graphic::tileTrans);
+    }
     
     graphic.copy(g,
                  Box(baseX + coordinateTable.entry(i).offsetX(),
