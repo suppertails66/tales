@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
+    <width>482</width>
     <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Export Resources</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_8">
+  <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
@@ -180,15 +180,15 @@
        </layout>
       </widget>
      </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QFrame" name="frame_2">
+     <item row="0" column="1">
+      <widget class="QFrame" name="frame_4">
        <property name="frameShape">
         <enum>QFrame::Box</enum>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
@@ -293,7 +293,7 @@
        </layout>
       </widget>
      </item>
-     <item row="1" column="0" colspan="2">
+     <item row="1" column="0">
       <widget class="QFrame" name="frame_2">
        <property name="frameShape">
         <enum>QFrame::Box</enum>
@@ -452,7 +452,7 @@
        </layout>
       </widget>
      </item>
-     <item row="1" column="2">
+     <item row="1" column="1">
       <widget class="QFrame" name="frame_3">
        <property name="frameShape">
         <enum>QFrame::Box</enum>

@@ -99,6 +99,8 @@
                 <li><a href="#enhancementseditorcomponents">Hacks and Enhancements Editor Components</a></li>
               </ol>
             </li>
+            <li><a href="#exportresourcesdialog">Export Resources Dialog</a>
+            </li>
           </ol>
           </li>
           <li><a href="#gamequirks">Game Quirks</a>
@@ -166,11 +168,12 @@
     <ol>
       <li><b>File: </b>This is the most fundamentally important component of the program. The File menu allows projects to be saved and loaded to a project file, or exported to a playable ROM image. A <b>project file</b> (extension: .tls) contains the data Tales needs to make edits&mdash;it is not a playable game. Project files are used to store data between program sessions. To produce a playable game, the project data must be exported to a ROM image (extension: .gg). The File menu contains the following items:
         <ol>
-          <li><b>Open project...</b> (<b>Ctrl+O</b>). Opens an existing project file.</li>
-          <li><b>Save project</b> (<b>Ctrl+S</b>). Saves the current project to the file it was last saved or loaded from. If the project has not yet been saved or loaded, this functions identically to the Save As option.</li>
-          <li><b>Save as...</b> (<b>Ctrl+Shift+S</b>). Opens a dialog box for selecting a location to save the current project.</li>
-          <li><b>Export ROM</b> (<b>Ctrl+E</b>). Exports the project as a playable ROM image to the location it was most recently exported to. If the project has not yet been exported, this functions identically to the Export ROM As option.</li>
-          <li><b>Export ROM as...</b> (<b>Ctrl+Shift+E</b>). Opens a dialog box for selecting a location to export the current project as a playable ROM.</li>
+          <li><b>Open project...</b> (<b>Ctrl+O</b>): Opens an existing project file.</li>
+          <li><b>Save project</b> (<b>Ctrl+S</b>): Saves the current project to the file it was last saved or loaded from. If the project has not yet been saved or loaded, this functions identically to the Save As option.</li>
+          <li><b>Save as...</b> (<b>Ctrl+Shift+S</b>): Opens a dialog box for selecting a location to save the current project.</li>
+          <li><b>Export ROM</b> (<b>Ctrl+E</b>): Exports the project as a playable ROM image to the location it was most recently exported to. If the project has not yet been exported, this functions identically to the Export ROM As option.</li>
+          <li><b>Export ROM as...</b> (<b>Ctrl+Shift+E</b>): Opens a dialog box for selecting a location to export the current project as a playable ROM.</li>
+          <li><b>Export resources...</b>: Opens the <a href="#exportresourcesdialog">Export Resources dialog</a>.</li>
         </ol>
       </li>
       <li><b>Tools:</b> contains a list of editing tools that can be selected for use. The currently selected tool is indicated by a check mark next to its name. Identical in function to the <a href="#toolselect">tool selection sidebar</a>&mdash;see that section for details.
@@ -186,6 +189,7 @@
       <li><img src="images/mapicon.png"> <b><a href="#leveleditor">Level editor</a></b> (<b>Shift+L</b>)</li>
       <li><img src="images/vramicon.png"> <b><a href="#vrameditor">VRAM editor</a></b> (<b>Shift+V</b>)</li>
       <li><img src="images/paintbrushicon.png"> <b><a href="#graphicseditor">Graphics editor</a></b> (<b>Shift+G</b>)</li>
+      <li><img src="images/tilemapicon.png"> <b><a href="#tilemapeditor">Tilemap editor</a></b> (<b>Shift+T</b>)</li>
       <li><img src="images/paletteicon.png"> <b><a href="#paletteeditor">Palette editor</a></b> (<b>Shift+P</b>)</li>
       <li><img src="images/palettecycleicon.png"> <b><a href="#palettecycleeditor">Palette cycle editor</a></b> (<b>Shift+Y</b>)</li>
       <li><img src="images/structureicon.png"> <b><a href="#structureeditor">Metatile structure editor</a></b> (<b>Shift+S</b>)</li>
@@ -800,6 +804,20 @@
           </ul>
         </li>
       </ul>
+    </p>
+    
+    <h3 id="exportresourcesdialog">Export Resources Dialog</h3>
+    <img src="images/exportresourcesdialog.png" width="400"></img>
+    <p>
+      The Export Resources dialog allows most graphics-related aspects of the game to be exported to external .PNG files <i>en masse</i>. Unlike the main editing tools, it is accessed through the File menu, under the option <b>Export resources...</b>.
+    </p>
+    <p>
+      <ol>
+        <li><b>Map exporter: </b>exports level maps. The <b>Visual</b>, <b>Behavior</b>, <b>Vert. solidity</b>, and <b>horiz. solidity</b> check boxes control which views of the level are exported (with each view becoming a separate file). The <b>Objects</b>, <b>Spawns</b>, and <b>Camera bounds</b> check boxes enable and disable the corresponding graphical overlays, explained under <a href="#leveleditor">Level Editor</a>.</li>
+        <li><b>Metatile exporter: </b>exports metatile sets. <b>Aggregate</b> outputs sets as a single image like the metatile displays used in the program, while <b>Individual</b> outputs each metatile as a separate image. <b>The preview graphic and palette from the <a href="#structureeditor">metatile structure editor</a> are used to export the graphics.</b></li>
+        <li><b>Graphic exporter: </b>exports graphics. <b>Raw graphics</b> exports the raw tiles that compose each graphic, and will render color 0 as transparent if the <b>Transparency</b> box is checked. <b>Sprite mappings</b> exports all the sprite mappings associated with each graphic. <b>Aligned sprite mappings</b> is the same as "Sprite mappings" except that each sprite mapping is centered on a 256x256 pixel transparent background according to its x-offset and y-offset parameter, as explained under <a href="#graphicseditor">Graphics Editor</a>, allowing sprites to more easily be combined into animations. <b>The preview palette from the graphics editor is used to export the graphics.</b></li>
+        <li><b>Tilemap exporter: </b>exports tilemaps.</b></li>
+      </ol>
     </p>
     
     <h2 id="gamequirks">Game Quirks</h2>
