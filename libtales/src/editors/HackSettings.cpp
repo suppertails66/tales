@@ -60,12 +60,14 @@ void HackSettings::save(std::string& data) {
                           SignednessTypes::nosign);
   data += std::string((char*)(buffer), ByteSizes::uint8Size);
   
-  ByteConversion::toBytes(noGameOverHackOption_,
-                          buffer,
-                          ByteSizes::uint8Size,
-                          EndiannessTypes::little,
-                          SignednessTypes::nosign);
-  data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  if (versionNum_ >= 1) {
+    ByteConversion::toBytes(noGameOverHackOption_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  }
   
   saver.finalize();
 }
@@ -179,14 +181,12 @@ void HackSettings::exportToROM(WritableROM& rom) {
     break;
   }
   
-  if (versionNum_ >= 1) {
-    switch (noGameOverHackOption_) {
-    case noGameOverHackOn:
-      TailsAdvBank0Hacks::addNoGameOverHack(rom);
-      break;
-    default:
-      break;
-    }
+  switch (noGameOverHackOption_) {
+  case noGameOverHackOn:
+    TailsAdvBank0Hacks::addNoGameOverHack(rom);
+    break;
+  default:
+    break;
   }
 }
   
