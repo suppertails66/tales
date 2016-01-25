@@ -23,4 +23,6 @@ r5:
 dark).
 * Changed display of mappings in the graphics editor so that non-mapped
 (non-editable) areas appear transparent.
+* Added count of total objects in level and the maximum total allowed to level
+editor.
 * Many internal improvements made to the code, courtesy of GerbilSoft.
