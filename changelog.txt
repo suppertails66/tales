@@ -18,11 +18,13 @@ editor, allowing new metatile structures to be added to and removed from sets.
 loaded.
 
 r5:
-* Added tilemap editor.
-* Fixed converion of Game Gear colors (previously, brighter colors appeared too
+* Added tilemap editor for modifying fixed tilemaps.
+* Added resource export dialog for exporting maps, metatiles, tilemaps, and
+graphics to PNGs.
+* Fixed conversion of Game Gear colors (previously, brighter colors appeared too
 dark).
 * Changed display of mappings in the graphics editor so that non-mapped
 (non-editable) areas appear transparent.
-* Added count of total objects in level and the maximum total allowed to level
-editor.
-* Many internal improvements made to the code, courtesy of GerbilSoft.
+* Added to level editor a count of total objects in all levels and the maximum
+total allowed.
+* Many internal improvements made to the code courtesy of GerbilSoft.
