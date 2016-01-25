@@ -116,13 +116,15 @@ int HackSettings::load(const Tbyte* data) {
   );
   byteCount += ByteSizes::uint8Size;
   
-  noGameOverHackOption_ = static_cast<NoGameOverHackOption>(
-    ByteConversion::fromBytes(data + byteCount,
-                              ByteSizes::uint8Size,
-                              EndiannessTypes::little,
-                              SignednessTypes::nosign)
-  );
-  byteCount += ByteSizes::uint8Size;
+  if (versionNum_ >= 1) {
+    noGameOverHackOption_ = static_cast<NoGameOverHackOption>(
+      ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign)
+    );
+    byteCount += ByteSizes::uint8Size;
+  }
   
   return byteCount;
 }
@@ -177,12 +179,14 @@ void HackSettings::exportToROM(WritableROM& rom) {
     break;
   }
   
-  switch (noGameOverHackOption_) {
-  case noGameOverHackOn:
-    TailsAdvBank0Hacks::addNoGameOverHack(rom);
-    break;
-  default:
-    break;
+  if (versionNum_ >= 1) {
+    switch (noGameOverHackOption_) {
+    case noGameOverHackOn:
+      TailsAdvBank0Hacks::addNoGameOverHack(rom);
+      break;
+    default:
+      break;
+    }
   }
 }
   

@@ -77,7 +77,7 @@ public:
       NoGameOverHackOption noGameOverHackOption__);
   
 protected:
-  const static int versionNum_ = 0;
+  const static int versionNum_ = 1;
 
   DoubleJumpFixOption doubleJumpFixOption_;
   
