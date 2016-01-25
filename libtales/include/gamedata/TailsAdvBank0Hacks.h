@@ -103,6 +103,15 @@ public:
    */
   static void addFlightDisableHack(
                      WritableROM& rom);
+  
+  /**
+   * Adds the no game over hack to the given ROM.
+   * With this hack set, dying simply restarts the current level (taking
+   * advantage of leftover code from when the game had a lives system).
+   * @param rom ROM to write to.
+   */
+  static void addNoGameOverHack(
+                     WritableROM& rom);
 
 protected:
 
@@ -469,6 +478,12 @@ protected:
   
   const static Tbyte flightDisableHackMainData
                           [flightDisableHackMainLength];
+                          
+  // No game over hack
+  const static Taddress noGameOverHackMainAddress = 0x1270;
+  const static int noGameOverHackMainLength = 2;
+  const static Tbyte noGameOverHackMainData
+                          [noGameOverHackMainLength];
                                 
 public:
 

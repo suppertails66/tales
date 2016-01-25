@@ -15,7 +15,8 @@ HackSettings::HackSettings()
     maxHeightFixOption_(maxHeightFixOff),
     bombJumpFixOption_(bombJumpFixOff),
     inventoryHackOption_(inventoryHackOff),
-    flightHackOption_(flightHackOff) { };
+    flightHackOption_(flightHackOff),
+    noGameOverHackOption_(noGameOverHackOff) { };
   
 void HackSettings::save(std::string& data) {
   SaveHelper saver(data,
@@ -53,6 +54,13 @@ void HackSettings::save(std::string& data) {
   data += std::string((char*)(buffer), ByteSizes::uint8Size);
   
   ByteConversion::toBytes(flightHackOption_,
+                          buffer,
+                          ByteSizes::uint8Size,
+                          EndiannessTypes::little,
+                          SignednessTypes::nosign);
+  data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  
+  ByteConversion::toBytes(noGameOverHackOption_,
                           buffer,
                           ByteSizes::uint8Size,
                           EndiannessTypes::little,
@@ -101,6 +109,14 @@ int HackSettings::load(const Tbyte* data) {
   byteCount += ByteSizes::uint8Size;
   
   flightHackOption_ = static_cast<FlightHackOption>(
+    ByteConversion::fromBytes(data + byteCount,
+                              ByteSizes::uint8Size,
+                              EndiannessTypes::little,
+                              SignednessTypes::nosign)
+  );
+  byteCount += ByteSizes::uint8Size;
+  
+  noGameOverHackOption_ = static_cast<NoGameOverHackOption>(
     ByteConversion::fromBytes(data + byteCount,
                               ByteSizes::uint8Size,
                               EndiannessTypes::little,
@@ -160,6 +176,14 @@ void HackSettings::exportToROM(WritableROM& rom) {
   default:
     break;
   }
+  
+  switch (noGameOverHackOption_) {
+  case noGameOverHackOn:
+    TailsAdvBank0Hacks::addNoGameOverHack(rom);
+    break;
+  default:
+    break;
+  }
 }
   
 HackSettings::DoubleJumpFixOption HackSettings::doubleJumpFixOption() {
@@ -205,6 +229,15 @@ HackSettings::FlightHackOption HackSettings::flightHackOption() {
 void HackSettings::setFlightHackOption(
     FlightHackOption flightHackOption__) {
   flightHackOption_ = flightHackOption__;
+}
+  
+HackSettings::NoGameOverHackOption HackSettings::noGameOverHackOption() {
+  return noGameOverHackOption_;
+}
+
+void HackSettings::setNoGameOverHackOption(
+    NoGameOverHackOption noGameOverHackOption__) {
+  noGameOverHackOption_ = noGameOverHackOption__;
 }
 
 

@@ -39,6 +39,11 @@ public:
     flightHackOnDisabled,
   };
   
+  enum NoGameOverHackOption {
+    noGameOverHackOff,
+    noGameOverHackOn
+  };
+  
   HackSettings();
   
   void save(std::string& data);
@@ -67,6 +72,10 @@ public:
   void setFlightHackOption(
       FlightHackOption flightHackOption__);
   
+  NoGameOverHackOption noGameOverHackOption();
+  void setNoGameOverHackOption(
+      NoGameOverHackOption noGameOverHackOption__);
+  
 protected:
   const static int versionNum_ = 0;
 
@@ -79,6 +88,8 @@ protected:
   InventoryHackOption inventoryHackOption_;
   
   FlightHackOption flightHackOption_;
+  
+  NoGameOverHackOption noGameOverHackOption_;
   
 };
 

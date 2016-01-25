@@ -42,6 +42,10 @@ private slots:
 
     void on_flightDisabledBox_clicked(bool checked);
 
+    void on_gameOverStandardBox_clicked(bool checked);
+
+    void on_gameOverNoneBox_clicked(bool checked);
+
 private:
     Ui::TalesQtEnhancementsEditor *ui;
 };

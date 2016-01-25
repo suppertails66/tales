@@ -81,6 +81,17 @@ void TalesQtEnhancementsEditor::refreshDisplay() {
     default:
         break;
     }
+
+    switch (enhancementsEditor_.hackSettings().noGameOverHackOption()) {
+    case HackSettings::noGameOverHackOff:
+        ui->gameOverStandardBox->setChecked(true);
+        break;
+    case HackSettings::noGameOverHackOn:
+        ui->gameOverNoneBox->setChecked(true);
+        break;
+    default:
+        break;
+    }
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
@@ -159,4 +170,16 @@ void TalesQtEnhancementsEditor::on_flightDisabledBox_clicked(bool checked)
 {
     enhancementsEditor_.hackSettings().setFlightHackOption(
                 HackSettings::flightHackOnDisabled);
+}
+
+void TalesQtEnhancementsEditor::on_gameOverStandardBox_clicked(bool checked)
+{
+    enhancementsEditor_.hackSettings().setNoGameOverHackOption(
+                HackSettings::noGameOverHackOff);
+}
+
+void TalesQtEnhancementsEditor::on_gameOverNoneBox_clicked(bool checked)
+{
+    enhancementsEditor_.hackSettings().setNoGameOverHackOption(
+                HackSettings::noGameOverHackOn);
 }

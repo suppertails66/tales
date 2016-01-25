@@ -457,6 +457,13 @@ void TailsAdvBank0Hacks::addFlightDisableHack(
                   flightDisableHackMainData,
                   flightDisableHackMainLength);
 }
+
+void TailsAdvBank0Hacks::addNoGameOverHack(
+                   WritableROM& rom) {
+  rom.directWrite(noGameOverHackMainAddress,
+                  noGameOverHackMainData,
+                  noGameOverHackMainLength);
+}
                      
 const Tbyte TailsAdvBank0Hacks::levelHeaderHackData[levelHeaderHackLength] =
   { 0x3E, 0x00,           // ld A,0   ; zero will be replaced by bank number
@@ -848,5 +855,10 @@ const Tbyte TailsAdvBank0Hacks::flightLimiterHackTrigger3Data
 const Tbyte TailsAdvBank0Hacks::flightDisableHackMainData
                         [flightDisableHackMainLength] =
   { 0xC9 };                   // ret          ; don't enter flight mode
+
+const Tbyte TailsAdvBank0Hacks::noGameOverHackMainData
+                        [noGameOverHackMainLength] =
+  { 0x00,                     // nop          ; don't check lives counter
+    0x00 };                   // nop
 
 };
