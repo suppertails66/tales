@@ -795,6 +795,16 @@ void LevelEditorLayeredGraphicScene
     ::setBoundsLayerEnabled(bool boundsLayerEnabled__) {
   boundsLayerEnabled_ = boundsLayerEnabled__;
 }
+                      
+bool LevelEditorLayeredGraphicScene
+    ::cameraBoxEnabled() const {
+  return spawnLayer_.cameraBoxEnabled();
+}
+
+void LevelEditorLayeredGraphicScene
+    ::setCameraBoxEnabled(bool cameraBoxEnabled__) {
+  spawnLayer_.setCameraBoxEnabled(cameraBoxEnabled__);
+}
   
 int LevelEditorLayeredGraphicScene::cameraTopBound() {
   return currentLevelHeader().cameraTopLimit();

@@ -29,6 +29,9 @@ public:
   virtual void render(Graphic& dst,
                       Box srcbox,
                       double scale);
+                      
+  bool cameraBoxEnabled() const;
+  void setCameraBoxEnabled(bool cameraBoxEnabled__);
 
   void setSpawnEditDialogCallback(
           bool (*spawnEditDialogCallback__)(
@@ -70,6 +73,7 @@ protected:
   GGPalette* palette0_;
   GGPalette* palette1_;
   int areaNum_;
+  bool cameraBoxEnabled_;
   
   bool (*spawnEditDialogCallback_)(
           LevelSpawnGraphicSceneLayer&,SpawnPoint&,void*);

@@ -142,6 +142,9 @@ public:
   void setGridEnabled(bool gridEnabled__);
   bool boundsLayerEnabled() const;
   void setBoundsLayerEnabled(bool boundsLayerEnabled__);
+                      
+  bool cameraBoxEnabled() const;
+  void setCameraBoxEnabled(bool cameraBoxEnabled__);
   
   int cameraTopBound();
   int cameraBottomBound();

@@ -206,6 +206,68 @@ int TailsAdvEditor::versionNum() {
   return versionNum_;
 }
   
+void TailsAdvEditor::exportMap(Graphic& dst,
+               int index,
+               ResourceExportIDs::MapExportID exportID,
+               bool objects,
+               bool spawns,
+               bool cameraBoundaries) {
+  
+  // Create temporary editor for exporting the map
+  LevelEditor mapExportEditor(
+                 data_.levelEffectsHeaders(),
+                 data_.levelGraphicsData(),
+                 data_.levelObjectEntryGroups(),
+                 data_.levelPaletteHeaders(),
+                 data_.mapData(),
+                 data_.metatileBehaviors(),
+                 data_.metatileHeightMaps(),
+                 data_.metatileWidthMaps(),
+                 data_.spawnPoints(),
+                 data_.spriteMappings(),
+                 data_.standardPalettes(),
+                 data_.warpDestinations(),
+                 metadata_);
+  
+  // Change to target level
+  mapExportEditor.changeMap(index);
+  
+  // Turn off unwanted overlays
+  mapExportEditor.setGridEnabled(false);
+  mapExportEditor.setCameraBoxEnabled(false);
+  mapExportEditor.setObjectsEnabled(objects);
+  mapExportEditor.setSpawnsEnabled(spawns);
+  mapExportEditor.setBoundsEnabled(cameraBoundaries);
+  
+  switch (exportID) {
+  case ResourceExportIDs::mapVisual:
+    mapExportEditor.setLevelViewMode(
+        LevelEditor::viewLevelVisual);
+    break;
+  case ResourceExportIDs::mapBehavior:
+    mapExportEditor.setLevelViewMode(
+        LevelEditor::viewLevelEffect);
+    break;
+  case ResourceExportIDs::mapVertSolidity:
+    mapExportEditor.setLevelViewMode(
+        LevelEditor::viewLevelVerticalSolidity);
+    break;
+  case ResourceExportIDs::mapHorizSolidity:
+    mapExportEditor.setLevelViewMode(
+        LevelEditor::viewLevelHorizontalSolidity);
+    break;
+  default:
+    break;
+  }
+  
+  // Create destination graphic
+  dst = Graphic(mapExportEditor.currentLevelRealWidth(),
+                mapExportEditor.currentLevelRealHeight());
+  
+  // Render the level
+  mapExportEditor.drawPreviewGraphic(dst);
+}
+  
 EditorMetadata& TailsAdvEditor::metadata() {
   return metadata_;
 }

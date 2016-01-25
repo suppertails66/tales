@@ -60,3 +60,10 @@ void TalesQtFormatConversion::drawGraphicToImage(QImage& image,
         }
     }
 }
+
+void TalesQtFormatConversion::drawGraphicToImageWithAlpha(QImage& image,
+                               Tales::Graphic& graphic) {
+    // extremely lazy cheat
+    image = QImage(graphic.w(), graphic.h(), QImage::Format_ARGB32);
+    drawGraphicToImage(image, graphic);
+}

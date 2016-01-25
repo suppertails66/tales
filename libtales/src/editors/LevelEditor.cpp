@@ -403,6 +403,15 @@ LevelEffectsHeader& LevelEditor::currentLevelEffectsHeader() {
   return levelEffectsHeaders_.headersByMapnum(previewScene_.areaNum(),
                                               previewScene_.mapNum());
 }
+  
+int LevelEditor::currentLevelRealWidth() {
+  return (currentLevelWidth() * MetatileStructure::metatileWidth);
+}
+
+int LevelEditor::currentLevelRealHeight() {
+  return (((MapLayout::dataSize + 1) / currentLevelWidth())
+            * MetatileStructure::metatileHeight);
+}
 
 bool LevelEditor::currentLevelHasWarps() {
   if (previewScene_.areaNum() <= PrimaryMaps::battleFortress) {
@@ -453,6 +462,10 @@ void LevelEditor::setSpawnsEnabled(bool spawnsEnabled__) {
 
 void LevelEditor::setBoundsEnabled(bool boundsEnabled__) {
   previewScene_.setBoundsLayerEnabled(boundsEnabled__);
+}
+  
+void LevelEditor::setCameraBoxEnabled(bool cameraBoxEnabled__) {
+  previewScene_.setCameraBoxEnabled(cameraBoxEnabled__);
 }
   
 void LevelEditor::setLevelViewMode(LevelViewMode levelViewMode__) {

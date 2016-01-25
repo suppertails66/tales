@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
+    <width>540</width>
     <height>210</height>
    </rect>
   </property>
@@ -126,6 +126,13 @@
               </property>
               <property name="checked">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="levelCameraBoundsBox">
+              <property name="text">
+               <string>Camera bounds</string>
               </property>
              </widget>
             </item>

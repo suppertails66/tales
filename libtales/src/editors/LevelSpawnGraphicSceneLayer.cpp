@@ -20,6 +20,7 @@ LevelSpawnGraphicSceneLayer::LevelSpawnGraphicSceneLayer(
     palette0_(&palette0__),
     palette1_(&palette1__),
     areaNum_(areaNum__),
+    cameraBoxEnabled_(true),
     spawnEditDialogCallback_(0),
     spawnEditDialogCallbackParam_(0) {
   regenerateDisplayCaches();
@@ -74,15 +75,26 @@ void LevelSpawnGraphicSceneLayer::render(
     }
     
     // Draw camera box
-    int realCamX = groupIt->camX() - srcbox.x();
-    int realCamY = groupIt->camY() - srcbox.y();
-    
-    dst.drawRectBorder(realCamX + marginLeft_, realCamY + marginTop_,
-                       marginRight_ - marginLeft_, marginBottom_ - marginTop_,
-                       Color(255, 0, 0, Color::fullAlphaOpacity),
-                       2);
+    if (cameraBoxEnabled_) {
+      int realCamX = groupIt->camX() - srcbox.x();
+      int realCamY = groupIt->camY() - srcbox.y();
+      
+      dst.drawRectBorder(realCamX + marginLeft_, realCamY + marginTop_,
+                         marginRight_ - marginLeft_, marginBottom_ - marginTop_,
+                         Color(255, 0, 0, Color::fullAlphaOpacity),
+                         2);
+    }
              
   } while (cacheIt != spawnDisplayCaches_.begin());
+}
+                      
+bool LevelSpawnGraphicSceneLayer::cameraBoxEnabled() const {
+  return cameraBoxEnabled_;
+}
+
+void LevelSpawnGraphicSceneLayer
+    ::setCameraBoxEnabled(bool cameraBoxEnabled__) {
+  cameraBoxEnabled_ = cameraBoxEnabled__;
 }
 
 void LevelSpawnGraphicSceneLayer::regenerateDisplayCaches() {

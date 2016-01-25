@@ -2,6 +2,7 @@
 #define GRAPHICSEXPORTDIALOG_H
 
 #include <QDialog>
+#include "editors/ResourceExportID.h"
 
 namespace Ui {
 class GraphicsExportDialog;
@@ -14,6 +15,11 @@ class GraphicsExportDialog : public QDialog
 public:
     explicit GraphicsExportDialog(QWidget *parent = 0);
     ~GraphicsExportDialog();
+
+protected:
+    void exportMap(int index,
+                   Tales::ResourceExportIDs::MapExportID exportID,
+                   std::string foldername);
     
 private slots:
     void on_mapExportButton_clicked(bool checked);

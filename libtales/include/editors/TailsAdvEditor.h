@@ -3,6 +3,7 @@
 
 
 #include "structs/Tbyte.h"
+#include "editors/ResourceExportID.h"
 #include "gamegear/LoadedROM.h"
 #include "gamegear/WritableROM.h"
 #include "gamedata/TailsAdvData.h"
@@ -51,6 +52,13 @@ public:
   void exportToFile(const std::string& filename);
   
   int versionNum();
+  
+  void exportMap(Graphic& dst,
+                 int index,
+                 ResourceExportIDs::MapExportID exportID,
+                 bool objects,
+                 bool spawns,
+                 bool cameraBoundaries);
   
   EditorMetadata& metadata();
   

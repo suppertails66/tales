@@ -14,6 +14,9 @@ public:
 
     static void drawGraphicToImage(QImage& image,
                                    Tales::Graphic& graphic);
+
+    static void drawGraphicToImageWithAlpha(QImage& image,
+                                   Tales::Graphic& graphic);
 protected:
 
 };

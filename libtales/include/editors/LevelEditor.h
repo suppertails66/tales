@@ -107,6 +107,9 @@ public:
   void setCurrentLevelWidth(int width__);
   LevelEffectsHeader& currentLevelEffectsHeader();
   
+  int currentLevelRealWidth();
+  int currentLevelRealHeight();
+  
   bool currentLevelHasWarps();
   WarpDestinationCollection& currentLevelWarps();
   EditableSpawnPoints& spawnPoints();
@@ -123,6 +126,8 @@ public:
   void setFGEnabled(bool fgEnabled__);
   void setSpawnsEnabled(bool spawnsEnabled__);
   void setBoundsEnabled(bool boundsEnabled__);
+  
+  void setCameraBoxEnabled(bool cameraBoxEnabled__);
   
   int scrollX() const;
   int scrollY() const;
