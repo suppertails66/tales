@@ -118,7 +118,7 @@ int HackSettings::load(const Tbyte* data) {
   );
   byteCount += ByteSizes::uint8Size;
   
-  if (versionNum_ >= 1) {
+  if (loader.version() >= 1) {
     noGameOverHackOption_ = static_cast<NoGameOverHackOption>(
       ByteConversion::fromBytes(data + byteCount,
                                 ByteSizes::uint8Size,
