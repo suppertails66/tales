@@ -61,6 +61,26 @@ void VisualMetatilePickerScene
     ::setMetatiles(MetatileStructureSet& metatiles__) {
   metatiles_ = &metatiles__;
 }
+  
+GGTileSet& VisualMetatilePickerScene
+    ::tiles() {
+  return *tiles_;
+}
+
+GGPalette& VisualMetatilePickerScene
+    ::palette0() {
+  return *palette0_;
+}
+
+GGPalette& VisualMetatilePickerScene
+    ::palette1() {
+  return *palette1_;
+}
+
+MetatileStructureSet& VisualMetatilePickerScene
+    ::metatiles() {
+  return *metatiles_;
+}
 
 
 };

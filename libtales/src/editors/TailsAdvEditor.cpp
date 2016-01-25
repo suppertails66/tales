@@ -1,6 +1,7 @@
 #include "editors/TailsAdvEditor.h"
 #include "editors/MappingAssembler.h"
 #include "editors/GraphicToMappings.h"
+#include "editors/TileRenderer.h"
 #include "exception/InvalidLoadDataException.h"
 #include "gamedata/TailsAdvBank0Hacks.h"
 #include "gamedata/TailsAdvFreeSpace.h"
@@ -351,6 +352,58 @@ void TailsAdvEditor::exportAlignedSpriteMapping(Graphic& dst,
                (alignedH / 2) + cache.offsetY(),
                0, 0),
            Graphic::noTransUpdate);
+}
+  
+void TailsAdvEditor::exportMetatile(Graphic& dst,
+                    int setNum,
+                    int metatileIndex) {
+  MetatileStructureEditor structureExportEditor(
+                            metadata_.metatileStructureDefaults(),
+                            data_.mapData().metatileStructures(),
+                            data_.levelGraphicsData(),
+                            data_.standardPalettes());
+  
+  structureExportEditor.loadNewCurrentSet(setNum);
+  structureExportEditor.pickMetatile(metatileIndex);
+  
+  GGTileSet tiles = structureExportEditor.currentGraphic();
+  GGPalette palette0 = structureExportEditor.currentPalette0();
+  GGPalette palette1 = structureExportEditor.currentPalette1();
+  MetatileStructure structure
+      = structureExportEditor.currentMetatileStructure();
+      
+  dst = Graphic(MetatileStructure::metatileWidth,
+                MetatileStructure::metatileHeight);
+  dst.clear(Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency));
+  
+  TileRenderer::renderMetatile(dst,
+                               Box(0, 0,
+                                   MetatileStructure::metatileWidth,
+                                   MetatileStructure::metatileHeight),
+                               structure,
+                               tiles,
+                               palette0,
+                               palette1,
+                               tileOffset_);
+}
+  
+void TailsAdvEditor::exportMetatileSet(Graphic& dst,
+                    int setNum) {
+  dst = Graphic(aggregateW, aggregateH);
+  dst.clear(Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency));
+  
+  for (int i = 0; i < MetatileStructures::numMetatilesPerTable; i++) {
+    Graphic g;
+    
+    exportMetatile(g, setNum, i);
+    
+    int x = (i % aggregateMetatilesPerRow) * MetatileStructure::metatileWidth;
+    int y = (i / aggregateMetatilesPerRow) * MetatileStructure::metatileHeight;
+    
+    dst.blit(g,
+             Box(x, y, 0, 0),
+             Graphic::noTransUpdate);
+  }
 }
   
 void TailsAdvEditor::createSpriteMappingCache(ObjectDisplayCache& cache,

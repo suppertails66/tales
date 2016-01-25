@@ -30,6 +30,8 @@ private slots:
 
     void on_graphicExportButton_clicked(bool checked);
 
+    void on_metatileExportButton_clicked(bool checked);
+
 private:
     Ui::GraphicsExportDialog *ui;
 };

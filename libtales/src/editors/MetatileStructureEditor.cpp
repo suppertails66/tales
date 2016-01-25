@@ -170,6 +170,18 @@ void MetatileStructureEditor::updatePickedTile() {
     break;
   }
 }
+
+GGTileSet& MetatileStructureEditor::currentGraphic() {
+  return metatilePicker_.tiles();
+}
+  
+GGPalette& MetatileStructureEditor::currentPalette0() {
+  return metatilePicker_.palette0();
+}
+
+GGPalette& MetatileStructureEditor::currentPalette1() {
+  return metatilePicker_.palette1();
+}
   
 MetatileStructureSet& MetatileStructureEditor::currentMetatileStructureSet() {
   return metatileStructures_.metatileStructureSet(currentSet_);
@@ -231,6 +243,11 @@ void MetatileStructureEditor::removeCurrentMetatileStructureIndex() {
       --(it->second);
     }
   }
+}
+  
+void MetatileStructureEditor::pickMetatile(int index) {
+  metatilePicker_.pickIndex(index);
+  loadPickedMetatile();
 }
   
 void MetatileStructureEditor::setStructureOfCurrentMetatile(int index) {

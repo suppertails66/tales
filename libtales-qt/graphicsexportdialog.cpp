@@ -268,3 +268,56 @@ void GraphicsExportDialog::exportGraphic(Tales::Graphic graphic,
     TalesQtFormatConversion::drawGraphicToImageWithAlpha(exportImage, graphic);
     exportImage.save(filename.c_str(), 0);
 }
+
+void GraphicsExportDialog::on_metatileExportButton_clicked(bool checked)
+{
+    QString foldername = QFileDialog::getExistingDirectory(
+                this, tr("Choose metatile export directory"),
+                "");
+
+    if (foldername.size() == 0) {
+        return;
+    }
+
+    int numSets = appState_.editor().metatileStructureEditor()
+            .numMetatileStructureSets();
+
+    ui->progressBar->setRange(0, numSets - 1);
+    ui->progressBar->setValue(0);
+
+    Graphic g;
+
+    for (int i = 0; i < numSets; i++) {
+        if (ui->metatileAggregateBox->isChecked()) {
+            appState_.editor().exportMetatileSet(
+                        g, i);
+
+            std::string exportFileName = foldername.toStdString()
+                    + "/"
+                    + "tileset-"
+                    + StringConversion::toString(i)
+                    + ".png";
+
+            exportGraphic(g, exportFileName);
+        }
+
+        if (ui->metatileIndividualBox->isChecked()) {
+            for (int j = 0; j < MetatileStructures::numMetatilesPerTable; j++) {
+                appState_.editor().exportMetatile(
+                            g, i, j);
+
+                std::string exportFileName = foldername.toStdString()
+                        + "/"
+                        + "tileset-"
+                        + StringConversion::toString(i)
+                        + "-tile-"
+                        + StringConversion::toString(j)
+                        + ".png";
+
+                exportGraphic(g, exportFileName);
+            }
+        }
+
+        ui->progressBar->setValue(i);
+    }
+}

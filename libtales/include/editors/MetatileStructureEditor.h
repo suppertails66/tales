@@ -71,6 +71,10 @@ public:
   
   void updatePickedTile();
   
+  GGTileSet& currentGraphic();
+  GGPalette& currentPalette0();
+  GGPalette& currentPalette1();
+  
   void changeCurrentGraphic(int index);
   void changeCurrentPalette0(int index);
   void changeCurrentPalette1(int index);
@@ -89,6 +93,8 @@ public:
   
   void appendMetatileStructureIndex();
   void removeCurrentMetatileStructureIndex();
+  
+  void pickMetatile(int index);
 protected:
   const static int tileOffset_ = -256;
   const static int legalTileLowerBound_ = 256;

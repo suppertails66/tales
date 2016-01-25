@@ -75,6 +75,13 @@ public:
                          int graphicIndex,
                          int spriteIndex);
   
+  void exportMetatile(Graphic& dst,
+                      int setNum,
+                      int metatileIndex);
+  
+  void exportMetatileSet(Graphic& dst,
+                      int setNum);
+  
   EditorMetadata& metadata();
   
   LevelEditor& levelEditor();
@@ -144,6 +151,12 @@ protected:
   
   const static int alignedW = 256;
   const static int alignedH = 256;
+  
+  const static int tileOffset_ = -256;
+  
+  const static int aggregateW = 256;
+  const static int aggregateH = 256;
+  const static int aggregateMetatilesPerRow = 16;
   
 };
 

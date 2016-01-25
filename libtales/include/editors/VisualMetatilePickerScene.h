@@ -23,6 +23,11 @@ public:
   void setPalette0(GGPalette& palette0__);
   void setPalette1(GGPalette& palette1__);
   void setMetatiles(MetatileStructureSet& metatiles__);
+  
+  GGTileSet& tiles();
+  GGPalette& palette0();
+  GGPalette& palette1();
+  MetatileStructureSet& metatiles();
 protected:
   const static int tileOffset_ = -256;
 //  static Graphic tileRenderBuffer_;
