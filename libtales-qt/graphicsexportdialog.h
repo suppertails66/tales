@@ -32,6 +32,8 @@ private slots:
 
     void on_metatileExportButton_clicked(bool checked);
 
+    void on_tilemapExportButton_clicked(bool checked);
+
 private:
     Ui::GraphicsExportDialog *ui;
 };

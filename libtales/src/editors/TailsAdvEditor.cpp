@@ -2,6 +2,7 @@
 #include "editors/MappingAssembler.h"
 #include "editors/GraphicToMappings.h"
 #include "editors/TileRenderer.h"
+#include "gamedata/TileMapInfos.h"
 #include "exception/InvalidLoadDataException.h"
 #include "gamedata/TailsAdvBank0Hacks.h"
 #include "gamedata/TailsAdvFreeSpace.h"
@@ -404,6 +405,32 @@ void TailsAdvEditor::exportMetatileSet(Graphic& dst,
              Box(x, y, 0, 0),
              Graphic::noTransUpdate);
   }
+}
+  
+void TailsAdvEditor::exportTileMap(Graphic& dst,
+                   int index) {
+  TileMapInfo info = TileMapInfos::tileMapInfo(index);
+  TileMapEditorToolManager toolManager_;
+  TileMapPickerScene tileMapPreview_(
+                        toolManager_,
+                        data_.tileMaps().tileMap(index),
+                        data_.levelGraphicsData().compressedGraphic(
+                          info.graphicNum),
+                        data_.standardPalettes().palette(
+                          info.paletteNum),
+                        info.offset);
+  tileMapPreview_.setGridLayerEnabled(false);
+  tileMapPreview_.setSceneScale(1.00);
+  tileMapPreview_.clearHighlightedBox();
+  tileMapPreview_.clearPickedBox();
+  
+  dst = Graphic(tileMapPreview_.nativeW(), tileMapPreview_.nativeH());
+  
+  tileMapPreview_.render(dst,
+                         Box(0, 0,
+                             tileMapPreview_.nativeW(),
+                             tileMapPreview_.nativeH()),
+                         Graphic::noTransUpdate);
 }
   
 void TailsAdvEditor::createSpriteMappingCache(ObjectDisplayCache& cache,

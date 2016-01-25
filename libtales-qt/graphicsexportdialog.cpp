@@ -321,3 +321,37 @@ void GraphicsExportDialog::on_metatileExportButton_clicked(bool checked)
         ui->progressBar->setValue(i);
     }
 }
+
+void GraphicsExportDialog::on_tilemapExportButton_clicked(bool checked)
+{
+    QString foldername = QFileDialog::getExistingDirectory(
+                this, tr("Choose tilemap export directory"),
+                "");
+
+    if (foldername.size() == 0) {
+        return;
+    }
+
+    int numSets = appState_.editor().tileMapEditor()
+            .numTileMaps();
+
+    ui->progressBar->setRange(0, numSets - 1);
+    ui->progressBar->setValue(0);
+
+    Graphic g;
+
+    for (int i = 0; i < numSets; i++) {
+        appState_.editor().exportTileMap(
+                    g, i);
+
+        std::string exportFileName = foldername.toStdString()
+                + "/"
+                + "tilemap-"
+                + StringConversion::toString(i)
+                + ".png";
+
+        exportGraphic(g, exportFileName);
+
+        ui->progressBar->setValue(i);
+    }
+}

@@ -82,6 +82,9 @@ public:
   void exportMetatileSet(Graphic& dst,
                       int setNum);
   
+  void exportTileMap(Graphic& dst,
+                     int index);
+  
   EditorMetadata& metadata();
   
   LevelEditor& levelEditor();
