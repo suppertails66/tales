@@ -462,7 +462,10 @@
       On the Master System and Game Gear, raw graphics consist of a series of patterns of pixel data. Each pattern can be combined with one of two 16-color palettes to form a color image. Patterns can be stored in the ROM either compressed or uncompressed; graphics stored uncompressed can be loaded quickly, which makes them suitable for player character graphics (which are too numerous to all fit in VRAM at once, and so are loaded one at a time as needed).
     </p>
     <p>
-      Tails Adventures combines raw graphic patterns together to produce the "object graphics" that are displayed to the player using sprites. The way the patterns are assembled is referred to as a <b>sprite mapping</b>. Sprites have a <b>transparent color</b>, which is always the first (zeroth) color in the palette. The game also assigns every sprite mapping a <b>collision box</b>, so that an object that uses a mapping can tell when it has touched another object.
+      Tails Adventures combines raw graphic patterns together to produce the "object graphics" that are displayed to the player using sprites. A <b>sprite</b> is an 8x8 graphic that is not aligned to a grid the way a tile in a tilemap is. Sprites have a <b>transparent color</b>, which is always the first (zeroth) color in the palette. The way multiple sprites are assembled to form a single image is referred to as a <b>sprite mapping</b>. The game also assigns every sprite mapping a <b>collision box</b>, so that an object that uses a mapping can tell when it has touched another object.
+    </p>
+    <p>
+      An important point to note is that <b>Tails Adventures uses the SMS/GG "tall" sprite mode at all times</b>. This means that every time a sprite is displayed on-screen, whatever pattern in VRAM comes immediately after the one used by the sprite will be displayed one tile underneath it (thus simulating a single 8x16 sprite).
     </p>
     <p>
       Tales does not support editing of sprite mappings for technical reasons (i.e. it's more trouble than it's worth). However, it can edit graphics and collision boxes.
