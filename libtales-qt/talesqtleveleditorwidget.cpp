@@ -124,8 +124,6 @@ void TalesQtLevelEditorWidget::refreshDisplay() {
 
     refreshToolbox();
 
-    refreshNumObjects();
-
     ui->cameraBoundTopBox->setValue(
                 levelEditor_.cameraTopBound());
     ui->cameraBoundBottomBox->setValue(
@@ -255,12 +253,22 @@ void TalesQtLevelEditorWidget::refreshNumObjects() {
         str += "0 / 0";
     }
     else {
+        // Level total
         str += StringConversion::toString(
                     levelEditor_.currentObjectGroup()->size());
         str += " / ";
         str += StringConversion::toString(
                     LevelObjectEntryGroup::maxGroupSize);
     }
+
+    // All objects total
+    str += "   (";
+    str += StringConversion::toString(
+                levelEditor_.totalObjectCount());
+    str += " / ";
+    str += StringConversion::toString(
+                levelEditor_.maxTotalObjects());
+    str += ")";
 
     ui->mapNumObjectsLabel->setText(str.c_str());
 }
@@ -280,6 +288,8 @@ void TalesQtLevelEditorWidget::reloadAndRefresh() {
     ui->objectListWidget->assignGroup(
                 levelEditor_.currentObjectGroup(),
                 levelEditor_.toolManager());
+
+    refreshNumObjects();
 
     refreshDisplay();
 }

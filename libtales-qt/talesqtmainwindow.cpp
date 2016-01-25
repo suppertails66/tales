@@ -3,6 +3,7 @@
 #include "talesqtstatevar.h"
 #include "genericerrordialog.h"
 #include "aboutdialog.h"
+#include "graphicsexportdialog.h"
 #include "exception/NotEnoughSpaceException.h"
 #include "util/StringConversion.h"
 #include <QFileDialog>
@@ -259,4 +260,9 @@ void TalesQtMainWindow::on_actionAbout_triggered(bool checked)
 void TalesQtMainWindow::on_actionTilemap_editor_triggered(bool checked)
 {
     appState_.changeEditor(TalesQtEditorModes::tileMapEditor);
+}
+
+void TalesQtMainWindow::on_actionExport_other_triggered(bool checked)
+{
+    GraphicsExportDialog(this).exec();
 }

@@ -155,6 +155,9 @@ public:
   
   std::string nameOfArea(int areaNum);
   
+  int maxTotalObjects();
+  int totalObjectCount();
+  
   EditorMetadata& metadata();
   
 protected:

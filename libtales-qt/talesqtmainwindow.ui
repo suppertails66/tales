@@ -65,6 +65,7 @@
     <addaction name="actionSave_project_as"/>
     <addaction name="actionExport_ROM_2"/>
     <addaction name="actionExport_ROM"/>
+    <addaction name="actionExport_other"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -277,6 +278,11 @@
    </property>
    <property name="shortcut">
     <string>Shift+T</string>
+   </property>
+  </action>
+  <action name="actionExport_other">
+   <property name="text">
+    <string>Export resources...</string>
    </property>
   </action>
  </widget>

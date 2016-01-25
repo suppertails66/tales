@@ -592,6 +592,14 @@ std::string LevelEditor::nameOfArea(int areaNum) {
   return metadata_.areaMetadata(areaNum).name();
 }
   
+int LevelEditor::maxTotalObjects() {
+  return levelObjectEntryGroups_.maxTotalEntries();
+}
+  
+int LevelEditor::totalObjectCount() {
+  return levelObjectEntryGroups_.totalEntries();
+}
+  
 EditorMetadata& LevelEditor::metadata() {
   return metadata_;
 }

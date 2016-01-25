@@ -15,13 +15,29 @@ QPixmap TalesQtFormatConversion::graphicToPixmap(Graphic& graphic) {
             (*rgb) = qRgba(color.r(),
                            color.g(),
                            color.b(),
-                           // Convert from our alpha to Qt's
-                           0xFF - color.a());
+                           color.a());
             ++rgb;
         }
     }
 
     return QPixmap().fromImage(temp);
+}
+
+QImage TalesQtFormatConversion::graphicToImage(Tales::Graphic& graphic) {
+    QImage image(graphic.w(), graphic.h(), QImage::Format_ARGB32);
+
+    for (int j = 0; j < graphic.h(); j++) {
+        QRgb* rgb = (QRgb*)(image.scanLine(j));
+
+        for (int i = 0; i < graphic.w(); i++) {
+            Color color = graphic.getPixel(i, j);
+            (*rgb) = qRgba(color.r(),
+                           color.g(),
+                           color.b(),
+                           color.a());
+            ++rgb;
+        }
+    }
 }
 
 void TalesQtFormatConversion::drawGraphicToImage(QImage& image,

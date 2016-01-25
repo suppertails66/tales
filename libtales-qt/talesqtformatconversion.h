@@ -10,6 +10,8 @@ class TalesQtFormatConversion
 public:
     static QPixmap graphicToPixmap(Tales::Graphic& graphic);
 
+    static QImage graphicToImage(Tales::Graphic& graphic);
+
     static void drawGraphicToImage(QImage& image,
                                    Tales::Graphic& graphic);
 protected:

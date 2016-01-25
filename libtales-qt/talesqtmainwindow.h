@@ -58,6 +58,8 @@ private slots:
 
     void on_actionTilemap_editor_triggered(bool checked);
 
+    void on_actionExport_other_triggered(bool checked);
+
 private:
     Ui::TalesQtMainWindow *ui;
 };

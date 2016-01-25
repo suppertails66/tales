@@ -78,7 +78,7 @@ int EditableLevelObjectEntryGroups::totalEntries() {
   for (BaseEditableMappedData<LevelObjectEntryGroup>::IndexDataMap::iterator
           it = primaryStorage_.begin();
        it != primaryStorage_.end();
-       it++) {
+       ++it) {
     totalObjects += it->size();
   }
   
