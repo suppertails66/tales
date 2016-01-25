@@ -33,8 +33,13 @@ void GraphicsExportDialog::on_mapExportButton_clicked(bool checked)
         return;
     }
 
-    for (int i = 0; i < appState_.editor().levelEditor()
-                            .levelHeaders().size(); i++) {
+    int numIndices = appState_.editor().levelEditor()
+            .levelHeaders().size();
+
+    ui->progressBar->setRange(0, numIndices - 1);
+    ui->progressBar->setValue(0);
+
+    for (int i = 0; i < numIndices; i++) {
         if (ui->levelVisualBox->isChecked()) {
             exportMap(i, ResourceExportIDs::mapVisual, foldername.toStdString());
         }
@@ -50,6 +55,8 @@ void GraphicsExportDialog::on_mapExportButton_clicked(bool checked)
         if (ui->levelBehaviorBox->isChecked()) {
             exportMap(i, ResourceExportIDs::mapHorizSolidity, foldername.toStdString());
         }
+
+        ui->progressBar->setValue(i);
     }
 
 //    std::cout << foldername.toStdString() << std::endl;
