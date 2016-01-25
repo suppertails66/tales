@@ -60,6 +60,21 @@ public:
                  bool spawns,
                  bool cameraBoundaries);
   
+  void exportTileGraphic(Graphic& dst,
+                         GraphicsEditor::GraphicCompressionType compression,
+                         int index,
+                         bool transparency);
+  
+  void exportSpriteMapping(Graphic& dst,
+                         GraphicsEditor::GraphicCompressionType compression,
+                         int graphicIndex,
+                         int spriteIndex);
+  
+  void exportAlignedSpriteMapping(Graphic& dst,
+                         GraphicsEditor::GraphicCompressionType compression,
+                         int graphicIndex,
+                         int spriteIndex);
+  
   EditorMetadata& metadata();
   
   LevelEditor& levelEditor();
@@ -119,6 +134,16 @@ protected:
   EnhancementsEditor enhancementsEditor_;
   
   TileMapEditor tileMapEditor_;
+  
+  void createSpriteMappingCache(ObjectDisplayCache& cache,
+                                GraphicsEditor& graphicsExportEditor,
+                                GraphicsEditor::GraphicCompressionType
+                                  compression,
+                                int graphicIndex,
+                                int spriteIndex);
+  
+  const static int alignedW = 256;
+  const static int alignedH = 256;
   
 };
 

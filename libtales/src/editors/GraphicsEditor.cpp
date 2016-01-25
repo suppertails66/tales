@@ -279,6 +279,19 @@ SpriteMapping& GraphicsEditor::currentMapping() {
   return toolManager_.mapping();
 }
   
+GGTileSet& GraphicsEditor::currentGraphic() {
+  switch (currentGraphicCompressionType_) {
+  case compressed:
+    return levelGraphicsData_.compressedGraphic(currentGraphicIndex_);
+    break;
+  case uncompressed:
+    return levelGraphicsData_.uncompressedGraphic(currentGraphicIndex_);
+    break;
+  default:
+    break;
+  }
+}
+  
 void GraphicsEditor::changeMapping(int mappingSubIndex) {
   GraphicToMappings::CompressionType localType
           = GraphicToMappings::compressed;

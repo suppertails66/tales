@@ -5,6 +5,7 @@
 #include "util/StringConversion.h"
 #include "gamedata/PrimaryMaps.h"
 #include "gamedata/SubMaps.h"
+#include "editors/GraphicToMappings.h"
 #include <QFileDialog>
 #include <iostream>
 
@@ -72,7 +73,144 @@ void GraphicsExportDialog::on_graphicExportButton_clicked(bool checked)
         return;
     }
 
+    int compressed = appState_.editor().graphicsEditor().numCompressedGraphics();
+    int uncompressed = appState_.editor().graphicsEditor().numUncompressedGraphics();
+    int total = compressed + uncompressed;
 
+    Graphic g;
+
+    ui->progressBar->setRange(0, total);
+    ui->progressBar->setValue(0);
+
+    int count = 0;
+
+    for (int i = 0; i < compressed; i++) {
+        if (ui->rawGraphicsBox->isChecked()) {
+            appState_.editor().exportTileGraphic(
+                        g,
+                        GraphicsEditor::compressed,
+                        i,
+                        ui->transparencyBox->isChecked());
+
+            std::string filename = foldername.toStdString()
+                    + "/"
+                    + "grp-tiles-compressed-"
+                    + StringConversion::toString(i)
+                    + ".png";
+
+            exportGraphic(g,filename);
+        }
+
+        int numMappings = GraphicToMappings::numMappingsForGraphic(
+                    GraphicToMappings::compressed, i);
+
+        if (ui->spriteMappingsBox->isChecked()) {
+            for (int j = 0; j < numMappings; j++) {
+                appState_.editor().exportSpriteMapping(
+                            g,
+                            GraphicsEditor::compressed,
+                            i,
+                            j);
+
+                std::string filename = foldername.toStdString()
+                        + "/"
+                        + "grp-spritemap-compressed-"
+                        + StringConversion::toString(i)
+                        + "-"
+                        + StringConversion::toString(j)
+                        + ".png";
+
+                exportGraphic(g,filename);
+            }
+        }
+
+        if (ui->alignedSpriteMappingsBox->isChecked()) {
+            for (int j = 0; j < numMappings; j++) {
+                appState_.editor().exportAlignedSpriteMapping(
+                            g,
+                            GraphicsEditor::compressed,
+                            i,
+                            j);
+
+                std::string filename = foldername.toStdString()
+                        + "/"
+                        + "grp-aligned-spritemap-compressed-"
+                        + StringConversion::toString(i)
+                        + "-"
+                        + StringConversion::toString(j)
+                        + ".png";
+
+                exportGraphic(g,filename);
+            }
+        }
+
+        ++count;
+        ui->progressBar->setValue(count);
+    }
+
+    for (int i = 0; i < uncompressed; i++) {
+        if (ui->rawGraphicsBox->isChecked()) {
+            appState_.editor().exportTileGraphic(
+                        g,
+                        GraphicsEditor::uncompressed,
+                        i,
+                        ui->transparencyBox->isChecked());
+
+            std::string filename = foldername.toStdString()
+                    + "/"
+                    + "grp-tiles-uncompressed-"
+                    + StringConversion::toString(i)
+                    + ".png";
+
+            exportGraphic(g, filename);
+        }
+
+        int numMappings = GraphicToMappings::numMappingsForGraphic(
+                    GraphicToMappings::uncompressed, i);
+
+        if (ui->spriteMappingsBox->isChecked()) {
+            for (int j = 0; j < numMappings; j++) {
+                appState_.editor().exportSpriteMapping(
+                            g,
+                            GraphicsEditor::uncompressed,
+                            i,
+                            j);
+
+                std::string filename = foldername.toStdString()
+                        + "/"
+                        + "grp-spritemap-uncompressed-"
+                        + StringConversion::toString(i)
+                        + "-"
+                        + StringConversion::toString(j)
+                        + ".png";
+
+                exportGraphic(g,filename);
+            }
+        }
+
+        if (ui->alignedSpriteMappingsBox->isChecked()) {
+            for (int j = 0; j < numMappings; j++) {
+                appState_.editor().exportAlignedSpriteMapping(
+                            g,
+                            GraphicsEditor::uncompressed,
+                            i,
+                            j);
+
+                std::string filename = foldername.toStdString()
+                        + "/"
+                        + "grp-aligned-spritemap-uncompressed-"
+                        + StringConversion::toString(i)
+                        + "-"
+                        + StringConversion::toString(j)
+                        + ".png";
+
+                exportGraphic(g,filename);
+            }
+        }
+
+        ++count;
+        ui->progressBar->setValue(count);
+    }
 }
 
 void GraphicsExportDialog::exportMap(int index,
@@ -121,8 +259,12 @@ void GraphicsExportDialog::exportMap(int index,
 
 //        std::cout << exportFileName << std::endl;
 
-    QImage exportImage;
-    TalesQtFormatConversion::drawGraphicToImageWithAlpha(exportImage, g);
+    exportGraphic(g, exportFileName.c_str());
+}
 
-    exportImage.save(exportFileName.c_str(), 0);
+void GraphicsExportDialog::exportGraphic(Tales::Graphic graphic,
+                   std::string filename) {
+    QImage exportImage;
+    TalesQtFormatConversion::drawGraphicToImageWithAlpha(exportImage, graphic);
+    exportImage.save(filename.c_str(), 0);
 }

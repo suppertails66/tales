@@ -88,6 +88,8 @@ public:
   bool mappingExists();
   SpriteMapping& currentMapping();
   
+  GGTileSet& currentGraphic();
+  
   void changeMapping(int mappingSubIndex);
       
   bool collisionViewEnabled();

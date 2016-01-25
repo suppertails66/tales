@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "editors/ResourceExportID.h"
+#include "structs/Graphic.h"
 
 namespace Ui {
 class GraphicsExportDialog;
@@ -20,6 +21,9 @@ protected:
     void exportMap(int index,
                    Tales::ResourceExportIDs::MapExportID exportID,
                    std::string foldername);
+
+    void exportGraphic(Tales::Graphic graphic,
+                       std::string filename);
     
 private slots:
     void on_mapExportButton_clicked(bool checked);

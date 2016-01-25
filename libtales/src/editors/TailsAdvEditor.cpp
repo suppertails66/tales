@@ -1,4 +1,6 @@
 #include "editors/TailsAdvEditor.h"
+#include "editors/MappingAssembler.h"
+#include "editors/GraphicToMappings.h"
 #include "exception/InvalidLoadDataException.h"
 #include "gamedata/TailsAdvBank0Hacks.h"
 #include "gamedata/TailsAdvFreeSpace.h"
@@ -266,6 +268,125 @@ void TailsAdvEditor::exportMap(Graphic& dst,
   
   // Render the level
   mapExportEditor.drawPreviewGraphic(dst);
+}
+  
+void TailsAdvEditor::exportTileGraphic(Graphic& dst,
+                       GraphicsEditor::GraphicCompressionType compression,
+                       int index,
+                       bool transparency) {
+  GraphicsEditor graphicsExportEditor(data_.levelGraphicsData(),
+                    data_.standardPalettes(),
+                    data_.spriteMappings(),
+                    metadata_);
+  
+  graphicsExportEditor.changeGraphic(compression,
+                                     index);
+  
+  graphicsExportEditor.setGridEnabled(false);
+  graphicsExportEditor.setCollisionViewEnabled(false);
+  graphicsExportEditor.setTransparencyEnabled(transparency);
+  
+  graphicsExportEditor.drawTileGraphic(dst);
+}
+  
+void TailsAdvEditor::exportSpriteMapping(Graphic& dst,
+                       GraphicsEditor::GraphicCompressionType compression,
+                       int graphicIndex,
+                       int spriteIndex) {
+  GraphicsEditor graphicsExportEditor(data_.levelGraphicsData(),
+                    data_.standardPalettes(),
+                    data_.spriteMappings(),
+                    metadata_);
+  
+  graphicsExportEditor.changeGraphic(compression,
+                                     graphicIndex);
+  graphicsExportEditor.changeMapping(spriteIndex);
+  
+  graphicsExportEditor.setGridEnabled(false);
+  graphicsExportEditor.setCollisionViewEnabled(false);
+  graphicsExportEditor.setTransparencyEnabled(true);
+  
+  ObjectDisplayCache cache;
+  
+  createSpriteMappingCache(cache,
+                           graphicsExportEditor,
+                           compression,
+                           graphicIndex,
+                           spriteIndex);
+  
+  dst = cache.graphic();
+  
+//  graphicsExportEditor.drawMappingGraphic(dst);
+}
+  
+void TailsAdvEditor::exportAlignedSpriteMapping(Graphic& dst,
+                       GraphicsEditor::GraphicCompressionType compression,
+                       int graphicIndex,
+                       int spriteIndex) {
+  GraphicsEditor graphicsExportEditor(data_.levelGraphicsData(),
+                    data_.standardPalettes(),
+                    data_.spriteMappings(),
+                    metadata_);
+  
+  graphicsExportEditor.changeGraphic(compression,
+                                     graphicIndex);
+  graphicsExportEditor.changeMapping(spriteIndex);
+  
+  graphicsExportEditor.setGridEnabled(false);
+  graphicsExportEditor.setCollisionViewEnabled(false);
+  graphicsExportEditor.setTransparencyEnabled(true);
+  
+  ObjectDisplayCache cache;
+  
+  createSpriteMappingCache(cache,
+                           graphicsExportEditor,
+                           compression,
+                           graphicIndex,
+                           spriteIndex);
+  
+  dst = Graphic(alignedW, alignedH);
+  dst.clear(Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency));
+  dst.blit(cache.graphic(),
+           Box((alignedW / 2) + cache.offsetX(),
+               (alignedH / 2) + cache.offsetY(),
+               0, 0),
+           Graphic::noTransUpdate);
+}
+  
+void TailsAdvEditor::createSpriteMappingCache(ObjectDisplayCache& cache,
+                              GraphicsEditor& graphicsExportEditor,
+                              GraphicsEditor::GraphicCompressionType
+                                compression,
+                              int graphicIndex,
+                              int spriteIndex) {
+  GraphicToMappings::CompressionType localType
+          = GraphicToMappings::compressed;
+
+  if (compression == GraphicsEditor::uncompressed) {
+      localType = GraphicToMappings::uncompressed;
+  }
+  
+  GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
+      localType,
+      graphicIndex,
+      spriteIndex);
+  
+  MappingAssembler::assembleMappings(
+                   cache,
+                   graphicsExportEditor.currentGraphic(),
+                   graphicsExportEditor.currentMapping(),
+                   data_.spriteMappings().coordinateTable(
+                     graphicsExportEditor.currentMapping()
+                       .coordinateTableIndex()),
+                   data_.spriteMappings().tileIndexTable(
+                     graphicsExportEditor.currentMapping()
+                       .tileIndexTableIndex()),
+                   data_.standardPalettes().palette(
+                     graphicsExportEditor.currentPaletteIndex()),
+                   ObjectStateInfo::left,
+                   entry.tileOffset,
+                   Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency),
+                   Color(0xFF, 0xFF, 0xFF, Color::fullAlphaTransparency));
 }
   
 EditorMetadata& TailsAdvEditor::metadata() {

@@ -263,22 +263,12 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QCheckBox" name="transparencyBox">
               <property name="text">
-               <string>Tiles per row</string>
+               <string>Transparency</string>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="tilesPerRowBox">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>256</number>
-              </property>
-              <property name="value">
-               <number>16</number>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -354,7 +344,7 @@
    <item>
     <widget class="QProgressBar" name="progressBar">
      <property name="value">
-      <number>100</number>
+      <number>0</number>
      </property>
     </widget>
    </item>
