@@ -2,6 +2,7 @@
 #include "ui_talesqtgraphicseditorwidget.h"
 #include "talesqtformatconversion.h"
 #include "talesqtstatevar.h"
+#include "nativegraphicexportdialog.h"
 #include "editors/PaletteEditor.h"
 #include "editors/GraphicToInfo.h"
 #include "util/StringConversion.h"
@@ -518,5 +519,6 @@ void TalesQtGraphicsEditorWidget::on_heightBox_valueChanged(int arg1)
 
 void TalesQtGraphicsEditorWidget::on_exportButton_clicked()
 {
-    graphicsEditor_.exportAllMappings();
+//    graphicsEditor_.exportAllMappings();
+    NativeGraphicExportDialog(this).exec();
 }
