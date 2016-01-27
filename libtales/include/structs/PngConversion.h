@@ -7,7 +7,7 @@
 #include <string>
 
 #ifdef TALES_ENABLE_LIBPNG
-  #include "png.h"
+  #include "libs/png.h"
 #endif
 
 namespace Tales {

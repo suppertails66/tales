@@ -199,6 +199,7 @@ bool PngConversion::indexedPngToTwoDArrayGG(TwoDByteArray& dst,
 #endif
 }
 
+#ifdef TALES_ENABLE_LIBPNG
 bool PngConversion::pngralloc(
                      png_structp& png_ptr,
                      png_infop& info_ptr,
@@ -322,6 +323,7 @@ bool PngConversion::pngwrite(png_structp& png_ptr,
   
   return true;
 }
+#endif
 
 
 };

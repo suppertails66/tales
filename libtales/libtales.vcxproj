@@ -60,7 +60,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TALES_ENABLE_LIBPNG;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\editors\AreaMetadataEntry.h" />
+    <ClInclude Include="include\editors\AssembledRawMapping.h" />
     <ClInclude Include="include\editors\BaseEditor.h" />
     <ClInclude Include="include\editors\ColorPickerGraphicSceneLayer.h" />
     <ClInclude Include="include\editors\ColorPreviewGraphicSceneLayer.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="include\editors\PaletteCycleEditor.h" />
     <ClInclude Include="include\editors\PaletteEditor.h" />
     <ClInclude Include="include\editors\PowerUpEditor.h" />
+    <ClInclude Include="include\editors\ResourceExportID.h" />
     <ClInclude Include="include\editors\TailsAdvEditor.h" />
     <ClInclude Include="include\editors\TileMapEditor.h" />
     <ClInclude Include="include\editors\TileMapEditorTool.h" />
@@ -251,6 +253,15 @@
     <ClInclude Include="include\gamegear\TileReference.h" />
     <ClInclude Include="include\gamegear\VirtualVDP.h" />
     <ClInclude Include="include\gamegear\WritableROM.h" />
+    <ClInclude Include="include\libs\png.h" />
+    <ClInclude Include="include\libs\pngconf.h" />
+    <ClInclude Include="include\libs\pngdebug.h" />
+    <ClInclude Include="include\libs\pnginfo.h" />
+    <ClInclude Include="include\libs\pnglibconf.h" />
+    <ClInclude Include="include\libs\pngpriv.h" />
+    <ClInclude Include="include\libs\pngstruct.h" />
+    <ClInclude Include="include\libs\zconf.h" />
+    <ClInclude Include="include\libs\zlib.h" />
     <ClInclude Include="include\structs\BitmapGraphicSceneObject.h" />
     <ClInclude Include="include\structs\Box.h" />
     <ClInclude Include="include\structs\BoxGraphicSceneObject.h" />
@@ -273,6 +284,7 @@
     <ClInclude Include="include\structs\LayeredGraphicScene.h" />
     <ClInclude Include="include\structs\LevelWidth.h" />
     <ClInclude Include="include\structs\LoadHelper.h" />
+    <ClInclude Include="include\structs\PngConversion.h" />
     <ClInclude Include="include\structs\RawFreeSpacePair.h" />
     <ClInclude Include="include\structs\SaveHelper.h" />
     <ClInclude Include="include\structs\Taddress.h" />
@@ -280,6 +292,8 @@
     <ClInclude Include="include\structs\Tmap.h" />
     <ClInclude Include="include\structs\Tpair.h" />
     <ClInclude Include="include\structs\TransModel.h" />
+    <ClInclude Include="include\structs\TwoDArray.h" />
+    <ClInclude Include="include\structs\TwoDByteArray.h" />
     <ClInclude Include="include\structs\TwoKeyedAddress.h" />
     <ClInclude Include="include\structs\TwoKeyedData.h" />
     <ClInclude Include="include\structs\WrapScrollGraphic.h" />
@@ -304,6 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editors\AreaMetadataEntry.cpp" />
+    <ClCompile Include="src\editors\AssembledRawMapping.cpp" />
     <ClCompile Include="src\editors\BaseEditor.cpp" />
     <ClCompile Include="src\editors\ColorPickerGraphicSceneLayer.cpp" />
     <ClCompile Include="src\editors\ColorPreviewGraphicSceneLayer.cpp" />
@@ -360,6 +375,7 @@
     <ClCompile Include="src\editors\PaletteCycleEditor.cpp" />
     <ClCompile Include="src\editors\PaletteEditor.cpp" />
     <ClCompile Include="src\editors\PowerUpEditor.cpp" />
+    <ClCompile Include="src\editors\ResourceExportID.cpp" />
     <ClCompile Include="src\editors\TailsAdvEditor.cpp" />
     <ClCompile Include="src\editors\TileMapEditor.cpp" />
     <ClCompile Include="src\editors\TileMapEditorTool.cpp" />
@@ -480,6 +496,13 @@
     <ClCompile Include="src\gamegear\TileReference.cpp" />
     <ClCompile Include="src\gamegear\VirtualVDP.cpp" />
     <ClCompile Include="src\gamegear\WritableROM.cpp" />
+    <ClCompile Include="src\libs\png.cpp" />
+    <ClCompile Include="src\libs\pngconf.cpp" />
+    <ClCompile Include="src\libs\pngdebug.cpp" />
+    <ClCompile Include="src\libs\pnginfo.cpp" />
+    <ClCompile Include="src\libs\pnglibconf.cpp" />
+    <ClCompile Include="src\libs\pngpriv.cpp" />
+    <ClCompile Include="src\libs\pngstruct.cpp" />
     <ClCompile Include="src\structs\BitmapGraphicSceneObject.cpp" />
     <ClCompile Include="src\structs\Box.cpp" />
     <ClCompile Include="src\structs\BoxGraphicSceneObject.cpp" />
@@ -502,6 +525,7 @@
     <ClCompile Include="src\structs\LayeredGraphicScene.cpp" />
     <ClCompile Include="src\structs\LevelWidth.cpp" />
     <ClCompile Include="src\structs\LoadHelper.cpp" />
+    <ClCompile Include="src\structs\PngConversion.cpp" />
     <ClCompile Include="src\structs\RawFreeSpacePair.cpp" />
     <ClCompile Include="src\structs\SaveHelper.cpp" />
     <ClCompile Include="src\structs\Taddress.cpp" />
@@ -509,6 +533,8 @@
     <ClCompile Include="src\structs\Tmap.cpp" />
     <ClCompile Include="src\structs\Tpair.cpp" />
     <ClCompile Include="src\structs\TransModel.cpp" />
+    <ClCompile Include="src\structs\TwoDArray.cpp" />
+    <ClCompile Include="src\structs\TwoDByteArray.cpp" />
     <ClCompile Include="src\structs\TwoKeyedAddress.cpp" />
     <ClCompile Include="src\structs\TwoKeyedData.cpp" />
     <ClCompile Include="src\structs\WrapScrollGraphic.cpp" />
@@ -530,6 +556,9 @@
     <ClCompile Include="src\util\SignednessType.cpp" />
     <ClCompile Include="src\util\StreamOps.cpp" />
     <ClCompile Include="src\util\StringConversion.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\libpng16.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 *.[oa]
 *.obj
 *.lib
+!libpng16.lib
 
 libtales/obj/
 
