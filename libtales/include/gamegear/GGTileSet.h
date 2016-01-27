@@ -6,6 +6,7 @@
 #include "gamegear/VirtualVDP.h"
 #include "structs/Tbyte.h"
 #include "structs/Graphic.h"
+#include "structs/TwoDByteArray.h"
 #include <string>
 
 namespace Tales {
@@ -123,6 +124,8 @@ public:
                                = Color(255, 255, 255, 255),
                               Graphic::TileTransferTransOption transOption
                                = Graphic::tileTrans);
+                             
+  TwoDByteArray toByteArray(int width);
 protected:
   /**
    * Tile data pointer.

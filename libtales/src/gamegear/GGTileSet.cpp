@@ -279,6 +279,23 @@ void GGTileSet::drawPalettizedGraphic(Graphic& output,
                 Box(0, 0, GGTile::width, GGTile::height));
   }
 }
+                             
+TwoDByteArray GGTileSet::toByteArray(int width) {
+  int realHeight = ((numTiles_ / width) + 1) * GGTile::height;
+  TwoDByteArray output(width * GGTile::width,
+                 realHeight);
+  output.clear();
+  
+  for (int i = 0; i < numTiles_; i++) {
+    int x = ((i % width) * GGTile::width);
+    int y = ((i / width) * GGTile::height);
+                 
+    tileSet_[i].transferToByteArray(output,
+                                    x, y);
+  }
+  
+  return output;
+}
 
 
 };

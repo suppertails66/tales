@@ -103,8 +103,31 @@ public:
   int uncompressedGraphicPaletteDefault(int index);
   void setUncompressedGraphicPaletteDefault(int index, int paletteNum);
   
-  void exportAllMappings();
+  void exportAllTiles(const std::string& folderpath,
+                      bool transparency = true);
+  
+  void exportAllMappings(const std::string& folderpath);
 protected:
+  const static int exportTilesPerRow_ = 16;
+
+  static std::string graphicToFilename(
+                        GraphicCompressionType comp,
+                        int graphicIndex);
+                        
+  static std::string graphicMappingToFilename(
+                        GraphicCompressionType comp,
+                        int graphicIndex,
+                        int mappingIndex);
+  
+  void exportTiles(const std::string& folderpath,
+                        GraphicCompressionType comp,
+                        int graphicIndex,
+                        bool transparency);
+  
+  void exportMappingSet(const std::string& folderpath,
+                        GraphicCompressionType comp,
+                        int graphicIndex);
+                        
   GraphicsEditorToolManager toolManager_;
 
   EditableLevelGraphicsData& levelGraphicsData_;

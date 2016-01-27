@@ -14,12 +14,7 @@ namespace Tales {
 
 
 class MappingAssembler {
-public:
-  static void transferTileToByteArray(
-                            TwoDByteArray& dst,
-                            GGTile& src,
-                            int x, int y);
-                            
+public:               
   static void assembleMappingsRaw(AssembledRawMapping& dst,
                                GGTileSet& src,
                                SpriteMapping& spriteMapping,

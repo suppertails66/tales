@@ -286,11 +286,11 @@ SpriteMapping& GraphicsEditor::currentMapping() {
   
 GGTileSet& GraphicsEditor::currentGraphic() {
   switch (currentGraphicCompressionType_) {
-  case compressed:
-    return levelGraphicsData_.compressedGraphic(currentGraphicIndex_);
-    break;
   case uncompressed:
     return levelGraphicsData_.uncompressedGraphic(currentGraphicIndex_);
+    break;
+  case compressed:
+    return levelGraphicsData_.compressedGraphic(currentGraphicIndex_);
     break;
   default:
     break;
@@ -364,53 +364,173 @@ void GraphicsEditor
       .setPaletteNum(paletteNum);
 }
   
-void GraphicsEditor::exportAllMappings() {
-  
+void GraphicsEditor::exportAllTiles(const std::string& folderpath,
+                      bool transparency) {
   for (int i = 0; i < numCompressedGraphics(); i++) {
-    int numMappings = GraphicToMappings::numMappingsForGraphic(
-          GraphicToMappings::compressed, i);
-    if (numMappings <= 0) {
-      continue;
-    }
-    
-    GGTileSet& tiles = levelGraphicsData_.compressedGraphic(i);
-    GGPalette& palette
-        = palettes_.palette(compressedGraphicPaletteDefault(i));
-    
-    for (int j = 0; j < numMappings; j++) {
-      GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
-            GraphicToMappings::compressed,
-            i,
-            j);
-      
-      SpriteMapping& spriteMapping
-          = spriteMappings_.spriteMapping(entry.mappingIndex);
-    
-      AssembledRawMapping dst;
-      MappingAssembler::assembleMappingsRaw(
-          dst,
-          tiles,
-          spriteMapping,
-          spriteMappings_.coordinateTable(
-              spriteMapping.coordinateTableIndex()),
-          spriteMappings_.tileIndexTable(
-              spriteMapping.tileIndexTableIndex()),
-          ObjectStateInfo::left,
-          entry.tileOffset);
-      
-      PngConversion::twoDArrayToIndexedPngGG(
-        std::string("grp-")
-          + StringConversion::toString(i)
-          + "-mapping-"
-          + StringConversion::toString(j)
-          + ".png",
-        dst.data(),
-        palette,
-        true);
-    }
-        
+    exportTiles(folderpath, compressed, i, transparency);
   }
-                        
+  
+  for (int i = 0; i < numUncompressedGraphics(); i++) {
+    exportTiles(folderpath, uncompressed, i, transparency);
+  }
+}
+  
+void GraphicsEditor::exportAllMappings(const std::string& folderpath) {
+  for (int i = 0; i < numCompressedGraphics(); i++) {
+    exportMappingSet(folderpath, compressed, i);
+  }
+  
+  for (int i = 0; i < numUncompressedGraphics(); i++) {
+    exportMappingSet(folderpath, uncompressed, i);
+  }
+}
+  
+void GraphicsEditor::exportTiles(const std::string& folderpath,
+                      GraphicCompressionType comp,
+                      int graphicIndex,
+                      bool transparency) {
+  GraphicToMappings::CompressionType localType
+          = GraphicToMappings::compressed;
+
+  if (comp == GraphicsEditor::uncompressed) {
+      localType = GraphicToMappings::uncompressed;
+  }
+  
+  GGTileSet* tiles;
+  GGPalette* palette;
+  switch (comp) {
+  case uncompressed:
+    tiles = &(levelGraphicsData_.uncompressedGraphic(
+        graphicIndex));
+    palette = &(palettes_.palette(uncompressedGraphicPaletteDefault(
+        graphicIndex)));
+    break;
+  case compressed:
+  default:
+    tiles = &(levelGraphicsData_.compressedGraphic(
+        graphicIndex));
+    palette = &(palettes_.palette(compressedGraphicPaletteDefault(
+        graphicIndex)));
+    break;
+  }
+  
+  TwoDByteArray data = tiles->toByteArray(exportTilesPerRow_);
+  
+  PngConversion::twoDArrayToIndexedPngGG(
+    folderpath + graphicToFilename(comp, graphicIndex),
+    data,
+    *palette,
+    transparency);
+}
+  
+void GraphicsEditor::exportMappingSet(
+                      const std::string& folderpath,
+                      GraphicCompressionType comp,
+                      int graphicIndex) {
+  GraphicToMappings::CompressionType localType
+          = GraphicToMappings::compressed;
+
+  if (comp == GraphicsEditor::uncompressed) {
+      localType = GraphicToMappings::uncompressed;
+  }
+  
+  GGTileSet* tiles;
+  GGPalette* palette;
+  switch (comp) {
+  case uncompressed:
+    tiles = &(levelGraphicsData_.uncompressedGraphic(
+        graphicIndex));
+    palette = &(palettes_.palette(uncompressedGraphicPaletteDefault(
+        graphicIndex)));
+    break;
+  case compressed:
+  default:
+    tiles = &(levelGraphicsData_.compressedGraphic(
+        graphicIndex));
+    palette = &(palettes_.palette(compressedGraphicPaletteDefault(
+        graphicIndex)));
+    break;
+  }
+  
+  int numMappings = GraphicToMappings::numMappingsForGraphic(
+        localType, graphicIndex);
+  
+  for (int j = 0; j < numMappings; j++) {
+    GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
+          localType,
+          graphicIndex,
+          j);
+    
+    SpriteMapping& spriteMapping
+        = spriteMappings_.spriteMapping(entry.mappingIndex);
+  
+    AssembledRawMapping dst;
+    MappingAssembler::assembleMappingsRaw(
+        dst,
+        *tiles,
+        spriteMapping,
+        spriteMappings_.coordinateTable(
+            spriteMapping.coordinateTableIndex()),
+        spriteMappings_.tileIndexTable(
+            spriteMapping.tileIndexTableIndex()),
+        ObjectStateInfo::left,
+        entry.tileOffset);
+    
+    PngConversion::twoDArrayToIndexedPngGG(
+      folderpath + graphicMappingToFilename(comp, graphicIndex, j),
+      dst.data(),
+      *palette,
+      true);
+  }
+}
+  
+std::string GraphicsEditor::graphicToFilename(
+                      GraphicCompressionType comp,
+                      int graphicIndex) {
+  std::string filename("grp");
+  
+  switch (comp) {
+  case uncompressed:
+    filename += "-uncompr";
+    break;
+  case compressed:
+    filename += "-compr";
+    break;
+  default:
+    break;
+  }
+  
+  filename += "-"
+            + StringConversion::toString(graphicIndex)
+            + ".png";
+  
+  return filename;
+}
+  
+std::string GraphicsEditor::graphicMappingToFilename(
+                      GraphicCompressionType comp,
+                      int graphicIndex,
+                      int mappingIndex) {
+  std::string filename("grp");
+  
+  switch (comp) {
+  case uncompressed:
+    filename += "-uncompr";
+    break;
+  case compressed:
+    filename += "-compr";
+    break;
+  default:
+    break;
+  }
+  
+  filename += "-"
+            + StringConversion::toString(graphicIndex)
+            + "-mapping-"
+            + StringConversion::toString(mappingIndex)
+            + ".png";
+  
+  return filename;
 }
 
 

@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     genericerrordialog.cpp \
     aboutdialog.cpp \
     talesqttilemapeditorwidget.cpp \
-    graphicsexportdialog.cpp
+    graphicsexportdialog.cpp \
+    nativegraphicexportdialog.cpp
 
 QMAKE_CXXFLAGS += -std=gnu++11
 
@@ -121,7 +122,8 @@ HEADERS  += talesqtmainwindow.h \
     genericerrordialog.h \
     aboutdialog.h \
     talesqttilemapeditorwidget.h \
-    graphicsexportdialog.h
+    graphicsexportdialog.h \
+    nativegraphicexportdialog.h
 
 FORMS    += talesqtmainwindow.ui \
     editorselectbar.ui \
@@ -160,7 +162,8 @@ FORMS    += talesqtmainwindow.ui \
     genericerrordialog.ui \
     aboutdialog.ui \
     talesqttilemapeditorwidget.ui \
-    graphicsexportdialog.ui
+    graphicsexportdialog.ui \
+    nativegraphicexportdialog.ui
 
 RESOURCES += \
     resources.qrc

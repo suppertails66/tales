@@ -3,6 +3,7 @@
 
 
 #include "structs/Tbyte.h"
+#include "structs/TwoDByteArray.h"
 #include <string>
 
 namespace Tales {
@@ -159,6 +160,9 @@ public:
    * @return Number of bytes read.
    */
   int load(const Tbyte* data);
+  
+  void transferToByteArray(TwoDByteArray& dst,
+                           int x, int y);
   
 protected:
   

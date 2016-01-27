@@ -224,6 +224,18 @@ int GGTile::load(const Tbyte* data) {
   
   return dataSize;
 }
+  
+void GGTile::transferToByteArray(TwoDByteArray& dst,
+                         int x, int y) {
+  for (int j = 0; j < GGTile::height; j++) {
+    for (int i = 0; i < GGTile::width; i++) {
+      // just be lazy and use a "safe" copy function
+      dst.setDataClipped(x + i,
+                         y + j,
+                         getPixel(i, j));
+    }
+  }
+}
 
 
 };

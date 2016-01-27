@@ -6,25 +6,6 @@
 namespace Tales {
 
 
-void MappingAssembler::transferTileToByteArray(
-                          TwoDByteArray& dst,
-                          GGTile& src,
-                          int x, int y) {
-//  Box dstbox = Box(x, y, dst.w(), dst.h());
-//  Box srcbox = Box(0, 0, GGTile::width, GGTile::height);
-//  srcbox.clip(dstbox);
-  
-  for (int j = 0; j < GGTile::height; j++) {
-    for (int i = 0; i < GGTile::width; i++) {
-      // just be lazy and use a "safe" copy function
-      dst.setDataClipped(x + i,
-                      y + j,
-                      src.getPixel(i, j));
-    }
-  }
-  
-}
-                            
 void MappingAssembler::assembleMappingsRaw(AssembledRawMapping& dst,
                              GGTileSet& src,
                              SpriteMapping& spriteMapping,
@@ -51,15 +32,13 @@ void MappingAssembler::assembleMappingsRaw(AssembledRawMapping& dst,
     GGTile g = src[tileIndex];
     GGTile g2 = src[tileIndex + 1];
     
-    transferTileToByteArray(
+    g.transferToByteArray(
               graphic,
-              g,
               baseX + coordinateTable.entry(i).offsetX(),
               baseY + coordinateTable.entry(i).offsetY());
                  
-    transferTileToByteArray(
+    g2.transferToByteArray(
               graphic,
-              g2,
               baseX + coordinateTable.entry(i).offsetX(),
               baseY + coordinateTable.entry(i).offsetY()
                     + GGTile::height);
