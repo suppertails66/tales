@@ -38,6 +38,8 @@ QImage TalesQtFormatConversion::graphicToImage(Tales::Graphic& graphic) {
             ++rgb;
         }
     }
+
+    return image;
 }
 
 void TalesQtFormatConversion::drawGraphicToImage(QImage& image,
