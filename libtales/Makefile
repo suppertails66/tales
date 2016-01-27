@@ -1,7 +1,8 @@
 AR=ar
 CXX=g++
 # Compile only
-CXXFLAGS=-std=gnu++11 -O2 -Wall -llibpng -I$(IDIR)
+DEFINES = -DTALES_ENABLE_LIBPNG
+CXXFLAGS=-std=gnu++11 -O2 -Wall -llibpng $(DEFINES) -I$(IDIR)
 
 IDIR := include
 SRCDIR := src
