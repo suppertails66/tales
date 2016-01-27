@@ -515,3 +515,8 @@ void TalesQtGraphicsEditorWidget::on_heightBox_valueChanged(int arg1)
     graphicsEditor_.currentMapping().setCollisionYLength(arg1);
     refreshDisplay();
 }
+
+void TalesQtGraphicsEditorWidget::on_exportButton_clicked()
+{
+    graphicsEditor_.exportAllMappings();
+}

@@ -97,6 +97,8 @@ private slots:
 
     void on_heightBox_valueChanged(int arg1);
 
+    void on_exportButton_clicked();
+
 private:
     Ui::TalesQtGraphicsEditorWidget *ui;
 };

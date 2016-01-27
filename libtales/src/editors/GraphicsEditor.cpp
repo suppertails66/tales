@@ -1,6 +1,11 @@
 #include "editors/GraphicsEditor.h"
 #include "editors/GraphicToMappings.h"
+#include "editors/MappingAssembler.h"
+#include "structs/PngConversion.h"
+#include "util/StringConversion.h"
 #include <iostream>
+
+using namespace Luncheon;
 
 namespace Tales {
 
@@ -357,6 +362,55 @@ void GraphicsEditor
     ::setUncompressedGraphicPaletteDefault(int index, int paletteNum) {
   metadata_.uncompressedGraphicPaletteDefaults()[index]
       .setPaletteNum(paletteNum);
+}
+  
+void GraphicsEditor::exportAllMappings() {
+  
+  for (int i = 0; i < numCompressedGraphics(); i++) {
+    int numMappings = GraphicToMappings::numMappingsForGraphic(
+          GraphicToMappings::compressed, i);
+    if (numMappings <= 0) {
+      continue;
+    }
+    
+    GGTileSet& tiles = levelGraphicsData_.compressedGraphic(i);
+    GGPalette& palette
+        = palettes_.palette(compressedGraphicPaletteDefault(i));
+    
+    for (int j = 0; j < numMappings; j++) {
+      GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
+            GraphicToMappings::compressed,
+            i,
+            j);
+      
+      SpriteMapping& spriteMapping
+          = spriteMappings_.spriteMapping(entry.mappingIndex);
+    
+      AssembledRawMapping dst;
+      MappingAssembler::assembleMappingsRaw(
+          dst,
+          tiles,
+          spriteMapping,
+          spriteMappings_.coordinateTable(
+              spriteMapping.coordinateTableIndex()),
+          spriteMappings_.tileIndexTable(
+              spriteMapping.tileIndexTableIndex()),
+          ObjectStateInfo::left,
+          entry.tileOffset);
+      
+      PngConversion::twoDArrayToIndexedPngGG(
+        std::string("grp-")
+          + StringConversion::toString(i)
+          + "-mapping-"
+          + StringConversion::toString(j)
+          + ".png",
+        dst.data(),
+        palette,
+        true);
+    }
+        
+  }
+                        
 }
 
 

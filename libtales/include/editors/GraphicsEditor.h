@@ -102,6 +102,8 @@ public:
   
   int uncompressedGraphicPaletteDefault(int index);
   void setUncompressedGraphicPaletteDefault(int index, int paletteNum);
+  
+  void exportAllMappings();
 protected:
   GraphicsEditorToolManager toolManager_;
 
