@@ -8,7 +8,15 @@
 namespace Tales {
 
 
-typedef TwoDArray<Tbyte> TwoDByteArray;
+class TwoDByteArray : public TwoDArray<Tbyte> {
+public:
+  TwoDByteArray();
+  TwoDByteArray(int w__, int h__);
+  
+  void clear();
+protected:
+  
+};
 
 
 };
