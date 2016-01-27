@@ -75,7 +75,7 @@ bool PngConversion::twoDArrayToIndexedPngGG(
     
     // Set color 0 to transparent if transparency is enabled
     if (transparency) {
-      pngTrans[0] = 0;
+      pngTrans[palette.getTransColorIndex()] = 0;
     }
     
     // Create link to transparency array

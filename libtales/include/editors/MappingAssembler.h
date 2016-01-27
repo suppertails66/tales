@@ -3,6 +3,7 @@
 
 
 #include "structs/Graphic.h"
+#include "editors/AssembledRawMapping.h"
 #include "gamegear/GGTileSet.h"
 #include "gamedata/EditableSpriteMappings.h"
 #include "gamegear/GGPalette.h"
@@ -14,6 +15,20 @@ namespace Tales {
 
 class MappingAssembler {
 public:
+  static void transferTileToByteArray(
+                            TwoDByteArray& dst,
+                            GGTile& src,
+                            int x, int y);
+                            
+  static void assembleMappingsRaw(AssembledRawMapping& dst,
+                               GGTileSet& src,
+                               SpriteMapping& spriteMapping,
+                               SpriteMappingCoordinateTable& coordinateTable,
+                               SpriteMappingTileIndexTable& tileIndexTable,
+                               ObjectStateInfo::FacingDirection
+                                 facingDirection,
+                               int tileOffset);
+                               
   static void assembleMappings(ObjectDisplayCache& dst,
                                GGTileSet& src,
                                SpriteMapping& spriteMapping,

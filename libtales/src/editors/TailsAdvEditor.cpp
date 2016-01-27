@@ -6,6 +6,7 @@
 #include "exception/InvalidLoadDataException.h"
 #include "gamedata/TailsAdvBank0Hacks.h"
 #include "gamedata/TailsAdvFreeSpace.h"
+#include "structs/PngConversion.h"
 #include "util/IniFile.h"
 #include <exception>
 #include <fstream>
@@ -65,6 +66,33 @@ TailsAdvEditor::TailsAdvEditor(const std::string& romFileName)
     tileMapEditor_(data_.tileMaps(),
                    data_.levelGraphicsData(),
                    data_.standardPalettes()) {
+/*  TwoDByteArray bytes(16, 16);
+  for (int j = 0; j < 16; j++) {
+    for (int i = 0; i < 16; i++) {
+      bytes.data(i, j) = i;
+    }
+  }
+  GGPalette palette;
+  for (int i = 0; i < GGPalette::numColorsInPalette; i++) {
+    GGColor color;
+    color.setRGB(i * 16, i * 16, i * 16);
+    palette[i] = color;
+  }
+  bool result1 = PngConversion::twoDArrayToIndexedPngGG(
+                    "test.png",
+                    bytes,
+                    palette);
+  std::cout << "write result: " << result1 << std::endl; */
+  
+//  bool result = PngConversion::indexedPngToTwoDArrayGG(
+//      bytes,
+//      "paletteeditor.png");
+//  std::cout << "nonindexed result: " << result << std::endl;
+  
+//  bool result2 = PngConversion::indexedPngToTwoDArrayGG(
+//      bytes,
+//      "buton_simplu_indexat.png");
+//  std::cout << "indexed result: " << result2 << std::endl;
   
   /* Expand the ROM regardless of anything else.
      This is theoretically temporary until some inconsistencies

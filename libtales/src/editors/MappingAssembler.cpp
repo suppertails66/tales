@@ -6,6 +6,72 @@
 namespace Tales {
 
 
+void MappingAssembler::transferTileToByteArray(
+                          TwoDByteArray& dst,
+                          GGTile& src,
+                          int x, int y) {
+//  Box dstbox = Box(x, y, dst.w(), dst.h());
+//  Box srcbox = Box(0, 0, GGTile::width, GGTile::height);
+//  srcbox.clip(dstbox);
+  
+  for (int j = 0; j < GGTile::height; j++) {
+    for (int i = 0; i < GGTile::width; i++) {
+      // just be lazy and use a "safe" copy function
+      dst.setDataClipped(x + i,
+                      y + j,
+                      src.getPixel(i, j));
+    }
+  }
+  
+}
+                            
+void MappingAssembler::assembleMappingsRaw(AssembledRawMapping& dst,
+                             GGTileSet& src,
+                             SpriteMapping& spriteMapping,
+                             SpriteMappingCoordinateTable& coordinateTable,
+                             SpriteMappingTileIndexTable& tileIndexTable,
+                             ObjectStateInfo::FacingDirection
+                               facingDirection,
+                             int tileOffset) {
+  Box offsetInfo = computeDimensionsOfMapping(coordinateTable);
+  
+  TwoDByteArray graphic(offsetInfo.w(), offsetInfo.h());
+  graphic.clear();
+  
+  int baseX = offsetInfo.x();
+  int baseY = offsetInfo.y();
+  
+  for (int i = 0; i < tileIndexTable.size(); i++) {
+    if (i >= coordinateTable.size()) {
+      break;
+    }
+  
+    int tileIndex = tileIndexTable.tileIndex(i) + tileOffset;
+    
+    GGTile g = src[tileIndex];
+    GGTile g2 = src[tileIndex + 1];
+    
+    transferTileToByteArray(
+              graphic,
+              g,
+              baseX + coordinateTable.entry(i).offsetX(),
+              baseY + coordinateTable.entry(i).offsetY());
+                 
+    transferTileToByteArray(
+              graphic,
+              g2,
+              baseX + coordinateTable.entry(i).offsetX(),
+              baseY + coordinateTable.entry(i).offsetY()
+                    + GGTile::height);
+  }
+  
+  dst.setData(graphic);
+  dst.setOffsetX(spriteMapping.offsetX() - baseX);
+  dst.setOffsetY(spriteMapping.offsetY() - baseY
+    + (MetatileStructure::metatileHeight)
+    + (MetatileStructure::metatileHeight / 8));
+}
+
 void MappingAssembler::assembleMappings(ObjectDisplayCache& dst,
                              GGTileSet& src,
                              SpriteMapping& spriteMapping,

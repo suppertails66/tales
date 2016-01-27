@@ -85,7 +85,7 @@ public:
     return data_[x][y];
   }
   
-  void setDataSafe(int x, int y, const T& t) {
+  void setDataClipped(int x, int y, const T& t) {
     if ((x < 0)
         || (x >= w_)
         || (y < 0)
