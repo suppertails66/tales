@@ -24,6 +24,19 @@ public:
     reinitializeArray(w__, h__);
   }
   
+  TwoDArray<T>(const TwoDArray<T>& t)
+    : data_(NULL),
+      w_(t.w_),
+      h_(t.h_) {
+    cloneIntoThis(t);
+  }
+  
+  TwoDArray<T>& operator=(const TwoDArray<T>& t) {
+    cloneIntoThis(t);
+    
+    return *this;
+  }
+  
   ~TwoDArray<T>() {
     destroyArray();
   }
@@ -72,6 +85,18 @@ public:
     return data_[x][y];
   }
 protected:
+  void cloneIntoThis(const TwoDArray& t) {
+    if ((w_ != t.w_) || (h_ != t.h_)) {
+      reinitializeArray(t.w_, t.h_);
+    }
+    
+    for (int i = 0; i < t.w_; i++) {
+      for (int j = 0; j < t.h_; j++) {
+        data_[i][j] = t.data_[i][j];
+      }
+    }
+  }
+
   void destroyArray() {
     if (data_ == NULL) {
       return;
