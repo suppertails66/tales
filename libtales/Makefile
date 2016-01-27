@@ -1,7 +1,7 @@
 AR=ar
 CXX=g++
 # Compile only
-CXXFLAGS=-std=gnu++11 -O2 -Wall -I$(IDIR)
+CXXFLAGS=-std=gnu++11 -O2 -Wall -llibpng -I$(IDIR)
 
 IDIR := include
 SRCDIR := src
