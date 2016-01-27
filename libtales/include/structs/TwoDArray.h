@@ -84,6 +84,17 @@ public:
     
     return data_[x][y];
   }
+  
+  void setDataSafe(int x, int y, const T& t) {
+    if ((x < 0)
+        || (x >= w_)
+        || (y < 0)
+        || (y >= h_)) {
+      return;
+    }
+  
+    data_[x][y] = t;
+  }
 protected:
   void cloneIntoThis(const TwoDArray& t) {
     if ((w_ != t.w_) || (h_ != t.h_)) {
