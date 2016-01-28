@@ -1,6 +1,7 @@
 #include "editors/GraphicsEditor.h"
 #include "editors/GraphicToMappings.h"
 #include "editors/MappingAssembler.h"
+#include "editors/GraphicMappingMath.h"
 #include "structs/PngConversion.h"
 #include "util/StringConversion.h"
 #include <iostream>
@@ -195,12 +196,7 @@ void GraphicsEditor::changeGraphic(GraphicCompressionType compressionType,
   }
   
   // do sprite mapping stuff
-  GraphicToMappings::CompressionType localType
-          = GraphicToMappings::compressed;
-
-  if (compressionType == GraphicsEditor::uncompressed) {
-      localType = GraphicToMappings::uncompressed;
-  }
+  GraphicToMappings::CompressionType localType = getLocalType(compressionType);
   
   if (GraphicToMappings::numMappingsForGraphic(localType, index) > 0) {
     // load first mapping if one exists
@@ -298,12 +294,8 @@ GGTileSet& GraphicsEditor::currentGraphic() {
 }
   
 void GraphicsEditor::changeMapping(int mappingSubIndex) {
-  GraphicToMappings::CompressionType localType
-          = GraphicToMappings::compressed;
-
-  if (currentGraphicCompressionType_ == GraphicsEditor::uncompressed) {
-      localType = GraphicToMappings::uncompressed;
-  }
+  GraphicToMappings::CompressionType localType = getLocalType(
+      currentGraphicCompressionType_);
   
   GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
       localType,
@@ -375,13 +367,34 @@ void GraphicsEditor::exportAllTiles(const std::string& folderpath,
   }
 }
   
-void GraphicsEditor::exportAllMappings(const std::string& folderpath) {
+void GraphicsEditor::exportAllMappings(const std::string& folderpath,
+                      bool transparency) {
   for (int i = 0; i < numCompressedGraphics(); i++) {
-    exportMappingSet(folderpath, compressed, i);
+    exportMappingSet(folderpath, compressed, i, transparency);
   }
   
   for (int i = 0; i < numUncompressedGraphics(); i++) {
-    exportMappingSet(folderpath, uncompressed, i);
+    exportMappingSet(folderpath, uncompressed, i, transparency);
+  }
+}
+  
+void GraphicsEditor::importAllTiles(const std::string& folderpath) {
+  for (int i = 0; i < numCompressedGraphics(); i++) {
+    importTiles(folderpath, compressed, i);
+  }
+  
+  for (int i = 0; i < numUncompressedGraphics(); i++) {
+    importTiles(folderpath, uncompressed, i);
+  }
+}
+
+void GraphicsEditor::importAllMappings(const std::string& folderpath) {
+  for (int i = 0; i < numCompressedGraphics(); i++) {
+    importMappingSet(folderpath, compressed, i);
+  }
+  
+  for (int i = 0; i < numUncompressedGraphics(); i++) {
+    importMappingSet(folderpath, uncompressed, i);
   }
 }
   
@@ -389,68 +402,29 @@ void GraphicsEditor::exportTiles(const std::string& folderpath,
                       GraphicCompressionType comp,
                       int graphicIndex,
                       bool transparency) {
-  GraphicToMappings::CompressionType localType
-          = GraphicToMappings::compressed;
-
-  if (comp == GraphicsEditor::uncompressed) {
-      localType = GraphicToMappings::uncompressed;
-  }
+  GraphicToMappings::CompressionType localType = getLocalType(comp);
   
-  GGTileSet* tiles;
-  GGPalette* palette;
-  switch (comp) {
-  case uncompressed:
-    tiles = &(levelGraphicsData_.uncompressedGraphic(
-        graphicIndex));
-    palette = &(palettes_.palette(uncompressedGraphicPaletteDefault(
-        graphicIndex)));
-    break;
-  case compressed:
-  default:
-    tiles = &(levelGraphicsData_.compressedGraphic(
-        graphicIndex));
-    palette = &(palettes_.palette(compressedGraphicPaletteDefault(
-        graphicIndex)));
-    break;
-  }
+  GGTileSet& tiles = getTileSet(comp, graphicIndex);
+  GGPalette& palette = getPalette(comp, graphicIndex);
   
-  TwoDByteArray data = tiles->toByteArray(exportTilesPerRow_);
+  TwoDByteArray data = tiles.toByteArray(exportTilesPerRow_);
   
   PngConversion::twoDArrayToIndexedPngGG(
     folderpath + graphicToFilename(comp, graphicIndex),
     data,
-    *palette,
+    palette,
     transparency);
 }
   
 void GraphicsEditor::exportMappingSet(
                       const std::string& folderpath,
                       GraphicCompressionType comp,
-                      int graphicIndex) {
-  GraphicToMappings::CompressionType localType
-          = GraphicToMappings::compressed;
-
-  if (comp == GraphicsEditor::uncompressed) {
-      localType = GraphicToMappings::uncompressed;
-  }
+                      int graphicIndex,
+                      bool transparency) {
+  GraphicToMappings::CompressionType localType = getLocalType(comp);
   
-  GGTileSet* tiles;
-  GGPalette* palette;
-  switch (comp) {
-  case uncompressed:
-    tiles = &(levelGraphicsData_.uncompressedGraphic(
-        graphicIndex));
-    palette = &(palettes_.palette(uncompressedGraphicPaletteDefault(
-        graphicIndex)));
-    break;
-  case compressed:
-  default:
-    tiles = &(levelGraphicsData_.compressedGraphic(
-        graphicIndex));
-    palette = &(palettes_.palette(compressedGraphicPaletteDefault(
-        graphicIndex)));
-    break;
-  }
+  GGTileSet& tiles = getTileSet(comp, graphicIndex);
+  GGPalette& palette = getPalette(comp, graphicIndex);
   
   int numMappings = GraphicToMappings::numMappingsForGraphic(
         localType, graphicIndex);
@@ -467,7 +441,7 @@ void GraphicsEditor::exportMappingSet(
     AssembledRawMapping dst;
     MappingAssembler::assembleMappingsRaw(
         dst,
-        *tiles,
+        tiles,
         spriteMapping,
         spriteMappings_.coordinateTable(
             spriteMapping.coordinateTableIndex()),
@@ -479,8 +453,126 @@ void GraphicsEditor::exportMappingSet(
     PngConversion::twoDArrayToIndexedPngGG(
       folderpath + graphicMappingToFilename(comp, graphicIndex, j),
       dst.data(),
-      *palette,
-      true);
+      palette,
+      transparency);
+  }
+}
+  
+void GraphicsEditor::importTiles(const std::string& folderpath,
+                  GraphicCompressionType comp,
+                  int graphicIndex) {
+  GraphicToMappings::CompressionType localType = getLocalType(comp);
+  
+  GGTileSet& tiles = getTileSet(comp, graphicIndex);
+//  GGPalette& palette = getPalette(comp, graphicIndex);
+  
+  TwoDByteArray data;
+  
+  if (!PngConversion::indexedPngToTwoDArrayGG(
+    data,
+    folderpath + graphicToFilename(comp, graphicIndex))) {
+    return;
+  }
+  
+  tiles.fromByteArray(data, exportTilesPerRow_);
+  
+/*  for (int j = 0; j < data.h(); j++) {
+    for (int i = 0; i < data.w(); i++) {
+      
+    }
+  } */
+}
+
+void GraphicsEditor::importMappingSet(const std::string& folderpath,
+                      GraphicCompressionType comp,
+                      int graphicIndex) {
+  GraphicToMappings::CompressionType localType = getLocalType(comp);
+  
+  GGTileSet& tiles = getTileSet(comp, graphicIndex);
+//  GGPalette& palette = getPalette(comp, graphicIndex);
+  
+  TwoDByteArray data;
+  
+  int numMappings = GraphicToMappings::numMappingsForGraphic(
+        localType, graphicIndex);
+  
+  for (int k = 0; k < numMappings; k++) {
+    if (!PngConversion::indexedPngToTwoDArrayGG(
+        data,
+        folderpath + graphicMappingToFilename(comp, graphicIndex, k))) {
+//      std::cout << folderpath
+//          + graphicMappingToFilename(comp, graphicIndex, k) << std::endl;
+      return;
+    }
+  
+    GraphicToMappingEntry entry = GraphicToMappings::graphicMapping(
+          localType,
+          graphicIndex,
+          k);
+    
+    SpriteMapping& spriteMapping
+        = spriteMappings_.spriteMapping(entry.mappingIndex);
+    
+    for (int j = 0; j < data.h(); j++) {
+      for (int i = 0; i < data.w(); i++) {
+        TileSetPixelIdentifier pos
+            = GraphicMappingMath::findTilePositionInMapping(
+                  spriteMapping,
+                  spriteMappings_.coordinateTable(
+                      spriteMapping.coordinateTableIndex()),
+                  spriteMappings_.tileIndexTable(
+                      spriteMapping.tileIndexTableIndex()),
+                  entry,
+                  i, j);
+        
+        if (pos.tileNum() >= 0) {
+          tiles[pos.tileNum()].setPixel(pos.x(), pos.y(), data.data(i, j));
+        }
+      }
+    }
+  }
+}
+                        
+GGTileSet& GraphicsEditor::getTileSet(GraphicCompressionType comp,
+                      int graphicIndex) {
+  switch (comp) {
+  case uncompressed:
+    return levelGraphicsData_.uncompressedGraphic(
+        graphicIndex);
+    break;
+  case compressed:
+  default:
+    return levelGraphicsData_.compressedGraphic(
+        graphicIndex);
+    break;
+  }
+}
+
+GGPalette& GraphicsEditor::getPalette(GraphicCompressionType comp,
+                      int graphicIndex) {
+  switch (comp) {
+  case uncompressed:
+    return palettes_.palette(uncompressedGraphicPaletteDefault(
+        graphicIndex));
+    break;
+  case compressed:
+  default:
+    return palettes_.palette(compressedGraphicPaletteDefault(
+        graphicIndex));
+    break;
+  }
+}
+                        
+GraphicToMappings::CompressionType GraphicsEditor::getLocalType(
+    GraphicCompressionType compressionType) {
+  switch (compressionType) {
+  case uncompressed:
+    return GraphicToMappings::uncompressed;
+    break;
+  case compressed:
+  default:
+    return GraphicToMappings::compressed;
+    break;
   }
 }
   

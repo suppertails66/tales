@@ -1,5 +1,6 @@
 #include "editors/GraphicMappingEditorLayer.h"
 #include "editors/MappingAssembler.h"
+#include "editors/GraphicMappingMath.h"
 #include <iostream>
 
 namespace Tales {
@@ -239,76 +240,23 @@ int GraphicMappingEditorLayer::realToNative(int coordinate) {
 void GraphicMappingEditorLayer::updatePencil(InputEventData eventData) {
   int nativeX = realToNative(eventData.x());
   int nativeY = realToNative(eventData.y());
-//  int tileX = nativeX / GGTile::width;
-//  int tileY = nativeY / GGTile::height;
   
-  Box dimensions = MappingAssembler::computeDimensionsOfMapping(
-    toolManager_->mappingCoordinateTable());
-  int centerX = dimensions.x();
-  int centerY = dimensions.y();
-
-  // wrong
-//  int centerX = dimensions.x() - toolManager_->mapping().offsetX();
-//  int centerY = dimensions.y() - toolManager_->mapping().offsetY();
-//  int centerX = -cache_.offsetX();
-//  int centerY = -cache_.offsetY();
-
-//  std::cout << "center: " << centerX << " " << centerY << std::endl;
-//  std::cout << "native: " << nativeX << " " << nativeY << std::endl;
+  TileSetPixelIdentifier pos
+      = GraphicMappingMath::findTilePositionInMapping(
+            toolManager_->mapping(),
+            toolManager_->mappingCoordinateTable(),
+            toolManager_->mappingTileIndexTable(),
+            toolManager_->mappingEntry(),
+            nativeX, nativeY);
   
-  for (int i = toolManager_->mappingCoordinateTable().size() - 1;
-       i >= 0;
-       i--) {
-    SpriteMappingCoordinateTableEntry entry
-      = toolManager_->mappingCoordinateTable().entry(i);
-    
-//    std::cout << entry.offsetX() << " " << entry.offsetY() << std::endl;
-    
-    int adjustedMapX = entry.offsetX() + centerX;
-    int adjustedMapY = entry.offsetY() + centerY;
-//    int mapTileX = adjustedMapX / GGTile::width;
-//    int mapTileY = adjustedMapY / GGTile::height;
-    
-//    std::cout << "adjusted: " << adjustedMapX << " " << adjustedMapY
-//        << std::endl;
-
-    int distX = nativeX - adjustedMapX;
-    int distY = nativeY - adjustedMapY;
-    
-//    std::cout << distX << " " << distY << std::endl;
-    
-    if ((distX < 0) || (distY < 0)) {
-      continue;
-    }
-    
-    if (distX < GGTile::width) {
-      // Regular sprite
-      if (distY < GGTile::height) {
-        int index = toolManager_->mappingTileIndexTable().tileIndex(i)
-                      + toolManager_->mappingEntry().tileOffset;
-        
-        toolManager_->setPencilTileIndex(index);
-        toolManager_->setPencilTileX(distX);
-        toolManager_->setPencilTileY(distY);
-        
-        return;
-      }
-      // Doubled sprite
-      else if (distY < (GGTile::height * 2)) {
-        int index = toolManager_->mappingTileIndexTable().tileIndex(i)
-                      + toolManager_->mappingEntry().tileOffset;
-        
-//        std::cout << index << std::endl;
-        
-        toolManager_->setPencilTileIndex(index + 1);
-        toolManager_->setPencilTileX(distX);
-        toolManager_->setPencilTileY(distY - GGTile::height);
-        
-        return;
-      }
-    }
+  if (pos.tileNum() < 0) {
+    toolManager_->setPencilTileIndex(-1);
   }
-  toolManager_->setPencilTileIndex(-1);
+  else {
+    toolManager_->setPencilTileIndex(pos.tileNum());
+    toolManager_->setPencilTileX(pos.x());
+    toolManager_->setPencilTileY(pos.y());
+  }
 }
 
 void GraphicMappingEditorLayer::drawPencil(InputEventData eventData) {

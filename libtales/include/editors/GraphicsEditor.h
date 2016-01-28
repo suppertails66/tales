@@ -11,6 +11,7 @@
 #include "editors/ColorPickerGraphicSceneLayer.h"
 #include "editors/EditorMetadata.h"
 #include "structs/InputEventData.h"
+#include "editors/GraphicToMappings.h"
 
 namespace Tales {
 
@@ -106,7 +107,12 @@ public:
   void exportAllTiles(const std::string& folderpath,
                       bool transparency = true);
   
-  void exportAllMappings(const std::string& folderpath);
+  void exportAllMappings(const std::string& folderpath,
+                      bool transparency = true);
+  
+  void importAllTiles(const std::string& folderpath);
+  
+  void importAllMappings(const std::string& folderpath);
 protected:
   const static int exportTilesPerRow_ = 16;
 
@@ -126,7 +132,24 @@ protected:
   
   void exportMappingSet(const std::string& folderpath,
                         GraphicCompressionType comp,
+                        int graphicIndex,
+                        bool transparency);
+  
+  void importTiles(const std::string& folderpath,
+                    GraphicCompressionType comp,
+                    int graphicIndex);
+  
+  void importMappingSet(const std::string& folderpath,
+                        GraphicCompressionType comp,
                         int graphicIndex);
+                        
+  GGTileSet& getTileSet(GraphicCompressionType comp,
+                        int graphicIndex);
+  GGPalette& getPalette(GraphicCompressionType comp,
+                        int graphicIndex);
+                        
+  GraphicToMappings::CompressionType getLocalType(
+    GraphicCompressionType compressionType);
                         
   GraphicsEditorToolManager toolManager_;
 
