@@ -29,3 +29,6 @@ dark).
 * Added to level editor a count of total objects in all levels and the maximum
 total allowed.
 * Many internal improvements made to the code courtesy of GerbilSoft.
+
+r6:
+* Added graphics importing and native-format exporting.

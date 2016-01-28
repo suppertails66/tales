@@ -23,6 +23,16 @@ TalesQtGraphicsEditorWidget::TalesQtGraphicsEditorWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Disable import/export stuff if not available
+    if (!graphicsEditor_.canImportAndExport()) {
+        ui->importButton->setEnabled(false);
+        ui->exportButton->setEnabled(false);
+        ui->importSingleMappingButton->setEnabled(false);
+        ui->exportSingleMappingButton->setEnabled(false);
+        ui->importSingleRawGraphicButton->setEnabled(false);
+        ui->exportSingleRawGraphicButton->setEnabled(false);
+    }
+
 //    ui->tilesScrollArea->takeWidget();
 //    ui->tilesScrollArea->setWidget(ui->tilesLabel);
 

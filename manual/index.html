@@ -46,6 +46,9 @@
               <ol>
                 <li><a href="#graphicsprimer">Graphics Primer</a></li>
                 <li><a href="#graphicscomponents">Graphics Editor Components</a></li>
+                <li><a href="#nativeexportdialog">Native Graphics Export Dialog</a></li>
+                <li><a href="#nativeimportdialog">Native Graphics Import Dialog</a></li>
+                <li><a href="#graphicsimportexportwarnings">Import/Export Warnings</a></li>
               </ol>
             </li>
             <li><a href="#tilemapeditor">Tilemap Editor</a>
@@ -167,7 +170,7 @@
       The menu bar contains several submenus for manipulating the program.
     </p>
     <ol>
-      <li><b>File: </b>This is the most fundamentally important component of the program. The File menu allows projects to be saved and loaded to a project file, or exported to a playable ROM image. A <b>project file</b> (extension: .tls) contains the data Tales needs to make edits&mdash;it is not a playable game. Project files are used to store data between program sessions. To produce a playable game, the project data must be exported to a ROM image (extension: .gg). The File menu contains the following items:
+      <li><b>File</b>: This is the most fundamentally important component of the program. The File menu allows projects to be saved and loaded to a project file, or exported to a playable ROM image. A <b>project file</b> (extension: .tls) contains the data Tales needs to make edits&mdash;it is not a playable game. Project files are used to store data between program sessions. To produce a playable game, the project data must be exported to a ROM image (extension: .gg). The File menu contains the following items:
         <ol>
           <li><b>Open project...</b> (<b>Ctrl+O</b>): Opens an existing project file.</li>
           <li><b>Save project</b> (<b>Ctrl+S</b>): Saves the current project to the file it was last saved or loaded from. If the project has not yet been saved or loaded, this functions identically to the Save As option.</li>
@@ -177,9 +180,9 @@
           <li><b>Export resources...</b>: Opens the <a href="#exportresourcesdialog">Export Resources dialog</a>.</li>
         </ol>
       </li>
-      <li><b>Tools:</b> contains a list of editing tools that can be selected for use. The currently selected tool is indicated by a check mark next to its name. Identical in function to the <a href="#toolselect">tool selection sidebar</a>&mdash;see that section for details.
+      <li><b>Tools</b>: contains a list of editing tools that can be selected for use. The currently selected tool is indicated by a check mark next to its name. Identical in function to the <a href="#toolselect">tool selection sidebar</a>&mdash;see that section for details.
       </li>
-      <li><b>Help:</b> contains the <b>About</b> option, which displays program authorship and version information.
+      <li><b>Help</b>: contains the <b>About</b> option, which displays program authorship and version information.
       </li>
     </ol>
     <h3 id="toolselect">Tool Selection Sidebar</h3>
@@ -334,7 +337,7 @@
       <li>The <b>camera boundaries editor</b>. The four numbers listed indicate where scrolling will be halted in each direction. Note that coordinates are given as distances from the left side of the screen (for left/right bounds), or the top side of the screen (for top/bottom bounds). There is also a "dead area" at the top and left of each area that the game is not capable of displaying (this is a technical issue related to the size of the Game Gear's screen). The <b>Show</b> box toggles whether or not the camera boundaries are displayed in the preview.</li>
       <li>The <b>map selector</b>. The game's maps are listed here, sorted by area. <b>Left-click</b> on a map's entry to open it for editing.
       <p>
-        <b>Note:</b> <a href="#quirksreplacelevels">Some maps have hardcoded "alternate" layouts</a> that are loaded in place of the "regular" layout under certain circumstances. These maps share their object layout with the "parent" map, but are otherwise unique (i.e. they have their own properties and metatile layout). Such levels are marked as "Special" in this list, with their "parent" map listed in parentheses.
+        <b>Note</b>: <a href="#quirksreplacelevels">Some maps have hardcoded "alternate" layouts</a> that are loaded in place of the "regular" layout under certain circumstances. These maps share their object layout with the "parent" map, but are otherwise unique (i.e. they have their own properties and metatile layout). Such levels are marked as "Special" in this list, with their "parent" map listed in parentheses.
       </p></li>
     </ol>
     <h4 id="objectproperties">Object Properties Dialog</h4>
@@ -342,37 +345,37 @@
     <p>
       The <b>Object Properties Dialog</b> is accessed by double-clicking on either an object's preview in the preview area, or its entry in the object list. It allows the object's properties to be modified.
       <ul>
-        <li><b>Object type:</b> the object's base type, which determines its behavior.</li>
-        <li><b>X/Y-coordinate:</b> the object's starting position. Note that the point at which the object actually spawns (and despawns) is type-dependent.</li>
-        <li><b>Facing flag:</b> Theoretically, this sets which direction the object initially faces, left or right. In practice, all but perhaps two or three object types ignore this flag and instead set the direction manually in their initialization code depending on their initial state.</li>
-        <li><b>Invisible flag:</b> If set, the object will be invisible when spawned. This flag will not work if either it or the flashing flag is changed by the object's cpde.</li>
-        <li><b>Flashing flag:</b> If set, the object will flash (flicker on and off at 30 Hz) when spawned. This is implemented by repeatedly switching the invisible flag on and off, and hence will "override" it if both are set. Object may also manually override this setting in their code.</li>
-        <li><b>VRAM indices:</b> Each object has two <a href="#vramprimer">VRAM indices</a>, one for its left-facing graphics and one for its right-facing graphics. If the current level's VRAM does not contain the expected graphics at the listed indices, then the object's graphics will obviously not display correctly. To save you some headaches, <em>the program tries to fill in these values automatically whenever an object's type is changed</em> by scanning VRAM for the expected graphics. This rescanning process can also be triggered manually by clicking the <b>Autofill</b> button (see also the <b>Autofill all</b> button, found in the object list).</li>
-        <li><b>Spawn parameter:</b> a parameter that determines the object's initial configuration. For the vast majority of objects, this simply involves choosing an initial state from a list. There are exceptions, however:
+        <li><b>Object type</b>: the object's base type, which determines its behavior.</li>
+        <li><b>X/Y-coordinate</b>: the object's starting position. Note that the point at which the object actually spawns (and despawns) is type-dependent.</li>
+        <li><b>Facing flag</b>: Theoretically, this sets which direction the object initially faces, left or right. In practice, all but perhaps two or three object types ignore this flag and instead set the direction manually in their initialization code depending on their initial state.</li>
+        <li><b>Invisible flag</b>: If set, the object will be invisible when spawned. This flag will not work if either it or the flashing flag is changed by the object's cpde.</li>
+        <li><b>Flashing flag</b>: If set, the object will flash (flicker on and off at 30 Hz) when spawned. This is implemented by repeatedly switching the invisible flag on and off, and hence will "override" it if both are set. Object may also manually override this setting in their code.</li>
+        <li><b>VRAM indices</b>: Each object has two <a href="#vramprimer">VRAM indices</a>, one for its left-facing graphics and one for its right-facing graphics. If the current level's VRAM does not contain the expected graphics at the listed indices, then the object's graphics will obviously not display correctly. To save you some headaches, <em>the program tries to fill in these values automatically whenever an object's type is changed</em> by scanning VRAM for the expected graphics. This rescanning process can also be triggered manually by clicking the <b>Autofill</b> button (see also the <b>Autofill all</b> button, found in the object list).</li>
+        <li><b>Spawn parameter</b>: a parameter that determines the object's initial configuration. For the vast majority of objects, this simply involves choosing an initial state from a list. There are exceptions, however:
           <ul>
             <li><b>Warp objects</b> (object type 8):
               <ul>
-                <li><b>Warp destination:</b> chooses which of the level's warp definitions (see <a href="#warpeditor">Warp Editor Dialog</a>) is the target of the warp object.</li>
-                <li><b>Warp size:</b> determines the size of the warp. Warp size varies by orientation&mdash;vertical warps extend upward by the listed amount, while horizontal warps extend both left and right.</li>
-                <li><b>Orientation:</b> determines whether the warp is horizontal or vertical. Horizontal warps are always 16 pixels (one metatile) high, while vertical warps are always 16 pixels wide.</li>
+                <li><b>Warp destination</b>: chooses which of the level's warp definitions (see <a href="#warpeditor">Warp Editor Dialog</a>) is the target of the warp object.</li>
+                <li><b>Warp size</b>: determines the size of the warp. Warp size varies by orientation&mdash;vertical warps extend upward by the listed amount, while horizontal warps extend both left and right.</li>
+                <li><b>Orientation</b>: determines whether the warp is horizontal or vertical. Horizontal warps are always 16 pixels (one metatile) high, while vertical warps are always 16 pixels wide.</li>
               </ul>
             </li>
             <li><b>Underwater mine hazards</b> (object type 65):
               <ul>
-                <li><b>State:</b> selects whether the mine is an immobile hazard (1 damage), a dropped mine (5 damage), or a mine dropper.</li>
-                <li><b>Orientation:</b> If the mine is a mine dropper, then it may cover multiple metatiles in order to cram more stuff on the screen at once. Droppers may be lined up either horizontally or diagonally.</li>
-                <li><b>Metatile coverage:</b> determines how many metatiles the dropper extends from its origin. The maximum value is 15.</li>
+                <li><b>State</b>: selects whether the mine is an immobile hazard (1 damage), a dropped mine (5 damage), or a mine dropper.</li>
+                <li><b>Orientation</b>: If the mine is a mine dropper, then it may cover multiple metatiles in order to cram more stuff on the screen at once. Droppers may be lined up either horizontally or diagonally.</li>
+                <li><b>Metatile coverage</b>: determines how many metatiles the dropper extends from its origin. The maximum value is 15.</li>
               </ul>
             </li>
             <li><b>Underwater missile launchers</b> (object type 66):
               <ul>
-                <li><b>Orientation:</b> as with mine droppers, but missile launchers must be vertical instead of horizontal.</li>
-                <li><b>Metatile coverage:</b> same as mine dropper.</li>
+                <li><b>Orientation</b>: as with mine droppers, but missile launchers must be vertical instead of horizontal.</li>
+                <li><b>Metatile coverage</b>: same as mine dropper.</li>
               </ul>
             </li>
             <li><b>Electric barriers</b> (object type 75) and <b>electric barrier switches</b> (object type 76):
               <ul>
-                <li><b>Identifier:</b> When an electric barrier siwtch is pressed, it attempts to deactivate the electric barrier whose identifier matches its own. Thus, this value is used to pair switches and barriers together.</li>
+                <li><b>Identifier</b>: When an electric barrier siwtch is pressed, it attempts to deactivate the electric barrier whose identifier matches its own. Thus, this value is used to pair switches and barriers together.</li>
               </ul>
             </li>
           </ul>
@@ -397,10 +400,10 @@
     <p>
       The <b>Level Properties Dialog</b> is accessed by clicking the <b>Level Properties...</b> button. It sets a number of miscellaneous level properties:
       <ul>
-        <li><b>Size:</b> determines the width and height of the level, in metatiles. Only certain specific sizes are allowed by the game engine.</li>
-        <li><b>Effects:</b> Each level may have up to four effects. An "effect" is generally a cycling palette or graphic.</li>
-        <li><b>Metatile structure set:</b> Changes the level's metatile structure set, and thus the appearance of its metatiles.</li>
-        <li><b>Palette 1 and 2:</b> Changes the level's tile palette (palette 1) and object palette (palette 2).</li>
+        <li><b>Size</b>: determines the width and height of the level, in metatiles. Only certain specific sizes are allowed by the game engine.</li>
+        <li><b>Effects</b>: Each level may have up to four effects. An "effect" is generally a cycling palette or graphic.</li>
+        <li><b>Metatile structure set</b>: Changes the level's metatile structure set, and thus the appearance of its metatiles.</li>
+        <li><b>Palette 1 and 2</b>: Changes the level's tile palette (palette 1) and object palette (palette 2).</li>
       </ul>
     </p>
     <h3 id="vrameditor">VRAM Editor</h3>
@@ -424,22 +427,22 @@
     <img src="images/vrameditor.png" width="500"></img>
     <p>
       <ol>
-        <li><b>VRAM Preview: </b> The main component of the VRAM editor, this interactive display previews the contents of VRAM in the currently selected level. Each of the graphics to be loaded is displayed in its target position. <b>Left-clicking on an object graphic</b> highlights it in both the preview and the object graphic list. To move a graphic to a new location in VRAM, <b>click and drag it</b> to a different place. Additionally, the selected graphics for the leaf, smoke puff, and water splash graphics will be shown here if their corresponding displays are enabled (see below).</li>
-        <li><b>Selected Graphic Info: </b>displays information about the currently highlighted graphic in the VRAM preview. The <b>Index</b> box shows the raw VRAM index of the graphic and allows it to be manually changed to a new value. The <b>Select</b> button provides an alternate method of moving the graphic: click the button, then click the location in the VRAM preview where the graphic should go. The <b>Flipped</b> check box indicates whether the selected graphic is horizontally flipped or not.</li>
-        <li><b>Object Graphic List: </b>lists the current level's object graphic pack and all of its contained graphics, by name. <b>Left-clicking an object graphic's name</b> highlights it in both the list and the VRAM preview. The <b>Up Arrow</b> and <b>Down Arrow</b> buttons move the currently selected graphic up or down the list, changing its priority (graphics lower on the list will be overwritten by those higher on the list). The <b>graphic pack box</b> allows the graphic pack used for the level to be changed. The <b>Edit...</b> button opens the <b><a href="#objectheadersdialog">Object Headers Dialog</a></b>, where new graphic packs can be created and removed. Finally, the <b>Add...</b> button brings up the <b><a href="#addgraphicdialog">Add Graphic Dialog</a></b>, while the <b>Remove</b> button removes the currently selected graphic from the pack.</li>
-        <li><b>Other Settings: </b>allows non-object aspects of VRAM to be modified.
+        <li><b>VRAM Preview</b>:  The main component of the VRAM editor, this interactive display previews the contents of VRAM in the currently selected level. Each of the graphics to be loaded is displayed in its target position. <b>Left-clicking on an object graphic</b> highlights it in both the preview and the object graphic list. To move a graphic to a new location in VRAM, <b>click and drag it</b> to a different place. Additionally, the selected graphics for the leaf, smoke puff, and water splash graphics will be shown here if their corresponding displays are enabled (see below).</li>
+        <li><b>Selected Graphic Info</b>: displays information about the currently highlighted graphic in the VRAM preview. The <b>Index</b> box shows the raw VRAM index of the graphic and allows it to be manually changed to a new value. The <b>Select</b> button provides an alternate method of moving the graphic: click the button, then click the location in the VRAM preview where the graphic should go. The <b>Flipped</b> check box indicates whether the selected graphic is horizontally flipped or not.</li>
+        <li><b>Object Graphic List</b>: lists the current level's object graphic pack and all of its contained graphics, by name. <b>Left-clicking an object graphic's name</b> highlights it in both the list and the VRAM preview. The <b>Up Arrow</b> and <b>Down Arrow</b> buttons move the currently selected graphic up or down the list, changing its priority (graphics lower on the list will be overwritten by those higher on the list). The <b>graphic pack box</b> allows the graphic pack used for the level to be changed. The <b>Edit...</b> button opens the <b><a href="#objectheadersdialog">Object Headers Dialog</a></b>, where new graphic packs can be created and removed. Finally, the <b>Add...</b> button brings up the <b><a href="#addgraphicdialog">Add Graphic Dialog</a></b>, while the <b>Remove</b> button removes the currently selected graphic from the pack.</li>
+        <li><b>Other Settings</b>: allows non-object aspects of VRAM to be modified.
           <ul>
-            <li><b>Map graphic box: </b>allows the map graphic for the current level to be changed. There is only one map graphic allowed per level, so generally this needs to be one of the game's provided level graphics.</li>
-            <li><b>Leaf index box: </b>Tails Adventures defines a "leaf index" for each area of the game. When the game wants to generate a wind gust effect, it looks up the leaf index for the current area and uses the patterns at that location to draw the effect. This allows space for other graphics to be optimally assigned, and is also used to composite two different graphics for the "fire wind" effect in Polly Mt. 2. This box allows the leaf index to be changed. To make this easier, the <b>Select</b> button, when clicked, allows the new location to be chosen by clicking on the VRAM preview.
+            <li><b>Map graphic box</b>: allows the map graphic for the current level to be changed. There is only one map graphic allowed per level, so generally this needs to be one of the game's provided level graphics.</li>
+            <li><b>Leaf index box</b>: Tails Adventures defines a "leaf index" for each area of the game. When the game wants to generate a wind gust effect, it looks up the leaf index for the current area and uses the patterns at that location to draw the effect. This allows space for other graphics to be optimally assigned, and is also used to composite two different graphics for the "fire wind" effect in Polly Mt. 2. This box allows the leaf index to be changed. To make this easier, the <b>Select</b> button, when clicked, allows the new location to be chosen by clicking on the VRAM preview.
               <p>
                 <em>Note: The leaf index is shared among all maps in an area.</em> It can't be separately set for each map. Also note that <em style="color: red;">the leaf index for Polly Mt. 1's boss arena (area 4-3) is hardcoded to index 250 and cannot be changed.</em>
               </p>
             </li>
-            <li><b>Smoke puff index box: </b>Nearly identical in function to the leaf index box, this one specifies the location of the graphics for the smoke puff emitted from the Sea Fox when it fires a weapon. However, this index is <em>not</em> shared among maps in an area; each map has its own index.</li>
-            <li><b>Water splash index box: </b>Same as the smoke puff index, including unique definitions per map, for the splash effect that appears when Tails or the Sea Fox jumps in/out of the water.</li>
+            <li><b>Smoke puff index box</b>: Nearly identical in function to the leaf index box, this one specifies the location of the graphics for the smoke puff emitted from the Sea Fox when it fires a weapon. However, this index is <em>not</em> shared among maps in an area; each map has its own index.</li>
+            <li><b>Water splash index box</b>: Same as the smoke puff index, including unique definitions per map, for the splash effect that appears when Tails or the Sea Fox jumps in/out of the water.</li>
           </ul>
         </li>
-        <li><b>Map selector: </b>allows the current level to be changed. Click any map entry to select it.</li>
+        <li><b>Map selector</b>: allows the current level to be changed. Click any map entry to select it.</li>
       </ol>
     </p>
     <h4 id="objectheadersdialog">Object Headers Dialog</h4>
@@ -474,30 +477,66 @@
     <img src="images/graphicseditor.png" width="500"></img>
     <p>
       <ol>
-        <li><b>Graphic preview: </b>Displays the raw patterns that compose the selected graphic. The <b>graphic combo box</b> at the top allows the selected graphic to be changed. This area can be interacted with to edit the graphics using the tools described below.</li>
-        <li><b>Sprite mapping preview: </b>Displays the currently selected sprite mapping, if any, for the active graphic. The <b>mapping combo box</b> at the top allows the selected mapping to be changed. Not all graphics have mappings. For those that do, this area can be interacted with to edit the graphic, just like the graphic preview area.</li>
-        <li><b>Graphic editing tools: </b>The basic tools for editing.
+        <li><b>Graphic preview</b>: Displays the raw patterns that compose the selected graphic. This area can be interacted with to edit the graphics using the tools described below. The <b>graphic combo box</b> at the top allows the selected graphic to be changed. The <b>Import...</b> and <b>Export...</b> buttons allow the current graphic to be exported and imported using the rules described in the sections <a href="#nativeexportdialog">Native Graphics Export Dialog</a> and <a href="#nativeimportdialog">Native Graphics Import Dialog</a>, with the Transparency check box determining whether the exported image marks color 0 as transparent.</li>
+        <li><b>Sprite mapping preview</b>: Displays the currently selected sprite mapping, if any, for the active graphic. Not all graphics have mappings. For those that do, this area can be interacted with to edit the graphic, just like the graphic preview area. The <b>mapping combo box</b> at the top allows the selected mapping to be changed, and the <b>Import...</b> and <b>Export...</b> buttons function analagously to those in the graphic preview area.</li>
+        <li><b>Graphic editing tools</b>: The basic tools for editing.
           <ul>
-            <li><b>Preview palette: </b>shows the palette being used to edit the graphic. Graphics can be colored using more than one palette, so the colors displayed are just for editing purposes. Clicking on a color selects it as the current color for the Pencil tool.</li>
-            <li><b>Preview palette box: </b>allows the preview palette for the current graphic to be changed. If changed, the new value will be saved as the default used whenever the graphic is loaded for editing.</li>
-            <li><b>Toolbar: </b>currently consists of just a single tool, the Pencil.
+            <li><b>Preview palette</b>: shows the palette being used to edit the graphic. Graphics can be colored using more than one palette, so the colors displayed are just for editing purposes. Clicking on a color selects it as the current color for the Pencil tool.</li>
+            <li><b>Preview palette box</b>: allows the preview palette for the current graphic to be changed. If changed, the new value will be saved as the default used whenever the graphic is loaded for editing.</li>
+            <li><b>Toolbar</b>: 
               <ul>
-                <li><img src="images/pencilicon.png"></img> <b>Pencil:</b> a simple tool for drawing one pixel at a time.
+                <li><img src="images/pencilicon.png"></img> <b>Pencil</b>: a simple tool for drawing one pixel at a time.
                   <ul>
-                    <li><b>Left-click:</b> draw the selected color to the clicked pixel. Either the graphic preview or the sprite mapping preview can be clicked.</li>
-                    <li><b>Right-click:</b> set the clicked pixel to color 0 (sprite transparency). Essentially an "eraser".</li>
-                    <li><b>Ctrl+left-click:</b> "pick up" the clicked pixel as the current color. Equivalent to the "dropper" tool in many image editing programs.</li>
+                    <li><b>Left-click</b>: draw the selected color to the clicked pixel. Either the graphic preview or the sprite mapping preview can be clicked.</li>
+                    <li><b>Right-click</b>: set the clicked pixel to color 0 (sprite transparency). Essentially an "eraser".</li>
+                    <li><b>Ctrl+left-click</b>: "pick up" the clicked pixel as the current color. Equivalent to the "dropper" tool in many image editing programs.</li>
                   </ul>
                 </li>
+                <li><b>Export all...</b>: opens the <a href="#nativeexportdialog">Native Graphics Export Dialog</a>.</li>
+                <li><b>Import all...</b>: opens the <a href="#nativeimportdialog">Native Graphics Import Dialog</a>.</li>
               </ul>
             </li>
-            <li><b>Zoom box: </b>changes the current zoom level. Ranges from 100% to 1600%.</li>
-            <li><b>Transparency check box: </b>sets whether sprite transparency is enabled or disabled. If enabled, transparency pixels are displayed as white.</li>
-            <li><b>Grid check box: </b>sets whether an 8x8 tile grid is overlaid onto the editing preview(s).</li>
+            <li><b>Zoom box</b>: changes the current zoom level. Ranges from 100% to 1600%.</li>
+            <li><b>Transparency check box</b>: sets whether sprite transparency is enabled or disabled. If enabled, transparency pixels are displayed as white.</li>
+            <li><b>Grid check box</b>: sets whether an 8x8 tile grid is overlaid onto the editing preview(s).</li>
           </ul>
         </li>
-        <li><b>Collision editor: </b>allows the current sprite mapping's collision box to be edited. The <b>Width</b> and <b>Height</b> boxes allow the box's width and height to be changed. The <b>X-offset</b> and <b>Y-offset</b> boxes change the offset <em>of the graphic itself from its associated object's centerpoint</em>; thus, changing their values may not yield the results you'd intuitively expect. The <b>Collision check box</b> sets whether or not the collision box is overlayed onto the sprite mapping.</li>
+        <li><b>Collision editor</b>: allows the current sprite mapping's collision box to be edited. The <b>Width</b> and <b>Height</b> boxes allow the box's width and height to be changed. The <b>X-offset</b> and <b>Y-offset</b> boxes change the offset <em>of the graphic itself from its associated object's centerpoint</em>; thus, changing their values may not yield the results you'd intuitively expect. The <b>Collision check box</b> sets whether or not the collision box is overlayed onto the sprite mapping.</li>
       </ol>
+    </p>
+    
+    <h4 id="nativeexportdialog">Native Graphics Export Dialog</h4>
+    <img src="images/nativegraphicsexportdialog.png" width="400"></img>
+    <p>
+      The Native Graphics Export Dialog is a tool for exporting the game's graphics <i>en masse</i> as .PNG files suitable for editing in an external program. The edited files can then be imported back in individually using the import/export tools in the graphics editor proper, or all at once by using the <a href="#nativeimportdialog">Native Graphics Import Dialog</a>.
+    </p>
+    <p>
+      The check boxes at the top of the dialog select what to export: raw tile data and/or sprite mappings. The <b>Transparency in output</b> check box determines whether or not color 0 will be marked as transparent in the output images. <b>Do not enable transparency if you plan to edit the files with GIMP</b>&mdash;see <a href="#graphicsimportexportwarnings">Import/Export Warnings</a> below. Clicking the <b>Export...</b> button brings up a dialog for selecting the folder where the exported files will be placed; confirming that dialog exports the chosen files.
+    </p>
+    
+    <h4 id="nativeimportdialog">Native Graphics Import Dialog</h4>
+    <img src="images/nativegraphicsimportdialog.png" width="300"></img>
+    <p>
+      The Native Graphics Import Dialog is a tool for importing specifically formatted .PNG files <i>en masse</i> to replace existing graphics. Generally, these will be edited versions of files exported using the <a href="#nativeexportdialog">Native Graphics Export Dialog</a>.
+    </p>
+    <p>
+      The radio buttons at the top of the dialog select what to import: raw tile data or sprite mappings. Clicking the <b>Import...</b> button brings up a dialog for selecting the folder to read the data from; confirming that dialog imports the chosen files.
+    </p>
+    <p>
+      <b><span style="color: red;">This procedure will overwrite <em>all</em> existing graphics data</span></b>, so be careful not to accidentally erase changes you have made in Tales. <b>Files imported using this method <em>must</em> be named in a specific format</b>&mdash;specifically, that produced by the Native Graphics Export Dialog. Files that are missing will obviously be ignored.
+    </p>
+    
+    <h4 id="graphicsimportexportwarnings">Import/Export Warnings</h4>
+    <p>
+      For importing and exporting graphics to work properly, make sure you keep the following in mind:
+      <ul>
+        <li><b>Every graphic imported must be a 4- or 8-bit palettized PNG with 16 colors.</b> This is the format used for exporting. Other bit sizes will be rejected. Having more colors than 16 will probably still work, but obviously any missing colors can't be used. If possible, make sure your image editor's PNG optimization settings are disabled (don't remove unused colors from the palette, etc.).</li>
+        <li><b><span style="color: red;">Do not enable transparency on exported graphics if you plan to edit them with GIMP.</span></b> <b>Saving an image with no transparency will work fine, so do that instead.</b> The reason is that GIMP discards the embedded transparency index when it reads a PNG file, and instead tries to generate a new one when the image is exported by replacing an unused color. In this case, though, the "unused" color is actually needed to maintain the proper palette structure. Thus the exported image will "lose" a color every time it's exported from GIMP, causing imports into Tales to look wrong. Other image editors may or may not have the same issue.</li>
+        <li><b>When importing mappings, the onus is on you to ensure that tiles that are used in multiple mappings are consistent.</b> The same tiles can appear in more than one mapping, and obviously only one version can be used at a time. This is primarily an issue when using the Import All dialog, where <b>mappings with a higher index will override those with a lower index if they have conflicting tiles</b>.</li>
+        <li><b>Graphics exported from the <a href="#exportresourcesdialog">Export Resources Dialog</a> <em>cannot</em> be imported into the graphics editor.</b> The format is incompatible (non-indexed).</li>
+        <li><b>Changing the colors in the exported graphic will have no effect.</b> The palette is just an editing convenience and isn't actually associated with the graphic within the game. To get a different palette in an image, either change it manually in an image editor or change the default palette in Tales and export again.</li>
+        <li>As a technical note, Tales can be compiled without libpng, in which case all options related to importing/exporting in the graphics editor will be disabled. This shouldn't be the case unless you built it yourself.</li>
+      </ul>
     </p>
     
     <h3 id="tilemapeditor">Tilemap Editor</h3>
@@ -515,10 +554,10 @@
     <img src="images/tilemapeditor.png" width="400"></img>
     <p>
       <ol>
-        <li><b>Tilemap selector: </b>allows different tilemaps to be selected for editing.</li>
-        <li><b>Tilemap preview: </b>an interactive display that allows the tilemap to be modified. Tools and controls are explained below under <b>Editing tools</b>.</li>
-        <li><b>Tile selector: </b>an interactive display showing the tiles in the graphic associated with the tilemap. Generally, this indicates the "active" metatile for each tool, and allows different ones to be selected as "active".</li>
-        <li><b>Editing tools: </b>allows different tools to be selected for editing the tilemap.
+        <li><b>Tilemap selector</b>: allows different tilemaps to be selected for editing.</li>
+        <li><b>Tilemap preview</b>: an interactive display that allows the tilemap to be modified. Tools and controls are explained below under <b>Editing tools</b>.</li>
+        <li><b>Tile selector</b>: an interactive display showing the tiles in the graphic associated with the tilemap. Generally, this indicates the "active" metatile for each tool, and allows different ones to be selected as "active".</li>
+        <li><b>Editing tools</b>: allows different tools to be selected for editing the tilemap.
           <ul>
             <li><img src="images/pencilicon.png"></img> <b>Pencil</b> (shortcut: <b>P</b>): "draws" on top of the tilemap.
               <ul>
@@ -548,7 +587,7 @@
                 <li><b>Middle-clicking on the tilemap preview</b> flips the clicked tile vertically.</li>
               </ul>
             </li>
-            <li><b>Grid check box: </b>enables and disables the tilemap grid overlay.</li>
+            <li><b>Grid check box</b>: enables and disables the tilemap grid overlay.</li>
           </ul>
         </li>
       </ol>
@@ -590,11 +629,11 @@
     <img src="images/structureeditor.png" width="340"></img>
     <p>
       <ol>
-        <li><b>Metatile picker:</b> displays the metatile structures in the current set. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
-        <li><b>Tile picker:</b> displays the patterns in the current preview graphic, with the pattern used for the selected tile in the active metatile highlighted. <b>Left-clicking</b> a pattern in this area changes the selected tile to use the new pattern.</li>
-        <li><b>Structure editor:</b>
+        <li><b>Metatile picker</b>: displays the metatile structures in the current set. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
+        <li><b>Tile picker</b>: displays the patterns in the current preview graphic, with the pattern used for the selected tile in the active metatile highlighted. <b>Left-clicking</b> a pattern in this area changes the selected tile to use the new pattern.</li>
+        <li><b>Structure editor</b>:
           <ul>
-            <li><b>Metatile preview:</b> shows an editable preview of the structure of the currently selected metatile. The four tile editors allow each of the structure's component tiles to be modified.
+            <li><b>Metatile preview</b>: shows an editable preview of the structure of the currently selected metatile. The four tile editors allow each of the structure's component tiles to be modified.
               <ul>
                 <li><b>Left-clicking</b> on a tile in the preview selects it as the active tile, allowing its VRAM index to be changed using the tile picker.</li>
                 <li><b>Right-clicking</b> on a tile toggles its horizontal flip flag.</li>
@@ -605,12 +644,12 @@
             </li>
           </ul>
         </li>
-        <li><b>Settings:</b>
+        <li><b>Settings</b>:
           <ul>
-            <li><b>Grid check box:</b> toggles the metatile and tile grids on and off.</li>
-            <li><b>Set box:</b> allows the target set to be changed. Changing sets automatically loads the default preview graphic and palettes associated with that set.</li>
-            <li><b>Preview graphic box:</b> changes the graphic used to display the current structure set. As a set can be associated with more than one set of graphics, determined by each level's VRAM configuration, <em>this setting is for editing purposes only</em>&mdash;it has no effect on the game if changed. If the preview graphic is changed, the new selection is saved as the default.</li>
-            <li><b>Preview palette boxes:</b> change the palettes used to display the current structure set. The same caveats as above apply.</li>
+            <li><b>Grid check box</b>: toggles the metatile and tile grids on and off.</li>
+            <li><b>Set box</b>: allows the target set to be changed. Changing sets automatically loads the default preview graphic and palettes associated with that set.</li>
+            <li><b>Preview graphic box</b>: changes the graphic used to display the current structure set. As a set can be associated with more than one set of graphics, determined by each level's VRAM configuration, <em>this setting is for editing purposes only</em>&mdash;it has no effect on the game if changed. If the preview graphic is changed, the new selection is saved as the default.</li>
+            <li><b>Preview palette boxes</b>: change the palettes used to display the current structure set. The same caveats as above apply.</li>
           </ul>
         </li>
       </ol>
@@ -624,19 +663,19 @@
     <p>
       As previously discussed, the game defines 256 metatiles which have the same behavior throughout all the game's levels. Specifically, every metatile has a <b>solidity setting</b>, <b>behavior property</b>, <b>width map</b>, <b>height map</b>, and <b>slope speed value</b>.
       <ul>
-        <li><b>Solidity: </b>defines whether the metatile is <b>fully solid</b>, <b>solid on top</b>, or <b>nonsolid</b>. If a metatile is fully solid, its width and height map determine when objects are colliding with it. If a metatile is solid on top, objects can pass through it from below but not from above. If a metatile is nonsolid, it can't be touched, but <em style="color: red;">its width and height map must have only zero magnitudes or the metatile will not behave correctly</em>.</li>
-        <li><b>Behavior: </b>defines the metatile's "effect", such as whether it can be destroyed with a bomb or damages Tails on contact. See <a href="#behaviorlist">the full list of behaviors below</a>.</li>
-        <li><b>Width/height map: </b>defines which parts of the metatile are "solid" and which are "nonsolid". See the <a href="#lengthmapeditor">Width/Height Map Editor section</a> for more details. Normally, a metatile's width and height map need to correspond to the same slope, or the metatile will behave erratically.</li>
-        <li><b>Slope speed value: </b>a signed value that is added to Tails' velocity when he tries to move while in contact with the metatile. This is used to make Tails walk slower when moving uphill. Note that Tails' velocity is modified before the speed cap is applied, so <em>this cannot be used to make Tails move faster than normal&mdash;only slower.</em> The game has a limited number of values for slope speed; each metatile must choose one of them.</li>
+        <li><b>Solidity</b>: defines whether the metatile is <b>fully solid</b>, <b>solid on top</b>, or <b>nonsolid</b>. If a metatile is fully solid, its width and height map determine when objects are colliding with it. If a metatile is solid on top, objects can pass through it from below but not from above. If a metatile is nonsolid, it can't be touched, but <em style="color: red;">its width and height map must have only zero magnitudes or the metatile will not behave correctly</em>.</li>
+        <li><b>Behavior</b>: defines the metatile's "effect", such as whether it can be destroyed with a bomb or damages Tails on contact. See <a href="#behaviorlist">the full list of behaviors below</a>.</li>
+        <li><b>Width/height map</b>: defines which parts of the metatile are "solid" and which are "nonsolid". See the <a href="#lengthmapeditor">Width/Height Map Editor section</a> for more details. Normally, a metatile's width and height map need to correspond to the same slope, or the metatile will behave erratically.</li>
+        <li><b>Slope speed value</b>: a signed value that is added to Tails' velocity when he tries to move while in contact with the metatile. This is used to make Tails walk slower when moving uphill. Note that Tails' velocity is modified before the speed cap is applied, so <em>this cannot be used to make Tails move faster than normal&mdash;only slower.</em> The game has a limited number of values for slope speed; each metatile must choose one of them.</li>
       </ul>
     </p>
     <h4 id="behaviorcomponents">Metatile Behavior Editor Components</h4>
     <img src="images/behavioreditor.png" width="340"></img>
     <p>
       <ol>
-        <li><b>Metatile picker:</b> displays the metatiles by behavior, vertical solidity, or horizontal solidity, according to the current settings. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
-        <li><b>Display settings:</b> changes how the metatiles in the metatile picker are previewed (by behavior, vertical solidity/height map, or horizontal solidity/width map). The <b>Grid</b> check box toggles the metatile grid on and off.</li>
-        <li><b>Metatile editor:</b> allows the current metatile's behavior to be changed. The radio buttons at the top set the solidity, while the combo boxes allow the slope speed, behavior, height map, and width map to be changed.</li>
+        <li><b>Metatile picker</b>: displays the metatiles by behavior, vertical solidity, or horizontal solidity, according to the current settings. <b>Left-clicking</b> a metatile in this area selects it for editing.</li>
+        <li><b>Display settings</b>: changes how the metatiles in the metatile picker are previewed (by behavior, vertical solidity/height map, or horizontal solidity/width map). The <b>Grid</b> check box toggles the metatile grid on and off.</li>
+        <li><b>Metatile editor</b>: allows the current metatile's behavior to be changed. The radio buttons at the top set the solidity, while the combo boxes allow the slope speed, behavior, height map, and width map to be changed.</li>
       </ol>
     </p>
     <h4 id="behaviorlist">Metatile Behavior List</h4>
@@ -644,79 +683,79 @@
       Behaviors listed in <span style="color: red;">red</span> have hardcoded behavior depending on what metatile index they are assigned to.
     </p>
     <ul>
-      <li>0. <img src="images/behavior0.png"></img> <b>Null tile: </b>The metatile is "nonsolid". However, <em style="color: red;">this does not cause the width and height map to be ignored!</em> If a metatile has the null tile behavior, its width and height maps <em>must</em> consist of all zeroes, or Tails will not be able to interact with it correctly.</li>
-      <li>1. <img src="images/behavior1.png"></img> <b>Climbable 1: </b>The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge.</li>
-      <li>2. <img src="images/behavior2.png"></img> <b>Climbable 2: </b>The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge. Appears to be functionally identical to Climbable 1, and is displayed as such in the editor.</li>
-      <li>3. <img src="images/behavior3.png"></img> <b>Nonclimable: </b>If solid, the metatile can be interacted with but not climbed on by Tails. This is ordinarily set on sloped tiles to prevent Tails from inappropriately attemping to climb on them.</li>
-      <li>4. <img src="images/behavior4a.png"></img><img src="images/behavior4b.png"></img><img src="images/behavior4c.png"></img><img src="images/behavior4d.png"></img><img src="images/behavior4e.png"></img><b style="color: red;"> Damaging: </b>Touching the metatile causes 4 rings of damage to Tails.<br/>
+      <li>0. <img src="images/behavior0.png"></img> <b>Null tile</b>: The metatile is "nonsolid". However, <em style="color: red;">this does not cause the width and height map to be ignored!</em> If a metatile has the null tile behavior, its width and height maps <em>must</em> consist of all zeroes, or Tails will not be able to interact with it correctly.</li>
+      <li>1. <img src="images/behavior1.png"></img> <b>Climbable 1</b>: The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge.</li>
+      <li>2. <img src="images/behavior2.png"></img> <b>Climbable 2</b>: The metatile can, if solid, be climbed on by Tails if he comes in contact with the edge. Appears to be functionally identical to Climbable 1, and is displayed as such in the editor.</li>
+      <li>3. <img src="images/behavior3.png"></img> <b>Nonclimable</b>: If solid, the metatile can be interacted with but not climbed on by Tails. This is ordinarily set on sloped tiles to prevent Tails from inappropriately attemping to climb on them.</li>
+      <li>4. <img src="images/behavior4a.png"></img><img src="images/behavior4b.png"></img><img src="images/behavior4c.png"></img><img src="images/behavior4d.png"></img><img src="images/behavior4e.png"></img><b style="color: red;"> Damaging</b>: Touching the metatile causes 4 rings of damage to Tails.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>104, 105:</b> upward spikes (damaging on top).</li>
-          <li><b>106, 107:</b> downward spikes (damaging on bottom).</li>
-          <li><b>108, 109:</b> rightward spikes (damaging on right).</li>
-          <li><b>110, 111:</b> leftward spikes (damaging on left).</li>
-          <li><b>112, 113:</b> lava (damaging on all sides).</li>
-          <li><b>All other indices:</b> no effect.</li>
+          <li><b>104, 105</b>: upward spikes (damaging on top).</li>
+          <li><b>106, 107</b>: downward spikes (damaging on bottom).</li>
+          <li><b>108, 109</b>: rightward spikes (damaging on right).</li>
+          <li><b>110, 111</b>: leftward spikes (damaging on left).</li>
+          <li><b>112, 113</b>: lava (damaging on all sides).</li>
+          <li><b>All other indices</b>: no effect.</li>
         </ul>
       </li>
-      <li>5. <img src="images/behavior5.png"></img> <b>Instadeath: </b>If Tails touches the metatile, he immediately dies, resulting in a game over. Note that this behavior is not set on any metatile in the base game.</li>
-      <li>6. <img src="images/behavior6a.png"></img><img src="images/behavior6b.png"></img> <b style="color: red;">Water: </b>The metatile is considered <a href="#quirkswater">Tails water</a>.<br/>
+      <li>5. <img src="images/behavior5.png"></img> <b>Instadeath</b>: If Tails touches the metatile, he immediately dies, resulting in a game over. Note that this behavior is not set on any metatile in the base game.</li>
+      <li>6. <img src="images/behavior6a.png"></img><img src="images/behavior6b.png"></img> <b style="color: red;">Water</b>: The metatile is considered <a href="#quirkswater">Tails water</a>.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>154:</b> upward water current.</li>
-          <li><b>155:</b> downward water current.</li>
-          <li><b>156:</b> leftward water current.</li>
-          <li><b>157:</b> rightward water current.</li>
-          <li><b>All other indices:</b> standard water (alters physics).</li>
+          <li><b>154</b>: upward water current.</li>
+          <li><b>155</b>: downward water current.</li>
+          <li><b>156</b>: leftward water current.</li>
+          <li><b>157</b>: rightward water current.</li>
+          <li><b>All other indices</b>: standard water (alters physics).</li>
         </ul>
       </li>
-      <li>7. <img src="images/behavior7.png"></img> <b style="color: red;">Wind gust: </b>If Tails is flying and he comes in contact with the metatile, he will be forced to move in a particular direction until he stops flying or is no longer in contact with the metatile.<br/>
+      <li>7. <img src="images/behavior7.png"></img> <b style="color: red;">Wind gust</b>: If Tails is flying and he comes in contact with the metatile, he will be forced to move in a particular direction until he stops flying or is no longer in contact with the metatile.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>120:</b> upward wind gust.</li>
-          <li><b>121:</b> downward wind gust.</li>
-          <li><b>122:</b> leftward wind gust.</li>
-          <li><b>123:</b> rightward wind gust.</li>
-          <li><b>124:</b> up-left wind gust.</li>
-          <li><b>125:</b> down-left wind gust.</li>
-          <li><b>126:</b> down-right wind gust.</li>
-          <li><b>127:</b> up-right wind gust.</li>
-          <li><b>All other indices:</b> no effect.</li>
+          <li><b>120</b>: upward wind gust.</li>
+          <li><b>121</b>: downward wind gust.</li>
+          <li><b>122</b>: leftward wind gust.</li>
+          <li><b>123</b>: rightward wind gust.</li>
+          <li><b>124</b>: up-left wind gust.</li>
+          <li><b>125</b>: down-left wind gust.</li>
+          <li><b>126</b>: down-right wind gust.</li>
+          <li><b>127</b>: up-right wind gust.</li>
+          <li><b>All other indices</b>: no effect.</li>
         </ul>
       </li>
-      <li>8. <img src="images/behavior8.png"></img> <b>Always-left conveyor: </b>A conveyor belt that always moves to the left.</li>
-      <li>9. <img src="images/behavior9.png"></img> <b style="color: red;">Conveyor reverser: </b>If the Wrench item is used in the proximity of the metatile, all conveyor metatiles (behavior 12) in the level will reverse direction.<br/>
+      <li>8. <img src="images/behavior8.png"></img> <b>Always-left conveyor</b>: A conveyor belt that always moves to the left.</li>
+      <li>9. <img src="images/behavior9.png"></img> <b style="color: red;">Conveyor reverser</b>: If the Wrench item is used in the proximity of the metatile, all conveyor metatiles (behavior 12) in the level will reverse direction.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>118:</b> "Standard" reverser.</li>
-          <li><b>119:</b> "Reversed" reverser.</li>
-          <li><b>All other indices:</b> no effect?</li>
+          <li><b>118</b>: "Standard" reverser.</li>
+          <li><b>119</b>: "Reversed" reverser.</li>
+          <li><b>All other indices</b>: no effect?</li>
         </ul>
       </li>
-      <li>10. <img src="images/behavior10.png"></img> <b>Crumbling: </b>If Tails walks on top of the tile, it will disintegrate after a few moments.</li>
-      <li>11. <img src="images/behavior11.png"></img><img src="images/behavior11b.png"></img> <b style="color: red;">Destructible: </b>The metatile can be destroyed by various means.<br/>
+      <li>10. <img src="images/behavior10.png"></img> <b>Crumbling</b>: If Tails walks on top of the tile, it will disintegrate after a few moments.</li>
+      <li>11. <img src="images/behavior11.png"></img><img src="images/behavior11b.png"></img> <b style="color: red;">Destructible</b>: The metatile can be destroyed by various means.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>96, 97, 98:</b> destroyable by standard weapons (Regular Bomb, Remote Bomb, Sonic...). If in the Sea Fox, the metatile can be destroyed by touching it with the front of the ship.</li>
-          <li><b>99, 100, 101:</b> destroyable only by the Large Bomb.</li>
-          <li><b>158:</b> destroyable by standard weapons, and spawns a ring when destroyed.</li>
-          <li><b>All other indices:</b> destroyable by standard weapons?</li>
+          <li><b>96, 97, 98</b>: destroyable by standard weapons (Regular Bomb, Remote Bomb, Sonic...). If in the Sea Fox, the metatile can be destroyed by touching it with the front of the ship.</li>
+          <li><b>99, 100, 101</b>: destroyable only by the Large Bomb.</li>
+          <li><b>158</b>: destroyable by standard weapons, and spawns a ring when destroyed.</li>
+          <li><b>All other indices</b>: destroyable by standard weapons?</li>
         </ul>
       </li>
-      <li>12. <img src="images/behavior12a.png"></img><img src="images/behavior12b.png"></img> <b style="color: red;">Standard conveyor: </b>The metatile pushes Tails left or right.<br/>
+      <li>12. <img src="images/behavior12a.png"></img><img src="images/behavior12b.png"></img> <b style="color: red;">Standard conveyor</b>: The metatile pushes Tails left or right.<br/>
         <span style="color: red;"> This tile has hardcoded behavior for the following metatile indices:</span>
         <ul>
-          <li><b>116:</b> pushes left if conveyor belts have not been reversed, and right if they have.</li>
-          <li><b>117:</b> pushes right if conveyor belts have not been reversed, and left if they have.</li>
-          <li><b>All other indices:</b> no effect?</li>
+          <li><b>116</b>: pushes left if conveyor belts have not been reversed, and right if they have.</li>
+          <li><b>117</b>: pushes right if conveyor belts have not been reversed, and left if they have.</li>
+          <li><b>All other indices</b>: no effect?</li>
         </ul>
       </li>
-      <li>13. <img src="images/behavior_dummy.png"></img> <b>Dummy 1: </b>no effect.</li>
-      <li>14. <img src="images/behavior14.png"></img> <b>Destructible with napalm: </b>The metatile can be destroyed by a Napalm Bomb.</li>
-      <li>15. <img src="images/behavior15.png"></img> <b>One-way down tile: </b>The metatile can be passed through from above, but not below.</li>
-      <li>16. <img src="images/behavior_dummy.png"></img> <b>Dummy 2: </b>no effect.</li>
-      <li>17. <img src="images/behavior17.png"></img> <b>Big upward gust: </b>When touched by Tails, the metatile generates a "strong" wind gust that blows him upward by approximately 16 metatiles vertically (regardless of whether he is flying). Note that <em>the controls are locked until Tails has moved the full distance required</em>, so make sure the player can't get stuck by being blown into a ceiling.</li>
-      <li>18. <img src="images/behavior_dummy.png"></img> <b>Dummy 3: </b>no effect.</li>
+      <li>13. <img src="images/behavior_dummy.png"></img> <b>Dummy 1</b>: no effect.</li>
+      <li>14. <img src="images/behavior14.png"></img> <b>Destructible with napalm</b>: The metatile can be destroyed by a Napalm Bomb.</li>
+      <li>15. <img src="images/behavior15.png"></img> <b>One-way down tile</b>: The metatile can be passed through from above, but not below.</li>
+      <li>16. <img src="images/behavior_dummy.png"></img> <b>Dummy 2</b>: no effect.</li>
+      <li>17. <img src="images/behavior17.png"></img> <b>Big upward gust</b>: When touched by Tails, the metatile generates a "strong" wind gust that blows him upward by approximately 16 metatiles vertically (regardless of whether he is flying). Note that <em>the controls are locked until Tails has moved the full distance required</em>, so make sure the player can't get stuck by being blown into a ceiling.</li>
+      <li>18. <img src="images/behavior_dummy.png"></img> <b>Dummy 3</b>: no effect.</li>
     </ul>
     
     <h3 id="lengthmapeditor">Width/Height Map Editor</h3>
@@ -734,9 +773,9 @@
     <img src="images/lengthmapeditor.png" width="400"></img>
     <p>
       <ol>
-        <li><b>Length map preview: </b>an interactive display of the current length map. <b>Left-clicking</b> a row or column in the display sets the corresponding row or column in the map. <b>Double-clicking</b> or <b>right-clicking</b> a row or column in the display opens the <a href="#lengthmapeditdialog">Length Map Edit Dialog</a>, allowing its value to be manually set. The <b>All forward</b> button makes all lengths face forward, while the <b>All backward</b> button makes them all face backward.</li>
-        <li><b>Width/height map selector: </b>lists all the width and height maps in the game. Clicking on a width or height map opens it for editing in the preview.</li>
-        <li><b>Slope speed editor: </b>lists all of the game's slope speed values and allows them to be modified. See the explanation of slope speed values in the <a href="#behaviorprimer">Metatile Behavior Primer</a>.</li>
+        <li><b>Length map preview</b>: an interactive display of the current length map. <b>Left-clicking</b> a row or column in the display sets the corresponding row or column in the map. <b>Double-clicking</b> or <b>right-clicking</b> a row or column in the display opens the <a href="#lengthmapeditdialog">Length Map Edit Dialog</a>, allowing its value to be manually set. The <b>All forward</b> button makes all lengths face forward, while the <b>All backward</b> button makes them all face backward.</li>
+        <li><b>Width/height map selector</b>: lists all the width and height maps in the game. Clicking on a width or height map opens it for editing in the preview.</li>
+        <li><b>Slope speed editor</b>: lists all of the game's slope speed values and allows them to be modified. See the explanation of slope speed values in the <a href="#behaviorprimer">Metatile Behavior Primer</a>.</li>
       </ol>
     </p>
     <h4 id="lengthmapeditdialog">Width/Height Map Edit Dialog</h4>
@@ -770,9 +809,9 @@
     <p>
       Each of the rows in the editor gives Tails' stats when he obtains the given number of emeralds. These stats are:
       <ul>
-        <li><b>Flight time: </b>the amount of time Tails can continuously fly. Ranges from 0 (no flight) to 12 (maximum time).</li>
-        <li><b>HP: </b>Tails' max ring count. Note that <em>the amount of HP listed for having no emeralds does not have any effect</em>&mdash;that value is manually initialized in the game's startup code and only changes when Tails picks up a new emerald.</li>
-        <li><b>HP Refill: </b>When Tails picks up the given number of Chaos Emeralds, his ring count will be set to this number. This does not have to be the same as the maximum HP for that Emerald. The above warning about the zero-Emerald entry applies.</li>
+        <li><b>Flight time</b>: the amount of time Tails can continuously fly. Ranges from 0 (no flight) to 12 (maximum time).</li>
+        <li><b>HP</b>: Tails' max ring count. Note that <em>the amount of HP listed for having no emeralds does not have any effect</em>&mdash;that value is manually initialized in the game's startup code and only changes when Tails picks up a new emerald.</li>
+        <li><b>HP Refill</b>: When Tails picks up the given number of Chaos Emeralds, his ring count will be set to this number. This does not have to be the same as the maximum HP for that Emerald. The above warning about the zero-Emerald entry applies.</li>
       </ul>
     </p>
     
@@ -785,32 +824,32 @@
     <p>
       There are a few different enhancements that can be applied:
       <ul>
-        <li><b>Inventory system: </b>change the way the game manages items.
+        <li><b>Inventory system</b>: change the way the game manages items.
           <ul>
-            <li><b>None: </b>the standard inventory system the game normally uses. The player gets four item slots, and the items in them can be changed by going to Tails' House or picking up an item with a slot empty. Note that this system means no continuous sequence of levels can require Tails to use more than four different items.</li>
-            <li><b>All items w/ hotswap: </b>massively overhauls the inventory system. This setting allows all obtained items to be used instead of just four at a time. To make managing the expanded inventory easier, a "hotswap" system is added to the pause screen. Holding Button 2 and pressing a direction button places the currently equipped item in a hotswap slot. That item can then be switched to on the fly by holding Button 1 and pressing the same direction.</li>
-            <li><b>All items, no hotswap: </b>allows all collected items to be accessed from the inventory, but doesn't add the hotswap system.</li>
-            <li><b>Standard w/ hotswap: </b>only allows four items to be carried at once, but adds the hotswap system for switching them quickly.</li>
+            <li><b>None</b>: the standard inventory system the game normally uses. The player gets four item slots, and the items in them can be changed by going to Tails' House or picking up an item with a slot empty. Note that this system means no continuous sequence of levels can require Tails to use more than four different items.</li>
+            <li><b>All items w/ hotswap</b>: massively overhauls the inventory system. This setting allows all obtained items to be used instead of just four at a time. To make managing the expanded inventory easier, a "hotswap" system is added to the pause screen. Holding Button 2 and pressing a direction button places the currently equipped item in a hotswap slot. That item can then be switched to on the fly by holding Button 1 and pressing the same direction.</li>
+            <li><b>All items, no hotswap</b>: allows all collected items to be accessed from the inventory, but doesn't add the hotswap system.</li>
+            <li><b>Standard w/ hotswap</b>: only allows four items to be carried at once, but adds the hotswap system for switching them quickly.</li>
           </ul>
         </li>
-        <li><b>Flight system: </b>change how Tails flies.
+        <li><b>Flight system</b>: change how Tails flies.
           <ul>
-            <li><b>None: </b>the standard flight system. Tails can only fly for a limited duration, but the player can reset the flight meter in mid-air by stopping and resuming flight, meaning there is no effective limit on flight.</li>
-            <li><b>Chaining disabled: </b>The player is no longer allowed to resume flight in mid-air&mdash;Tails must touch the ground first. This places an absolute limit on how high/far Tails can fly.</li>
-            <li><b>Flight disabled: </b>prevents Tails from flying. This is a cleaner solution than setting flight time to zero in the power-up editor.</li>
+            <li><b>None</b>: the standard flight system. Tails can only fly for a limited duration, but the player can reset the flight meter in mid-air by stopping and resuming flight, meaning there is no effective limit on flight.</li>
+            <li><b>Chaining disabled</b>: The player is no longer allowed to resume flight in mid-air&mdash;Tails must touch the ground first. This places an absolute limit on how high/far Tails can fly.</li>
+            <li><b>Flight disabled</b>: prevents Tails from flying. This is a cleaner solution than setting flight time to zero in the power-up editor.</li>
           </ul>
         </li>
-        <li><b>Game over: </b>change what happens when Tails dies.
+        <li><b>Game over</b>: change what happens when Tails dies.
           <ul>
-            <li><b>Standard: </b>the standard game over system. When Tails dies, the Game Over screen displays and the game restarts, effectively kicking the player back to the world map.</li>
-            <li><b>No game over: </b>When Tails dies, he restarts the current map at the spawn point where he began it with max health.</li>
+            <li><b>Standard</b>: the standard game over system. When Tails dies, the Game Over screen displays and the game restarts, effectively kicking the player back to the world map.</li>
+            <li><b>No game over</b>: When Tails dies, he restarts the current map at the spawn point where he began it with max health.</li>
           </ul>
         </li>
-        <li><b>Bug fixes: </b>toggle fixes for various game bugs, mostly minor ones.
+        <li><b>Bug fixes</b>: toggle fixes for various game bugs, mostly minor ones.
           <ul>
-            <li><b>Jump height when Button 1 held: </b>fixes an issue where the game erroneously checks to see if either Button 1 (use item) or Button 2 (jump) is pressed when deciding how long the player has held down the jump button. This causes Tails to incorrectly always jump to the maximum possible height when the item button is held down and the jump button is tapped.</li>
-            <li><b>Bomb while jumping graphic fix: </b>fixes an issue where one of Tails' graphics descriptors has the wrong length. This causes one of the frames of Tails' animation for throwing a bomb while jumping to display incorrectly. Note that the graphic in question can still be edited correctly in the graphics editor.</li>
-            <li><b>Double jump fix: </b>fixes an obscure bug where jumping, then falling for 256 frames while continuing to hold the jump button will cause Tails to jump again in mid-air. It's possible to achieve this on certain parts of Area 4-3 (the Polly Mt. 1 boss level).</li>
+            <li><b>Jump height when Button 1 held</b>: fixes an issue where the game erroneously checks to see if either Button 1 (use item) or Button 2 (jump) is pressed when deciding how long the player has held down the jump button. This causes Tails to incorrectly always jump to the maximum possible height when the item button is held down and the jump button is tapped.</li>
+            <li><b>Bomb while jumping graphic fix</b>: fixes an issue where one of Tails' graphics descriptors has the wrong length. This causes one of the frames of Tails' animation for throwing a bomb while jumping to display incorrectly. Note that the graphic in question can still be edited correctly in the graphics editor.</li>
+            <li><b>Double jump fix</b>: fixes an obscure bug where jumping, then falling for 256 frames while continuing to hold the jump button will cause Tails to jump again in mid-air. It's possible to achieve this on certain parts of Area 4-3 (the Polly Mt. 1 boss level).</li>
           </ul>
         </li>
       </ul>
@@ -823,11 +862,11 @@
     </p>
     <p>
       <ol>
-        <li><b>Map exporter: </b>exports level maps. The <b>Visual</b>, <b>Behavior</b>, <b>Vert. solidity</b>, and <b>horiz. solidity</b> check boxes control which views of the level are exported (with each view becoming a separate file). The <b>Objects</b>, <b>Spawns</b>, and <b>Camera bounds</b> check boxes enable and disable the corresponding graphical overlays, explained under <a href="#leveleditor">Level Editor</a>.</li>
-        <li><b>Metatile exporter: </b>exports metatile sets. <b>Aggregate</b> outputs sets as a single image like the metatile displays used in the program, while <b>Individual</b> outputs each metatile as a separate image. <b>The preview graphic and palette from the <a href="#structureeditor">metatile structure editor</a> are used to export the graphics.</b></li>
-        <li><b>Graphic exporter: </b>exports graphics. <b>Raw graphics</b> exports the raw tiles that compose each graphic, and will render color 0 as transparent if the <b>Transparency</b> box is checked. <b>Sprite mappings</b> exports all the sprite mappings associated with each graphic. <b>Aligned sprite mappings</b> is the same as "Sprite mappings" except that each sprite mapping is centered on a 256x256 pixel transparent background according to its x-offset and y-offset parameter, as explained under <a href="#graphicseditor">Graphics Editor</a>, allowing sprites to more easily be combined into animations. <b>The preview palette from the graphics editor is used to export the graphics.</b></li>
-        <li><b>Tilemap exporter: </b>exports tilemaps.</b></li>
-        <li><b>Progress bar: </b>indicates progress through the current export. (Maps can take a while!)</b></li>
+        <li><b>Map exporter</b>: exports level maps. The <b>Visual</b>, <b>Behavior</b>, <b>Vert. solidity</b>, and <b>horiz. solidity</b> check boxes control which views of the level are exported (with each view becoming a separate file). The <b>Objects</b>, <b>Spawns</b>, and <b>Camera bounds</b> check boxes enable and disable the corresponding graphical overlays, explained under <a href="#leveleditor">Level Editor</a>.</li>
+        <li><b>Metatile exporter</b>: exports metatile sets. <b>Aggregate</b> outputs sets as a single image like the metatile displays used in the program, while <b>Individual</b> outputs each metatile as a separate image. <b>The preview graphic and palette from the <a href="#structureeditor">metatile structure editor</a> are used to export the graphics.</b></li>
+        <li><b>Graphic exporter</b>: exports graphics. <b>Raw graphics</b> exports the raw tiles that compose each graphic, and will render color 0 as transparent if the <b>Transparency</b> box is checked. <b>Sprite mappings</b> exports all the sprite mappings associated with each graphic. <b>Aligned sprite mappings</b> is the same as "Sprite mappings" except that each sprite mapping is centered on a 256x256 pixel transparent background according to its x-offset and y-offset parameter, as explained under <a href="#graphicseditor">Graphics Editor</a>, allowing sprites to more easily be combined into animations. <b>The preview palette from the graphics editor is used to export the graphics.</b></li>
+        <li><b>Tilemap exporter</b>: exports tilemaps.</b></li>
+        <li><b>Progress bar</b>: indicates progress through the current export. (Maps can take a while!)</b></li>
       </ol>
     </p>
     
@@ -885,21 +924,21 @@
     <p>
       In some cases, the game assigns map data to an area/map slot, but does not provide other data (such as an object layout). In these cases, the editor will allow only the editable aspects of the level to be changed. These "pseudo-levels" are:
         <ul>
-          <li><b>Area 16 (world map):</b> The game does, in fact, assign the world map some unique level data. The top part of it is a duplicate of part of Area 4-2, while the rest is blank. It's normally never displayed to the user because the visible part of the screen is overwritten by a fixed tilemap. You can still edit the world map palettes and effects through the <a href="#levelproperties">Level Properties dialog</a>. The object layout is hardcoded and can't be changed.</li>
-          <li><b>Area 19 (intro):</b> The intro uses a hardcoded object layout, but the map layout can still be modified.</li>
+          <li><b>Area 16 (world map)</b>: The game does, in fact, assign the world map some unique level data. The top part of it is a duplicate of part of Area 4-2, while the rest is blank. It's normally never displayed to the user because the visible part of the screen is overwritten by a fixed tilemap. You can still edit the world map palettes and effects through the <a href="#levelproperties">Level Properties dialog</a>. The object layout is hardcoded and can't be changed.</li>
+          <li><b>Area 19 (intro)</b>: The intro uses a hardcoded object layout, but the map layout can still be modified.</li>
         </ul>
     </p>
     <h3 id="quirksreplacelevels">Substitute Levels</h3>
     <p>
       The game has a few "substitute" level layouts that are hardcoded to load in place of others if certain conditions are met. This is used primarily to get rid of boss-related parts of levels after the boss has been defeated. The levels with substitutes are:
       <ul>
-        <li><b>Area 4-3 (Polly Mt. 1 boss):</b> loaded when the area is revisited after defeating the boss. Replaces the vertical "maze" with empty space.</li>
-        <li><b>Area 6-3 (Lake Rocky boss):</b> loaded when the area is revisited after defeating the boss. Gets rid of the boss ship.</li>
-        <li><b>Area 6-5 (Lake Rocky, exit to Coco Island):</b> loaded when the area is revisited after accessing Coco Island. Gets rid of the tiles blocking the Coco Island exit in the lower-right part of the level.</li>
-        <li><b>Area 9-3 (Cavern Island boss):</b> loaded when the area is revisited after defeating the boss. Changes the boss tiles to they are "embedded" in the ground.</li>
-        <li><b>Area 16-1 (world map):</b> unknown purpose.</li>
-        <li><b>Area 19-2 (intro forest on fire):</b> unknown purpose.</li>
-        <li><b>Area 20-2 (Coco Island escape cutscene):</b> unknown purpose.</li>
+        <li><b>Area 4-3 (Polly Mt. 1 boss)</b>: loaded when the area is revisited after defeating the boss. Replaces the vertical "maze" with empty space.</li>
+        <li><b>Area 6-3 (Lake Rocky boss)</b>: loaded when the area is revisited after defeating the boss. Gets rid of the boss ship.</li>
+        <li><b>Area 6-5 (Lake Rocky, exit to Coco Island)</b>: loaded when the area is revisited after accessing Coco Island. Gets rid of the tiles blocking the Coco Island exit in the lower-right part of the level.</li>
+        <li><b>Area 9-3 (Cavern Island boss)</b>: loaded when the area is revisited after defeating the boss. Changes the boss tiles to they are "embedded" in the ground.</li>
+        <li><b>Area 16-1 (world map)</b>: unknown purpose.</li>
+        <li><b>Area 19-2 (intro forest on fire)</b>: unknown purpose.</li>
+        <li><b>Area 20-2 (Coco Island escape cutscene)</b>: unknown purpose.</li>
       </ul>
     </p>
     
@@ -935,10 +974,10 @@
     <p>
      A few of the game's level effects are somewhat unusual in function:
       <ul>
-        <li><b>Final boss trigger sequence:</b> normally set only on the final boss arena. When the player enters that level, this effect checks to see if the semifinal boss has already been defeated and overrides the default scrolling limits if so.</li>
-        <li><b>Dummy 1 and 2:</b> These effects do nothing, and are set on the two maps of Battle Fortress 1. They have a small bit of leftover code that suggests they used to do something, but it's not in the game anymore.</li>
-        <li><b>Lake Rocky boss scrolling:</b> continually scrolls the bottom rows of the screen while the top continues to scroll normally.</li>
-        <li><b>Cavern Island boss split-scroll:</b> special scrolling used to "move" metatiles for the Cavern Island boss.</li>
+        <li><b>Final boss trigger sequence</b>: normally set only on the final boss arena. When the player enters that level, this effect checks to see if the semifinal boss has already been defeated and overrides the default scrolling limits if so.</li>
+        <li><b>Dummy 1 and 2</b>: These effects do nothing, and are set on the two maps of Battle Fortress 1. They have a small bit of leftover code that suggests they used to do something, but it's not in the game anymore.</li>
+        <li><b>Lake Rocky boss scrolling</b>: continually scrolls the bottom rows of the screen while the top continues to scroll normally.</li>
+        <li><b>Cavern Island boss split-scroll</b>: special scrolling used to "move" metatiles for the Cavern Island boss.</li>
       </ul>
      </p>
     

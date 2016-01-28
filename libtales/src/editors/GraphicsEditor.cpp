@@ -736,6 +736,10 @@ bool GraphicsEditor::exportCurrentMapping(const std::string& filename,
   
   return true;
 }
+  
+bool GraphicsEditor::canImportAndExport() const {
+  return PngConversion::canConvertPng();
+}
 
 
 }; 

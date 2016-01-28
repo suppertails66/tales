@@ -2,6 +2,14 @@ There are two basic components to Tales: libtales, a static library which
 provides most of the editing logic, and libtales-qt, a Qt-based interface onto
 libtales.
 
+Since r6, Tales uses libpng to provide graphics importing and
+exporting. For Windows, the necessary headers and .lib files are included in the
+source; prebuilt libpng and zlib DLLs are found in the lib folder. For other
+systems, you will need libpng installed with the header and library files in the
+appropriate environment variables. If you can't or don't want to use libpng,
+undefine TALES_ENABLE_LIBPNG, which will disable the corresponding
+import/export functionality.
+
 ==Building libtales==
 - On Linux(-like) systems:
   1. Navigate to the "libtales" folder and run the command "make".
