@@ -121,6 +121,8 @@ public:
   bool importCurrentMapping(const std::string& filename);
   bool exportCurrentMapping(const std::string& filename,
                             bool transparency = true);
+  
+  bool canImportAndExport() const;
 protected:
   const static int exportTilesPerRow_ = 16;
 
