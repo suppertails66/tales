@@ -7,7 +7,15 @@
 #include <string>
 
 #ifdef TALES_ENABLE_LIBPNG
-  #include "libs/png.h"
+  // TODO: remove this check and use libs/png.h
+  // this is laziness in its purest form: my linux box doesn't have
+  // the latest libpng and the longjmp stuff breaks when linking the new
+  // header against the old library
+  #ifdef _WIN32
+    #include "libs/png.h"
+  #else
+    #include "png.h"
+  #endif
 #endif
 
 namespace Tales {

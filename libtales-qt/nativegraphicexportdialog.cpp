@@ -34,6 +34,7 @@ void NativeGraphicExportDialog::on_pushButton_clicked(bool checked)
 
     if (ui->spriteMappingsCheckBox->isChecked()) {
         appState_.editor().graphicsEditor().exportAllMappings(
-                    filepath.toStdString() + "/");
+                    filepath.toStdString() + "/",
+                    ui->transparencyCheckBox->isChecked());
     }
 }

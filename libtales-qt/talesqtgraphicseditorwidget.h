@@ -99,6 +99,8 @@ private slots:
 
     void on_exportButton_clicked();
 
+    void on_importButton_clicked(bool checked);
+
 private:
     Ui::TalesQtGraphicsEditorWidget *ui;
 };

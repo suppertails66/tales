@@ -149,7 +149,9 @@ bool PngConversion::indexedPngToTwoDArrayGG(TwoDByteArray& dst,
     }
     
     // Fail if data bit depth does not match expected
-    if (png_get_bit_depth(png_ptr, info_ptr) != pngBitDepth_) {
+    int bit_depth = png_get_bit_depth(png_ptr, info_ptr);
+    if (bit_depth > pngBitDepth_) {
+//      std::cout << (int)(png_get_bit_depth(png_ptr, info_ptr)) << std::endl;
       throw PngFailure();
     }
     
@@ -158,7 +160,8 @@ bool PngConversion::indexedPngToTwoDArrayGG(TwoDByteArray& dst,
     png_get_PLTE(png_ptr, info_ptr, &palette, &num_palette);
     
     // Fail if there are not enough entries in the palette
-    if (num_palette < GGPalette::numColorsInPalette) {
+    if (num_palette < GGPalette::numColorsInPalette - 1) {
+//      std::cout << num_palette << std::endl;
       throw PngFailure();
     }
     
@@ -177,10 +180,33 @@ bool PngConversion::indexedPngToTwoDArrayGG(TwoDByteArray& dst,
     png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
     
     // Copy values to the destination array
-    for (int j = 0; j < h; j++) {
-      for (int i = 0; i < w; i++) {
-        dst.data(i, j) = row_pointers[j][i];
+    if (bit_depth == 8) {
+      for (int j = 0; j < h; j++) {
+        for (int i = 0; i < w; i++) {
+          dst.data(i, j) = row_pointers[j][i];
+        }
       }
+    }
+    else if (bit_depth == 4) {
+      for (int j = 0; j < h; j++) {
+        int xpos = 0;
+        while (xpos < w) {
+          Tbyte byte = row_pointers[j][xpos/2];
+          Tbyte color1 = (byte & 0x0F);
+          Tbyte color2 = (byte & 0xF0) >> 4;
+          
+          dst.data(xpos++, j) = color2;
+          
+          if (xpos >= w) {
+            break;
+          }
+          
+          dst.data(xpos++, j) = color1;
+        }
+      }
+    }
+    else {
+      throw PngFailure();
     }
     
 //    std::cout << num_palette << std::endl;

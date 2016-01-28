@@ -248,20 +248,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="exportButton">
-          <property name="text">
-           <string>Export...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="importButton">
-          <property name="text">
-           <string>Import...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -273,6 +259,20 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exportButton">
+          <property name="text">
+           <string>Export all...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="importButton">
+          <property name="text">
+           <string>Import all...</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

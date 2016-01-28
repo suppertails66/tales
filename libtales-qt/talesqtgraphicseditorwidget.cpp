@@ -522,3 +522,10 @@ void TalesQtGraphicsEditorWidget::on_exportButton_clicked()
 //    graphicsEditor_.exportAllMappings();
     NativeGraphicExportDialog(this).exec();
 }
+
+void TalesQtGraphicsEditorWidget::on_importButton_clicked(bool checked)
+{
+    graphicsEditor_.importAllTiles("graphicsnative/");
+    graphicsEditor_.importAllMappings("graphicsnative/");
+    refreshDisplay();
+}

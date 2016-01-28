@@ -296,6 +296,46 @@ TwoDByteArray GGTileSet::toByteArray(int width) {
   
   return output;
 }
+                             
+void GGTileSet::fromByteArray(TwoDByteArray& src,
+                   int width) {
+  int tileNum = 0;
+  for (int j = 0; j < src.h(); j += GGTile::height) {
+    for (int i = 0; i < src.w(); i += GGTile::width) {
+      tileFromByteArray(tileNum, src, i, j);
+      ++tileNum;
+      
+      if (tileNum >= numTiles_) {
+        break;
+      }
+    }
+    
+    if (tileNum >= numTiles_) {
+      break;
+    }
+  }
+}
+
+void GGTileSet::tileFromByteArray(int tileNum,
+                       TwoDByteArray& src,
+                       int x, int y) {
+  for (int j = 0; j < GGTile::height; j++) {
+    int srcy = (y + j);
+    if (srcy >= src.h()) {
+      continue;
+    }
+    
+    for (int i = 0; i < GGTile::width; i++) {
+      int srcx = (x + i);
+      if (srcx >= src.w()) {
+        continue;
+      }
+      
+      tileSet_[tileNum].setPixel(i, j,
+                                 src.data(srcx, srcy));
+    }
+  }
+}
 
 
 };

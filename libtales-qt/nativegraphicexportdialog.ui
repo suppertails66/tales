@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>522</width>
-    <height>270</height>
+    <width>552</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -36,7 +36,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>183</width>
+          <width>188</width>
           <height>20</height>
          </size>
         </property>
@@ -106,7 +106,30 @@
    <item>
     <widget class="QCheckBox" name="transparencyCheckBox">
      <property name="text">
-      <string>Use transparency for raw tiles</string>
+      <string>Transparency in output (LEAVE DISABLED IF USING GIMP)</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Graphics exported through this dialog are stored as palettized (indexed) PNGs with a 1:1 correspondence to the original data. To be able to import the graphics again, you MUST ensure your image editor does not alter the palette layout in any way! Make sure any optimization or recompression settings are disabled, and that your edited image has exactly 16 colors in its palette.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Do not enable transparency if you plan to edit with GIMP. If your image has transparent pixels, GIMP will unavoidably destroy colors in the palette upon export, causing subsequent imports into Tales to look wrong or fail entirely.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -152,16 +175,6 @@
       </spacer>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Graphics exported through this dialog are stored as palettized (indexed) PNGs with a 1:1 correspondence to the original data. To be able to import the graphics again, you MUST ensure your image editor does not alter the palette layout in any way! Make sure any optimization or recompression settings are disabled, and that your edited image has exactly 16 colors in its palette.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

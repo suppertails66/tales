@@ -126,7 +126,14 @@ public:
                                = Graphic::tileTrans);
                              
   TwoDByteArray toByteArray(int width);
+                             
+  void fromByteArray(TwoDByteArray& src,
+                     int width);
 protected:
+  void tileFromByteArray(int tileNum,
+                         TwoDByteArray& src,
+                         int x, int y);
+
   /**
    * Tile data pointer.
    */
