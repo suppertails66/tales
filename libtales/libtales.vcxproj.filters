@@ -741,6 +741,12 @@
     <ClInclude Include="include\libs\pngdebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\editors\GraphicMappingMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\editors\TileSetPixelIdentifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editors\AreaMetadataEntry.cpp">
@@ -1458,6 +1464,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libs\pngconf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editors\GraphicMappingMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editors\TileSetPixelIdentifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

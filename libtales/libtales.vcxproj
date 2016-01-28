@@ -85,6 +85,7 @@
     <ClInclude Include="include\editors\GraphicCompressionType.h" />
     <ClInclude Include="include\editors\GraphicInfo.h" />
     <ClInclude Include="include\editors\GraphicMappingEditorLayer.h" />
+    <ClInclude Include="include\editors\GraphicMappingMath.h" />
     <ClInclude Include="include\editors\GraphicPaletteDefaultMap.h" />
     <ClInclude Include="include\editors\GraphicsEditor.h" />
     <ClInclude Include="include\editors\GraphicsEditorScene.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="include\editors\TileMapPickerScene.h" />
     <ClInclude Include="include\editors\TilePickerScene.h" />
     <ClInclude Include="include\editors\TileRenderer.h" />
+    <ClInclude Include="include\editors\TileSetPixelIdentifier.h" />
     <ClInclude Include="include\editors\VisualMetatilePickerScene.h" />
     <ClInclude Include="include\editors\VRAMCache.h" />
     <ClInclude Include="include\editors\VRAMEditorLayeredGraphicScene.h" />
@@ -328,6 +330,7 @@
     <ClCompile Include="src\editors\GraphicCompressionType.cpp" />
     <ClCompile Include="src\editors\GraphicInfo.cpp" />
     <ClCompile Include="src\editors\GraphicMappingEditorLayer.cpp" />
+    <ClCompile Include="src\editors\GraphicMappingMath.cpp" />
     <ClCompile Include="src\editors\GraphicPaletteDefaultMap.cpp" />
     <ClCompile Include="src\editors\GraphicsEditor.cpp" />
     <ClCompile Include="src\editors\GraphicsEditorScene.cpp" />
@@ -383,6 +386,7 @@
     <ClCompile Include="src\editors\TileMapPickerScene.cpp" />
     <ClCompile Include="src\editors\TilePickerScene.cpp" />
     <ClCompile Include="src\editors\TileRenderer.cpp" />
+    <ClCompile Include="src\editors\TileSetPixelIdentifier.cpp" />
     <ClCompile Include="src\editors\VisualMetatilePickerScene.cpp" />
     <ClCompile Include="src\editors\VRAMCache.cpp" />
     <ClCompile Include="src\editors\VRAMEditorLayeredGraphicScene.cpp" />
