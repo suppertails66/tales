@@ -150,7 +150,7 @@ bool PngConversion::indexedPngToTwoDArrayGG(TwoDByteArray& dst,
     
     // Fail if data bit depth does not match expected
     int bit_depth = png_get_bit_depth(png_ptr, info_ptr);
-    if (bit_depth > pngBitDepth_) {
+    if ((bit_depth < 4) || (bit_depth > 8)) {
 //      std::cout << (int)(png_get_bit_depth(png_ptr, info_ptr)) << std::endl;
       throw PngFailure();
     }

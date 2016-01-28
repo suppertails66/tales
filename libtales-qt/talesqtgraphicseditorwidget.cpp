@@ -3,6 +3,7 @@
 #include "talesqtformatconversion.h"
 #include "talesqtstatevar.h"
 #include "nativegraphicexportdialog.h"
+#include "nativegraphicimportdialog.h"
 #include "editors/PaletteEditor.h"
 #include "editors/GraphicToInfo.h"
 #include "util/StringConversion.h"
@@ -521,11 +522,11 @@ void TalesQtGraphicsEditorWidget::on_exportButton_clicked()
 {
 //    graphicsEditor_.exportAllMappings();
     NativeGraphicExportDialog(this).exec();
+    refreshDisplay();
 }
 
 void TalesQtGraphicsEditorWidget::on_importButton_clicked(bool checked)
 {
-    graphicsEditor_.importAllTiles("graphicsnative/");
-    graphicsEditor_.importAllMappings("graphicsnative/");
+    NativeGraphicImportDialog(this).exec();
     refreshDisplay();
 }

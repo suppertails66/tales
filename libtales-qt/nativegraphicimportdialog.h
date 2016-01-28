@@ -15,6 +15,9 @@ public:
     explicit NativeGraphicImportDialog(QWidget *parent = 0);
     ~NativeGraphicImportDialog();
     
+private slots:
+    void on_importButton_clicked(bool checked);
+
 private:
     Ui::NativeGraphicImportDialog *ui;
 };
