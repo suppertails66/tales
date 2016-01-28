@@ -4,7 +4,7 @@ libtales.
 
 Since r6, Tales uses libpng to provide graphics importing and
 exporting. For Windows, the necessary headers and .lib files are included in the
-source; prebuilt libpng and zlib DLLs are found in the lib folder. For other
+source; a prebuilt libpng DLL is found in the lib folder. For other
 systems, you will need libpng installed with the header and library files in the
 appropriate environment variables. If you can't or don't want to use libpng,
 undefine TALES_ENABLE_LIBPNG, which will disable the corresponding
