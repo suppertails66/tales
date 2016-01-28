@@ -165,19 +165,19 @@ void TalesQtPaletteEditorWidget::on_paletteComboBox_activated(int index)
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_redSpinBox_valueChanged()
+void TalesQtPaletteEditorWidget::on_redSpinBox_valueChanged(int value)
 {
     setCurrentR(ui->redSpinBox->value() / 16 * 16);
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_greenSpinBox_valueChanged()
+void TalesQtPaletteEditorWidget::on_greenSpinBox_valueChanged(int value)
 {
     setCurrentG(ui->greenSpinBox->value() / 16 * 16);
     refreshDisplay();
 }
 
-void TalesQtPaletteEditorWidget::on_blueSpinBox_valueChanged()
+void TalesQtPaletteEditorWidget::on_blueSpinBox_valueChanged(int value)
 {
     setCurrentB(ui->blueSpinBox->value() / 16 * 16);
     refreshDisplay();

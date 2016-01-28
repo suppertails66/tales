@@ -44,11 +44,11 @@ protected:
 private slots:
     void on_paletteComboBox_activated(int index);
 
-    void on_redSpinBox_valueChanged();
+    void on_redSpinBox_valueChanged(int value);
 
-    void on_greenSpinBox_valueChanged();
+    void on_greenSpinBox_valueChanged(int value);
 
-    void on_blueSpinBox_valueChanged();
+    void on_blueSpinBox_valueChanged(int value);
 
     void on_redSlider_sliderMoved(int position);
 
