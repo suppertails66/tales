@@ -20,7 +20,7 @@ void NativeGraphicImportDialog::on_importButton_clicked(bool checked)
     QString filepath =
             QFileDialog::getExistingDirectory(
                 this,
-                "Choose export directory");
+                "Choose import directory");
 
     if (filepath.compare("") == 0) {
         return;

@@ -4,9 +4,12 @@
 #include "talesqtstatevar.h"
 #include "nativegraphicexportdialog.h"
 #include "nativegraphicimportdialog.h"
+#include "genericerrordialog.h"
+#include <QFileDialog>
 #include "editors/PaletteEditor.h"
 #include "editors/GraphicToInfo.h"
 #include "util/StringConversion.h"
+#include "util/FileManip.h"
 #include "editors/GraphicToMappings.h"
 #include <iostream>
 
@@ -528,5 +531,117 @@ void TalesQtGraphicsEditorWidget::on_exportButton_clicked()
 void TalesQtGraphicsEditorWidget::on_importButton_clicked(bool checked)
 {
     NativeGraphicImportDialog(this).exec();
+    refreshDisplay();
+}
+
+void TalesQtGraphicsEditorWidget::on_importSingleRawGraphicButton_clicked(bool checked)
+{
+    QString filename =
+            QFileDialog::getOpenFileName(
+                this,
+                "Choose raw graphic file",
+                "",
+                "PNG files (*.png)");
+
+    if (filename.compare("") == 0) {
+        return;
+    }
+
+    bool result = graphicsEditor_.importCurrentGraphic(filename.toStdString());
+
+    if (!result) {
+        GenericErrorDialog("Error: Raw graphic import failed!\n"
+                           "Make sure that the graphic you are trying "
+                           "to import is a 16-color indexed PNG (such as "
+                           "one you previously exported from the graphics "
+                           "editor), and that the dimensions of the imported "
+                           "image are the same as the one you are replacing.\n"
+                           "If using GIMP to edit, make sure there are no "
+                           "transparent pixels when you export the file, or palette "
+                           "data will be lost.",
+                           this);
+    }
+
+    refreshDisplay();
+}
+
+void TalesQtGraphicsEditorWidget::on_importSingleMappingButton_clicked(bool checked)
+{
+    QString filename =
+            QFileDialog::getOpenFileName(
+                this,
+                "Choose sprite mapping graphic file",
+                "",
+                "PNG files (*.png)");
+
+    if (filename.compare("") == 0) {
+        return;
+    }
+
+    bool result = graphicsEditor_.importCurrentMapping(filename.toStdString());
+
+    if (!result) {
+        GenericErrorDialog("Error: Sprite mapping import failed!\n"
+                           "Make sure that the graphic you are trying "
+                           "to import is a 16-color indexed PNG (such as "
+                           "one you previously exported from the graphics "
+                           "editor), and that the dimensions of the imported "
+                           "image are the same as the one you are replacing.\n"
+                           "If using GIMP to edit, make sure there are no "
+                           "transparent pixels when you export the file, or palette "
+                           "data will be lost.",
+                           this);
+    }
+
+    refreshDisplay();
+}
+
+void TalesQtGraphicsEditorWidget::on_exportSingleRawGraphicButton_clicked(bool checked)
+{
+    QString filename =
+            QFileDialog::getSaveFileName(
+                this,
+                "Choose raw graphic export location",
+                "",
+                "PNG files (*.png)");
+
+    if (filename.compare("") == 0) {
+        return;
+    }
+
+    bool result = graphicsEditor_.exportCurrentGraphic(
+                filename.toStdString(),
+                ui->transparencyCheckBox->isChecked());
+
+    if (!result) {
+        GenericErrorDialog("Error: Raw graphic export failed!\n",
+                           this);
+    }
+
+    refreshDisplay();
+}
+
+void TalesQtGraphicsEditorWidget::on_exportSingleMappingButton_clicked(bool checked)
+{
+    QString filename =
+            QFileDialog::getSaveFileName(
+                this,
+                "Choose sprite mapping export location",
+                "",
+                "PNG files (*.png)");
+
+    if (filename.compare("") == 0) {
+        return;
+    }
+
+    bool result = graphicsEditor_.exportCurrentMapping(
+                filename.toStdString(),
+                ui->transparencyCheckBox->isChecked());
+
+    if (!result) {
+        GenericErrorDialog("Error: Sprite mapping export failed!\n",
+                           this);
+    }
+
     refreshDisplay();
 }

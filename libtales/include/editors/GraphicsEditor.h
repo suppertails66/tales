@@ -113,6 +113,14 @@ public:
   void importAllTiles(const std::string& folderpath);
   
   void importAllMappings(const std::string& folderpath);
+  
+  bool importCurrentGraphic(const std::string& filename);
+  bool exportCurrentGraphic(const std::string& filename,
+                            bool transparency = true);
+  
+  bool importCurrentMapping(const std::string& filename);
+  bool exportCurrentMapping(const std::string& filename,
+                            bool transparency = true);
 protected:
   const static int exportTilesPerRow_ = 16;
 

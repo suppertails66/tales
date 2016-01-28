@@ -101,6 +101,14 @@ private slots:
 
     void on_importButton_clicked(bool checked);
 
+    void on_importSingleRawGraphicButton_clicked(bool checked);
+
+    void on_importSingleMappingButton_clicked(bool checked);
+
+    void on_exportSingleRawGraphicButton_clicked(bool checked);
+
+    void on_exportSingleMappingButton_clicked(bool checked);
+
 private:
     Ui::TalesQtGraphicsEditorWidget *ui;
 };

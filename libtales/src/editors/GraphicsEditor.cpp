@@ -475,12 +475,6 @@ void GraphicsEditor::importTiles(const std::string& folderpath,
   }
   
   tiles.fromByteArray(data, exportTilesPerRow_);
-  
-/*  for (int j = 0; j < data.h(); j++) {
-    for (int i = 0; i < data.w(); i++) {
-      
-    }
-  } */
 }
 
 void GraphicsEditor::importMappingSet(const std::string& folderpath,
@@ -623,6 +617,124 @@ std::string GraphicsEditor::graphicMappingToFilename(
             + ".png";
   
   return filename;
+}
+  
+bool GraphicsEditor::importCurrentGraphic(const std::string& filename) {
+  GraphicToMappings::CompressionType localType = getLocalType(
+    currentGraphicCompressionType_);
+  
+  GGTileSet& tiles = currentGraphic();
+//  GGPalette& palette = getPalette(comp, graphicIndex);
+  
+  TwoDByteArray data;
+  
+  if (!PngConversion::indexedPngToTwoDArrayGG(
+                  data,
+                  filename)) {
+    return false;
+  }
+  
+  tiles.fromByteArray(data, exportTilesPerRow_);
+  
+  return true;
+}
+
+bool GraphicsEditor::exportCurrentGraphic(const std::string& filename,
+                                          bool transparency) {
+  GraphicToMappings::CompressionType localType = getLocalType(
+    currentGraphicCompressionType_);
+  
+  GGTileSet& tiles = currentGraphic();
+  GGPalette& palette = getPalette(currentGraphicCompressionType_,
+                                  currentGraphicIndex_);
+  
+  TwoDByteArray data = tiles.toByteArray(exportTilesPerRow_);
+  
+  PngConversion::twoDArrayToIndexedPngGG(
+    filename,
+    data,
+    palette,
+    transparency);
+  
+  return true;
+}
+  
+bool GraphicsEditor::importCurrentMapping(const std::string& filename) {
+  GraphicToMappings::CompressionType localType = getLocalType(
+    currentGraphicCompressionType_);
+  
+  GGTileSet& tiles = currentGraphic();
+//  GGPalette& palette = getPalette(comp, graphicIndex);
+  
+  TwoDByteArray data;
+  
+  if (!PngConversion::indexedPngToTwoDArrayGG(
+                  data,
+                  filename)) {
+    return false;
+  }
+
+  GraphicToMappingEntry entry
+    = toolManager_.mappingEntry();
+  
+  SpriteMapping& spriteMapping
+      = toolManager_.mapping();
+  
+  for (int j = 0; j < data.h(); j++) {
+    for (int i = 0; i < data.w(); i++) {
+      TileSetPixelIdentifier pos
+          = GraphicMappingMath::findTilePositionInMapping(
+                spriteMapping,
+                spriteMappings_.coordinateTable(
+                    spriteMapping.coordinateTableIndex()),
+                spriteMappings_.tileIndexTable(
+                    spriteMapping.tileIndexTableIndex()),
+                entry,
+                i, j);
+      
+      if (pos.tileNum() >= 0) {
+        tiles[pos.tileNum()].setPixel(pos.x(), pos.y(), data.data(i, j));
+      }
+    }
+  }
+  
+  return true;
+}
+
+bool GraphicsEditor::exportCurrentMapping(const std::string& filename,
+                                          bool transparency) {
+  GraphicToMappings::CompressionType localType = getLocalType(
+    currentGraphicCompressionType_);
+  
+  GGTileSet& tiles = currentGraphic();
+  GGPalette& palette = getPalette(currentGraphicCompressionType_,
+                                  currentGraphicIndex_);
+  
+  GraphicToMappingEntry entry
+    = toolManager_.mappingEntry();
+  
+  SpriteMapping& spriteMapping
+      = toolManager_.mapping();
+
+  AssembledRawMapping dst;
+  MappingAssembler::assembleMappingsRaw(
+      dst,
+      tiles,
+      spriteMapping,
+      spriteMappings_.coordinateTable(
+          spriteMapping.coordinateTableIndex()),
+      spriteMappings_.tileIndexTable(
+          spriteMapping.tileIndexTableIndex()),
+      ObjectStateInfo::left,
+      entry.tileOffset);
+  
+  PngConversion::twoDArrayToIndexedPngGG(
+    filename,
+    dst.data(),
+    palette,
+    transparency);
+  
+  return true;
 }
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
-    <height>380</height>
+    <width>625</width>
+    <height>336</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,32 @@
         <item>
          <widget class="QComboBox" name="graphicComboBox"/>
         </item>
+        <item>
+         <widget class="QPushButton" name="importSingleRawGraphicButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Import...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exportSingleRawGraphicButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Export...</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -66,8 +92,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>276</width>
-          <height>120</height>
+          <width>296</width>
+          <height>113</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -440,6 +466,26 @@
         <item>
          <widget class="QComboBox" name="mappingComboBox"/>
         </item>
+        <item>
+         <widget class="QPushButton" name="importSingleMappingButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Import...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exportSingleMappingButton">
+          <property name="text">
+           <string>Export...</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -456,8 +502,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>137</width>
-          <height>158</height>
+          <width>301</width>
+          <height>114</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_14">
