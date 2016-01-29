@@ -32,3 +32,6 @@ total allowed.
 
 r6:
 * Added graphics importing and native-format exporting.
+
+r7:
+* Added intra-level layout importing.
