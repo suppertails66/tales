@@ -1,5 +1,7 @@
 #include "levelpropertiesdialog.h"
 #include "ui_levelpropertiesdialog.h"
+#include "confirmationdialog.h"
+#include "layoutimportdialog.h"
 #include "gamedata/SpecialEffect.h"
 #include "editors/PaletteEditor.h"
 #include "util/StringConversion.h"
@@ -139,4 +141,24 @@ void LevelPropertiesDialog::on_palette1ComboBox_activated(int index)
 void LevelPropertiesDialog::on_metatileStructureSetComboBox_activated(int index)
 {
     levelEditor_.setCurrentLevelMetatileStructureIndex(index);
+}
+
+void LevelPropertiesDialog::on_removeAllObjectsButton_clicked(bool checked)
+{
+    int result = ConfirmationDialog("This will delete all objects from the level. "
+                                    "Are you sure?", this).exec();
+
+    if (result == QDialog::Accepted) {
+        levelEditor_.clearCurrentLevelObjects();
+    }
+}
+
+void LevelPropertiesDialog::on_importObjectLayoutButton_clicked(bool checked)
+{
+    LayoutImportDialog dialog(this);
+    int result = dialog.exec();
+
+    if (result == QDialog::Accepted) {
+        levelEditor_.importLayout(dialog.selectedMapIndex());
+    }
 }

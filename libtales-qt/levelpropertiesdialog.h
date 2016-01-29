@@ -38,6 +38,10 @@ private slots:
 
     void on_metatileStructureSetComboBox_activated(int index);
 
+    void on_removeAllObjectsButton_clicked(bool checked);
+
+    void on_importObjectLayoutButton_clicked(bool checked);
+
 private:
     Ui::LevelPropertiesDialog *ui;
 };
