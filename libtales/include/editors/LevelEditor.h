@@ -86,6 +86,12 @@ public:
   
   void moveCurrentLevelSpawnsInBounds();
   
+  void clearCurrentLevelObjects();
+  
+  void importLayout(int levelHeaderIndex__);
+  void importMapLayout(int levelHeaderIndex__);
+  void importObjectLayout(int levelHeaderIndex__);
+  
   LevelEditorTools::LevelEditorTool currentTool() const;
   void changeTool(LevelEditorTools::LevelEditorTool tool);
   
@@ -168,6 +174,8 @@ public:
 protected:
   
   void cacheVRAM(int levelHeaderIndex);
+  
+  bool appendObject(LevelObjectEntry entry);
   
   EditableLevelEffectsHeaders& levelEffectsHeaders_;
   EditableLevelGraphicsData& levelGraphicsData_;

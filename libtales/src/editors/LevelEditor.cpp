@@ -1,5 +1,6 @@
 #include "editors/LevelEditor.h"
 #include "gamedata/MetatileStructure.h"
+#include <cstdlib>
 
 namespace Tales {
 
@@ -200,6 +201,7 @@ void LevelEditor
 
 void LevelEditor
     ::moveCurrentLevelSpawnsInBounds() {
+  // ignore areas with no spawn points
   if (previewScene_.areaNum() > 0x0C) {
     return;
   }
@@ -237,6 +239,73 @@ void LevelEditor
       it->setTailsY(target);
     }
   }
+}
+  
+void LevelEditor::clearCurrentLevelObjects() {
+  while (currentObjectGroup()->size()) {
+    eraseObjectAtIndex(0);
+  }
+}
+
+void LevelEditor::importLayout(int levelHeaderIndex__) {
+  importMapLayout(levelHeaderIndex__);
+  importObjectLayout(levelHeaderIndex__);
+}
+  
+void LevelEditor::importMapLayout(int levelHeaderIndex__) {
+  LevelHeader& levelHeader = previewScene_.currentLevelHeader();
+                            
+  LevelHeader& srcLevelHeader = levelHeaders().levelHeaderByIndex(
+                                levelHeaderIndex__);
+  
+  MapLayout& mapLayout = mapData_.mapLayouts().mapAtIndex(
+                            levelHeader.mapLayoutID());
+  
+  MapLayout& srcMapLayout = mapData_.mapLayouts().mapAtIndex(
+                              srcLevelHeader.mapLayoutID());
+  
+  mapLayout = srcMapLayout;
+  levelHeader.setWidth(srcLevelHeader.width());
+}
+  
+void LevelEditor::importObjectLayout(int levelHeaderIndex__) {
+  if (currentObjectGroup() == NULL) {
+    return;
+  }
+
+  clearCurrentLevelObjects();
+                      
+  AreaMapReference mapnums = mapData_.levelHeaders()
+    .areaMapNumOfIndex(levelHeaderIndex__);
+  
+  // areas with no layout
+  if ((mapnums.areaNum() == 16) || (mapnums.areaNum() == 19)) {
+    return;
+  }
+  
+  int objectIndex
+    = levelObjectEntryGroups_.indexOfMapnum(
+                      mapnums.areaNum(),
+                      mapnums.mapNum());
+  
+  LevelObjectEntryGroup& group
+      = levelObjectEntryGroups_.group(objectIndex);
+  
+  for (LevelObjectEntryCollection::iterator it = group.begin();
+       it != group.end();
+       ++it) {
+    appendObject(*it);
+  }
+}
+  
+bool LevelEditor::appendObject(LevelObjectEntry entry) {
+  if (currentObjectGroup() == NULL) {
+    return false;
+  }
+  
+  currentObjectGroup()->addEntry(entry);
+  
+  return true;
 }
 
 LevelEditorTools::LevelEditorTool LevelEditor::currentTool() const {
