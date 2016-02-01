@@ -845,6 +845,13 @@
             <li><b>No game over</b>: When Tails dies, he restarts the current map at the spawn point where he began it with max health.</li>
           </ul>
         </li>
+        <li><b>Save system</b>: change how game data is stored between play sessions.
+          <ul>
+            <li><b>Default (password)</b>: the standard password system.</li>
+            <li><b>Auto save</b>: Instead of passwords, the game saves the game state to save RAM and loads it when "Continue" is selected at the title screen. Data is saved automatically whenever the world map is loaded. It's also possible to save manually by selecting the "Cont." option at Tails' House. Note that if you use this, you might want to edit the graphics and/or tilemap for the "Cont." option to "Save" or the like.</li>
+            <li><b>Manual save</b>: same as "Auto save", but the game does not automatically save on the world map, meaning the player has to go to Tails' House and do it manually.</li>
+          </ul>
+        </li>
         <li><b>Bug fixes</b>: toggle fixes for various game bugs, mostly minor ones.
           <ul>
             <li><b>Jump height when Button 1 held</b>: fixes an issue where the game erroneously checks to see if either Button 1 (use item) or Button 2 (jump) is pressed when deciding how long the player has held down the jump button. This causes Tails to incorrectly always jump to the maximum possible height when the item button is held down and the jump button is tapped.</li>
