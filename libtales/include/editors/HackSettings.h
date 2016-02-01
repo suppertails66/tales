@@ -44,6 +44,12 @@ public:
     noGameOverHackOn
   };
   
+  enum SaveHackOption {
+    saveHackOff,
+    manualSaveHackOn,
+    autoSaveHackOn,
+  };
+  
   HackSettings();
   
   void save(std::string& data);
@@ -76,8 +82,12 @@ public:
   void setNoGameOverHackOption(
       NoGameOverHackOption noGameOverHackOption__);
   
+  SaveHackOption saveHackOption();
+  void setSaveHackOption(
+      SaveHackOption saveHackOption__);
+  
 protected:
-  const static int versionNum_ = 1;
+  const static int versionNum_ = 2;
 
   DoubleJumpFixOption doubleJumpFixOption_;
   
@@ -90,6 +100,8 @@ protected:
   FlightHackOption flightHackOption_;
   
   NoGameOverHackOption noGameOverHackOption_;
+  
+  SaveHackOption saveHackOption_;
   
 };
 

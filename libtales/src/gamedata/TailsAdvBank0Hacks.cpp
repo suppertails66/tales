@@ -464,6 +464,37 @@ void TailsAdvBank0Hacks::addNoGameOverHack(
                   noGameOverHackMainData,
                   noGameOverHackMainLength);
 }
+
+void TailsAdvBank0Hacks::addManualSaveHack(
+                     WritableROM& rom) {
+  addSaveHackBase(rom);
+}
+
+void TailsAdvBank0Hacks::addAutoSaveHack(
+                   WritableROM& rom) {
+  rom.directWrite(autoSaveHackAddress,
+                  autoSaveHackData,
+                  autoSaveHackLength);
+}
+
+void TailsAdvBank0Hacks::addSaveHackBase(
+                   WritableROM& rom) {
+  rom.directWrite(saveHackAddress1,
+                  saveHackData1,
+                  saveHackLength1);
+                  
+  rom.directWrite(saveHackAddress2,
+                  saveHackData2,
+                  saveHackLength2);
+                  
+  rom.directWrite(saveHackAddress3,
+                  saveHackData3,
+                  saveHackLength3);
+                  
+  rom.directWrite(saveHackAddress4,
+                  saveHackData4,
+                  saveHackLength4);
+}
                      
 const Tbyte TailsAdvBank0Hacks::levelHeaderHackData[levelHeaderHackLength] =
   { 0x3E, 0x00,           // ld A,0   ; zero will be replaced by bank number
@@ -860,5 +891,58 @@ const Tbyte TailsAdvBank0Hacks::noGameOverHackMainData
                         [noGameOverHackMainLength] =
   { 0x00,                     // nop          ; don't check lives counter
     0x00 };                   // nop
+
+const Tbyte TailsAdvBank0Hacks::saveHackData1[saveHackLength1] = {
+  205, 47, 133, 205, 55, 133, 205, 161, 22, 58, 
+  16, 209, 254, 2, 32, 3, 195, 100, 128, 195, 
+  35, 128, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0 };
+
+const Tbyte TailsAdvBank0Hacks::saveHackData2[saveHackLength2] = {
+  195, 245, 22 };
+
+const Tbyte TailsAdvBank0Hacks::saveHackData3[saveHackLength3] = {
+  195, 96, 22, 0, 0 };
+
+const Tbyte TailsAdvBank0Hacks::saveHackData4[saveHackLength4] = {
+  62, 8, 50, 252, 255, 58, 32, 128, 254, 0, 
+  40, 13, 14, 0, 1, 32, 0, 17, 36, 208, 
+  33, 0, 128, 237, 176, 62, 0, 50, 252, 255, 
+  33, 46, 208, 203, 86, 40, 5, 62, 2, 50, 
+  66, 208, 175, 50, 208, 210, 62, 16, 50, 170, 
+  210, 195, 229, 15, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 62, 8, 50, 252, 255, 
+  14, 0, 1, 32, 0, 17, 0, 128, 33, 36, 
+  208, 237, 176, 62, 255, 50, 32, 128, 62, 0, 
+  50, 252, 255, 201, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  73, 32, 99, 97, 110, 39, 116, 32, 98, 101, 
+  97, 116, 32, 89, 117, 107, 97, 114, 105, 62, 
+  8, 50, 252, 255, 6, 19, 17, 226, 22, 33, 
+  33, 128, 26, 190, 32, 6, 35, 19, 16, 248, 
+  24, 29, 33, 0, 128, 17, 1, 128, 1, 32, 
+  0, 175, 119, 237, 176, 62, 0, 50, 32, 128, 
+  33, 226, 22, 17, 33, 128, 1, 19, 0, 237, 
+  176, 62, 0, 50, 252, 255, 195, 190, 4, 0, 
+  0, 205, 67, 38, 205, 161, 22, 201, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0 };
+
+const Tbyte TailsAdvBank0Hacks::autoSaveHackData[autoSaveHackLength] = {
+  205, 51, 23, 0 };
 
 };

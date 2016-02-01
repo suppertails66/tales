@@ -16,7 +16,8 @@ HackSettings::HackSettings()
     bombJumpFixOption_(bombJumpFixOff),
     inventoryHackOption_(inventoryHackOff),
     flightHackOption_(flightHackOff),
-    noGameOverHackOption_(noGameOverHackOff) { };
+    noGameOverHackOption_(noGameOverHackOff),
+    saveHackOption_(saveHackOff) { };
   
 void HackSettings::save(std::string& data) {
   SaveHelper saver(data,
@@ -62,6 +63,15 @@ void HackSettings::save(std::string& data) {
   
   if (versionNum_ >= 1) {
     ByteConversion::toBytes(noGameOverHackOption_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  }
+  
+  if (versionNum_ >= 2) {
+    ByteConversion::toBytes(saveHackOption_,
                             buffer,
                             ByteSizes::uint8Size,
                             EndiannessTypes::little,
@@ -120,6 +130,16 @@ int HackSettings::load(const Tbyte* data) {
   
   if (loader.version() >= 1) {
     noGameOverHackOption_ = static_cast<NoGameOverHackOption>(
+      ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign)
+    );
+    byteCount += ByteSizes::uint8Size;
+  }
+  
+  if (loader.version() >= 2) {
+    saveHackOption_ = static_cast<SaveHackOption>(
       ByteConversion::fromBytes(data + byteCount,
                                 ByteSizes::uint8Size,
                                 EndiannessTypes::little,
@@ -188,6 +208,17 @@ void HackSettings::exportToROM(WritableROM& rom) {
   default:
     break;
   }
+  
+  switch (saveHackOption_) {
+  case manualSaveHackOn:
+    TailsAdvBank0Hacks::addManualSaveHack(rom);
+    break;
+  case autoSaveHackOn:
+    TailsAdvBank0Hacks::addAutoSaveHack(rom);
+    break;
+  default:
+    break;
+  }
 }
   
 HackSettings::DoubleJumpFixOption HackSettings::doubleJumpFixOption() {
@@ -242,6 +273,15 @@ HackSettings::NoGameOverHackOption HackSettings::noGameOverHackOption() {
 void HackSettings::setNoGameOverHackOption(
     NoGameOverHackOption noGameOverHackOption__) {
   noGameOverHackOption_ = noGameOverHackOption__;
+}
+  
+HackSettings::SaveHackOption HackSettings::saveHackOption() {
+  return saveHackOption_;
+}
+
+void HackSettings::setSaveHackOption(
+    SaveHackOption saveHackOption__) {
+  saveHackOption_ = saveHackOption__;
 }
 
 

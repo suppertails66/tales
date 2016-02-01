@@ -112,6 +112,26 @@ public:
    */
   static void addNoGameOverHack(
                      WritableROM& rom);
+  
+  /**
+   * Adds the manual save hack to the given ROM.
+   * With this hack set, the game saves progress to SRAM instead of using
+   * passwords. Progress must be manually saved by selecting "Cont." at Tails'
+   * House.
+   * @param rom ROM to write to.
+   */
+  static void addManualSaveHack(
+                     WritableROM& rom);
+  
+  /**
+   * Adds the autosave hack to the given ROM.
+   * With this hack set, the game saves progress to SRAM instead of using
+   * passwords. Progress is automatically saved whenever the world map
+   * is loaded.
+   * @param rom ROM to write to.
+   */
+  static void addAutoSaveHack(
+                     WritableROM& rom);
 
 protected:
 
@@ -484,6 +504,29 @@ protected:
   const static int noGameOverHackMainLength = 2;
   const static Tbyte noGameOverHackMainData
                           [noGameOverHackMainLength];
+  
+  // Save hack
+  static void addSaveHackBase(
+                     WritableROM& rom);
+  const static Taddress saveHackAddress1 = 0x2C2D3;
+  const static int saveHackLength1 = 167;
+  const static Tbyte saveHackData1[];
+  
+  const static Taddress saveHackAddress2 = 0x35;
+  const static int saveHackLength2 = 3;
+  const static Tbyte saveHackData2[];
+  
+  const static Taddress saveHackAddress3 = 0x534;
+  const static int saveHackLength3 = 5;
+  const static Tbyte saveHackData3[];
+  
+  const static Taddress saveHackAddress4 = 0x1660;
+  const static int saveHackLength4 = 228;
+  const static Tbyte saveHackData4[];
+  
+  const static Taddress autoSaveHackAddress = 0x1160;
+  const static int autoSaveHackLength = 4;
+  const static Tbyte autoSaveHackData[];
                                 
 public:
 
