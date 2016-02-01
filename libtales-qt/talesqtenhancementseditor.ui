@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_11">
+  <layout class="QVBoxLayout" name="verticalLayout_13">
    <item>
     <spacer name="verticalSpacer_6">
      <property name="orientation">
@@ -274,6 +274,53 @@ infinite chaining allowed)</string>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_12">
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Save system</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_5">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <item>
+                  <widget class="QRadioButton" name="saveHackOffBox">
+                   <property name="text">
+                    <string>Default (password)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="autoSaveHackOnBox">
+                   <property name="text">
+                    <string>Auto save</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="manualSaveHackOnBox">
+                   <property name="text">
+                    <string>Manual save</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>

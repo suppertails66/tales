@@ -4,6 +4,7 @@
 #include "gamedata/TailsAdvBank0Hacks.h"
 #include "util/ByteConversion.h"
 #include "util/ByteSizes.h"
+#include <iostream>
 
 using namespace Luncheon;
 

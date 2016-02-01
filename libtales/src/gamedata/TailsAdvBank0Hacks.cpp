@@ -472,6 +472,7 @@ void TailsAdvBank0Hacks::addManualSaveHack(
 
 void TailsAdvBank0Hacks::addAutoSaveHack(
                    WritableROM& rom) {
+  addSaveHackBase(rom);
   rom.directWrite(autoSaveHackAddress,
                   autoSaveHackData,
                   autoSaveHackLength);
@@ -943,6 +944,6 @@ const Tbyte TailsAdvBank0Hacks::saveHackData4[saveHackLength4] = {
   0, 0, 0, 0, 0, 0, 0, 0 };
 
 const Tbyte TailsAdvBank0Hacks::autoSaveHackData[autoSaveHackLength] = {
-  205, 51, 23, 0 };
+  205, 51, 23 };
 
 };

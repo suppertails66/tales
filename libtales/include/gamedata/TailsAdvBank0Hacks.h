@@ -525,7 +525,7 @@ protected:
   const static Tbyte saveHackData4[];
   
   const static Taddress autoSaveHackAddress = 0x1160;
-  const static int autoSaveHackLength = 4;
+  const static int autoSaveHackLength = 3;
   const static Tbyte autoSaveHackData[];
                                 
 public:

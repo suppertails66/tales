@@ -46,6 +46,12 @@ private slots:
 
     void on_gameOverNoneBox_clicked(bool checked);
 
+    void on_saveHackOffBox_clicked(bool checked);
+
+    void on_autoSaveHackOnBox_clicked(bool checked);
+
+    void on_manualSaveHackOnBox_clicked(bool checked);
+
 private:
     Ui::TalesQtEnhancementsEditor *ui;
 };

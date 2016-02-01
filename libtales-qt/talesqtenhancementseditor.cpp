@@ -92,6 +92,20 @@ void TalesQtEnhancementsEditor::refreshDisplay() {
     default:
         break;
     }
+
+    switch (enhancementsEditor_.hackSettings().saveHackOption()) {
+    case HackSettings::saveHackOff:
+        ui->saveHackOffBox->setChecked(true);
+        break;
+    case HackSettings::autoSaveHackOn:
+        ui->autoSaveHackOnBox->setChecked(true);
+        break;
+    case HackSettings::manualSaveHackOn:
+        ui->manualSaveHackOnBox->setChecked(true);
+        break;
+    default:
+        break;
+    }
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
@@ -182,4 +196,22 @@ void TalesQtEnhancementsEditor::on_gameOverNoneBox_clicked(bool checked)
 {
     enhancementsEditor_.hackSettings().setNoGameOverHackOption(
                 HackSettings::noGameOverHackOn);
+}
+
+void TalesQtEnhancementsEditor::on_saveHackOffBox_clicked(bool checked)
+{
+    enhancementsEditor_.hackSettings().setSaveHackOption(
+                HackSettings::saveHackOff);
+}
+
+void TalesQtEnhancementsEditor::on_autoSaveHackOnBox_clicked(bool checked)
+{
+    enhancementsEditor_.hackSettings().setSaveHackOption(
+                HackSettings::autoSaveHackOn);
+}
+
+void TalesQtEnhancementsEditor::on_manualSaveHackOnBox_clicked(bool checked)
+{
+    enhancementsEditor_.hackSettings().setSaveHackOption(
+                HackSettings::manualSaveHackOn);
 }
