@@ -34,4 +34,6 @@ r6:
 * Added graphics importing and native-format exporting.
 
 r7:
-* Added intra-level layout importing.
+* Added intra-level layout importing and option to remove all objects in a
+level to Level Properties dialog.
+* Fixed potential crashes caused by having no objects in a level.
