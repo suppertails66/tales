@@ -266,6 +266,11 @@ void LevelEditor::importMapLayout(int levelHeaderIndex__) {
   
   mapLayout = srcMapLayout;
   levelHeader.setWidth(srcLevelHeader.width());
+  levelHeader.setCameraTopLimit(srcLevelHeader.cameraTopLimit());
+  levelHeader.setCameraBottomLimit(srcLevelHeader.cameraBottomLimit());
+  levelHeader.setCameraLeftLimit(srcLevelHeader.cameraLeftLimit());
+  levelHeader.setCameraRightLimit(srcLevelHeader.cameraRightLimit());
+  levelHeader.setTileStructureID(srcLevelHeader.tileStructureID());
 }
   
 void LevelEditor::importObjectLayout(int levelHeaderIndex__) {
