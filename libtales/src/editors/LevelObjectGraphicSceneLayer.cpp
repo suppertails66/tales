@@ -49,16 +49,19 @@ void LevelObjectGraphicSceneLayer::render(
   if (levelObjectEntryGroupIndex_ == -1) { 
     return;
   }
+
+  if (levelObjectEntryGroups_->groupSize(levelObjectEntryGroupIndex_) <= 0) {
+    return;
+  }
   
   // Draw in reverse order
   LevelObjectEntryCollection::iterator groupIt
     = levelObjectEntryGroups_->groupEnd(levelObjectEntryGroupIndex_);
   ObjectDisplayCacheCollection::iterator cacheIt
     = objectDisplayCaches_.end();
-  if (levelObjectEntryGroups_->groupSize(levelObjectEntryGroupIndex_) > 0) {
-    --groupIt;
-    --cacheIt;
-  }
+
+  --groupIt;
+  --cacheIt;
   
   while (true) {
     int realX = groupIt->xPos() - srcbox.x();
