@@ -132,6 +132,21 @@ public:
    */
   static void addAutoSaveHack(
                      WritableROM& rom);
+  
+  /**
+   * Adds the start-on-level hack to the given ROM.
+   * With this hack set, starting a new game will boot directly to
+   * the specified level instead of the world map.
+   * @param rom ROM to write to.
+   * @param area Area number to start on.
+   * @param map Map number of start on.
+   * @param spawn Starting spawn number.
+   */
+  static void addStartOnLevelHack(
+                     WritableROM& rom,
+                     Tbyte area,
+                     Tbyte map,
+                     Tbyte spawn);
 
 protected:
 
@@ -527,6 +542,31 @@ protected:
   const static Taddress autoSaveHackAddress = 0x1160;
   const static int autoSaveHackLength = 3;
   const static Tbyte autoSaveHackData[];
+    
+  // Start-on-level hack
+  
+  const static Taddress startOnLevelHackAddress1 = 0x272C;
+  const static int startOnLevelHackLength1 = 16;
+  const static Tbyte startOnLevelHackData1[];
+  const static int startOnLevelHackData1AreaOffset = 1;
+  const static int startOnLevelHackData1MapOffset = 6;
+  const static int startOnLevelHackData1SpawnOffset = 11;
+  
+  const static Taddress startOnLevelHackAddress2 = 0x528;
+  const static int startOnLevelHackLength2 = 1;
+  const static Tbyte startOnLevelHackData2[];
+  
+  const static Taddress startOnLevelHackCopySrcAddress = 0x50E;
+  const static Taddress startOnLevelHackCopyDstAddress = 0x50B;
+  const static int startOnLevelHackCopyLength = 0x26;
+  
+  const static Taddress startOnLevelHackAddress3 = 0x531;
+  const static int startOnLevelHackLength3 = 3;
+  const static Tbyte startOnLevelHackData3[];
+  
+  const static Taddress startOnLevelHackAddress4 = 0x530;
+  const static int startOnLevelHackLength4 = 1;
+  const static Tbyte startOnLevelHackData4[];
                                 
 public:
 

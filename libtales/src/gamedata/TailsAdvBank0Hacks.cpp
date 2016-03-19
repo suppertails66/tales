@@ -496,6 +496,51 @@ void TailsAdvBank0Hacks::addSaveHackBase(
                   saveHackData4,
                   saveHackLength4);
 }
+
+void TailsAdvBank0Hacks::addStartOnLevelHack(
+                   WritableROM& rom,
+                   Tbyte area,
+                   Tbyte map,
+                   Tbyte spawn) {
+  rom.directWrite(startOnLevelHackAddress1,
+                  startOnLevelHackData1,
+                  startOnLevelHackLength1);
+  // Fill in area, map, spawn num
+  rom.directWrite(startOnLevelHackAddress1
+                    + startOnLevelHackData1AreaOffset,
+                  &area,
+                  ByteSizes::uint8Size);
+  rom.directWrite(startOnLevelHackAddress1
+                    + startOnLevelHackData1MapOffset,
+                  &map,
+                  ByteSizes::uint8Size);
+  rom.directWrite(startOnLevelHackAddress1
+                    + startOnLevelHackData1SpawnOffset,
+                  &spawn,
+                  ByteSizes::uint8Size);
+  
+  rom.directWrite(startOnLevelHackAddress2,
+                  startOnLevelHackData2,
+                  startOnLevelHackLength2);
+  
+  // Copy and shift block
+  Tbyte copyTemp[startOnLevelHackCopyLength];
+  std::memcpy(copyTemp,
+              rom.directRead(startOnLevelHackCopySrcAddress),
+              startOnLevelHackCopyLength);
+  std::memcpy(rom.directWrite(startOnLevelHackCopyDstAddress),
+              copyTemp,
+              startOnLevelHackCopyLength);
+  
+  // Fill in data
+  rom.directWrite(startOnLevelHackAddress3,
+                  startOnLevelHackData3,
+                  startOnLevelHackLength3);
+  
+  rom.directWrite(startOnLevelHackAddress4,
+                  startOnLevelHackData4,
+                  startOnLevelHackLength4);
+}
                      
 const Tbyte TailsAdvBank0Hacks::levelHeaderHackData[levelHeaderHackLength] =
   { 0x3E, 0x00,           // ld A,0   ; zero will be replaced by bank number
@@ -945,5 +990,32 @@ const Tbyte TailsAdvBank0Hacks::saveHackData4[saveHackLength4] = {
 
 const Tbyte TailsAdvBank0Hacks::autoSaveHackData[autoSaveHackLength] = {
   205, 51, 23 };
+
+const Tbyte TailsAdvBank0Hacks::startOnLevelHackData1[
+    startOnLevelHackLength1] = {
+  0x3E, 0x00,                  // ld a,#$00      ; area num (fill in later)
+  0x32, 0xAD, 0xD2,            // ld (D2AD),a
+  0x3E, 0x00,                  // ld a,#$00      ; map num (fill in later)
+  0x32, 0xAB, 0xD2,            // ld (D2AB),a
+  0x3E, 0x00,                  // ld a,#$00      ; spawn num (fill in later)
+  0x32, 0xAC, 0xD2,            // ld (D2AC),a
+  0xC9,                        // ret
+   };
+
+const Tbyte TailsAdvBank0Hacks::startOnLevelHackData2[
+    startOnLevelHackLength2] = {
+  0x42                         // ld (hl),#$42
+   };
+
+const Tbyte TailsAdvBank0Hacks::startOnLevelHackData3[
+    startOnLevelHackLength3] = {
+  0x36, 0x48,                  // ld (hl),#$48  ; if continuing
+  0x00                         // nop
+   };
+
+const Tbyte TailsAdvBank0Hacks::startOnLevelHackData4[
+    startOnLevelHackLength4] = {
+  0x08,                        // jr z,+08h     ; skip extra code
+   };
 
 };
