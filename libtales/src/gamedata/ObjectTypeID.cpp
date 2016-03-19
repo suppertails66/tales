@@ -39,17 +39,17 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   
   // Weapons
   case ObjectTypeIDs::regularBomb:
-    return "Regular bomb (dupe 2)";
+    return "Regular Bomb (dupe 2)";
   case ObjectTypeIDs::crouchingRegularBomb:
-    return "Regular bomb";
+    return "Regular Bomb";
   case ObjectTypeIDs::giantBomb:
-    return "Giant bomb";
+    return "Large Bomb";
   case ObjectTypeIDs::remoteBomb:
-    return "Remote bomb";
+    return "Remote Bomb";
   case ObjectTypeIDs::napalmBomb:
-    return "Napalm bomb";
+    return "Napalm Bomb";
   case ObjectTypeIDs::tripleBomb:
-    return "Triple bomb";
+    return "Triple Bomb";
   case ObjectTypeIDs::hammer:
     return "Hammer";
   case ObjectTypeIDs::hammer2:
@@ -61,29 +61,29 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::hammer5:
     return "Hammer (dupe 5)";
   case ObjectTypeIDs::protonTorpedo:
-    return "Proton torpedo";
+    return "Proton Torpedo";
   case ObjectTypeIDs::protonTorpedo2:
-    return "Proton torpedo (dupe 2)";
+    return "Proton Torpedo (dupe 2)";
   case ObjectTypeIDs::protonTorpedo3:
-    return "Proton torpedo (dupe 3)";
+    return "Proton Torpedo (dupe 3)";
   case ObjectTypeIDs::protonTorpedo4:
-    return "Proton torpedo (dupe 4)";
+    return "Proton Torpedo (dupe 4)";
   case ObjectTypeIDs::protonTorpedo5:
-    return "Proton torpedo (dupe 5)";
+    return "Proton Torpedo (dupe 5)";
   case ObjectTypeIDs::protonTorpedo6:
-    return "Proton torpedo (dupe 6)";
+    return "Proton Torpedo (dupe 6)";
   case ObjectTypeIDs::protonTorpedo7:
-    return "Proton torpedo (dupe 7)";
+    return "Proton Torpedo (dupe 7)";
   case ObjectTypeIDs::protonTorpedo8:
-    return "Proton torpedo (dupe 8)";
+    return "Proton Torpedo (dupe 8)";
   case ObjectTypeIDs::vulcanCannon:
-    return "Vulcan cannon";
+    return "Vulcan Cannon";
   case ObjectTypeIDs::antiAirMissile:
-    return "Anti-air missile";
+    return "Anti-Air Missile";
   case ObjectTypeIDs::antiAirMissile2:
-    return "Anti-air missile (dupe 2)";
+    return "Anti-Air Missile (dupe 2)";
   case ObjectTypeIDs::antiAirMissile3:
-    return "Anti-air missile (dupe 3)";
+    return "Anti-Air Missile (dupe 3)";
   case ObjectTypeIDs::tailsMine:
     return "Mine weapon";
   case ObjectTypeIDs::tailsMine2:
@@ -121,13 +121,13 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::drillRobot:
     return "Drill robot";
   case ObjectTypeIDs::flyingBat:
-    return "Flying bat";
+    return "Bat robot";
   case ObjectTypeIDs::runningBomberDuck:
-    return "Bomb and flee duck";
+    return "Running bomber duck";
   case ObjectTypeIDs::jumpingLava:
     return "Jumping lava";
   case ObjectTypeIDs::gunnerDuck:
-    return "Gunner duck";
+    return "Turret duck";
   case ObjectTypeIDs::leapingDuck:
     return "Leaping duck";
   case ObjectTypeIDs::shootingFleeingDuck:
@@ -137,7 +137,7 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::flyingShooterDuck:
     return "Fighter duck";
   case ObjectTypeIDs::flyingBomberDuck:
-    return "Fly and bomb duck";
+    return "Flying bomber duck";
   case ObjectTypeIDs::waterMine:
     return "Underwater mine hazard";
   case ObjectTypeIDs::waterMissileLauncher:
@@ -155,11 +155,11 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::robotKillBeams:
     return "Remote Robot killer beams";
   case ObjectTypeIDs::rovingLaser:
-    return "Back-and-forth laser";
+    return "Coco Island boss laser";
     
   // Obstacles
   case ObjectTypeIDs::trapRoomBossDoor:
-    return "Coco Island boss room door";
+    return "Coco Island boss barriers";
   case ObjectTypeIDs::electricField:
     return "Electric barrier";
   case ObjectTypeIDs::electricFieldSwitch:
@@ -167,7 +167,7 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::seaFoxWeaponSmoke:
     return "Sea Fox weapon smoke puff";
   case ObjectTypeIDs::pushableRock:
-    return "Pushable rock";
+    return "Pushable boulder";
   case ObjectTypeIDs::windGustEffect:
     return "Wind gust visual effect";
   
@@ -200,7 +200,7 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::spring:
     return "Spring";
   case ObjectTypeIDs::elevator:
-    return "Elevator";
+    return "Floating platform";
   
   // Bosses
   case ObjectTypeIDs::poloyForestBoss:
