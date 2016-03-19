@@ -1,6 +1,9 @@
 #include "talesqtenhancementseditor.h"
 #include "ui_talesqtenhancementseditor.h"
 #include "talesqtstatevar.h"
+#include "gamedata/PrimaryMaps.h"
+#include "gamedata/SubMaps.h"
+#include "util/StringConversion.h"
 
 using namespace Tales;
 
@@ -10,6 +13,12 @@ TalesQtEnhancementsEditor::TalesQtEnhancementsEditor(QWidget *parent) :
     ui(new Ui::TalesQtEnhancementsEditor)
 {
     ui->setupUi(this);
+
+    for (int i = HackSettings::startOnLevelHackAreaBase;
+         i < HackSettings::startOnLevelHackAreaLimit;
+         i++) {
+        ui->startAreaBox->addItem(StringConversion::toString(i).c_str(), i);
+    }
 }
 
 TalesQtEnhancementsEditor::~TalesQtEnhancementsEditor()
@@ -106,6 +115,53 @@ void TalesQtEnhancementsEditor::refreshDisplay() {
     default:
         break;
     }
+
+    refreshStartLevelDisplay();
+}
+
+void TalesQtEnhancementsEditor::refreshStartLevelDisplay() {
+    switch (enhancementsEditor_.hackSettings().startOnLevelHackOption()) {
+    case HackSettings::startOnLevelHackOff:
+        ui->startLevelEnabledBox->setChecked(false);
+        ui->startAreaBox->setEnabled(false);
+        ui->startMapBox->setEnabled(false);
+        ui->startSpawnBox->setEnabled(false);
+        break;
+    case HackSettings::startOnLevelHackOn:
+        ui->startLevelEnabledBox->setChecked(true);
+        ui->startAreaBox->setEnabled(true);
+        ui->startMapBox->setEnabled(true);
+        ui->startSpawnBox->setEnabled(true);
+        break;
+    default:
+        break;
+    }
+
+    ui->startAreaBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startOnLevelHackArea()
+                    - HackSettings::startOnLevelHackAreaBase);
+
+    int numMaps = SubMaps::subMapCounts[
+            enhancementsEditor_.hackSettings().startOnLevelHackArea()];
+    ui->startMapBox->clear();
+    for (int i = 0; i < numMaps; i++) {
+        ui->startMapBox->addItem(StringConversion::toString(i + 1).c_str(), i + 1);
+    }
+    ui->startMapBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startOnLevelHackMap()
+                    - 1);
+
+    int numSpawns =
+            appState_.editor().levelEditor().spawnPoints()
+                .spawnsByMapnum(
+                    enhancementsEditor_.hackSettings().startOnLevelHackArea(),
+                    enhancementsEditor_.hackSettings().startOnLevelHackMap()).size();
+    ui->startSpawnBox->clear();
+    for (int i = 0; i < numSpawns; i++) {
+        ui->startSpawnBox->addItem(StringConversion::toString(i).c_str(), i);
+    }
+    ui->startMapBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startOnLevelHackSpawn());
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
@@ -214,4 +270,42 @@ void TalesQtEnhancementsEditor::on_manualSaveHackOnBox_clicked(bool checked)
 {
     enhancementsEditor_.hackSettings().setSaveHackOption(
                 HackSettings::manualSaveHackOn);
+}
+
+void TalesQtEnhancementsEditor::on_startLevelEnabledBox_clicked(bool checked)
+{
+    if (checked) {
+        enhancementsEditor_.hackSettings().setStartOnLevelHackOption(
+                    HackSettings::startOnLevelHackOn);
+    }
+    else {
+        enhancementsEditor_.hackSettings().setStartOnLevelHackOption(
+                    HackSettings::startOnLevelHackOff);
+    }
+
+    refreshStartLevelDisplay();
+}
+
+void TalesQtEnhancementsEditor::on_startAreaBox_activated(int index)
+{
+    enhancementsEditor_.hackSettings().setStartOnLevelHackArea(
+                ui->startAreaBox->itemData(index).toInt());
+    enhancementsEditor_.hackSettings().setStartOnLevelHackMap(
+                1);
+    enhancementsEditor_.hackSettings().setStartOnLevelHackSpawn(
+                0);
+
+    refreshStartLevelDisplay();
+}
+
+void TalesQtEnhancementsEditor::on_startMapBox_activated(int index)
+{
+    enhancementsEditor_.hackSettings().setStartOnLevelHackMap(
+                ui->startMapBox->itemData(index).toInt());
+}
+
+void TalesQtEnhancementsEditor::on_startSpawnBox_activated(int index)
+{
+    enhancementsEditor_.hackSettings().setStartOnLevelHackSpawn(
+                ui->startSpawnBox->itemData(index).toInt());
 }

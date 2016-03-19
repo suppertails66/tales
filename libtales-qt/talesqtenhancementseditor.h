@@ -20,6 +20,8 @@ public:
 
 protected:
     Tales::EnhancementsEditor& enhancementsEditor_;
+
+    void refreshStartLevelDisplay();
     
 private slots:
     void on_doubleJumpFixBox_clicked(bool checked);
@@ -51,6 +53,14 @@ private slots:
     void on_autoSaveHackOnBox_clicked(bool checked);
 
     void on_manualSaveHackOnBox_clicked(bool checked);
+
+    void on_startLevelEnabledBox_clicked(bool checked);
+
+    void on_startAreaBox_activated(int index);
+
+    void on_startMapBox_activated(int index);
+
+    void on_startSpawnBox_activated(int index);
 
 private:
     Ui::TalesQtEnhancementsEditor *ui;
