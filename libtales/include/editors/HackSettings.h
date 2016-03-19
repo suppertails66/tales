@@ -55,6 +55,9 @@ public:
     startOnLevelHackOn
   };
   
+  const static int startOnLevelHackAreaBase = 0x01;
+  const static int startOnLevelHackAreaLimit = 0x0D;
+  
   HackSettings();
   
   void save(std::string& data);
