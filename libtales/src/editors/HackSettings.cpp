@@ -22,7 +22,10 @@ HackSettings::HackSettings()
     startOnLevelHackOption_(startOnLevelHackOff),
     startOnLevelHackArea_(1),
     startOnLevelHackMap_(1),
-    startOnLevelHackSpawn_(0) { };
+    startOnLevelHackSpawn_(0),
+    startingItemHackOption_(startingItemHackOff),
+    startingItemHackID_(0x01),
+    startingItemHackSFID_(0x13) { };
   
 void HackSettings::save(std::string& data) {
   SaveHelper saver(data,
@@ -107,6 +110,29 @@ void HackSettings::save(std::string& data) {
     data += std::string((char*)(buffer), ByteSizes::uint8Size);
     
     ByteConversion::toBytes(startOnLevelHackSpawn_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  }
+  
+  if (versionNum_ >= 4) {
+    ByteConversion::toBytes(startingItemHackOption_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+    
+    ByteConversion::toBytes(startingItemHackID_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+    
+    ByteConversion::toBytes(startingItemHackSFID_,
                             buffer,
                             ByteSizes::uint8Size,
                             EndiannessTypes::little,
@@ -205,6 +231,28 @@ int HackSettings::load(const Tbyte* data) {
     byteCount += ByteSizes::uint8Size;
     
     startOnLevelHackSpawn_ = ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign);
+    byteCount += ByteSizes::uint8Size;
+  }
+  
+  if (loader.version() >= 4) {
+    startingItemHackOption_ = static_cast<StartingItemHackOption>(
+      ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign)
+    );
+    byteCount += ByteSizes::uint8Size;
+    
+    startingItemHackID_ = ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign);
+    byteCount += ByteSizes::uint8Size;
+    
+    startingItemHackSFID_ = ByteConversion::fromBytes(data + byteCount,
                                 ByteSizes::uint8Size,
                                 EndiannessTypes::little,
                                 SignednessTypes::nosign);
@@ -389,6 +437,31 @@ int HackSettings::startOnLevelHackSpawn() {
 
 void HackSettings::setStartOnLevelHackSpawn(int startOnLevelHackSpawn__) {
   startOnLevelHackSpawn_ = startOnLevelHackSpawn__;
+}
+  
+HackSettings::StartingItemHackOption HackSettings::startingItemHackOption() {
+  return startingItemHackOption_;
+}
+
+void HackSettings::setStartingItemHackOption(
+    StartingItemHackOption startingItemHackOption__) {
+  startingItemHackOption_ = startingItemHackOption__;
+}
+
+int HackSettings::startingItemHackID() {
+  return startingItemHackID_;
+}
+
+void HackSettings::setStartingItemHackID(int startingItemHackID__) {
+  startingItemHackID_ = startingItemHackID__;
+}
+
+int HackSettings::startingItemHackSFID() {
+  return startingItemHackSFID_;
+}
+
+void HackSettings::setStartingItemHackSFID(int startingItemHackSFID__) {
+  startingItemHackSFID_ = startingItemHackSFID__;
 }
 
 

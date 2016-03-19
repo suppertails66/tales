@@ -55,8 +55,15 @@ public:
     startOnLevelHackOn
   };
   
+  enum StartingItemHackOption {
+    startingItemHackOff,
+    startingItemHackOn
+  };
+  
   const static int startOnLevelHackAreaBase = 0x01;
   const static int startOnLevelHackAreaLimit = 0x0D;
+  
+  const static int startingItemHackIDLimit = 0x1B;
   
   HackSettings();
   
@@ -107,8 +114,18 @@ public:
   int startOnLevelHackSpawn();
   void setStartOnLevelHackSpawn(int startOnLevelHackSpawn__);
   
+  StartingItemHackOption startingItemHackOption();
+  void setStartingItemHackOption(
+      StartingItemHackOption startingItemHackOption__);
+  
+  int startingItemHackID();
+  void setStartingItemHackID(int startingItemHackID__);
+  
+  int startingItemHackSFID();
+  void setStartingItemHackSFID(int startingItemHackSFID__);
+  
 protected:
-  const static int versionNum_ = 3;
+  const static int versionNum_ = 4;
 
   DoubleJumpFixOption doubleJumpFixOption_;
   
@@ -128,6 +145,10 @@ protected:
   int startOnLevelHackArea_;
   int startOnLevelHackMap_;
   int startOnLevelHackSpawn_;
+  
+  StartingItemHackOption startingItemHackOption_;
+  int startingItemHackID_;
+  int startingItemHackSFID_;
   
 };
 
