@@ -148,6 +148,10 @@ ObjectEditDialog::ObjectEditDialog(Tales::LevelObjectGraphicSceneLayer&
         if (ObjectTypeIDs::isObjectUsable(
                     static_cast<ObjectTypeIDs::ObjectTypeID>(i))) {
             ui->objectTypeComboBox->addItem(
+                        QString(ObjectTypeIDs::nameOfObject(
+                                        static_cast<ObjectTypeIDs::ObjectTypeID>(i))
+                            .c_str()), QVariant(i));
+/*            ui->objectTypeComboBox->addItem(
                         QString((
                             StringConversion::toString(
                                     i
@@ -155,9 +159,10 @@ ObjectEditDialog::ObjectEditDialog(Tales::LevelObjectGraphicSceneLayer&
                                     + ": "
                                     + ObjectTypeIDs::nameOfObject(
                                         static_cast<ObjectTypeIDs::ObjectTypeID>(i))
-                            ).c_str()), QVariant(i));
+                            ).c_str()), QVariant(i)); */
         }
     }
+    ui->objectTypeComboBox->model()->sort(0);
 
     reloadDisplay();
 }
