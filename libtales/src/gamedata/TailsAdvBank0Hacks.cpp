@@ -545,7 +545,8 @@ void TailsAdvBank0Hacks::addStartOnLevelHack(
 void TailsAdvBank0Hacks::addStartingItemHack(
                    WritableROM& rom,
                    Tbyte startingItemID,
-                   Tbyte sfStartingItemID) {
+                   Tbyte sfStartingItemID,
+                   bool allItemsEnabled) {
   rom.directWrite(startingItemHackItemIDAddress,
                   &startingItemID,
                   ByteSizes::uint8Size);
@@ -582,6 +583,21 @@ void TailsAdvBank0Hacks::addStartingItemHack(
                           ByteSizes::uint8Size,
                           EndiannessTypes::little,
                           SignednessTypes::nosign);
+  
+  if (allItemsEnabled) {
+    Tbyte pos = startingItemHackItemToPos[startingItemID];
+    Tbyte sfPos = startingItemHackItemToPos[sfStartingItemID];
+    
+    rom.directWrite(startingItemHackAllItemsPosAddress,
+                    &pos,
+                    ByteSizes::uint8Size);
+    rom.directWrite(startingItemHackAllItemsSFPosAddress,
+                    &sfPos,
+                    ByteSizes::uint8Size);
+    rom.directWrite(startingItemHackAllItemsSFSlotAddress,
+                    &sfStartingItemID,
+                    ByteSizes::uint8Size);
+  }
 }
                      
 const Tbyte TailsAdvBank0Hacks::levelHeaderHackData[levelHeaderHackLength] =
@@ -1098,5 +1114,40 @@ Tbyte TailsAdvBank0Hacks::bitNumToHLIndirectOpcodeParam(int bitNum) {
   return (HLIndirectOpcodeParamBase
             + (bitNum * HLIndirectOpcodeParamBitMultiplier));
 }
+
+const Tbyte TailsAdvBank0Hacks::startingItemHackItemToPos[
+    itemIDsLimit] = {
+    // 0x00
+    0x17,
+    0x17,
+    0x16,
+    0x15,
+    0x14,
+    0x13,
+    0x12,
+    0x11,
+    // 0x08
+    0x07,
+    0x06,
+    0x0F,
+    0x0E,
+    0x0D,
+    0x0C,
+    0x0B,
+    0x0A,
+    // 0x10
+    0x09,
+    0x08,
+    0x07,
+    0x06,
+    0x05,
+    0x04,
+    0x03,
+    0x02,
+    // 0x18
+    0x01,
+    0x00,
+    0x10
+  };
 
 };

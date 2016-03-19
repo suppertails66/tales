@@ -164,11 +164,15 @@ public:
    * and equipped at start of game).
    * @param sfStartingItemID Starting item for Sea Fox (unlocked,
    * but not equipped).
+   * @param allItemsEnabled If true, the "all items" hack has been enabled.
+   * This requires some extra patching in order to work. Note that this
+   * means this hack must be applied after the "all items" hack.
    */
   static void addStartingItemHack(
                      WritableROM& rom,
                      Tbyte startingItemID,
-                     Tbyte sfStartingItemID);
+                     Tbyte sfStartingItemID,
+                     bool allItemsEnabled = false);
 
 protected:
 
@@ -607,6 +611,10 @@ protected:
   const static Tbyte HLIndirectOpcodeParamBase = 0xC6;
   const static Tbyte HLIndirectOpcodeParamBitMultiplier = 8;
   static Tbyte bitNumToHLIndirectOpcodeParam(int bitNum);
+  const static Taddress startingItemHackAllItemsPosAddress = 0x26FF;
+  const static Taddress startingItemHackAllItemsSFPosAddress = 0x2705;
+  const static Taddress startingItemHackAllItemsSFSlotAddress = 0x06CE;
+  const static Tbyte startingItemHackItemToPos[];
                                 
 public:
 

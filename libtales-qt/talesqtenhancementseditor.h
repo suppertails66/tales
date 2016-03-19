@@ -24,6 +24,8 @@ protected:
     void refreshStartLevelDisplay();
 
     void reloadStartLevelDisplayValues();
+
+    void refreshStartingItemDisplay();
     
 private slots:
     void on_doubleJumpFixBox_clicked(bool checked);
@@ -63,6 +65,12 @@ private slots:
     void on_startMapBox_activated(int index);
 
     void on_startSpawnBox_activated(int index);
+
+    void on_startingItemBox_activated(int index);
+
+    void on_startingItemSFBox_activated(int index);
+
+    void on_startingItemEnabledBox_clicked(bool checked);
 
 private:
     Ui::TalesQtEnhancementsEditor *ui;

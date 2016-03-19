@@ -21,6 +21,13 @@ TalesQtEnhancementsEditor::TalesQtEnhancementsEditor(QWidget *parent) :
         ui->startAreaBox->addItem(StringConversion::toString(i).c_str(), i);
     }
 
+    for (int i = 0; i < HackSettings::startingItemHackIDLimit; i++) {
+        ui->startingItemBox->addItem(StringConversion::toString(i).c_str(),
+                                     i);
+        ui->startingItemSFBox->addItem(StringConversion::toString(i).c_str(),
+                                     i);
+    }
+
     reloadStartLevelDisplayValues();
 }
 
@@ -172,6 +179,29 @@ void TalesQtEnhancementsEditor::reloadStartLevelDisplayValues() {
     }
 
     refreshStartLevelDisplay();
+
+    refreshStartingItemDisplay();
+}
+
+void TalesQtEnhancementsEditor::refreshStartingItemDisplay() {
+    switch (enhancementsEditor_.hackSettings().startingItemHackOption()) {
+    case HackSettings::startingItemHackOff:
+        ui->startingItemEnabledBox->setChecked(false);
+        ui->startingItemBox->setEnabled(false);
+        ui->startingItemSFBox->setEnabled(false);
+        break;
+    case HackSettings::startingItemHackOn:
+        ui->startingItemEnabledBox->setChecked(true);
+        ui->startingItemBox->setEnabled(true);
+        ui->startingItemBox->setCurrentIndex(
+                    enhancementsEditor_.hackSettings().startingItemHackID());
+        ui->startingItemSFBox->setEnabled(true);
+        ui->startingItemSFBox->setCurrentIndex(
+                    enhancementsEditor_.hackSettings().startingItemHackSFID());
+        break;
+    default:
+        break;
+    }
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
@@ -318,4 +348,30 @@ void TalesQtEnhancementsEditor::on_startSpawnBox_activated(int index)
 {
     enhancementsEditor_.hackSettings().setStartOnLevelHackSpawn(
                 ui->startSpawnBox->itemData(index).toInt());
+}
+
+void TalesQtEnhancementsEditor::on_startingItemBox_activated(int index)
+{
+    enhancementsEditor_.hackSettings().setStartingItemHackID(
+                ui->startingItemBox->itemData(index).toInt());
+}
+
+void TalesQtEnhancementsEditor::on_startingItemSFBox_activated(int index)
+{
+    enhancementsEditor_.hackSettings().setStartingItemHackSFID(
+                ui->startingItemSFBox->itemData(index).toInt());
+}
+
+void TalesQtEnhancementsEditor::on_startingItemEnabledBox_clicked(bool checked)
+{
+    if (checked) {
+        enhancementsEditor_.hackSettings().setStartingItemHackOption(
+                    HackSettings::startingItemHackOn);
+    }
+    else {
+        enhancementsEditor_.hackSettings().setStartingItemHackOption(
+                    HackSettings::startingItemHackOff);
+    }
+
+    refreshStartingItemDisplay();
 }

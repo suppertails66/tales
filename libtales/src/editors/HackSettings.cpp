@@ -341,6 +341,20 @@ void HackSettings::exportToROM(WritableROM& rom) {
   default:
     break;
   }
+  
+  switch (startingItemHackOption_) {
+  case startingItemHackOn:
+    TailsAdvBank0Hacks::addStartingItemHack(rom,
+                                            startingItemHackID_,
+                                            startingItemHackSFID_,
+      ((inventoryHackOption_ == inventoryHackOnBasic)
+        || (inventoryHackOption_ == inventoryHackOnFull))
+        ? true
+        : false);
+    break;
+  default:
+    break;
+  }
 }
   
 HackSettings::DoubleJumpFixOption HackSettings::doubleJumpFixOption() {
