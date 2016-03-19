@@ -147,6 +147,28 @@ public:
                      Tbyte area,
                      Tbyte map,
                      Tbyte spawn);
+  
+  /**
+   * Adds the starting item hack to the given ROM.
+   * With this hack set, the player will start the game with the given
+   * items rather than the normal defaults (Regular Bomb and Vulcan Missile).
+   * Caveats: If this hack is used, the SRAM save system should also be used,
+   * as the password system does not encode information about the Regular
+   * Bomb (since it is assumed to be unlocked). Additionally, if 0 (no item)
+   * is specified for the first parameter, the all-inventory hack must not
+   * be used -- currently, it assumes there will always be at least one
+   * item unlocked, and will freeze the game when items are changed if
+   * this is not the case.
+   * @param rom ROM to write to.
+   * @param startingItemID Starting item for regular inventory (unlocked
+   * and equipped at start of game).
+   * @param sfStartingItemID Starting item for Sea Fox (unlocked,
+   * but not equipped).
+   */
+  static void addStartingItemHack(
+                     WritableROM& rom,
+                     Tbyte startingItemID,
+                     Tbyte sfStartingItemID);
 
 protected:
 
@@ -567,6 +589,24 @@ protected:
   const static Taddress startOnLevelHackAddress4 = 0x530;
   const static int startOnLevelHackLength4 = 1;
   const static Tbyte startOnLevelHackData4[];
+  
+  // Starting item hack
+  
+  const static Taddress startingItemHackItemIDAddress = 0x2714;
+  const static int itemIDsLimit = 0x1B;
+  struct StartingItemHackUnlockPair {
+    Taddress address;
+    int bit;
+  };
+  const static StartingItemHackUnlockPair
+    startingItemHackItemUnlockLocations[];
+  const static Taddress startingItemHackUnlockLocationAddress = 0x270A;
+  const static Taddress startingItemHackSFUnlockLocationAddress = 0x270F;
+  const static Taddress startingItemHackUnlockBitAddress = 0x270D;
+  const static Taddress startingItemHackSFUnlockBitAddress = 0x2712;
+  const static Tbyte HLIndirectOpcodeParamBase = 0xC6;
+  const static Tbyte HLIndirectOpcodeParamBitMultiplier = 8;
+  static Tbyte bitNumToHLIndirectOpcodeParam(int bitNum);
                                 
 public:
 

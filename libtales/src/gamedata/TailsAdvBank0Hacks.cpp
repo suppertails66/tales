@@ -541,6 +541,48 @@ void TailsAdvBank0Hacks::addStartOnLevelHack(
                   startOnLevelHackData4,
                   startOnLevelHackLength4);
 }
+
+void TailsAdvBank0Hacks::addStartingItemHack(
+                   WritableROM& rom,
+                   Tbyte startingItemID,
+                   Tbyte sfStartingItemID) {
+  rom.directWrite(startingItemHackItemIDAddress,
+                  &startingItemID,
+                  ByteSizes::uint8Size);
+  
+  StartingItemHackUnlockPair unlockPair
+    = startingItemHackItemUnlockLocations[startingItemID];
+  StartingItemHackUnlockPair sfUnlockPair
+    = startingItemHackItemUnlockLocations[sfStartingItemID];
+  
+  ByteConversion::toBytes(unlockPair.address,
+                          rom.directWrite(
+                            startingItemHackUnlockLocationAddress),
+                          ByteSizes::uint16Size,
+                          EndiannessTypes::little,
+                          SignednessTypes::nosign);
+  ByteConversion::toBytes(bitNumToHLIndirectOpcodeParam(
+                            unlockPair.bit),
+                          rom.directWrite(
+                            startingItemHackUnlockBitAddress),
+                          ByteSizes::uint8Size,
+                          EndiannessTypes::little,
+                          SignednessTypes::nosign);
+  
+  ByteConversion::toBytes(sfUnlockPair.address,
+                          rom.directWrite(
+                            startingItemHackSFUnlockLocationAddress),
+                          ByteSizes::uint16Size,
+                          EndiannessTypes::little,
+                          SignednessTypes::nosign);
+  ByteConversion::toBytes(bitNumToHLIndirectOpcodeParam(
+                            sfUnlockPair.bit),
+                          rom.directWrite(
+                            startingItemHackSFUnlockBitAddress),
+                          ByteSizes::uint8Size,
+                          EndiannessTypes::little,
+                          SignednessTypes::nosign);
+}
                      
 const Tbyte TailsAdvBank0Hacks::levelHeaderHackData[levelHeaderHackLength] =
   { 0x3E, 0x00,           // ld A,0   ; zero will be replaced by bank number
@@ -1017,5 +1059,44 @@ const Tbyte TailsAdvBank0Hacks::startOnLevelHackData4[
     startOnLevelHackLength4] = {
   0x08,                        // jr z,+08h     ; skip extra code
    };
+
+const TailsAdvBank0Hacks::StartingItemHackUnlockPair
+  TailsAdvBank0Hacks::startingItemHackItemUnlockLocations[
+    itemIDsLimit] = {
+    { 0xD030, 7 },    // 0x00: null/no item -- copy of regular bomb
+                      // (requires special case, but isn't allowed for now
+                      // because the all items hack doesn't support it?)
+    { 0xD030, 7 },    // 0x01: regular bomb
+    { 0xD030, 6 },    // 0x02: large bomb
+    { 0xD030, 5 },    // 0x03: remote bomb
+    { 0xD030, 4 },    // 0x04: napalm bomb
+    { 0xD030, 3 },    // 0x05: triple bomb
+    { 0xD030, 2 },    // 0x06: wrench
+    { 0xD030, 1 },    // 0x07: helmet
+    { 0xD032, 7 },    // 0x08: item radar
+    { 0xD032, 6 },    // 0x09: radio
+    { 0xD031, 7 },    // 0x0A: hammer
+    { 0xD031, 6 },    // 0x0B: teleport device
+    { 0xD031, 5 },    // 0x0C: night vision
+    { 0xD031, 4 },    // 0x0D: speed boots
+    { 0xD031, 3 },    // 0x0E: super glove
+    { 0xD031, 2 },    // 0x0F: fang
+    { 0xD031, 1 },    // 0x10: knuckles
+    { 0xD031, 0 },    // 0x11: sonic
+    { 0xD033, 7 },    // 0x12: proton torpedo
+    { 0xD033, 6 },    // 0x13: vulcan missile
+    { 0xD033, 5 },    // 0x14: extra speed
+    { 0xD033, 4 },    // 0x15: extra armor
+    { 0xD033, 3 },    // 0x16: anti-air missile
+    { 0xD033, 2 },    // 0x17: spark
+    { 0xD033, 1 },    // 0x18: mine
+    { 0xD033, 0 },    // 0x19: rocket booster
+    { 0xD030, 0 },    // 0x1A: remote robot
+  };
+
+Tbyte TailsAdvBank0Hacks::bitNumToHLIndirectOpcodeParam(int bitNum) {
+  return (HLIndirectOpcodeParamBase
+            + (bitNum * HLIndirectOpcodeParamBitMultiplier));
+}
 
 };
