@@ -66,7 +66,7 @@ const GraphicInfo GraphicToInfo
   GraphicInfo("Electric barrier", GraphicCategories::obstacle),
   // 30
   GraphicInfo("Electric barrier switch", GraphicCategories::obstacle),
-  GraphicInfo("Flame shooter", GraphicCategories::enemy),
+  GraphicInfo("Flame shooter/lava", GraphicCategories::enemy),
   GraphicInfo("Beehive", GraphicCategories::enemy),
   GraphicInfo("Polly Mt 2 fire wind", GraphicCategories::effect),
   GraphicInfo("World map objects", GraphicCategories::misc),
