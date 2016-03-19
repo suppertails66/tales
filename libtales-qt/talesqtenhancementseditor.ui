@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>483</height>
+    <height>504</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -544,7 +544,9 @@ when &quot;New Game&quot; is selected:</string>
        <item>
         <widget class="QCheckBox" name="startingItemEnabledBox">
          <property name="text">
-          <string>Start new game with these items instead of the defaults:</string>
+          <string>Start new game with these items instead of the defaults:
+(Don't use &quot;Null&quot; if using all items hack, and don't
+change the &quot;Regular&quot; item if using passwords)</string>
          </property>
         </widget>
        </item>

@@ -11,6 +11,37 @@ using namespace Luncheon;
 namespace Tales {
 
 
+const char* HackSettings::itemNames[startingItemHackIDLimit] =
+  {
+   "Null",
+   "Regular Bomb",
+   "Large Bomb",
+   "Remote Bomb",
+   "Napalm Bomb",
+   "Triple Bomb",
+   "Wrench",
+   "Helmet",
+   "Item Radar",
+   "Radio",
+   "Hammer",
+   "Teleport Device",
+   "Night Vision",
+   "Speed Boots",
+   "Super Glove",
+   "Fang",
+   "Knuckles",
+   "Sonic",
+   "Proton Torpedo",
+   "Vulcan Missile",
+   "Extra Speed",
+   "Extra Armor",
+   "Anti-Air Missile",
+   "Spark",
+   "Mine",
+   "Rocket Booster",
+   "Remote Robot"
+  };
+  
 HackSettings::HackSettings()
   : doubleJumpFixOption_(doubleJumpFixOff),
     maxHeightFixOption_(maxHeightFixOff),

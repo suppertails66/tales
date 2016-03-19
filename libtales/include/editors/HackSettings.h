@@ -65,6 +65,8 @@ public:
   
   const static int startingItemHackIDLimit = 0x1B;
   
+  const static char* itemNames[];
+  
   HackSettings();
   
   void save(std::string& data);

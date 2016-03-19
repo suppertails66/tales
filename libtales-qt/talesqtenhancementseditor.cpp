@@ -22,9 +22,9 @@ TalesQtEnhancementsEditor::TalesQtEnhancementsEditor(QWidget *parent) :
     }
 
     for (int i = 0; i < HackSettings::startingItemHackIDLimit; i++) {
-        ui->startingItemBox->addItem(StringConversion::toString(i).c_str(),
+        ui->startingItemBox->addItem(HackSettings::itemNames[i],
                                      i);
-        ui->startingItemSFBox->addItem(StringConversion::toString(i).c_str(),
+        ui->startingItemSFBox->addItem(HackSettings::itemNames[i],
                                      i);
     }
 
@@ -127,6 +127,8 @@ void TalesQtEnhancementsEditor::refreshDisplay() {
     }
 
     reloadStartLevelDisplayValues();
+
+    refreshStartingItemDisplay();
 }
 
 void TalesQtEnhancementsEditor::refreshStartLevelDisplay() {
@@ -193,15 +195,16 @@ void TalesQtEnhancementsEditor::refreshStartingItemDisplay() {
     case HackSettings::startingItemHackOn:
         ui->startingItemEnabledBox->setChecked(true);
         ui->startingItemBox->setEnabled(true);
-        ui->startingItemBox->setCurrentIndex(
-                    enhancementsEditor_.hackSettings().startingItemHackID());
         ui->startingItemSFBox->setEnabled(true);
-        ui->startingItemSFBox->setCurrentIndex(
-                    enhancementsEditor_.hackSettings().startingItemHackSFID());
         break;
     default:
         break;
     }
+
+    ui->startingItemBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startingItemHackID());
+    ui->startingItemSFBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startingItemHackSFID());
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
