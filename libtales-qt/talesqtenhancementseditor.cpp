@@ -4,6 +4,7 @@
 #include "gamedata/PrimaryMaps.h"
 #include "gamedata/SubMaps.h"
 #include "util/StringConversion.h"
+#include <iostream>
 
 using namespace Tales;
 
@@ -19,6 +20,8 @@ TalesQtEnhancementsEditor::TalesQtEnhancementsEditor(QWidget *parent) :
          i++) {
         ui->startAreaBox->addItem(StringConversion::toString(i).c_str(), i);
     }
+
+    reloadStartLevelDisplayValues();
 }
 
 TalesQtEnhancementsEditor::~TalesQtEnhancementsEditor()
@@ -116,7 +119,7 @@ void TalesQtEnhancementsEditor::refreshDisplay() {
         break;
     }
 
-    refreshStartLevelDisplay();
+    reloadStartLevelDisplayValues();
 }
 
 void TalesQtEnhancementsEditor::refreshStartLevelDisplay() {
@@ -141,15 +144,22 @@ void TalesQtEnhancementsEditor::refreshStartLevelDisplay() {
                 enhancementsEditor_.hackSettings().startOnLevelHackArea()
                     - HackSettings::startOnLevelHackAreaBase);
 
+    ui->startMapBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startOnLevelHackMap()
+                    - 1);
+
+    ui->startSpawnBox->setCurrentIndex(
+                enhancementsEditor_.hackSettings().startOnLevelHackSpawn());
+}
+
+void TalesQtEnhancementsEditor::reloadStartLevelDisplayValues() {
+
     int numMaps = SubMaps::subMapCounts[
             enhancementsEditor_.hackSettings().startOnLevelHackArea()];
     ui->startMapBox->clear();
     for (int i = 0; i < numMaps; i++) {
         ui->startMapBox->addItem(StringConversion::toString(i + 1).c_str(), i + 1);
     }
-    ui->startMapBox->setCurrentIndex(
-                enhancementsEditor_.hackSettings().startOnLevelHackMap()
-                    - 1);
 
     int numSpawns =
             appState_.editor().levelEditor().spawnPoints()
@@ -160,8 +170,8 @@ void TalesQtEnhancementsEditor::refreshStartLevelDisplay() {
     for (int i = 0; i < numSpawns; i++) {
         ui->startSpawnBox->addItem(StringConversion::toString(i).c_str(), i);
     }
-    ui->startMapBox->setCurrentIndex(
-                enhancementsEditor_.hackSettings().startOnLevelHackSpawn());
+
+    refreshStartLevelDisplay();
 }
 
 void TalesQtEnhancementsEditor::on_doubleJumpFixBox_clicked(bool checked)
@@ -295,7 +305,7 @@ void TalesQtEnhancementsEditor::on_startAreaBox_activated(int index)
     enhancementsEditor_.hackSettings().setStartOnLevelHackSpawn(
                 0);
 
-    refreshStartLevelDisplay();
+    reloadStartLevelDisplayValues();
 }
 
 void TalesQtEnhancementsEditor::on_startMapBox_activated(int index)

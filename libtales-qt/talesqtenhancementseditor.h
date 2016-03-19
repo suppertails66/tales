@@ -22,6 +22,8 @@ protected:
     Tales::EnhancementsEditor& enhancementsEditor_;
 
     void refreshStartLevelDisplay();
+
+    void reloadStartLevelDisplayValues();
     
 private slots:
     void on_doubleJumpFixBox_clicked(bool checked);

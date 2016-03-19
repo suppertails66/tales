@@ -91,6 +91,27 @@ void HackSettings::save(std::string& data) {
                             EndiannessTypes::little,
                             SignednessTypes::nosign);
     data += std::string((char*)(buffer), ByteSizes::uint8Size);
+    
+    ByteConversion::toBytes(startOnLevelHackArea_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+    
+    ByteConversion::toBytes(startOnLevelHackMap_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+    
+    ByteConversion::toBytes(startOnLevelHackSpawn_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
   }
   
   saver.finalize();
@@ -169,6 +190,24 @@ int HackSettings::load(const Tbyte* data) {
                                 EndiannessTypes::little,
                                 SignednessTypes::nosign)
     );
+    byteCount += ByteSizes::uint8Size;
+    
+    startOnLevelHackArea_ = ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign);
+    byteCount += ByteSizes::uint8Size;
+    
+    startOnLevelHackMap_ = ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign);
+    byteCount += ByteSizes::uint8Size;
+    
+    startOnLevelHackSpawn_ = ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign);
     byteCount += ByteSizes::uint8Size;
   }
   
