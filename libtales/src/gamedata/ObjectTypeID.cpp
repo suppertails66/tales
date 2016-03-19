@@ -167,7 +167,7 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::seaFoxWeaponSmoke:
     return "Sea Fox weapon smoke puff";
   case ObjectTypeIDs::pushableRock:
-    return "Pushable boulder";
+    return "Boulder";
   case ObjectTypeIDs::windGustEffect:
     return "Wind gust visual effect";
   

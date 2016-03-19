@@ -56,7 +56,7 @@ const GraphicInfo GraphicToInfo
   // 20
   GraphicInfo("Underwater bird missile", GraphicCategories::enemy),
   GraphicInfo("Turret duck", GraphicCategories::enemy),
-  GraphicInfo("Pushable boulder", GraphicCategories::obstacle),
+  GraphicInfo("Boulder", GraphicCategories::obstacle),
   GraphicInfo("Remote Robot killer beams", GraphicCategories::enemy),
   GraphicInfo("Conveyor bomb", GraphicCategories::enemy),
   GraphicInfo("Conveyor-riding duck", GraphicCategories::enemy),
