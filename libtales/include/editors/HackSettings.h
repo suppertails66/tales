@@ -50,6 +50,11 @@ public:
     autoSaveHackOn,
   };
   
+  enum StartOnLevelHackOption {
+    startOnLevelHackOff,
+    startOnLevelHackOn
+  };
+  
   HackSettings();
   
   void save(std::string& data);
@@ -86,8 +91,21 @@ public:
   void setSaveHackOption(
       SaveHackOption saveHackOption__);
   
+  StartOnLevelHackOption startOnLevelHackOption();
+  void setStartOnLevelHackOption(
+      StartOnLevelHackOption startOnLevelHackOption__);
+  
+  int startOnLevelHackArea();
+  void setStartOnLevelHackArea(int startOnLevelHackArea__);
+  
+  int startOnLevelHackMap();
+  void setStartOnLevelHackMap(int startOnLevelHackMap__);
+  
+  int startOnLevelHackSpawn();
+  void setStartOnLevelHackSpawn(int startOnLevelHackSpawn__);
+  
 protected:
-  const static int versionNum_ = 2;
+  const static int versionNum_ = 3;
 
   DoubleJumpFixOption doubleJumpFixOption_;
   
@@ -102,6 +120,11 @@ protected:
   NoGameOverHackOption noGameOverHackOption_;
   
   SaveHackOption saveHackOption_;
+  
+  StartOnLevelHackOption startOnLevelHackOption_;
+  int startOnLevelHackArea_;
+  int startOnLevelHackMap_;
+  int startOnLevelHackSpawn_;
   
 };
 

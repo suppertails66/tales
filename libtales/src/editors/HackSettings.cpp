@@ -18,7 +18,11 @@ HackSettings::HackSettings()
     inventoryHackOption_(inventoryHackOff),
     flightHackOption_(flightHackOff),
     noGameOverHackOption_(noGameOverHackOff),
-    saveHackOption_(saveHackOff) { };
+    saveHackOption_(saveHackOff),
+    startOnLevelHackOption_(startOnLevelHackOff),
+    startOnLevelHackArea_(1),
+    startOnLevelHackMap_(1),
+    startOnLevelHackSpawn_(0) { };
   
 void HackSettings::save(std::string& data) {
   SaveHelper saver(data,
@@ -73,6 +77,15 @@ void HackSettings::save(std::string& data) {
   
   if (versionNum_ >= 2) {
     ByteConversion::toBytes(saveHackOption_,
+                            buffer,
+                            ByteSizes::uint8Size,
+                            EndiannessTypes::little,
+                            SignednessTypes::nosign);
+    data += std::string((char*)(buffer), ByteSizes::uint8Size);
+  }
+  
+  if (versionNum_ >= 3) {
+    ByteConversion::toBytes(startOnLevelHackOption_,
                             buffer,
                             ByteSizes::uint8Size,
                             EndiannessTypes::little,
@@ -141,6 +154,16 @@ int HackSettings::load(const Tbyte* data) {
   
   if (loader.version() >= 2) {
     saveHackOption_ = static_cast<SaveHackOption>(
+      ByteConversion::fromBytes(data + byteCount,
+                                ByteSizes::uint8Size,
+                                EndiannessTypes::little,
+                                SignednessTypes::nosign)
+    );
+    byteCount += ByteSizes::uint8Size;
+  }
+  
+  if (loader.version() >= 3) {
+    startOnLevelHackOption_ = static_cast<StartOnLevelHackOption>(
       ByteConversion::fromBytes(data + byteCount,
                                 ByteSizes::uint8Size,
                                 EndiannessTypes::little,
@@ -220,6 +243,17 @@ void HackSettings::exportToROM(WritableROM& rom) {
   default:
     break;
   }
+  
+  switch (startOnLevelHackOption_) {
+  case startOnLevelHackOn:
+    TailsAdvBank0Hacks::addStartOnLevelHack(rom,
+                                            startOnLevelHackArea_,
+                                            startOnLevelHackMap_,
+                                            startOnLevelHackSpawn_);
+    break;
+  default:
+    break;
+  }
 }
   
 HackSettings::DoubleJumpFixOption HackSettings::doubleJumpFixOption() {
@@ -283,6 +317,39 @@ HackSettings::SaveHackOption HackSettings::saveHackOption() {
 void HackSettings::setSaveHackOption(
     SaveHackOption saveHackOption__) {
   saveHackOption_ = saveHackOption__;
+}
+  
+HackSettings::StartOnLevelHackOption HackSettings::startOnLevelHackOption() {
+  return startOnLevelHackOption_;
+}
+
+void HackSettings::setStartOnLevelHackOption(
+    StartOnLevelHackOption startOnLevelHackOption__) {
+  startOnLevelHackOption_ = startOnLevelHackOption__;
+}
+  
+int HackSettings::startOnLevelHackArea() {
+  return startOnLevelHackArea_;
+}
+
+void HackSettings::setStartOnLevelHackArea(int startOnLevelHackArea__) {
+  startOnLevelHackArea_ = startOnLevelHackArea__;
+}
+
+int HackSettings::startOnLevelHackMap() {
+  return startOnLevelHackMap_;
+}
+
+void HackSettings::setStartOnLevelHackMap(int startOnLevelHackMap__) {
+  startOnLevelHackMap_ = startOnLevelHackMap__;
+}
+
+int HackSettings::startOnLevelHackSpawn() {
+  return startOnLevelHackSpawn_;
+}
+
+void HackSettings::setStartOnLevelHackSpawn(int startOnLevelHackSpawn__) {
+  startOnLevelHackSpawn_ = startOnLevelHackSpawn__;
 }
 
 
