@@ -29,6 +29,13 @@ protected:
     void reloadMapBox();
     void reloadSpawnBox();
 
+    void turnOnMapOverride(int mapNum,
+                           int spawnNum);
+    void turnOffMapOverride();
+
+    bool selectCurrentMap();
+    bool selectCurrentSpawn();
+
     Tales::WarpDestinationCollection warps_;
     Tales::WarpDestination* activeWarp_;
     Tales::EditableSpawnPoints& spawnPoints_;
@@ -65,6 +72,12 @@ private slots:
     void on_mapBox_activated(int index);
 
     void on_spawnBox_activated(int index);
+
+    void on_mapOverrideEnabledBox_clicked(bool checked);
+
+    void on_mapOverrideNumBox_valueChanged(int arg1);
+
+    void on_spawnOverrideNumBox_valueChanged(int arg1);
 
 private:
     Ui::WarpEditDialog *ui;

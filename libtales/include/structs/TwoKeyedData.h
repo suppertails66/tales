@@ -3,6 +3,7 @@
 
 
 #include "exception/TGenericException.h"
+#include "exception/OutOfRangeIndexException.h"
 #include "util/StringConversion.h"
 #include <string>
 #include <cstring>
@@ -134,21 +135,19 @@ public:
     // Throw if primary key is out of range
     if ((unsigned int)primaryKey >= (unsigned int)numPrimaryKeys_
                                         + primaryKeyBase) {
-      throw TGenericException(TALES_SRCANDLINE,
+      throw OutOfRangeIndexException(TALES_SRCANDLINE,
                              "TwoKeyedData<T>::operator[]"
-                             "(int,int)",
-                             std::string("Out of range primary key: ")
-                             + StringConversion::toString(primaryKey));
+                             "(int,int) [PRIMARY]",
+                             primaryKey);
     }
     
     // Throw if subkey is out of range
     if ((unsigned int)subKey >= (unsigned int)(subKeyTable_[primaryKey]
                                     + subKeyBase)) {
-      throw TGenericException(TALES_SRCANDLINE,
+      throw OutOfRangeIndexException(TALES_SRCANDLINE,
                              "TwoKeyedData<T>::operator[]"
-                             "(int,int)",
-                             std::string("Out of range subkey: ")
-                             + StringConversion::toString(subKey));
+                             "(int,int) [SUB]",
+                             subKey);
     }
     
     // Return the requested data
@@ -165,21 +164,19 @@ public:
     // Throw if primary key is out of range
     if ((unsigned int)primaryKey >= (unsigned int)numPrimaryKeys_
                                         + primaryKeyBase) {
-      throw TGenericException(TALES_SRCANDLINE,
-                             "TwoKeyedData<T>::getDataByKeys"
-                             "(int,int) const",
-                             std::string("Out of range primary key: ")
-                             + StringConversion::toString(primaryKey));
+      throw OutOfRangeIndexException(TALES_SRCANDLINE,
+                             "TwoKeyedData<T>::operator[]"
+                             "(int,int) const [PRIMARY]",
+                             primaryKey);
     }
     
     // Throw if subkey is out of range
     if ((unsigned int)subKey >= (unsigned int)(subKeyTable_[primaryKey])
                                     + subKeyBase) {
-      throw TGenericException(TALES_SRCANDLINE,
-                             "TwoKeyedData<T>::getDataByKeys"
-                             "(int,int) const",
-                             std::string("Out of range subkey: ")
-                             + StringConversion::toString(subKey));
+      throw OutOfRangeIndexException(TALES_SRCANDLINE,
+                             "TwoKeyedData<T>::operator[]"
+                             "(int,int) const [SUB]",
+                             subKey);
     }
     
     // Return the requested data

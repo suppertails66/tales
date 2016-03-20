@@ -51,18 +51,24 @@ void WarpEditDialog::loadWarp(Tales::WarpDestination& warp) {
         }
     }
 
-    for (int i = 0; i < ui->mapBox->count(); i++) {
-        if (ui->mapBox->itemData(i).toInt()
-                == activeWarp_->subMapDestination()) {
-            ui->mapBox->setCurrentIndex(i);
-        }
+    bool mapFound = selectCurrentMap();
+
+    bool spawnFound = false;
+    if (mapFound) {
+        spawnFound = selectCurrentSpawn();
     }
 
-    for (int i = 0; i < ui->spawnBox->count(); i++) {
-        if (ui->spawnBox->itemData(i).toInt()
-                == activeWarp_->destinationSpawnIndex()) {
-            ui->spawnBox->setCurrentIndex(i);
-        }
+    if (!mapFound || !spawnFound) {
+        turnOnMapOverride(activeWarp_->subMapDestination(),
+                          activeWarp_->destinationSpawnIndex());
+    }
+    else {
+        turnOffMapOverride();
+
+        reloadMapBox();
+        reloadSpawnBox();
+//        selectCurrentMap();
+//        selectCurrentSpawn();
     }
 
     if (activeWarp_->levelUnlocked(
@@ -239,26 +245,83 @@ void WarpEditDialog::reloadSpawnBox() {
                     "Coco Island escape", 0xFF);
     }
     else {
-        SpawnPointCollection& spawns
-                = spawnPoints_.spawnsByMapnum(
-                    activeWarp_->primaryMapDestination(),
-                    activeWarp_->subMapDestination());
+        try {
+            SpawnPointCollection& spawns
+                    = spawnPoints_.spawnsByMapnum(
+                        activeWarp_->primaryMapDestination(),
+                        activeWarp_->subMapDestination());
 
-        int num = 0;
-        for (SpawnPointCollection::iterator it = spawns.begin();
-             it != spawns.end();
-             ++it) {
-            std::string namestr;
-            namestr += StringConversion::toString(
-                        num);
-            ui->spawnBox->addItem(
-                        namestr.c_str(), num);
+            int num = 0;
+            for (SpawnPointCollection::iterator it = spawns.begin();
+                 it != spawns.end();
+                 ++it) {
+                std::string namestr;
+                namestr += StringConversion::toString(
+                            num);
+                ui->spawnBox->addItem(
+                            namestr.c_str(), num);
 
-            ++num;
+                ++num;
+            }
+        }
+        catch (OutOfRangeIndexException& e) {
+
         }
     }
 }
 
+void WarpEditDialog::turnOnMapOverride(int mapNum,
+                                       int spawnNum) {
+    ui->mapOverrideEnabledBox->setChecked(true);
+    ui->mapOverrideNumBox->setEnabled(true);
+    ui->mapOverrideNumBox->setValue(mapNum);
+    ui->spawnOverrideNumBox->setEnabled(true);
+    ui->spawnOverrideNumBox->setValue(spawnNum);
+
+    ui->mapBox->setEnabled(false);
+    ui->spawnBox->setEnabled(false);
+
+    activeWarp_->setSubMapDestination(mapNum);
+    activeWarp_->setDestinationSpawnIndex(spawnNum);
+}
+
+void WarpEditDialog::turnOffMapOverride() {
+    ui->mapBox->setEnabled(true);
+    ui->spawnBox->setEnabled(true);
+
+    ui->mapOverrideEnabledBox->setChecked(false);
+    ui->mapOverrideNumBox->setEnabled(false);
+    activeWarp_->setSubMapDestination(
+                ui->mapBox->itemData(
+                    ui->mapBox->currentIndex()).toInt());
+    ui->spawnOverrideNumBox->setEnabled(false);
+    activeWarp_->setDestinationSpawnIndex(
+                ui->spawnBox->itemData(
+                    ui->spawnBox->currentIndex()).toInt());
+
+    reloadMapBox();
+    reloadSpawnBox();
+}
+
+bool WarpEditDialog::selectCurrentMap() {
+    for (int i = 0; i < ui->mapBox->count(); i++) {
+        if (ui->mapBox->itemData(i).toInt()
+                == activeWarp_->subMapDestination()) {
+            ui->mapBox->setCurrentIndex(i);
+            return true;
+        }
+    }
+}
+
+bool WarpEditDialog::selectCurrentSpawn() {
+    for (int i = 0; i < ui->spawnBox->count(); i++) {
+        if (ui->spawnBox->itemData(i).toInt()
+                == activeWarp_->destinationSpawnIndex()) {
+            ui->spawnBox->setCurrentIndex(i);
+            return true;
+        }
+    }
+}
 
 void WarpEditDialog::on_warpNumberBox_activated(int index)
 {
@@ -374,4 +437,25 @@ void WarpEditDialog::on_spawnBox_activated(int index)
 {
     activeWarp_->setDestinationSpawnIndex(
                 ui->spawnBox->itemData(index).toInt());
+}
+
+void WarpEditDialog::on_mapOverrideEnabledBox_clicked(bool checked)
+{
+    if (checked) {
+        turnOnMapOverride(activeWarp_->subMapDestination(),
+                          activeWarp_->destinationSpawnIndex());
+    }
+    else {
+        turnOffMapOverride();
+    }
+}
+
+void WarpEditDialog::on_mapOverrideNumBox_valueChanged(int arg1)
+{
+    activeWarp_->setSubMapDestination(arg1);
+}
+
+void WarpEditDialog::on_spawnOverrideNumBox_valueChanged(int arg1)
+{
+    activeWarp_->setDestinationSpawnIndex(arg1);
 }
