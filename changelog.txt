@@ -46,6 +46,7 @@ a level instead of the world map.
 items.
 * Fixed camera boundaries display -- previously, it was one tile too far to the
 left.
+* Added ability to make warps point to spawn 0 of the world map (Tails' House).
 * Sorted the object list in the Object Properties dialog alphabetically instead
 of by internal ID number.
 * Changed names of some objects and graphics for consistency and accuracy.
