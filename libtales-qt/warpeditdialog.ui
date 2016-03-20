@@ -281,6 +281,9 @@ unless you know what you're doing!)</string>
       </item>
       <item>
        <widget class="QSpinBox" name="mapOverrideNumBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -294,6 +297,9 @@ unless you know what you're doing!)</string>
       </item>
       <item>
        <widget class="QSpinBox" name="spawnOverrideNumBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="maximum">
          <number>255</number>
         </property>
