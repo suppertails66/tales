@@ -226,7 +226,7 @@ void WarpEditDialog::reloadSpawnBox() {
 
     if (activeWarp_->primaryMapDestination()
             == PrimaryMaps::worldMap) {
-        for (int i = 1; i <= 0x0C; i++) {
+        for (int i = 0; i <= 0x0C; i++) {
             std::string namestr;
             namestr += "Area "
                     + StringConversion::toString(
