@@ -79,6 +79,8 @@ private slots:
 
     void on_spawnOverrideNumBox_valueChanged(int arg1);
 
+    void on_mapOverrideEnabledBox_toggled(bool checked);
+
 private:
     Ui::WarpEditDialog *ui;
 };

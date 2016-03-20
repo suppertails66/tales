@@ -59,14 +59,18 @@ void WarpEditDialog::loadWarp(Tales::WarpDestination& warp) {
     }
 
     if (!mapFound || !spawnFound) {
-        turnOnMapOverride(activeWarp_->subMapDestination(),
-                          activeWarp_->destinationSpawnIndex());
+        if (!ui->mapOverrideEnabledBox->isChecked()) {
+            turnOnMapOverride(activeWarp_->subMapDestination(),
+                              activeWarp_->destinationSpawnIndex());
+        }
     }
     else {
-        turnOffMapOverride();
+        if (ui->mapOverrideEnabledBox->isChecked()) {
+            turnOffMapOverride();
+        }
 
-        reloadMapBox();
-        reloadSpawnBox();
+//        reloadMapBox();
+//        reloadSpawnBox();
 //        selectCurrentMap();
 //        selectCurrentSpawn();
     }
@@ -441,13 +445,13 @@ void WarpEditDialog::on_spawnBox_activated(int index)
 
 void WarpEditDialog::on_mapOverrideEnabledBox_clicked(bool checked)
 {
-    if (checked) {
+/*    if (checked) {
         turnOnMapOverride(activeWarp_->subMapDestination(),
                           activeWarp_->destinationSpawnIndex());
     }
     else {
         turnOffMapOverride();
-    }
+    } */
 }
 
 void WarpEditDialog::on_mapOverrideNumBox_valueChanged(int arg1)
@@ -458,4 +462,15 @@ void WarpEditDialog::on_mapOverrideNumBox_valueChanged(int arg1)
 void WarpEditDialog::on_spawnOverrideNumBox_valueChanged(int arg1)
 {
     activeWarp_->setDestinationSpawnIndex(arg1);
+}
+
+void WarpEditDialog::on_mapOverrideEnabledBox_toggled(bool checked)
+{
+    if (checked) {
+        turnOnMapOverride(activeWarp_->subMapDestination(),
+                          activeWarp_->destinationSpawnIndex());
+    }
+    else {
+        turnOffMapOverride();
+    }
 }
