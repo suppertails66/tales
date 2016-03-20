@@ -131,7 +131,7 @@ std::string ObjectTypeIDs::nameOfObject(ObjectTypeID id) {
   case ObjectTypeIDs::leapingDuck:
     return "Leaping duck";
   case ObjectTypeIDs::shootingFleeingDuck:
-    return "Shoot and flee duck";
+    return "Underwater shooter duck";
   case ObjectTypeIDs::rockThrowingDuck:
     return "Rock-throwing duck";
   case ObjectTypeIDs::flyingShooterDuck:
