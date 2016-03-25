@@ -47,6 +47,8 @@ items.
 * Added option to manually set the map and spawn numbers in the Warp Edit dialog
 instead of restricting it to nominally valid values.
 * Added ability to make warps point to spawn 0 of the world map (Tails' House).
+* Fixed bug that caused exported ROMs to fail/freeze when loading graphics from
+bank 0x20 or higher.
 * Fixed camera boundaries display -- previously, it was one tile too far to the
 left.
 * Sorted the object list in the Object Properties dialog alphabetically instead
