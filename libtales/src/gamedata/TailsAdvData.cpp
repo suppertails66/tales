@@ -263,6 +263,19 @@ void TailsAdvData::exportToROM(WritableROM& rom) {
   
   /* A VERY LONG SEQUENCE OF EXPORTS GOES HERE */
   
+  if (romExpanded_) {
+    // If the ROM has been expanded, there are now 0x40 rather than 0x20
+    // valid banks. However, there are a handful of pieces of code that
+    // mask a value by 0x1F to obtain a bank number. We need to adjust these
+    // to 0x3F or the program will be unable to access the new banks.
+    rom.directWrite(andMaskExpandAdjustAddress1,
+                    andMaskExpandAdjustValue,
+                    ByteSizes::uint8Size);
+    rom.directWrite(andMaskExpandAdjustAddress2,
+                    andMaskExpandAdjustValue,
+                    ByteSizes::uint8Size);
+  }
+  
   standardPalettes_.exportToROM(rom);
   paletteCycles_.exportToROM(rom);
   levelEffectsHeaders_.exportToROM(rom);
@@ -285,19 +298,6 @@ void TailsAdvData::exportToROM(WritableROM& rom) {
   warpDestinations_.exportToROM(rom);
   levelObjectEntryGroups_.exportToROM(rom);
   mapData_.exportToROM(rom);
-  
-  if (romExpanded_) {
-    // If the ROM has been expanded, there are now 0x40 rather than 0x20
-    // valid banks. However, there are a handful of pieces of code that
-    // mask a value by 0x1F to obtain a bank number. We need to adjust these
-    // to 0x3F or the program will be unable to access the new banks.
-    rom.directWrite(andMaskExpandAdjustAddress1,
-                    andMaskExpandAdjustValue,
-                    1);
-    rom.directWrite(andMaskExpandAdjustAddress2,
-                    andMaskExpandAdjustValue,
-                    1);
-  }
 }
 
 void TailsAdvData::exportToFile(LoadedROM& rom,

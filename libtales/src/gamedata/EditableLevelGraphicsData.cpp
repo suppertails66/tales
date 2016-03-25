@@ -1414,6 +1414,12 @@ void EditableLevelGraphicsData::exportGraphics(
                                  
       // Get new address
       Taddress newBaseAddress = spaceIt->address();
+  
+/*      if (i == 54) {
+        std::cout << compressedData.size() << std::endl;
+        std::cout << newBaseAddress << std::endl;
+        std::cout << spaceIt->length() << std::endl;
+      } */
       
       // Claim the free space we need
       rom.freeSpace().claimSpace(spaceIt,
