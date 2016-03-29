@@ -130,6 +130,7 @@
               <li><a href="#tipsoneway">One-Way Levels</a></li>
               <li><a href="#tipsteleport">Teleporters</a></li>
               <li><a href="#tipsobj69">Object 69</a></li>
+              <li><a href="#tipsmanualmap">Manual Map Numbers</a></li>
             </ol>
           </li>
       </ol>
@@ -391,6 +392,9 @@
     <img src="images/warpeditor.png" width="340"></img>
     <p>
       The <b>Warp Editor Dialog</b> is accessed by clicking the <b>Warps...</b> button. The <b>Warp</b> combo box allows each of the defined warps for the current level to be selected for editing. The <b>Area</b>, <b>Map</b>, and <b>Spawn</b> boxes set the warp's destination. The <b>Area Unlock Flags</b> determine which areas on the world map are unlocked when the warp is used.
+    </p>
+    <p>
+      If the <b>manual map/spawn box</b> is checked, then the two boxes on the right can be used to directly set the map and spawn numbers to a value from 0 to 255. <em style="color: red;">Don't turn this on unless you know what you're doing &ndash;</em> see the <a href="#tipsmanualmap">Manual Map Numbers</a> section for details.
     </p>
     <p>
       There are a couple of special cases hardcoded into the game. First, if a warp's area is set to "World map", then the "Spawn" parameter determines which area the Tails icon is set to when the warp is used. Second, warps to the world map can have a spawn parameter of "Coco Island escape". In this case, the Coco Island escape cutscene sequence will trigger when the warp is taken.
@@ -857,6 +861,10 @@
             <li><b>Manual save</b>: same as "Auto save", but the game does not automatically save on the world map, meaning the player has to go to Tails' House and do it manually.</li>
           </ul>
         </li>
+        <li><b>Starting level</b>: starts the game from a chosen level instead of going to the world map.
+        </li>
+        <li><b>Starting items</b>: places the selected items in the inventory at the start of the game in place of the Regular Bomb and Vulcan Missile. Because the game doesn't encode information about the Regular Bomb in its passwords, <em>the "Regular" item must be the Regular Bomb if the password system is used</em>. Due to a technical issue, <em>do not set either value to "Null" if any of the all-items hacks are enabled</em>.
+        </li>
         <li><b>Bug fixes</b>: toggle fixes for various game bugs, mostly minor ones.
           <ul>
             <li><b>Jump height when Button 1 held</b>: fixes an issue where the game erroneously checks to see if either Button 1 (use item) or Button 2 (jump) is pressed when deciding how long the player has held down the jump button. This causes Tails to incorrectly always jump to the maximum possible height when the item button is held down and the jump button is tapped.</li>
@@ -1038,5 +1046,26 @@
     <p>
       Object 69, the "bird launcher" normally used to block the exit to Coco Island in area 6-5, is special. In its idle state, it is invisible and fires missiles at Tails when he is to the left of it. After being hit six times, it is destroyed, converting a <b>5x2 area of tiles to the right of it to metatile type 172</b>. Metatile 172 is ordinarily a regular "passable" tile, so this can be used to open up a passageway. Metatile 172 can also be assigned a different effect in the <a href="#behavioreditor">metatile behavior editor</a> to achieve different ends.
     </p>
+    <p>
+      Perhaps more importantly, <b>destroying this object sets the flag to load the alternate version of area 6-5, and prevents further instances of object 69 from spawning.</b> That means there can only be one in the game, so consider carefully how best to use it.
+    </p>
+    <h3 id="tipsmanualmap">Manual Map Numbers</h3>
+    <p>
+      The "Manual map/spawn" setting in the <a href="#warpeditor">Warp Editor Dialog</a> can be used to achieve several interesting effects.
+      <ul>
+        <li>Setting the map number to a higher value than is valid for the current area has some strange side effects. In most cases, the game will simply start the next map in its internal order (the order in which the maps are listed in the level editor), but with certain "properties" from the nominal area number.</li>
+        <li>Setting the spawn number to an invalid value will, like with maps, continue pulling spawns off of the internal list, starting from the spawns for the specified map.</li>
+      </ul>
+    </p>
+    <p>
+      Note that only maps or spawns <em>further along</em> the internal lists can be accessed. (For the technically inclined, these values are effectively unsigned &ndash; values of 128 or more can't be used to point to lower entries in the internal tables.)
+    </p>
+    <p>
+       Setting these to unusual values can be used to pull off some neat tricks, but <em style="color: red;">be careful when doing this, because invalid values can cause crashes or other undesirable results</em>.
+    </p>
+      <ul>
+        <li>The background music that plays is determined solely by area number.</li>
+        <li>Whether the Sea Fox is activated for the current map depends solely on the area number (see <a href="#quirksseafox">this section</a> for specifics). You can use an out-of-range map value in two ways: by specifying a Sea Fox area, you can place the Sea Fox in levels it wasn't meant for. For instance, targeting map 6-12 (map 12 of Lake Rocky, which has only 9 maps) will start map 1 of Green Island (area 8) with the Lake Rocky Sea Fox physics active. Similarly, a lower area number can be used to start a Sea Fox level with the regular Tails physics active.</li>
+      </ul>
   </body>
 </html>
